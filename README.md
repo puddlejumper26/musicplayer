@@ -18,8 +18,8 @@ Better Angular Study
 
 # 3.0 API
 ## 3.1 Angular
-`@SkipSelf()` - core.module.ts
-'@Optional()' - core.module.ts
+- `@SkipSelf()` - core.module.ts
+- '@Optional()' - core.module.ts
 
 
 ## 3.2 Angular Material CDK
@@ -31,3 +31,4 @@ Better Angular Study
 ## 3.5 NgRx
 
 ## 3.6 Ant Design Angular | BetterScroll
+- `[nzSuffix]` - app.component.html
