@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Banner } from 'src/app/services/data-types/common.types';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  banners: Banner[];
+
+  constructor(
+    private homeServe: HomeService
+  ) {
+    this.homeServe.getBanner().subscribe( banners => {
+      this.banners = banners;
+    })
+  }
 
   ngOnInit() {
   }

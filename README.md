@@ -16,11 +16,13 @@ Better Angular Study
 - BetterScroll 2.0
 
 
-# 3.0 API
+# 3.0 API && Note
 ## 3.1 Angular
 - `@SkipSelf()` - core.module.ts
-- '@Optional()' - core.module.ts
-
+- `@Optional()` - core.module.ts
+- `Tree Shaking` - home.service.ts
+- `InjectionToken` - services.module.ts
+- `@Inject()` - services.module.ts
 
 ## 3.2 Angular Material CDK
 
