@@ -27,6 +27,9 @@ Better Angular Study
 - `ng-template` - wy-carousel.component.html
 - `@ViewChild( {static: true})` - wy-carousel.component.ts 
 - `@Input()` - wy-carousel.component.ts
+- `changeDetection` - wy-carousel.component.ts
+  - `ChangeDetectionStrategy.OnPush`
+- 
 
 
 ## 3.2 Angular Material CDK

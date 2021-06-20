@@ -4,7 +4,7 @@
             nzAutoPlay 
             nzEffect="fade" 
             [nzDotRender]="wyCarousel.dotRef"
-            (nzBeforeChange)="OnBeforeChange($event)">
+            (nzBeforeChange)="onBeforeChange($event)">
             <div class="carousel-item" nz-carousel-content *ngFor="let item of banners">
                 <a [href]="item.url" target="_blank" class="banner-item">
                     <img [src]="item.imageUrl">
