@@ -1,3 +1,4 @@
+import { HomeService } from 'src/app/services/home.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesModule } from '../pages/pages.module';
 import { ShareModule } from '../share/share.module';
+import { ServicesModule } from '../services/services.module';
 
 /**
  *  To manage all the modules and component,  ONLY imported inside app.module.ts
@@ -27,6 +29,7 @@ import { ShareModule } from '../share/share.module';
     HttpClientModule,
     BrowserAnimationsModule,
     CommonModule,
+    ServicesModule,
     PagesModule,
     ShareModule,
     AppRoutingModule,
@@ -34,6 +37,8 @@ import { ShareModule } from '../share/share.module';
   exports: [
     ShareModule,
     AppRoutingModule
+  ],
+  providers: [
   ]
 })
 export class CoreModule {
