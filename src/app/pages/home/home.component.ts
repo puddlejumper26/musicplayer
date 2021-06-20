@@ -10,6 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 export class HomeComponent implements OnInit {
 
   banners: Banner[];
+  carouselActiveIndex = 0;
 
   constructor(
     private homeServe: HomeService
@@ -20,6 +21,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  OnBeforeChange({ to }){
+    this.carouselActiveIndex = to
   }
 
 }

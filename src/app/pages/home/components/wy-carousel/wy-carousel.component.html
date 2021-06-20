@@ -4,6 +4,10 @@
 
         <!-- When other component inserts this component, then could insert content through here -->
         <ng-content></ng-content>
+
+        <ng-template #dot let-number>
+            <i class="dot" [class.active]="activeIndex === number"></i>
+        </ng-template>
         
         <i nz-icon class="arrow right" nzType="right" nzTheme="outline"></i>
     </div>
