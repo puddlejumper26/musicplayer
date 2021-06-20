@@ -4,10 +4,11 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { WyCarouselComponent } from './components/wy-carousel/wy-carousel.component';
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, WyCarouselComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
