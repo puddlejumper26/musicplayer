@@ -23,6 +23,7 @@ Better Angular Study
 - `Tree Shaking` - home.service.ts
 - `InjectionToken` - services.module.ts
 - `@Inject()` - services.module.ts
+- `ng-content` - wy-carousel.component.html
 
 ## 3.2 Angular Material CDK
 
