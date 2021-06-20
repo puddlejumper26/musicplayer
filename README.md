@@ -24,6 +24,10 @@ Better Angular Study
 - `InjectionToken` - services.module.ts
 - `@Inject()` - services.module.ts
 - `ng-content` - wy-carousel.component.html
+- `ng-template` - wy-carousel.component.html
+- `@ViewChild( {static: true})` - wy-carousel.component.ts 
+- `@Input()` - wy-carousel.component.ts
+
 
 ## 3.2 Angular Material CDK
 
@@ -35,3 +39,5 @@ Better Angular Study
 
 ## 3.6 Ant Design Angular | BetterScroll
 - `[nzSuffix]` - app.component.html
+- `[nzDotRender]` - home.component.html
+  - `nzBeforeChange` - home.component.html 
