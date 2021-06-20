@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  OnBeforeChange({ to }){
+  onBeforeChange({ to }){
     this.carouselActiveIndex = to
   }
 
