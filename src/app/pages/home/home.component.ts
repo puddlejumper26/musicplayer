@@ -1,7 +1,8 @@
 import { HotTag, SongSheet } from './../../services/data-types/common.types';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Banner } from 'src/app/services/data-types/common.types';
 import { HomeService } from 'src/app/services/home.service';
+import { NzCarouselComponent } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,8 @@ export class HomeComponent implements OnInit {
   hotTags: HotTag[];
   songSheetList: SongSheet[];
   carouselActiveIndex = 0;
+
+  @ViewChild(NzCarouselComponent, { static: true }) private nzCarousel: NzCarouselComponent;
 
   constructor(
     private homeServe: HomeService
@@ -48,4 +51,7 @@ export class HomeComponent implements OnInit {
     this.carouselActiveIndex = to
   }
 
+  onChangeSlide(type: string) {
+    this.nzCarousel[type]();
+  }
 }

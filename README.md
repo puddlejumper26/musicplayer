@@ -37,6 +37,8 @@ Better Angular Study
 - `ng-template` - wy-carousel.component.html
 - `@ViewChild( {static: true})` - wy-carousel.component.ts 
 - `@Input()` - wy-carousel.component.ts
+- `@Output()` - wy-carousel.component.ts
+- `new EventEmitter<>()` - wy-carousel.component.ts
 - `changeDetection` - wy-carousel.component.ts
   - `ChangeDetectionStrategy.OnPush`
 - `@Pipe` - play-count.pipe.ts”
