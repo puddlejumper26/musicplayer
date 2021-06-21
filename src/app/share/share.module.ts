@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
  *  store all the project global components and services, therefore it needs to be exported
  */
 @NgModule({
-  declarations: [],
   imports: [
     NgZorroAntdModule,
     FormsModule,
@@ -20,7 +19,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     NgZorroAntdModule,
     FormsModule,
-    WyUiModule
+    WyUiModule,
   ]
 })
 export class ShareModule { }

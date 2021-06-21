@@ -39,7 +39,7 @@ Better Angular Study
 - `@Input()` - wy-carousel.component.ts
 - `changeDetection` - wy-carousel.component.ts
   - `ChangeDetectionStrategy.OnPush`
-- 
+- `@Pipe` - play-count.pipe.ts”
 
 
 ## 3.2 Angular Material CDK
