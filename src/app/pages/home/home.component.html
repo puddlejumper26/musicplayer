@@ -34,7 +34,14 @@
                     </div>
 
                     <div class="down">
-                        SongList
+                        <div class="down-wrap">
+                            <app-single-sheet 
+                                class="sheet-item"
+                                *ngFor="let item of songSheetList"
+                                [sheet]="item">
+                            </app-single-sheet>
+                        </div>
+
                     </div>
                 </div>
             </div>
