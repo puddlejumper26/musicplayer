@@ -1,14 +1,19 @@
+import { PlayCountPipe } from './../play-count.pipe';
 import { NgModule } from '@angular/core';
 import { SingleSheetComponent } from './single-sheet/single-sheet.component';
 
 
 
 @NgModule({
-  declarations: [SingleSheetComponent],
+  declarations: [
+    SingleSheetComponent,
+    PlayCountPipe
+  ],
   imports: [
   ],
   exports: [
-    SingleSheetComponent
+    SingleSheetComponent,
+    PlayCountPipe
   ]
 })
 export class WyUiModule { }
