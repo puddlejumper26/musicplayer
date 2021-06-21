@@ -4,6 +4,9 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChi
   selector: 'app-wy-carousel',
   templateUrl: './wy-carousel.component.html',
   styleUrls: ['./wy-carousel.component.less'],
+/**
+ * @OnPush means it will check the status of this component when the input changes
+ */
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WyCarouselComponent implements OnInit {
