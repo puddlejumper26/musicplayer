@@ -1,4 +1,4 @@
-import { HotTag } from './../../services/data-types/common.types';
+import { HotTag, SongSheet } from './../../services/data-types/common.types';
 import { Component, OnInit } from '@angular/core';
 import { Banner } from 'src/app/services/data-types/common.types';
 import { HomeService } from 'src/app/services/home.service';
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   banners: Banner[];
   hotTags: HotTag[];
-
+  songSheetList: SongSheet[];
   carouselActiveIndex = 0;
 
   constructor(
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
   private getPersonalizedSheetList() {
     this.homeServe.getPersonalSheetList().subscribe( sheets => {
-      console.log('sheets', sheets);
+      this.songSheetList = sheets;
     })
   }
 

@@ -1,9 +1,10 @@
-<center>Music Player</center>
+<h1 align="center">Music Player</h1>
 
 # 1.0 Purpose 
 Better Angular Study
 
-# 2.0 Enviroment
+# 2.0 Enviroment & Installation
+## 2.1 Environment
 - Angular 8.3.0
 - Angular Cli 8.3.0
 - Ng-Zorro-Antd
@@ -15,6 +16,15 @@ Better Angular Study
   - [How to install](https://github.com/puddlejumper26/musicplayer/issues/1)
 - BetterScroll 2.0
 
+## 2.2 Installation
+- Install Netease Clould Music API (follow 2.1)
+  - run `node app.js`
+  - All the API interfaces are running on the `localhost:3000` 
+- Clone this repo to local, run the following commands
+  - `git clone https://github.com/puddlejumper26/musicplayer.git` 
+  - `npm install`
+  - `ng serve`
+  - open `localhost:4200` to see the app
 
 # 3.0 API && Note
 ## 3.1 Angular
