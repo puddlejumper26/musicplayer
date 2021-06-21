@@ -16,3 +16,10 @@ export type SongSheet = {
     picUrl: string;
     playCount: number;
 }
+
+export type Singer = {
+    picUrl: string;
+    id: number;
+    name: string;
+    albumSize: number;
+}

@@ -47,7 +47,22 @@
             </div>
 
             <div class="right">
+                <h3>Login</h3>
 
+                <div class="settled-singer">
+                    <div class="tit"><b>Singers</b></div>
+                    <div class="list">
+                        <div class="card" *ngFor="let singer of singers">
+                            <div class="pic">
+                                <img [src]='singer.picUrl'>
+                            </div>
+                            <div class="txt">
+                                <b class="class">{{ singer.name }}</b>
+                                <span>Albums: {{ singer.albumSize }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
