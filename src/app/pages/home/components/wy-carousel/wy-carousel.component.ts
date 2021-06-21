@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-wy-carousel',
@@ -15,11 +15,20 @@ export class WyCarouselComponent implements OnInit {
    */
   @ViewChild('dot', {static: true}) dotRef: TemplateRef<any>;
 
+  /**
+   *  @Input to receive data from parent
+   *  @Output with @EventEmitter to send data to parent, notice the EventEmitter is from @angular/core
+   */
   @Input() activeIndex = 0;
+  @Output() changeSlide = new EventEmitter<'pre' | 'next'>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onChangeSlide(type: 'pre' | 'next') {
+    this.changeSlide.emit(type);
   }
 
 }

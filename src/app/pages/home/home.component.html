@@ -1,5 +1,5 @@
 <div class="class">
-    <app-wy-carousel #wyCarousel [activeIndex]="carouselActiveIndex">
+    <app-wy-carousel #wyCarousel [activeIndex]="carouselActiveIndex" (changeSlide)="onChangeSlide($event)">
         <nz-carousel 
             nzAutoPlay 
             nzEffect="fade" 

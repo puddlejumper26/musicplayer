@@ -1,6 +1,6 @@
 <div class="carousel">
     <div class="wrap">
-        <i nz-icon class="arrow left" type="left" theme="outline"></i>
+        <i nz-icon class="arrow left" type="left" theme="outline" (click)="onChangeSlide('pre')"></i>
 
         <!-- When other component inserts this component, then could insert content through here -->
         <ng-content></ng-content>
@@ -9,6 +9,6 @@
             <i class="dot" [class.active]="activeIndex === number"></i>
         </ng-template>
         
-        <i nz-icon class="arrow right" nzType="right" nzTheme="outline"></i>
+        <i nz-icon class="arrow right" nzType="right" nzTheme="outline" (click)="onChangeSlide('next')"></i>
     </div>
 </div>
