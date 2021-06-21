@@ -42,6 +42,7 @@ Better Angular Study
 - `changeDetection` - wy-carousel.component.ts
   - `ChangeDetectionStrategy.OnPush`
 - `@Pipe` - play-count.pipe.ts”
+- `new HttpParams` | `fromString` | `queryString`- singer.service.ts
 
 
 ## 3.2 Angular Material CDK
