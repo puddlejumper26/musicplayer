@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzCarouselComponent } from 'ng-zorro-antd';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/internal/operators';
 
 import { HotTag, Singer, SongSheet } from './../../services/data-types/common.types';
 import { Banner } from 'src/app/services/data-types/common.types';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/internal/operators';
+import { SheetService } from 'src/app/services/sheet.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(NzCarouselComponent, { static: true }) private nzCarousel: NzCarouselComponent;
 
   constructor(
-    
+    private sheetServe: SheetService,
     private route: ActivatedRoute
   ) {
     this.route.data.pipe(map( res => res.homeDatas )).subscribe( ([banners, hotTags, songSheetList, singers]) => {
@@ -43,5 +44,11 @@ export class HomeComponent implements OnInit {
 
   onChangeSlide(type: string) {
     this.nzCarousel[type]();
+  }
+
+  onPlaySheet(id: number) {
+    this.sheetServe.getSongSheetDetail(id).subscribe(res => {
+      console.log(res);
+    })
   }
 }
