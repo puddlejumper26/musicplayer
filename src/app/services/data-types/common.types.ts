@@ -33,3 +33,8 @@ export type Song = {
     al: { id: number; name: string; picUrl: string };
     dt: number; // play duration
 }
+
+export type SongUrl = {
+    id: number;
+    url: string;
+}

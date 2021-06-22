@@ -49,8 +49,11 @@ Better Angular Study
 
 ## 3.3 rxjs
 - `forkJoin` | `combineLatest` - home-resolve.service.ts
+- `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
+- `pluck` | `switchMap` | `mergeMap` | `concatMap` - sheet.service.ts
 
 ## 3.4 dom
+- `slice()`| shallow copy - song.service.ts 
 
 ## 3.5 NgRx
 
