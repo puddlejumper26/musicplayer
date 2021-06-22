@@ -43,11 +43,12 @@ Better Angular Study
   - `ChangeDetectionStrategy.OnPush`
 - `@Pipe` - play-count.pipe.ts”
 - `new HttpParams` | `fromString` | `queryString`- singer.service.ts
-
+- `Resolve` - home-resolve.service.ts
 
 ## 3.2 Angular Material CDK
 
 ## 3.3 rxjs
+- `forkJoin` | `combineLatest` - home-resolve.service.ts
 
 ## 3.4 dom
 
