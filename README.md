@@ -44,6 +44,7 @@ Better Angular Study
 - `@Pipe` - play-count.pipe.ts”
 - `new HttpParams` | `fromString` | `queryString`- singer.service.ts | sheet.service.ts
 - `Resolve` - home-resolve.service.ts
+- `encapsulation: ViewEncapsulation.None` - wy-slider.component.ts 
 
 ## 3.2 Angular Material CDK
 
