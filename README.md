@@ -41,10 +41,11 @@ Better Angular Study
 - `new EventEmitter<>()` - wy-carousel.component.ts
 - `changeDetection` - wy-carousel.component.ts
   - `ChangeDetectionStrategy.OnPush`
-- `@Pipe` - play-count.pipe.ts”
+- `@Pipe` - play-count.pipe.ts
 - `new HttpParams` | `fromString` | `queryString`- singer.service.ts | sheet.service.ts
 - `Resolve` - home-resolve.service.ts
-- `encapsulation: ViewEncapsulation.None` - wy-slider.component.ts 
+- `encapsulation: ViewEncapsulation.None` - wy-slider.component.ts
+- `ElementRef` - wy-slider.component.ts 
 
 ## 3.2 Angular Material CDK
 
@@ -52,9 +53,12 @@ Better Angular Study
 - `forkJoin` | `combineLatest` - home-resolve.service.ts
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
 - `pluck` | `switchMap` | `mergeMap` | `concatMap` - sheet.service.ts
+- `fromEvent` - wy-slider.component.ts
 
-## 3.4 dom
+## 3.4 dom && JS
 - `slice()`| shallow copy - song.service.ts 
+- `HTMLDivElement` - wy-slider.component.ts
+- `MouseEvent` | `TouchEvent` | `instanceof` | `stopPropagation` | `preventDefault` - wy-slider.component.ts
 
 ## 3.5 NgRx
 
