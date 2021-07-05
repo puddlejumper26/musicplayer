@@ -7,6 +7,7 @@ import { DOCUMENT } from '@angular/common';
 
 import { SliderEventObserverConfig } from './wy-slider-types';
 import { sliderEvent } from './wy-slider-helper';
+import { inArray } from 'src/app/utils/array';
 
 @Component({
   selector: 'app-wy-slider',
@@ -39,6 +40,7 @@ export class WySliderComponent implements OnInit {
     // console.log('wySlider', this.wySlider.nativeElement);
     this.sliderDom = this.wySlider.nativeElement;
     this.createDraggingObservables();
+    this.subscribeDrag(['start']);
   }
 
   /**
@@ -94,13 +96,37 @@ export class WySliderComponent implements OnInit {
           )
     });
 
+    // binding these three observable events
     this.dragStart$ = (mouse.startPlucked$, touch.startPlucked$);
     this.dragMove$ = (mouse.moveResolved$, touch.moveResolved$);
     this.dragEnd$ = (mouse.end$, touch.end$);
   }
 
-  private findClosestValue(position) {
-     return null;
+  // to convert the distance that mouse moved to the value we need
+  private findClosestValue(position: number): number {
+    return null;
   }
 
+  private subscribeDrag(events: string[] = ['start', 'move', 'end']) {
+    if(inArray(events, 'start') && this.dragStart$) {
+      this.dragStart$.subscribe(this.onDragStart.bind(this));
+    }
+    if(inArray(events,'move') && this.dragMove$) {
+      this.dragMove$.subscribe(this.onDragMove.bind(this));
+    }
+    if(inArray(events,'end') && this.dragEnd$) {
+      this.dragEnd$.subscribe(this.onDragEnd.bind(this));
+    }
+  }
+
+  // @value the position when mouse is pressed
+  private onDragStart(value: number) {
+
+  }
+  private onDragMove(value: number) {
+
+  }
+  private onDragEnd() {
+
+  }
 }
