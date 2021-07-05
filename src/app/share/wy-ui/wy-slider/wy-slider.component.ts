@@ -1,7 +1,12 @@
-import { map, pluck } from 'rxjs/internal/operators';
-import { Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { distinctUntilChanged, filter, map, merge, mergeAll, pluck, takeUntil } from 'rxjs/internal/operators';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { tap } from 'rxjs/internal/operators/tap';
+import { DOCUMENT } from '@angular/common';
+
+import { SliderEventObserverConfig } from './wy-slider-types';
+import { sliderEvent } from './wy-slider-helper';
 
 @Component({
   selector: 'app-wy-slider',
@@ -21,9 +26,13 @@ export class WySliderComponent implements OnInit {
 
   @ViewChild('wySlider', {static: true}) private wySlider: ElementRef;
   @Input() wyVertical = false;  // cause we have one slider for song play, one slider for volumn
+  
   private sliderDom: HTMLDivElement;
+  private dragStart$: Observable<number>;
+  private dragMove$: Observable<number>;
+  private dragEnd$: Observable<Event>;
 
-  constructor() {}
+  constructor(@Inject(DOCUMENT) private doc: Document) {}
 
   ngOnInit() {
     // console.log('el:', this.el.nativeElement);
@@ -38,41 +47,60 @@ export class WySliderComponent implements OnInit {
    *  @mobile touchstart touchmove touchend -> @TouchEvent -> obtain position   | event.touchs[0].pageX  | event.touchs[0].pageY
    */
   private createDraggingObservables() {
+
     const orientField = this.wyVertical ? 'pageY' : 'pageX';
 
-    const mouse = {
+    const mouse: SliderEventObserverConfig = {
       start: "mousedown",
       move: "mousemove",
       end: "mouseup",
       filter: (e: MouseEvent) => e instanceof MouseEvent,
       pluckKey: [orientField],
-    }
+    };
 
-    const touch = {
+    const touch: SliderEventObserverConfig = {
       start: "touchstart",
       move: "touchmove",
       end: "touchend",
       filter: (e: TouchEvent) => e instanceof TouchEvent,
       pluckKey: ['touchs','0',orientField]
-    }
+    };
 
     [mouse, touch].forEach(source => {
-      const {start, move, end, filter, pluckKey} = source;
-      fromEvent(this.sliderDom, start)
+      const {start, move, end, filter: filterUnc, pluckKey} = source;
+      
+      source.startPlucked$ = fromEvent(this.sliderDom, start)
         .pipe(
-          filter(filter),  // filter whether mouse or touch
-          tap( (e: Event)=> {
-            e.stopPropagation();
-            e.preventDefault();
-          }),
+          filter(filterUnc),  // filter whether mouse or touch
+          tap( sliderEvent ),
           pluck(...pluckKey),  // obtain the position, after this step, the position data should be obtained,
-          map( (position: Number) => this.findClosestValue(position))
-        )
+          map( (position: number) => this.findClosestValue(position))
+      );
+      
+      /**
+       *  @DOCUMENT is better for rendering than @docment
+       */
+      // source.end$ = fromEvent(document, end);
+      source.end$ = fromEvent(this.doc, end);  
+
+      source.moveResolved$ = fromEvent(this.doc, move)
+          .pipe(
+            filter(filterUnc),  // filter whether mouse or touch
+            tap(sliderEvent),
+            pluck(...pluckKey),  // obtain the position, after this step, the position data should be obtained,
+            distinctUntilChanged(),// above pluck flow value changes, then here continue to emit flow, no change then stop 
+            map( (position: number) => this.findClosestValue(position)),
+            takeUntil(source.end$) // when the end then the flow also ends
+          )
     });
+
+    this.dragStart$ = (mouse.startPlucked$, touch.startPlucked$);
+    this.dragMove$ = (mouse.moveResolved$, touch.moveResolved$);
+    this.dragEnd$ = (mouse.end$, touch.end$);
   }
 
-  private findClosestValue() {
-    
+  private findClosestValue(position) {
+     return null;
   }
 
 }

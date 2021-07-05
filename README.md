@@ -56,11 +56,13 @@ Better Angular Study
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
 - `pluck` | `switchMap` | `mergeMap` | `concatMap` - sheet.service.ts
 - `fromEvent` - wy-slider.component.ts
+- `distinctUntilChanged` | `takeUntil`- wy-slider.component.ts
 
 ## 3.4 dom && JS
 - `slice()`| shallow copy - song.service.ts 
 - `HTMLDivElement` - wy-slider.component.ts
 - `MouseEvent` | `TouchEvent` | `instanceof` | `stopPropagation` | `preventDefault` - wy-slider.component.ts
+- `document` | `DOCUMENT (@angular)` | `Document` - wy-slider.component.ts
 
 ## 3.5 NgRx
 
