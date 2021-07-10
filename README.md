@@ -55,14 +55,15 @@ Better Angular Study
 - `forkJoin` | `combineLatest` - home-resolve.service.ts
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
 - `pluck` | `switchMap` | `mergeMap` | `concatMap` - sheet.service.ts
-- `fromEvent` - wy-slider.component.ts
-- `distinctUntilChanged` | `takeUntil`- wy-slider.component.ts
+- `fromEvent` | `filter` | `tap` | `distinctUntilChanged` | `takeUntil`- wy-slider.component.ts
 
 ## 3.4 dom && JS
 - `slice()`| shallow copy - song.service.ts 
 - `HTMLDivElement` - wy-slider.component.ts
 - `MouseEvent` | `TouchEvent` | `instanceof` | `stopPropagation` | `preventDefault` - wy-slider.component.ts
 - `document` | `DOCUMENT (@angular)` | `Document` - wy-slider.component.ts
+- `HTMLElement.getBoundingClientRect()` | `HTMLElement.getClientRects` | `HTMLElement.ownerDocument` | `window.pageYOffset` | `window.pageXOffset` - wy-slider-helper.ts
+- `bind` - wy-slider.component.ts
 
 ## 3.5 NgRx
 
@@ -70,3 +71,7 @@ Better Angular Study
 - `[nzSuffix]` - app.component.html
 - `[nzDotRender]` - home.component.html
   - `nzBeforeChange` - home.component.html 
+
+
+# 4.0 Demo
+![](https://user-images.githubusercontent.com/80747582/124521982-cbbdc300-ddf1-11eb-94ce-2053cd32376a.png)
