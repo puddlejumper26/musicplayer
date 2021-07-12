@@ -1,15 +1,15 @@
 import { Observable } from 'rxjs/internal/Observable';
 import { distinctUntilChanged, filter, map, pluck, takeUntil } from 'rxjs/internal/operators';
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { concat } from 'rxjs';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { tap } from 'rxjs/internal/operators/tap';
 import { DOCUMENT } from '@angular/common';
 
-import { SliderEventObserverConfig } from './wy-slider-types';
+import { SliderEventObserverConfig, SliderValue } from './wy-slider-types';
 import { getElementOffset, sliderEvent } from './wy-slider-helper';
 import { inArray } from 'src/app/utils/array';
-import { limitNumberInRange } from 'src/app/utils/number';
+import { getPercent, limitNumberInRange } from 'src/app/utils/number';
 
 @Component({
   selector: 'app-wy-slider',
@@ -17,6 +17,7 @@ import { limitNumberInRange } from 'src/app/utils/number';
   styleUrls: ['./wy-slider.component.less'],
   // to make the children component could use the styling file in this level
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WySliderComponent implements OnInit {
 /**
@@ -36,8 +37,15 @@ export class WySliderComponent implements OnInit {
   private dragStart$: Observable<number>;
   private dragMove$: Observable<number>;
   private dragEnd$: Observable<Event>;
+  private isDragging = false;
 
-  constructor(@Inject(DOCUMENT) private doc: Document) {}
+  value: SliderValue = null;
+  offset: SliderValue = null;
+
+  constructor(
+    @Inject(DOCUMENT) private doc: Document,
+    private cdr: ChangeDetectorRef
+    ) {}
 
   ngOnInit() {
     // console.log('el:', this.el.nativeElement);
@@ -130,12 +138,41 @@ export class WySliderComponent implements OnInit {
   // @value the position when mouse is pressed
   private onDragStart(value: number) {
     console.log('value', value);
+    this.toggleDragMoving(true);
   }
   private onDragMove(value: number) {
-
+    if(this.subscribeDrag) {
+      this.setValue(value);
+      this.cdr.markForCheck();
+    }
   }
   private onDragEnd() {
+    this.toggleDragMoving(false);
+    this.cdr.markForCheck();
+  }
 
+  private toggleDragMoving(movable: boolean) {
+    this.isDragging = movable;
+    if(movable) {
+      this.subscribeDrag(['move', 'end']);
+    } else {
+      // this.unsubscribeDrag(['move', 'end']);
+    }
+  }
+
+  private setValue(value: SliderValue) {
+    this.value = value;
+    this.updateTrackAndHandles();
+  }
+
+  // update the position of the track render and handles
+  private updateTrackAndHandles() {
+    this.offset = this.getValueToOffset(this.value);
+    this.cdr.markForCheck();
+  }
+
+  private getValueToOffset(value: SliderValue): SliderValue {
+    return getPercent(this.wyMin, this.wyMax, value);
   }
 
   /**
