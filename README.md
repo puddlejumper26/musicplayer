@@ -47,6 +47,7 @@ Better Angular Study
 - `encapsulation: ViewEncapsulation.None` - wy-slider.component.ts
 - `ElementRef` - wy-slider.component.ts 
 - `ngOnChanges` - wy-slider-handle.component.ts | wy-slider-track.component.ts
+- `ChangeDetectorRef` | `markForCheck()`- wy-slider.component.ts
 
 
 ## 3.2 Angular Material CDK
