@@ -9,6 +9,7 @@ import { DOCUMENT } from '@angular/common';
 import { SliderEventObserverConfig } from './wy-slider-types';
 import { getElementOffset, sliderEvent } from './wy-slider-helper';
 import { inArray } from 'src/app/utils/array';
+import { limitNumberInRange } from 'src/app/utils/number';
 
 @Component({
   selector: 'app-wy-slider',
@@ -151,7 +152,7 @@ export class WySliderComponent implements OnInit {
 
     // slider current position / slider component total length = (val - min) / (max - min)
     // val = ratio * (max - min) + min
-    const ratio = (position - sliderStart) / sliderLength;
+    const ratio = limitNumberInRange((position - sliderStart) / sliderLength, 0, 1);
     const ratioTrue = this.wyVertical ? 1 - ratio : ratio; 
 
     return ratioTrue * (this.wyMax - this.wyMin) + this.wyMin;
