@@ -55,14 +55,14 @@ Better Angular Study
 - `forkJoin` | `combineLatest` - home-resolve.service.ts
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
 - `pluck` | `switchMap` | `mergeMap` | `concatMap` - sheet.service.ts
-- `fromEvent` | `filter` | `tap` | `distinctUntilChanged` | `takeUntil`- wy-slider.component.ts
+- `fromEvent` | `filter` | `tap` | `distinctUntilChanged` | `takeUntil` | `mgerge` replaced with `concat`- wy-slider.component.ts
 
 ## 3.4 dom && JS
 - `slice()`| shallow copy - song.service.ts 
 - `HTMLDivElement` - wy-slider.component.ts
 - `MouseEvent` | `TouchEvent` | `instanceof` | `stopPropagation` | `preventDefault` - wy-slider.component.ts
 - `document` | `DOCUMENT (@angular)` | `Document` - wy-slider.component.ts
-- `HTMLElement.getBoundingClientRect()` | `HTMLElement.getClientRects` | `HTMLElement.ownerDocument` | `window.pageYOffset` | `window.pageXOffset` - wy-slider-helper.ts
+- `HTMLElement.getBoundingClientRect()` | `HTMLElement.getClientRects()` | `HTMLElement.ownerDocument.defaultView` | `window.pageYOffset` | `window.pageXOffset` - wy-slider-helper.ts
 - `bind` - wy-slider.component.ts
 
 ## 3.5 NgRx

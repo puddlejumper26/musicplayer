@@ -19,6 +19,7 @@ export function getElementOffset(el: HTMLElement): {top: number, left: number} {
     const rect = el.getBoundingClientRect();
     /**
      *  @ownerDocument to take the el current document node
+     *  @defaultView return the object of window which has the document
      */
     const win = el.ownerDocument.defaultView;
 

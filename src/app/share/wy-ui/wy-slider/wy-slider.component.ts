@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs/internal/Observable';
-import { distinctUntilChanged, filter, map, merge, mergeAll, pluck, takeUntil } from 'rxjs/internal/operators';
+import { distinctUntilChanged, filter, map, pluck, takeUntil } from 'rxjs/internal/operators';
 import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { concat } from 'rxjs';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { tap } from 'rxjs/internal/operators/tap';
 import { DOCUMENT } from '@angular/common';
@@ -71,6 +72,7 @@ export class WySliderComponent implements OnInit {
     };
 
     [mouse, touch].forEach(source => {
+      // Deconstruction of JSON data
       const {start, move, end, filter: filterUnc, pluckKey} = source;
       
       source.startPlucked$ = fromEvent(this.sliderDom, start)
@@ -98,10 +100,11 @@ export class WySliderComponent implements OnInit {
           )
     });
 
+    // console.log('【createDraggingObservables】- mouse.startPlucked$ -', mouse.startPlucked$)
     // binding these three observable events
-    this.dragStart$ = (mouse.startPlucked$, touch.startPlucked$);
-    this.dragMove$ = (mouse.moveResolved$, touch.moveResolved$);
-    this.dragEnd$ = (mouse.end$, touch.end$);
+    this.dragStart$ = concat(mouse.startPlucked$, touch.startPlucked$);
+    this.dragMove$ = concat(mouse.moveResolved$, touch.moveResolved$);
+    this.dragEnd$ = concat(mouse.end$, touch.end$);
   }
 
   
@@ -111,8 +114,9 @@ export class WySliderComponent implements OnInit {
    */
   private subscribeDrag(events: string[] = ['start', 'move', 'end']) {
     if(inArray(events, 'start') && this.dragStart$) {
+      // console.log('【subscribeDrag】 - this', this);
+      // console.log('【subscribeDrag】 - dragStart$', this.dragStart$);
       this.dragStart$.subscribe(this.onDragStart.bind(this)); 
-      console.log('subscribeDrag', this);
     }
     if(inArray(events,'move') && this.dragMove$) {
       this.dragMove$.subscribe(this.onDragMove.bind(this));
@@ -124,7 +128,7 @@ export class WySliderComponent implements OnInit {
 
   // @value the position when mouse is pressed
   private onDragStart(value: number) {
-
+    console.log('value', value);
   }
   private onDragMove(value: number) {
 
@@ -145,7 +149,12 @@ export class WySliderComponent implements OnInit {
     // obtain slider (left, up) position
     const sliderStart = this.getSliderStartPosition();
 
-    return null;
+    // slider current position / slider component total length = (val - min) / (max - min)
+    // val = ratio * (max - min) + min
+    const ratio = (position - sliderStart) / sliderLength;
+    const ratioTrue = this.wyVertical ? 1 - ratio : ratio; 
+
+    return ratioTrue * (this.wyMax - this.wyMin) + this.wyMin;
   }
 
   private getSliderLength(): number {
