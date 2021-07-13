@@ -48,6 +48,7 @@ Better Angular Study
 - `ElementRef` - wy-slider.component.ts 
 - `ngOnChanges` - wy-slider-handle.component.ts | wy-slider-track.component.ts
 - `ChangeDetectorRef` | `markForCheck()`- wy-slider.component.ts
+- `NG_VALUE_ACCESSOR` | `ngDestroy` | `ControlValueAccessor` `writeValue` `registerOnChange` `registerOnTouched`- wy-slider.component.ts
 
 
 ## 3.2 Angular Material CDK
