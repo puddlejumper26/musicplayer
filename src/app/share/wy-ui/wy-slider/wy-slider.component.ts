@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/internal/Observable';
 import { distinctUntilChanged, filter, map, pluck, takeUntil } from 'rxjs/internal/operators';
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { concat } from 'rxjs';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { concat, Subscription } from 'rxjs';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { tap } from 'rxjs/internal/operators/tap';
 import { DOCUMENT } from '@angular/common';
@@ -19,7 +19,7 @@ import { getPercent, limitNumberInRange } from 'src/app/utils/number';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WySliderComponent implements OnInit {
+export class WySliderComponent implements OnInit, OnDestroy {
 /**
  *  This slider will bind with many mouse events, so we need to obtain the @dom and there are several ways to do it
  * 
@@ -34,10 +34,15 @@ export class WySliderComponent implements OnInit {
   @Input() wyMax = 100;
   
   private sliderDom: HTMLDivElement;
+  private isDragging = false;
+
   private dragStart$: Observable<number>;
   private dragMove$: Observable<number>;
   private dragEnd$: Observable<Event>;
-  private isDragging = false;
+
+  private dragStart_: Subscription | null;
+  private dragMove_: Subscription | null;
+  private dragEnd_: Subscription | null;
 
   value: SliderValue = null;
   offset: SliderValue = null;
@@ -46,7 +51,7 @@ export class WySliderComponent implements OnInit {
     @Inject(DOCUMENT) private doc: Document,
     private cdr: ChangeDetectorRef
     ) {}
-
+  
   ngOnInit() {
     // console.log('el:', this.el.nativeElement);
     // console.log('wySlider', this.wySlider.nativeElement);
@@ -122,16 +127,31 @@ export class WySliderComponent implements OnInit {
    * @bind https://www.jianshu.com/p/ee175cade48b
    */
   private subscribeDrag(events: string[] = ['start', 'move', 'end']) {
-    if(inArray(events, 'start') && this.dragStart$) {
+    if(inArray(events, 'start') && this.dragStart$ && !this.dragStart_) {
       // console.log('【subscribeDrag】 - this', this);
       // console.log('【subscribeDrag】 - dragStart$', this.dragStart$);
-      this.dragStart$.subscribe(this.onDragStart.bind(this)); 
+      this.dragStart_ = this.dragStart$.subscribe(this.onDragStart.bind(this)); 
     }
-    if(inArray(events,'move') && this.dragMove$) {
-      this.dragMove$.subscribe(this.onDragMove.bind(this));
+    if(inArray(events,'move') && this.dragMove$ && !this.dragMove_) {
+      this.dragMove_ = this.dragMove$.subscribe(this.onDragMove.bind(this));
     }
-    if(inArray(events,'end') && this.dragEnd$) {
-      this.dragEnd$.subscribe(this.onDragEnd.bind(this));
+    if(inArray(events,'end') && this.dragEnd$ && !this.dragEnd_) {
+      this.dragEnd_ = this.dragEnd$.subscribe(this.onDragEnd.bind(this));
+    }
+  }
+
+  private unsubscribeDrag(events: string[] = ['start', 'move', 'end']) {
+    if(inArray(events, 'start') && this.dragStart_) {
+      this.dragStart_.unsubscribe();
+      this.dragStart_ = null;
+    }
+    if(inArray(events,'move') && this.dragMove_) {
+      this.dragMove_.unsubscribe();
+      this.dragMove_ = null;
+    }
+    if(inArray(events,'end') && this.dragEnd_) {
+      this.dragEnd_.unsubscribe();
+      this.dragEnd_ = null;
     }
   }
 
@@ -157,7 +177,7 @@ export class WySliderComponent implements OnInit {
     if(movable) {
       this.subscribeDrag(['move', 'end']);
     } else {
-      // this.unsubscribeDrag(['move', 'end']);
+      this.unsubscribeDrag(['move', 'end']);
     }
   }
 
@@ -212,11 +232,19 @@ export class WySliderComponent implements OnInit {
     const offset = getElementOffset(this.sliderDom);
     return this.wyVertical ? offset.top : offset.left ;    
   }
+
+
+  ngOnDestroy(): void {
+    this.unsubscribeDrag();
+  }
 }
 
 
 
-
+/*************************************************************
+ * 
+ * ***********************************************************
+ */
 
 /**
 @bind
