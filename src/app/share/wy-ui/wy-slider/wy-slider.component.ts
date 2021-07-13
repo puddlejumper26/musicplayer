@@ -162,10 +162,18 @@ export class WySliderComponent implements OnInit {
   }
 
   private setValue(value: SliderValue) {
-    this.value = value;
-    this.updateTrackAndHandles();
+    if(!this.valueEuqal(this.value, value)) {  // During the dragging, the new value could be the same as the current value
+      this.value = value;
+      this.updateTrackAndHandles();
+    }
   }
 
+  private valueEuqal(valA: SliderValue, valB: SliderValue): boolean {
+    if(typeof valA !== typeof valB) {
+      return false;
+    }
+    return valA === valB
+  }
   // update the position of the track render and handles
   private updateTrackAndHandles() {
     this.offset = this.getValueToOffset(this.value);
