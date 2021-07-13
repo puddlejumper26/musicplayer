@@ -139,6 +139,7 @@ export class WySliderComponent implements OnInit {
   private onDragStart(value: number) {
     console.log('value', value);
     this.toggleDragMoving(true);
+    this.setValue(value);
   }
   private onDragMove(value: number) {
     if(this.subscribeDrag) {
