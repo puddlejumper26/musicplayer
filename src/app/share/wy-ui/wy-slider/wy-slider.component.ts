@@ -195,6 +195,8 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
     }else if(!this.valueEuqal(this.value, value)) {  // During the dragging, the new value could be the same as the current value
       this.value = value;
       this.updateTrackAndHandles();
+      // console.log('setValue - this.value', this.value);
+      this.onValueChange(this.value);
     }
   }
 
@@ -265,7 +267,10 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
    *  @ControlValueAccessor and @NG_VALUE_ACCESSOR
    */
 
-  // read and set value , value here are passed from outside, so need to add value check (needCheck) inside setValue()
+  /* 
+   * read and set value , value here are passed from outside, so need to add value check (needCheck) inside setValue()
+   * therefore when there is a value changed inside playerComponent, and binded through <app-wy-slider> inside of playerComponent.html, then here would receive this value
+   */
   writeValue(value: SliderValue): void {
     this.setValue(value, true);
   }

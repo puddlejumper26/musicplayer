@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -8,6 +9,7 @@ import { WySliderModule } from '../wy-slider/wy-slider.module';
   declarations: [WyPlayerComponent],
   imports: [
     CommonModule,
+    FormsModule,
     WySliderModule,
   ],
   exports: [
