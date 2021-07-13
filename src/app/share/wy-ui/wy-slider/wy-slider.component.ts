@@ -1,10 +1,11 @@
 import { Observable } from 'rxjs/internal/Observable';
 import { distinctUntilChanged, filter, map, pluck, takeUntil } from 'rxjs/internal/operators';
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, forwardRef } from '@angular/core';
 import { concat, Subscription } from 'rxjs';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { tap } from 'rxjs/internal/operators/tap';
 import { DOCUMENT } from '@angular/common';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SliderEventObserverConfig, SliderValue } from './wy-slider-types';
 import { getElementOffset, sliderEvent } from './wy-slider-helper';
@@ -18,8 +19,13 @@ import { getPercent, limitNumberInRange } from 'src/app/utils/number';
   // to make the children component could use the styling file in this level
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{
+    provide: NG_VALUE_ACCESSOR, // applied with ControlValueAccessor
+    useExisting: forwardRef(() => WySliderComponent), // to allow to use an Class not defined yet, will be defined in the following
+    multi: true, // has multiple dependencies
+  }]
 })
-export class WySliderComponent implements OnInit, OnDestroy {
+export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccessor {
 /**
  *  This slider will bind with many mouse events, so we need to obtain the @dom and there are several ways to do it
  * 
@@ -181,11 +187,30 @@ export class WySliderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private setValue(value: SliderValue) {
-    if(!this.valueEuqal(this.value, value)) {  // During the dragging, the new value could be the same as the current value
+  private setValue(value: SliderValue, needCheck = false) {
+    if(needCheck) {
+      if(this.isDragging) return; // if the handle is dragging, just return
+      this.value = this.formatValue(value);
+      this.updateTrackAndHandles();
+    }else if(!this.valueEuqal(this.value, value)) {  // During the dragging, the new value could be the same as the current value
       this.value = value;
       this.updateTrackAndHandles();
     }
+  }
+
+  private formatValue(value: SliderValue): SliderValue {
+    let res = value;
+    if(this.assertValueValid(value)){
+      res = this.wyMin;
+    }else {
+      res = limitNumberInRange(value, this.wyMin, this.wyMax);
+    }
+    return res;
+  }
+
+  // Whether the input value is NaN
+  private assertValueValid(value: SliderValue): boolean {
+    return isNaN(typeof value !== 'number' ? parseFloat(value) : value)
   }
 
   private valueEuqal(valA: SliderValue, valB: SliderValue): boolean {
@@ -233,6 +258,23 @@ export class WySliderComponent implements OnInit, OnDestroy {
     return this.wyVertical ? offset.top : offset.left ;    
   }
 
+  private onValueChange(value: SliderValue): void {};
+  private onTouched(): void {};
+
+  /**
+   *  @ControlValueAccessor and @NG_VALUE_ACCESSOR
+   */
+
+  // read and set value , value here are passed from outside, so need to add value check (needCheck) inside setValue()
+  writeValue(value: SliderValue): void {
+    this.setValue(value, true);
+  }
+  registerOnChange(fn: (value: SliderValue) => void): void {
+    this.onValueChange = fn;
+  }
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn
+  }
 
   ngOnDestroy(): void {
     this.unsubscribeDrag();
