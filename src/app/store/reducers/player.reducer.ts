@@ -1,5 +1,4 @@
-import { state } from "@angular/animations";
-import { createReducer, on } from "@ngrx/store";
+import { Action, createReducer, on } from "@ngrx/store";
 
 import { Song } from "src/app/services/data-types/common.types";
 import { PlayMode } from "src/app/share/wy-ui/wy-player/player-types";
@@ -36,8 +35,12 @@ export const initialState: PlayState = {
 const reducer = createReducer(
     initialState,
     on(SetPlaying, (state, {playing}) => ({...state, playing})),
-    on(SetPlayList, (state, {list}) => ({...state, playList: list})),
-    on(SetSongList, (state, {list}) => ({...state, songList: list})),
-    on(SetPlayMode, (state, {mode}) => ({...state, playMode: mode})),
-    on(SetCurrentIndex, (state, {index}) => ({...state, currentIndex: index})),
+    on(SetPlayList, (state, {playList}) => ({...state, playList})),
+    on(SetSongList, (state, {songList}) => ({...state, songList})),
+    on(SetPlayMode, (state, {playMode}) => ({...state, playMode})),
+    on(SetCurrentIndex, (state, {currentIndex}) => ({...state, currentIndex})),
 )
+
+export function playerReducer(state: PlayState, action: Action) {
+    return reducer(state, action);
+}
