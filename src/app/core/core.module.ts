@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesModule } from '../pages/pages.module';
 import { ShareModule } from '../share/share.module';
 import { ServicesModule } from '../services/services.module';
+import { AppStoreModule } from '../store';
 
 /**
  *  To manage all the modules and component,  ONLY imported inside app.module.ts
@@ -32,6 +33,7 @@ import { ServicesModule } from '../services/services.module';
     ServicesModule,
     PagesModule,
     ShareModule,
+    AppStoreModule,
     AppRoutingModule,
   ],
   exports: [

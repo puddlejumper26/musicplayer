@@ -6,10 +6,6 @@ import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
 import { WyUiModule } from './share/wy-ui/wy-ui.module';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
 
 registerLocaleData(en);
 
@@ -20,14 +16,13 @@ registerLocaleData(en);
   imports: [
     CoreModule,
     WyUiModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    // StoreModule.forRoot({player: playerReducer}, {
+    //   runtimeChecks: {
+    //     strictStateImmutability: true,
+    //     strictActionImmutability: true
+    //   }
+    // }),
+    // StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

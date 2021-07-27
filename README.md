@@ -68,6 +68,9 @@ Better Angular Study
 - `bind` - wy-slider.component.ts
 
 ## 3.5 NgRx
+- `createAction` | `props` - player.actions.ts
+- `createReducer` | `Action` | `on`- player.reducer.ts
+- `createSelector` - player.selector.ts
 
 ## 3.6 Ant Design Angular | BetterScroll
 - `[nzSuffix]` - app.component.html

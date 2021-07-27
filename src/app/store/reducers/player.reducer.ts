@@ -34,7 +34,7 @@ export const initialState: PlayState = {
 // register 5 actions
 const reducer = createReducer(
     initialState,
-    on(SetPlaying, (state, {playing}) => ({...state, playing})),
+    on(SetPlaying, (state, {playing}) => ({...state, playing})), // will return new state , so when the onPlaySheet(homeComponent) is called, new value will be given
     on(SetPlayList, (state, {playList}) => ({...state, playList})),
     on(SetSongList, (state, {songList}) => ({...state, songList})),
     on(SetPlayMode, (state, {playMode}) => ({...state, playMode})),
