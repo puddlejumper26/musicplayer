@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
   // this will call the reducer(playerReducer) for upddating the state of following parameters such as songList, playList...
   onPlaySheet(id: number) {
     this.sheetServe.playSheet(id).subscribe(list => {
-      console.log("onPlaySheet - -", list);
       this.store$.dispatch(SetSongList({ songList: list }));
       this.store$.dispatch(SetPlayList({ playList: list }));
       this.store$.dispatch(SetCurrentIndex({ currentIndex: 0 })) // default to play the first song

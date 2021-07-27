@@ -70,7 +70,7 @@ Better Angular Study
 ## 3.5 NgRx
 - `createAction` | `props` - player.actions.ts
 - `createReducer` | `Action` | `on`- player.reducer.ts
-- `createSelector` - player.selector.ts
+- `createSelector` | `createFeatureSelector`- player.selector.ts
 
 ## 3.6 Ant Design Angular | BetterScroll
 - `[nzSuffix]` - app.component.html
