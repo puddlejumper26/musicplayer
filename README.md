@@ -66,7 +66,8 @@ Better Angular Study
 - `document` | `DOCUMENT (@angular)` | `Document` - wy-slider.component.ts
 - `HTMLElement.getBoundingClientRect()` | `HTMLElement.getClientRects()` | `HTMLElement.ownerDocument.defaultView` | `window.pageYOffset` | `window.pageXOffset` - wy-slider-helper.ts
 - `bind` - wy-slider.component.ts
-
+- `HTMLAudioElement` | `play()` - wy-player.component.ts
+- `(canPlay)` - wy-player.component.html
 ## 3.5 NgRx
 - `createAction` | `props` - player.actions.ts
 - `createReducer` | `Action` | `on`- player.reducer.ts
