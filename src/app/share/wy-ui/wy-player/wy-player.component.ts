@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import { AppStoreModule } from 'src/app/store';
@@ -20,6 +20,9 @@ export class WyPlayerComponent implements OnInit {
   currentIndex: number;
   playMode: PlayMode;
   currentSong: Song;
+
+  @ViewChild('audio', { static: true }) private audio: ElementRef;
+  private audioEl: HTMLAudioElement;
 
   constructor(
     private store$: Store<AppStoreModule>
@@ -63,15 +66,17 @@ export class WyPlayerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.audioEl = this.audio.nativeElement;
+    // console.log('this.audio.nativeElement - - ', this.audio.nativeElement);
   }
 
   private watchList(list: Song[], type: string) {
-    console.log('watchList - list', list);
+    // console.log('watchList - list', list);
     this[type] = list;
   }
 
   private watchCurrentIndex(index: number) {
-    console.log('watchCurrentIndex - index', index);
+    // console.log('watchCurrentIndex - index', index);
     this.currentIndex = index;
   }
 
@@ -82,7 +87,15 @@ export class WyPlayerComponent implements OnInit {
   private watchCurrentSong(song: Song) {
     if(song) {
       this.currentSong = song;
-      console.log('watchCurrentSong - -', song);
+      // console.log('watchCurrentSong - -', song);
     }
+  }
+
+  onCanPlay() {
+    this.play();
+  }
+
+  private play() {
+    this.audioEl.play();
   }
 }
