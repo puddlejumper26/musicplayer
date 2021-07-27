@@ -17,6 +17,10 @@ export class WyPlayerComponent implements OnInit {
   constructor(
     private store$: Store<AppStoreModule>
   ) {
+
+    /**
+     * here @get the data from the @store
+     */
     const appStore$ = this.store$.pipe(select(getPlayer));
     appStore$.pipe(select(getSongList)).subscribe(list => {
       console.log('song list', list);

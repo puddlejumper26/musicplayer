@@ -50,6 +50,9 @@ export class HomeComponent implements OnInit {
     this.nzCarousel[type]();
   }
 
+  /**
+   *  here is to @dispatch and @set the state, and @store the data
+   */
   // this will call the reducer(playerReducer) for upddating the state of following parameters such as songList, playList...
   onPlaySheet(id: number) {
     this.sheetServe.playSheet(id).subscribe(list => {
