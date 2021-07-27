@@ -1,8 +1,14 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { PlayState } from './../reducers/player.reducer';
 
 const selectPlayerStates = (state: PlayState) => state;
+
+// to obtain the player
+/**
+ * @player has to be identical with the index.ts ->     StoreModule.forRoot({player: playerReducer}, 
+ */
+export const getPlayer = createFeatureSelector<PlayState>('player');
 
 export const getPlaying = createSelector(selectPlayerStates, (state: PlayState) => state.playing);
 export const getPlayList = createSelector(selectPlayerStates, (state: PlayState) => state.playList);
