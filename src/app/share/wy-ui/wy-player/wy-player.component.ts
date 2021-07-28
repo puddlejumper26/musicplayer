@@ -26,9 +26,6 @@ export class WyPlayerComponent implements OnInit {
   @ViewChild('audio', { static: true }) private audio: ElementRef;
   private audioEl: HTMLAudioElement;
 
-  @ViewChild('audio', { static: true }) private audio: ElementRef;
-  private audioEl: HTMLAudioElement;
-
   constructor(
     private store$: Store<AppStoreModule>
   ) {
