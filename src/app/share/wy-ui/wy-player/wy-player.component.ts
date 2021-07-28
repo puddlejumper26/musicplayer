@@ -100,7 +100,7 @@ export class WyPlayerComponent implements OnInit {
     this.audioEl.play();
   }
 
-  // get picUrl(): string {
-  //   return this.currentSong ? this.currentSong.al.picUrl  : "//s4.music.126.net/style/web2/img/default/default_album.jpg";
-  // }
+  get picUrl(): string {
+    return this.currentSong ? this.currentSong.al.picUrl  : "//s4.music.126.net/style/web2/img/default/default_album.jpg";
+  }
 }
