@@ -29,7 +29,7 @@
                         <app-wy-slider [bufferOffset]="bufferOffset" [(ngModel)]="sliderValue"></app-wy-slider>
                     </div>
                     <span class="time">
-                        <em>{{ currentTime }}</em> / {{ duration }}
+                        <em>{{ currentTime | formatTime }}</em> / {{ duration | formatTime }}
                     </span>
                 </div>
             </div>
