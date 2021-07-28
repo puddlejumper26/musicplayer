@@ -15,14 +15,12 @@
                 <i class="mask"></i>
             </div>
             <div class="play">
-                <div class="words clearfix hide">
-                    <p class="ellipsis margin-bottom-none">Song Name</p>
+                <div class="words clearfix">
+                    <p class="ellipsis margin-bottom-none">{{ currentSong?.name }}</p>
                     <ul class="songs clearfix margin-bottom-none">
-                        <li>
-                            <a href="">Singer1</a>
-                        </li>
-                        <li>
-                            <a href="">Singer2</a>
+                        <li *ngFor="let item of currentSong?.ar; last as isLast">
+                            <a href="">{{ item.name }}</a>
+                            <span [hidden]='isLast'>/</span>
                         </li>
                     </ul>
                 </div>
