@@ -12,7 +12,7 @@ import { Url } from "url";
    *  ServiceModule will provide with HomeService
    *   same as put HomeService into the provicers inside ServiceModule
    *   cause the second method could be delete when it is not used when Tree shaking
-   * 
+   *
    *   @TreeShaking is to auto delete the module or package in the APP which is imported but not used when generating pacakge
    */
   providedIn: ServicesModule,
@@ -21,11 +21,11 @@ export class SongService {
 
   constructor(
     private http: HttpClient,
-    @Inject(API_CONFIG) private uri: string 
+    @Inject(API_CONFIG) private uri: string
   ) { }
 
   getSongUrl(ids: string): Observable<SongUrl[]> {
-    // note here is different from singer.serive, cause here is only one id 
+    // note here is different from singer.serive, cause here is only one id
     const params = new HttpParams().set('id', ids);
     return this.http.get(this.uri + 'song/url', { params })
       .pipe(map((res: { data: SongUrl[] }) => res.data))
@@ -40,11 +40,11 @@ export class SongService {
     // To make an array through all potential ids
     const ids = songArr.map(item => item.id).join(',');
 
-    // 
+    //
     /** cause the return should be a flow, so here to create a flow
-     *  
+     *
      *  @create and @new
-     * 
+     *
      *  return new Observable(observer => {
      */
     // return Observable.create(observer => {
@@ -62,9 +62,12 @@ export class SongService {
     songs.forEach(song => {
       const url = urls.find(url => url.id === song.id).url;
       if(url) {
-        result.push({ ...songs, url });
+        // console.log('songService - generateSongList - song -', song);
+        // console.log('songService - generateSongList - url -', url);
+        result.push({ ...song, url });
+        // console.log('songService - generateSongList - result -', result)
       }
     });
     return result;
-  }  
+  }
 }

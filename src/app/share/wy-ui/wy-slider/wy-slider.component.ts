@@ -28,8 +28,8 @@ import { getPercent, limitNumberInRange } from 'src/app/utils/number';
 export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccessor {
 /**
  *  This slider will bind with many mouse events, so we need to obtain the @dom and there are several ways to do it
- * 
- *  @One constructor(private el: ElementRef){},  so in the noOnInit this.el.nativeElement is the dom of the slider 
+ *
+ *  @One constructor(private el: ElementRef){},  so in the noOnInit this.el.nativeElement is the dom of the slider
  *  @Two with @ViewChild
  */
   // constructor(private el: ElementRef) { }
@@ -39,7 +39,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
   @Input() wyMin = 0;
   @Input() wyMax = 100;
   @Input() bufferOffset: SliderValue = 0;
-  
+
   private sliderDom: HTMLDivElement;
   private isDragging = false;
 
@@ -58,7 +58,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
     @Inject(DOCUMENT) private doc: Document,
     private cdr: ChangeDetectorRef
     ) {}
-  
+
   ngOnInit() {
     // console.log('el:', this.el.nativeElement);
     // console.log('wySlider', this.wySlider.nativeElement);
@@ -95,27 +95,27 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
     [mouse, touch].forEach(source => {
       // Deconstruction of JSON data
       const {start, move, end, filter: filterUnc, pluckKey} = source;
-      
+
       source.startPlucked$ = fromEvent(this.sliderDom, start)
         .pipe(
           filter(filterUnc),  // filter whether mouse or touch
-          tap( sliderEvent ), // tap(_ => console.log('executed')), not 
+          tap( sliderEvent ), // tap(_ => console.log('executed')), not
           pluck(...pluckKey),  // obtain the position, after this step, the position data should be obtained,
           map( (position: number) => this.findClosestValue(position))
       );
-      
+
       /**
        *  @DOCUMENT is better for rendering than @docment
        */
       // source.end$ = fromEvent(document, end);
-      source.end$ = fromEvent(this.doc, end);  
+      source.end$ = fromEvent(this.doc, end);
 
       source.moveResolved$ = fromEvent(this.doc, move)
           .pipe(
             filter(filterUnc),  // filter whether mouse or touch
             tap(sliderEvent),
             pluck(...pluckKey),  // obtain the position, after this step, the position data should be obtained,
-            distinctUntilChanged(),// above pluck flow value changes, then here continue to emit flow, no change then stop 
+            distinctUntilChanged(),// above pluck flow value changes, then here continue to emit flow, no change then stop
             map( (position: number) => this.findClosestValue(position)),
             takeUntil(source.end$) // when the end then the flow also ends
           )
@@ -128,7 +128,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
     this.dragEnd$ = concat(mouse.end$, touch.end$);
   }
 
-  
+
   // string[] in order to subscribe multiple events
   /**
    * @bind https://www.jianshu.com/p/ee175cade48b
@@ -137,7 +137,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
     if(inArray(events, 'start') && this.dragStart$ && !this.dragStart_) {
       // console.log('【subscribeDrag】 - this', this);
       // console.log('【subscribeDrag】 - dragStart$', this.dragStart$);
-      this.dragStart_ = this.dragStart$.subscribe(this.onDragStart.bind(this)); 
+      this.dragStart_ = this.dragStart$.subscribe(this.onDragStart.bind(this));
     }
     if(inArray(events,'move') && this.dragMove$ && !this.dragMove_) {
       this.dragMove_ = this.dragMove$.subscribe(this.onDragMove.bind(this));
@@ -164,7 +164,6 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   // @value the position when mouse is pressed
   private onDragStart(value: number) {
-    console.log('value', value);
     this.toggleDragMoving(true);
     this.setValue(value);
   }
@@ -234,20 +233,20 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   /**
    *  to convert the distance that mouse moved to the value we need
-   * 
-   *  position / total length of slider[sliderLength] = (val - min) / (max - min)  ==> here we need to find out the val 
-   */ 
+   *
+   *  position / total length of slider[sliderLength] = (val - min) / (max - min)  ==> here we need to find out the val
+   */
   private findClosestValue(position: number): number {
     // obtain total length
     const sliderLength = this.getSliderLength();
-    
+
     // obtain slider (left, up) position
     const sliderStart = this.getSliderStartPosition();
 
     // slider current position / slider component total length = (val - min) / (max - min)
     // val = ratio * (max - min) + min
     const ratio = limitNumberInRange((position - sliderStart) / sliderLength, 0, 1);
-    const ratioTrue = this.wyVertical ? 1 - ratio : ratio; 
+    const ratioTrue = this.wyVertical ? 1 - ratio : ratio;
 
     return ratioTrue * (this.wyMax - this.wyMin) + this.wyMin;
   }
@@ -258,7 +257,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   private getSliderStartPosition(): number {
     const offset = getElementOffset(this.sliderDom);
-    return this.wyVertical ? offset.top : offset.left ;    
+    return this.wyVertical ? offset.top : offset.left ;
   }
 
   private onValueChange(value: SliderValue): void {};
@@ -268,7 +267,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
    *  @ControlValueAccessor and @NG_VALUE_ACCESSOR
    */
 
-  /* 
+  /*
    * read and set value , value here are passed from outside, so need to add value check (needCheck) inside setValue()
    * therefore when there is a value changed inside playerComponent, and binded through <app-wy-slider> inside of playerComponent.html, then here would receive this value
    */
@@ -290,7 +289,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
 
 
 /*************************************************************
- * 
+ *
  * ***********************************************************
  */
 
@@ -304,10 +303,10 @@ var module = {
 
 module.getX(); // 81
 
-var retrieveX = module.getX;  
+var retrieveX = module.getX;
 retrieveX();  // 9  global scope
 
 var boundGetX = retrieveX.bind(module);
 boundGetX(); // 81 bind to use module inside data to replace the global scope
- 
+
  */
