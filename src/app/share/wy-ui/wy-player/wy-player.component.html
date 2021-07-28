@@ -29,7 +29,7 @@
                         <app-wy-slider [bufferOffset]="bufferOffset" [(ngModel)]="sliderValue"></app-wy-slider>
                     </div>
                     <span class="time">
-                        <em>02:12</em> / 04:23
+                        <em>{{ currentTime }}</em> / {{ duration }}
                     </span>
                 </div>
             </div>
@@ -52,5 +52,10 @@
         </div>
     </div>
 
-    <audio #audio [src]="currentSong?.url" (canplay)="onCanPlay()"></audio>
+    <audio
+      #audio
+      [src]="currentSong?.url"
+      (canplay)="onCanPlay()"
+      (timeupdate)="onTimeUpdate($event)"
+    ></audio>
 </div>

@@ -20,6 +20,8 @@ export class WyPlayerComponent implements OnInit {
   currentIndex: number;
   playMode: PlayMode;
   currentSong: Song;
+  duration: number;
+  currentTime: number;
 
   @ViewChild('audio', { static: true }) private audio: ElementRef;
   private audioEl: HTMLAudioElement;
@@ -87,12 +89,17 @@ export class WyPlayerComponent implements OnInit {
   private watchCurrentSong(song: Song) {
     if(song) {
       this.currentSong = song;
-      console.log('watchCurrentSong - currentSong -', this.currentSong);
+      this.duration = song.dt / 1000; // to change from minisec -> sec
+      // console.log('watchCurrentSong - currentSong -', song);
     }
   }
 
-  onCanPlay() {
+  onTimeUpdate(e: Event) {
+    console.log('onTimeUpdate - time', (<HTMLAudioElement>e.target).currentTime); // <== to obtain the current time through consertation
+    this.currentTime = (<HTMLAudioElement>e.target).currentTime;
+  }
 
+  onCanPlay() {
     this.play();
   }
 
