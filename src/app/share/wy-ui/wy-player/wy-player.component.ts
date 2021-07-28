@@ -87,18 +87,20 @@ export class WyPlayerComponent implements OnInit {
   private watchCurrentSong(song: Song) {
     if(song) {
       this.currentSong = song;
-      console.log('watchCurrentSong URL - -', this.currentSong.url);
+      // console.log('watchCurrentSong URL - -', this.currentSong.url);
     }
   }
 
   onCanPlay() {
-    console.log(2222222);
-    
+
     this.play();
   }
 
   private play() {
-    console.log(11111111);
     this.audioEl.play();
   }
+
+  // get picUrl(): string {
+  //   return this.currentSong ? this.currentSong.al.picUrl  : "//s4.music.126.net/style/web2/img/default/default_album.jpg";
+  // }
 }
