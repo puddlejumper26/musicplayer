@@ -68,6 +68,7 @@ Better Angular Study
 - `bind` - wy-slider.component.ts
 - `HTMLAudioElement` | `play()` - wy-player.component.ts
 - `(canplay)` | `(timeupdate)` - wy-player.component.html
+- `| 0` | `padStart()` - format-time.pipe.ts
 ## 3.5 NgRx
 - `createAction` | `props` - player.actions.ts
 - `createReducer` | `Action` | `on`- player.reducer.ts
