@@ -87,7 +87,7 @@ export class WyPlayerComponent implements OnInit {
   private watchCurrentSong(song: Song) {
     if(song) {
       this.currentSong = song;
-      // console.log('watchCurrentSong URL - -', this.currentSong.url);
+      console.log('watchCurrentSong - currentSong -', this.currentSong);
     }
   }
 
