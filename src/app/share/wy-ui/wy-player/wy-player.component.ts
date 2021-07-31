@@ -23,6 +23,11 @@ export class WyPlayerComponent implements OnInit {
   duration: number;
   currentTime: number;
 
+  //play status
+  playing = false;
+  // whether ready to play
+  songReady = false;
+
   @ViewChild('audio', { static: true }) private audio: ElementRef;
   private audioEl: HTMLAudioElement;
 
@@ -99,12 +104,26 @@ export class WyPlayerComponent implements OnInit {
     this.currentTime = (<HTMLAudioElement>e.target).currentTime;
   }
 
+  // play / pause
+  onToggle() {
+    if(this.songReady) {
+      this.playing = !this.playing;
+      if(this.playing) {
+        this.audioEl.play();
+      }else{
+        this.audioEl.pause();
+      }
+    }
+  }
+
   onCanPlay() {
+    this.songReady = true;
     this.play();
   }
 
   private play() {
     this.audioEl.play();
+    this.playing = true;
   }
 
   get picUrl(): string {
