@@ -26,7 +26,8 @@
                 </div>
                 <div class="bar">
                     <div class="slider-wrap">
-                        <app-wy-slider [bufferOffset]="bufferOffset" [(ngModel)]="sliderValue" (ngModelChange)="onPercentChange($event)"></app-wy-slider>
+                        <!-- <app-wy-slider [bufferOffset]="bufferOffset" [(ngModel)]="sliderValue" (ngModelChange)="onPercentChange($event)"></app-wy-slider> -->
+                        <app-wy-slider [bufferOffset]="bufferOffset" [(ngModel)]="sliderValue" (wyOnAfterChange)="onPercentChange($event)"></app-wy-slider>
                     </div>
                     <span class="time">
                         <em>{{ currentTime | formatTime }}</em> / {{ duration | formatTime }}
