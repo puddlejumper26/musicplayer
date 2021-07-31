@@ -13,6 +13,12 @@ import { Song } from 'src/app/services/data-types/common.types';
   styleUrls: ['./wy-player.component.less']
 })
 export class WyPlayerComponent implements OnInit {
+  /**
+   *  Here is difficult to use  @Input or @Output
+   *  cause we need to obtain the value from the WyPlayerComponent, and pass the value to WySliderComponent,
+   *  which means we need a @EventEmitter in the WyPlayerComponent, but because this value is from the songs,
+   *  so we use the @ControlValueAccessor inside the WySliderComponent to obtain the value from WyPlayerComponent
+   */
   sliderValue = 35;
   bufferOffset = 45;
 
