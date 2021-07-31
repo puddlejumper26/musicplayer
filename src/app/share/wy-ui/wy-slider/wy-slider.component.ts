@@ -228,6 +228,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
 
   private getValueToOffset(value: SliderValue): SliderValue {
+    // console.log('getValueToOffset - value -', value);
     return getPercent(this.wyMin, this.wyMax, value);
   }
 
