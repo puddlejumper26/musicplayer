@@ -195,7 +195,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
     }else if(!this.valueEuqal(this.value, value)) {  // During the dragging, the new value could be the same as the current value
       this.value = value;
       this.updateTrackAndHandles();
-      console.log('setValue - this.value', this.value);
+      // console.log('setValue - this.value', this.value);
       this.onValueChange(this.value);
     }
   }
