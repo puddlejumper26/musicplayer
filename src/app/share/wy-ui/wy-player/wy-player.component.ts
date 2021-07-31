@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 
 import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList } from 'src/app/store/selectors/player.selector';
+import { SetCurrentIndex } from './../../../store/actions/player.actions';
 import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
 
@@ -100,20 +101,54 @@ export class WyPlayerComponent implements OnInit {
   }
 
   onTimeUpdate(e: Event) {
-    console.log('onTimeUpdate - time', (<HTMLAudioElement>e.target).currentTime); // <== to obtain the current time through consertation
+    // console.log('onTimeUpdate - time', (<HTMLAudioElement>e.target).currentTime); // <== to obtain the current time through consertation
     this.currentTime = (<HTMLAudioElement>e.target).currentTime;
   }
 
   // play / pause
   onToggle() {
-    if(this.songReady) {
-      this.playing = !this.playing;
-      if(this.playing) {
-        this.audioEl.play();
-      }else{
-        this.audioEl.pause();
+    if(!this.currentSong) {
+      if(this.playList.length) {
+        this.updateIndex(0);
+      }
+    }else {
+      if(this.songReady) {
+        this.playing = !this.playing;
+        if(this.playing) {
+          this.audioEl.play();
+        }else{
+          this.audioEl.pause();
+        }
       }
     }
+  }
+
+  onPrev(index: number) {
+    if(!this.songReady) return;
+    if(this.playList.length === 1){
+      this.loop();
+    }else{
+      const newIndex = index <0 ? this.playList.length-1 : index;
+      this.updateIndex(newIndex)
+    }
+  }
+
+  onNext(index: number) {
+    if(!this.songReady) {
+      return;
+    }else {
+      if(this.playList.length === 1) {
+        this.loop()
+      }else {
+        const newIndex = index >= this.playList.length ? 0 : index;
+        this.updateIndex(newIndex);
+      }
+    }
+  }
+
+  private updateIndex(index: number) {
+    this.store$.dispatch(SetCurrentIndex({ currentIndex: index }));
+    this.songReady = false;
   }
 
   onCanPlay() {
@@ -124,6 +159,12 @@ export class WyPlayerComponent implements OnInit {
   private play() {
     this.audioEl.play();
     this.playing = true;
+  }
+
+  // single loop
+  private loop() {
+    this.audioEl.currentTime = 0;
+    this.play();
   }
 
   get picUrl(): string {
