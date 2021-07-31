@@ -7,7 +7,7 @@
         <div class="wrap">
             <div class="btns">
                 <i class="prev"></i>
-                <i class="toggle"></i>
+                <i class="toggle" [class.playing]="playing" (click)="onToggle()"></i>
                 <i class="next"></i>
             </div>
             <div class="head">

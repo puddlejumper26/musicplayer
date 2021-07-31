@@ -66,7 +66,7 @@ Better Angular Study
 - `document` | `DOCUMENT (@angular)` | `Document` - wy-slider.component.ts
 - `HTMLElement.getBoundingClientRect()` | `HTMLElement.getClientRects()` | `HTMLElement.ownerDocument.defaultView` | `window.pageYOffset` | `window.pageXOffset` - wy-slider-helper.ts
 - `bind` - wy-slider.component.ts
-- `HTMLAudioElement` | `play()` - wy-player.component.ts
+- `HTMLAudioElement` | `play()` | `pause()` - wy-player.component.ts
 - `(canplay)` | `(timeupdate)` - wy-player.component.html
 - `| 0` | `padStart()` - format-time.pipe.ts
 ## 3.5 NgRx
