@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/internal/Observable';
 import { distinctUntilChanged, filter, map, pluck, takeUntil } from 'rxjs/internal/operators';
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, forwardRef } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, forwardRef, Output, EventEmitter } from '@angular/core';
 import { concat, Subscription } from 'rxjs';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { tap } from 'rxjs/internal/operators/tap';
@@ -39,6 +39,8 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
   @Input() wyMin = 0;
   @Input() wyMax = 100;
   @Input() bufferOffset: SliderValue = 0;
+
+  @Output() wyOnAfterChange = new EventEmitter<SliderValue>()
 
   private sliderDom: HTMLDivElement;
   private isDragging = false;
@@ -174,6 +176,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
     }
   }
   private onDragEnd() {
+    this.wyOnAfterChange.emit(this.value);
     this.toggleDragMoving(false);
     this.cdr.markForCheck();
   }
