@@ -274,6 +274,8 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
   /*
    * read and set value , value here are passed from outside, so need to add value check (needCheck) inside setValue()
    * therefore when there is a value changed inside playerComponent, and binded through <app-wy-slider> inside of playerComponent.html, then here would receive this value
+   *
+   *  after @EventEmitter is added and emit the (this.value), afterwards we don't need the following from @ControlValueAccessor
    */
   writeValue(value: SliderValue): void {
     this.setValue(value, true);
