@@ -110,6 +110,14 @@ export class WyPlayerComponent implements OnInit {
     // console.log('onTimeUpdate - time', (<HTMLAudioElement>e.target).currentTime); // <== to obtain the current time through consertation
     this.currentTime = (<HTMLAudioElement>e.target).currentTime;
     this.percent = (this.currentTime / this.duration) * 100;
+
+    /**
+     * @end with vaule 0 means where the buffer ends, is a number
+     */
+    const buffered = this.audioEl.buffered;
+    if(buffered.length && this.bufferOffset < 100) {
+      this.bufferOffset = (buffered.end(0) / this.duration) * 100;
+    }
   }
 
   // play / pause
