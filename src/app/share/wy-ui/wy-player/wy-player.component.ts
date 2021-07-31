@@ -104,12 +104,12 @@ export class WyPlayerComponent implements OnInit {
   onPercentChange(per) {
     console.log('onPercentChange - per - ', per);
     this.audioEl.currentTime = this.duration * (per / 100);
-    this.sliderValue = per;
   }
 
   onTimeUpdate(e: Event) {
     // console.log('onTimeUpdate - time', (<HTMLAudioElement>e.target).currentTime); // <== to obtain the current time through consertation
     this.currentTime = (<HTMLAudioElement>e.target).currentTime;
+    this.percent = (this.currentTime / this.duration) * 100;
   }
 
   // play / pause
