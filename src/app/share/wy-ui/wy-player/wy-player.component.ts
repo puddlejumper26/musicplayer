@@ -112,7 +112,9 @@ export class WyPlayerComponent implements OnInit {
 
   onPercentChange(per: number) {
     // console.log('onPercentChange - per - ', per);
-    this.audioEl.currentTime = this.duration * (per / 100);
+    if(this.currentSong){
+      this.audioEl.currentTime = this.duration * (per / 100);
+    }
   }
 
   onVolumnChange(per: number) {
