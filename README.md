@@ -49,7 +49,7 @@ Better Angular Study
 - `ngOnChanges` - wy-slider-handle.component.ts | wy-slider-track.component.ts
 - `ChangeDetectorRef` | `markForCheck()`- wy-slider.component.ts
 - `NG_VALUE_ACCESSOR` | `ngDestroy` | `ControlValueAccessor` `writeValue` `registerOnChange` `registerOnTouched`- wy-slider.component.ts
-- `(ngModelChange)`- wy-player.component.html
+- `(ngModelChange)` | `DOCUMENT` | `Inject` - wy-player.component.html
 
 
 ## 3.2 Angular Material CDK
@@ -59,6 +59,7 @@ Better Angular Study
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
 - `pluck` | `switchMap` | `mergeMap` | `concatMap` - sheet.service.ts
 - `fromEvent` | `filter` | `tap` | `distinctUntilChanged` | `takeUntil` | `mgerge` replaced with `concat`- wy-slider.component.ts
+- `Subscription` | `fromEvent` - wy-player.component.ts
 
 ## 3.4 dom && JS
 - `slice()`| shallow copy - song.service.ts 

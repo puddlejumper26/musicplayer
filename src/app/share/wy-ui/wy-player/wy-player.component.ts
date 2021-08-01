@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { fromEvent, Subscription } from 'rxjs';
 
 import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList } from 'src/app/store/selectors/player.selector';
@@ -31,11 +33,17 @@ export class WyPlayerComponent implements OnInit {
   // whether ready to play
   songReady = false;
 
+  showVolumnPanel = false;
+  selfClick = false; // whether click the player panel itself
+
+  private winClick: Subscription
+
   @ViewChild('audio', { static: true }) private audio: ElementRef;
   private audioEl: HTMLAudioElement;
 
   constructor(
-    private store$: Store<AppStoreModule>
+    private store$: Store<AppStoreModule>,
+    @Inject(DOCUMENT) private doc: Document,
   ) {
 
     /**
@@ -140,6 +148,40 @@ export class WyPlayerComponent implements OnInit {
           this.audioEl.pause();
         }
       }
+    }
+  }
+
+  toggelVolPanel(evt: MouseEvent) {
+    evt.stopPropagation();
+    this.togglePanel();
+  }
+
+  private togglePanel() {
+    this.showVolumnPanel = !this.showVolumnPanel;
+    if(this.showVolumnPanel) {
+      this.bindDocumentClickListener();
+    }else {
+      this.unbindDocumentClickListener();
+    }
+  }
+
+  private bindDocumentClickListener() {
+    if(!this.winClick) {
+      this.winClick = fromEvent(this.doc, 'click').subscribe(() => {
+        // click other parts, not the player part
+        if(!this.selfClick) {
+          this.showVolumnPanel = false;
+          this.unbindDocumentClickListener();
+        }
+        this.selfClick = false;
+      })
+    }
+  }
+
+  private unbindDocumentClickListener() {
+    if(this.winClick) {
+      this.winClick.unsubscribe();
+      this.winClick = null;
     }
   }
 
