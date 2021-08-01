@@ -276,6 +276,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
    * therefore when there is a value changed inside playerComponent, and binded through <app-wy-slider> inside of playerComponent.html, then here would receive this value
    *
    *  after @EventEmitter is added and emit the (this.value), afterwards we don't need the following from @ControlValueAccessor
+   *   but we need to use one slider component also for slider bar, so we still need this method.
    */
   writeValue(value: SliderValue): void {
     this.setValue(value, true);

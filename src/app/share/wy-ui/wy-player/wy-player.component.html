@@ -47,7 +47,7 @@
                 </p>
 
                 <div class="control-vol">
-                    <app-wy-slider [wyVertical]="true"></app-wy-slider>
+                    <app-wy-slider [wyVertical]="true" [(ngModel)]="volumn" (ngModelChange)="onVolumnChange($event)"></app-wy-slider>
                 </div>
             </div>
         </div>
