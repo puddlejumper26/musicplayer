@@ -15,6 +15,7 @@ import { Song } from 'src/app/services/data-types/common.types';
 export class WyPlayerComponent implements OnInit {
 
   percent = 0;
+  volumn = 60;
   bufferOffset = 0;
 
   songList: Song[];
@@ -101,9 +102,13 @@ export class WyPlayerComponent implements OnInit {
     }
   }
 
-  onPercentChange(per) {
-    console.log('onPercentChange - per - ', per);
+  onPercentChange(per: number) {
+    // console.log('onPercentChange - per - ', per);
     this.audioEl.currentTime = this.duration * (per / 100);
+  }
+
+  onVolumnChange(per: number) {
+    this.audioEl.volume = per / 100;
   }
 
   onTimeUpdate(e: Event) {
