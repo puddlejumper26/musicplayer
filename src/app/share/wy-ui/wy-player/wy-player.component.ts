@@ -5,7 +5,7 @@ import { fromEvent, Subscription } from 'rxjs';
 
 import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList } from 'src/app/store/selectors/player.selector';
-import { SetCurrentIndex, SetPlayMode } from './../../../store/actions/player.actions';
+import { SetCurrentIndex, SetPlayMode, SetPlayList } from './../../../store/actions/player.actions';
 import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
 import { shuffle } from 'src/app/utils/array';
@@ -124,8 +124,18 @@ export class WyPlayerComponent implements OnInit {
       if(mode.type === 'random') {
         list = shuffle(this.songList);
       }
-      console.log('watchPlayMode - list -', list);
+      // console.log('watchPlayMode - list -', list);
+
+      // current playing song should not be changed when shuffling songList
+      this.updateCurrentIndex(list, this.currentSong);
+      this.store$.dispatch(SetPlayList({ playList: list }));
     }
+  }
+
+  // to find the current playing song's index in the new songList after shuffled
+  private updateCurrentIndex(list: Song[], song: Song) {
+      const newIndex = list.findIndex(item => item.id === song.id);
+      this.store$.dispatch(SetCurrentIndex({ currentIndex: newIndex }));
   }
 
   private watchCurrentSong(song: Song) {
