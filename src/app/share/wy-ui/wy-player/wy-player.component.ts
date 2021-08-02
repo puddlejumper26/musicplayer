@@ -5,7 +5,7 @@ import { fromEvent, Subscription } from 'rxjs';
 
 import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList } from 'src/app/store/selectors/player.selector';
-import { SetCurrentIndex } from './../../../store/actions/player.actions';
+import { SetCurrentIndex, SetPlayMode } from './../../../store/actions/player.actions';
 import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
 
@@ -129,9 +129,11 @@ export class WyPlayerComponent implements OnInit {
   changeMode() {
     // console.log('changeMode - this.modeCount - ', this.modeCount);
     const temp = modeTypes[++this.modeCount % 3];
-    // console.log('changeMode - ++this.modeCount - ', ++this.modeCount);
-    console.log('changeMode - this.modeCount++ % 3 - ', ++this.modeCount % 3);
-    console.log('changeMode - temp - ', temp);
+    // console.log('changeMode - this.modeCount++ % 3 - ', ++this.modeCount % 3);
+    // console.log('changeMode - temp - ', temp);
+
+    // here to sent the mode data, and @appStore$.pipe(select(getPlayMode)).subscribe will obtain(subscribe) this data
+    this.store$.dispatch(SetPlayMode({ playMode: temp }));
   }
 
   onPercentChange(per: number) {
