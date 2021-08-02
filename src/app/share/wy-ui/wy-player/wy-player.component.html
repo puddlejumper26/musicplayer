@@ -41,7 +41,7 @@
             </div>
             <div class="ctrl">
                 <i class="volume" title="volume" (click)="toggelVolPanel($event)"></i>
-                <i class="loop" title="loop"></i>
+                <i [ngClass]="currentMode.type" [title]="currentMode.label" (click)="changeMode()"></i>
                 <p class="open">
                     <span></span>
                 </p>
