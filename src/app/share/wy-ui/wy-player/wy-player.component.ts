@@ -9,6 +9,18 @@ import { SetCurrentIndex } from './../../../store/actions/player.actions';
 import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
 
+
+const modeTypes: PlayMode[] = [{
+  type: 'loop',
+  label: 'loop'
+},{
+  type:'random',
+  label:'random'
+},{
+  type:'singleLoop',
+  label:'single loop'
+}];
+
 @Component({
   selector: 'app-wy-player',
   templateUrl: './wy-player.component.html',
@@ -32,6 +44,9 @@ export class WyPlayerComponent implements OnInit {
   playing = false;
   // whether ready to play
   songReady = false;
+
+  currentMode: PlayMode;
+  modeCount = 0; // record how many time clicked
 
   showVolumnPanel = false;
   selfClick = false; // whether click the player panel itself
@@ -99,7 +114,8 @@ export class WyPlayerComponent implements OnInit {
   }
 
   private watchPlayMode(mode: PlayMode) {
-
+    console.log('watchPlayMode - mode -', mode);
+    this.currentMode = mode;
   }
 
   private watchCurrentSong(song: Song) {
@@ -108,6 +124,14 @@ export class WyPlayerComponent implements OnInit {
       this.duration = song.dt / 1000; // to change from minisec -> sec
       // console.log('watchCurrentSong - currentSong -', song);
     }
+  }
+
+  changeMode() {
+    // console.log('changeMode - this.modeCount - ', this.modeCount);
+    const temp = modeTypes[++this.modeCount % 3];
+    // console.log('changeMode - ++this.modeCount - ', ++this.modeCount);
+    console.log('changeMode - this.modeCount++ % 3 - ', ++this.modeCount % 3);
+    console.log('changeMode - temp - ', temp);
   }
 
   onPercentChange(per: number) {
