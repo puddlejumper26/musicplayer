@@ -271,6 +271,15 @@ export class WyPlayerComponent implements OnInit {
     this.playing = true;
   }
 
+  onEnded() {
+    this.playing = false;
+    if(this.currentMode.type === 'singleLoop') {
+      this.loop()
+    }else {
+      this.onNext(this.currentIndex + 1);
+    }
+  }
+
   // single loop
   private loop() {
     this.audioEl.currentTime = 0;
