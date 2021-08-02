@@ -8,6 +8,7 @@ import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, g
 import { SetCurrentIndex, SetPlayMode } from './../../../store/actions/player.actions';
 import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
+import { shuffle } from 'src/app/utils/array';
 
 
 const modeTypes: PlayMode[] = [{
@@ -29,7 +30,7 @@ const modeTypes: PlayMode[] = [{
 export class WyPlayerComponent implements OnInit {
 
   percent = 0;
-  volumn = 60;
+  volumn = 10;
   bufferOffset = 0;
 
   songList: Song[];
@@ -116,6 +117,15 @@ export class WyPlayerComponent implements OnInit {
   private watchPlayMode(mode: PlayMode) {
     console.log('watchPlayMode - mode -', mode);
     this.currentMode = mode;
+
+    if(this.songList) {
+      // always using @slice() to store the copy
+      let list = this.songList.slice();
+      if(mode.type === 'random') {
+        list = shuffle(this.songList);
+      }
+      console.log('watchPlayMode - list -', list);
+    }
   }
 
   private watchCurrentSong(song: Song) {
