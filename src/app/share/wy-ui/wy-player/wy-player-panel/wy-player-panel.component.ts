@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 import { Song } from 'src/app/services/data-types/common.types';
 
@@ -13,6 +13,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   @Input() currentSong: Song;
   @Input() currentIndex: number;
   @Input() show: boolean;
+
+  @Output() onClose = new EventEmitter<void>();
 
   constructor() { }
 
