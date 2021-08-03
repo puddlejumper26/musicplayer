@@ -19,7 +19,7 @@
     <div class="msk"></div>
     <div class="list-wrap">
       <ul>
-        <li *ngFor="let item of songList; index as i" [class.current]="currentIndex === i">
+        <li *ngFor="let item of songList; index as i" [class.current]="currentIndex === i" (click)="onChangeSong.emit(item)">
           <i class="col arrow"></i>
           <div class="col name ellipsis">{{item.name}}</div>
           <div class="col icons">

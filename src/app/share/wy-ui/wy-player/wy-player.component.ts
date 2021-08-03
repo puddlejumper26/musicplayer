@@ -137,8 +137,13 @@ export class WyPlayerComponent implements OnInit {
 
   // to find the current playing song's index in the new songList after shuffled
   private updateCurrentIndex(list: Song[], song: Song) {
+    console.log('updateCurrentIndex - Song - ', song);
+
+    if(song) {
+      console.log('updateCurrentindex - song.id - ', song.id);
       const newIndex = list.findIndex(item => item.id === song.id);
       this.store$.dispatch(SetCurrentIndex({ currentIndex: newIndex }));
+    }
   }
 
   private watchCurrentSong(song: Song) {
@@ -298,5 +303,10 @@ export class WyPlayerComponent implements OnInit {
 
   get picUrl(): string {
     return this.currentSong ? this.currentSong.al.picUrl  : "//s4.music.126.net/style/web2/img/default/default_album.jpg";
+  }
+
+  onChangeSong(song: Song) {
+    console.log('onChangeSong is called');
+    this.updateCurrentIndex(this.playList, song);
   }
 }

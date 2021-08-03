@@ -15,6 +15,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   @Input() show: boolean;
 
   @Output() onClose = new EventEmitter<void>();
+  @Output() onChangeSong = new EventEmitter<Song>();
 
   constructor() { }
 
