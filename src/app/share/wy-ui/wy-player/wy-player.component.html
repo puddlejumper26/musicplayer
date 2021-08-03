@@ -40,9 +40,9 @@
                 <i class="share" title="Share"></i>
             </div>
             <div class="ctrl">
-                <i class="volume" title="volume" (click)="toggelVolPanel($event)"></i>
+                <i class="volume" title="volume" (click)="toggleVolPanel($event)"></i>
                 <i [ngClass]="currentMode.type" [title]="currentMode.label" (click)="changeMode()"></i>
-                <p class="open">
+                <p class="open" (click)="toggleListPanel()">
                     <span></span>
                 </p>
 
@@ -50,7 +50,12 @@
                     <app-wy-slider [wyVertical]="true" [(ngModel)]="volumn" (ngModelChange)="onVolumnChange($event)"></app-wy-slider>
                 </div>
             </div>
-            <app-wy-player-panel [songList]="songList" [currentSong]="currentSong"></app-wy-player-panel>
+            <app-wy-player-panel
+              [songList]="songList"
+              [currentSong]="currentSong"
+              [currentIndex]="currentIndex"
+              [show]="showPanel"
+              ></app-wy-player-panel>
         </div>
     </div>
 

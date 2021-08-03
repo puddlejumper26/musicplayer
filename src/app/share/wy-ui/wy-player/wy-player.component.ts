@@ -52,6 +52,9 @@ export class WyPlayerComponent implements OnInit {
   showVolumnPanel = false;
   selfClick = false; // whether click the player panel itself
 
+  //show play list panel
+  showPanel = false;
+
   private winClick: Subscription
 
   @ViewChild('audio', { static: true }) private audio: ElementRef;
@@ -199,14 +202,20 @@ export class WyPlayerComponent implements OnInit {
     }
   }
 
-  toggelVolPanel(evt: MouseEvent) {
-    evt.stopPropagation();
-    this.togglePanel();
+  toggleListPanel() {
+    if(this.songList.length){
+      this.togglePanel('showPanel')
+    }
   }
 
-  private togglePanel() {
-    this.showVolumnPanel = !this.showVolumnPanel;
-    if(this.showVolumnPanel) {
+  toggleVolPanel(evt: MouseEvent) {
+    evt.stopPropagation();
+    this.togglePanel('showVolumnPanel');
+  }
+
+  private togglePanel(type: string) {
+    this[type] = !this[type];
+    if(this.showVolumnPanel || this.showPanel) {
       this.bindDocumentClickListener();
     }else {
       this.unbindDocumentClickListener();
@@ -219,6 +228,7 @@ export class WyPlayerComponent implements OnInit {
         // click other parts, not the player part
         if(!this.selfClick) {
           this.showVolumnPanel = false;
+          this.showPanel = false;
           this.unbindDocumentClickListener();
         }
         this.selfClick = false;

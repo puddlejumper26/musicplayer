@@ -11,6 +11,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
   @Input() songList: Song[];
   @Input() currentSong: Song;
+  @Input() currentIndex: number;
+  @Input() show: boolean;
 
   constructor() { }
 
