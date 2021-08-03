@@ -10,7 +10,7 @@
         <i class="icon trush" title="Clear"></i> Clear
       </div>
       <p class="playing-name">{{currentSong?.name}}</p>
-      <i class="icon close"></i>
+      <i class="icon close" (click)="onClose.emit()"></i>
     </div>
   </div>
 
