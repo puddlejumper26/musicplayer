@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, ViewChildren, QueryList } from '@angular/core';
 
 import { Song } from 'src/app/services/data-types/common.types';
+import { WyScrollComponent } from './../wy-scroll/wy-scroll.component';
 
 @Component({
   selector: 'app-wy-player-panel',
@@ -17,6 +18,9 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   @Output() onClose = new EventEmitter<void>();
   @Output() onChangeSong = new EventEmitter<Song>();
 
+  // we need to use this compnent both for player list and also for lyrics, so @Children
+  @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
+
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -25,6 +29,12 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
     };
     if(changes['currentSong']) {
       console.log('ngOnChanges - currentSong', this.currentSong);
+    }
+    if(changes['show']) {
+      if(!changes['show'].firstChange && this.show) {
+        // first means the first component
+        this.wyScroll.first.refreshScroll();
+      }
     }
   }
 
