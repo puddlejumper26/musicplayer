@@ -52,6 +52,7 @@ Better Angular Study
 - `NG_VALUE_ACCESSOR` | `ngDestroy` | `ControlValueAccessor` `writeValue` `registerOnChange` `registerOnTouched`- wy-slider.component.ts
 - `(ngModelChange)` | `DOCUMENT` | `Inject` - wy-player.component.html
 - `AfterViewInit` | `ngAfterViewInit` - wy-scroll.component.ts
+- `firstChange` | `QueryList` | `first` - wy-player-panel.component.ts
 
 
 ## 3.2 Angular Material CDK
