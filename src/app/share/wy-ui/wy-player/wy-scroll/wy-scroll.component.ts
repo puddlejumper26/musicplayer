@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChil
 import BScroll from '@better-scroll/core';
 import ScrollBar from '@better-scroll/scroll-bar';
 BScroll.use(ScrollBar);
+import MouseWheel from '@better-scroll/mouse-wheel'
+BScroll.use(MouseWheel);
 
 @Component({
   selector: 'app-wy-scroll',
@@ -36,7 +38,8 @@ export class WyScrollComponent implements OnInit, AfterViewInit, OnChanges {
     this.bs = new BScroll(this.wrapRef.nativeElement, {
       scrollbar: {
         interactive: true,
-      }
+      },
+      mouseWheel: {}
     });
   }
 
