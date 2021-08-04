@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import BScroll from '@better-scroll/core';
+import ScrollBar from '@better-scroll/scroll-bar';
+BScroll.use(ScrollBar);
 
 @Component({
   selector: 'app-wy-scroll',
@@ -31,7 +33,11 @@ export class WyScrollComponent implements OnInit, AfterViewInit, OnChanges {
     // console.log('ngAfterViewInit - this.wrapRef.nativeElement.offsetHeight -', this.wrapRef.nativeElement.offsetHeight);
 
     // init
-    this.bs = new BScroll(this.wrapRef.nativeElement);
+    this.bs = new BScroll(this.wrapRef.nativeElement, {
+      scrollbar: {
+        interactive: true,
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
