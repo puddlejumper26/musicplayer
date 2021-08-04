@@ -15,6 +15,7 @@ Better Angular Study
   - [DOC, in Chinese] https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi
   - [How to install](https://github.com/puddlejumper26/musicplayer/issues/1)
 - BetterScroll 2.0
+  - https://better-scroll.github.io/docs/en-US/ 
 
 ## 2.2 Installation
 - Install Netease Clould Music API (follow 2.1)
@@ -44,12 +45,13 @@ Better Angular Study
 - `@Pipe` - play-count.pipe.ts
 - `new HttpParams` | `fromString` | `queryString`- singer.service.ts | sheet.service.ts
 - `Resolve` - home-resolve.service.ts
-- `encapsulation: ViewEncapsulation.None` - wy-slider.component.ts
+- `encapsulation: ViewEncapsulation.None` - wy-slider.component.ts | wy-scroll.component.ts
 - `ElementRef` - wy-slider.component.ts 
 - `ngOnChanges` - wy-slider-handle.component.ts | wy-slider-track.component.ts
 - `ChangeDetectorRef` | `markForCheck()`- wy-slider.component.ts
 - `NG_VALUE_ACCESSOR` | `ngDestroy` | `ControlValueAccessor` `writeValue` `registerOnChange` `registerOnTouched`- wy-slider.component.ts
 - `(ngModelChange)` | `DOCUMENT` | `Inject` - wy-player.component.html
+- `AfterViewInit` | `ngAfterViewInit` - wy-scroll.component.ts
 
 
 ## 3.2 Angular Material CDK
@@ -81,6 +83,8 @@ Better Angular Study
 - `[nzDotRender]` - home.component.html
   - `nzBeforeChange` - home.component.html 
 
+# 4.0 Commands
+- `ng g c *** -s -t -c=OnPush -v=None` // -s -t -> inline the css and html
 
-# 4.0 Demo
+# 5.0 Demo
 ![](https://user-images.githubusercontent.com/80747582/124521982-cbbdc300-ddf1-11eb-94ce-2053cd32376a.png)
