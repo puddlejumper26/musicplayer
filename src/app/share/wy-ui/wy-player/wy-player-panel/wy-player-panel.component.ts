@@ -61,7 +61,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       console.log('scrollToCurrent - this.scrollY - ', this.scrollY);
       console.log('scrollToCurrent - offsetTop - ', offsetTop);
       //downwards play songs, to keep the song in the view
-      if((offsetTop - Math.abs(this.scrollY)) > 215) {
+      if((offsetTop - Math.abs(this.scrollY)) > offsetHeight * 5) {
         this.wyScroll.first.scrollToElement(currentLi, 300, false, true);
       }
       //upwards play songs, to keep the song in the view
