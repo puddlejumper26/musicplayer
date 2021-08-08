@@ -30,7 +30,7 @@ const modeTypes: PlayMode[] = [{
 export class WyPlayerComponent implements OnInit {
 
   percent = 0;
-  volumn = 10;
+  volumn = 60;
   bufferOffset = 0;
 
   songList: Song[];

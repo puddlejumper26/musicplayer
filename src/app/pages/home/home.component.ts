@@ -1,4 +1,4 @@
-import { SetSongList, SetPlayList, SetCurrentIndex } from './../../store/actions/player.actions';
+import { SetSongList, SetPlayList, SetCurrentIndex, SetPlayMode } from './../../store/actions/player.actions';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +9,12 @@ import { HotTag, Singer, SongSheet } from './../../services/data-types/common.ty
 import { Banner } from 'src/app/services/data-types/common.types';
 import { SheetService } from 'src/app/services/sheet.service';
 import { AppStoreModule } from 'src/app/store';
+import { PlayMode } from 'src/app/share/wy-ui/wy-player/player-types';
+
+const initPlayMode: PlayMode = {
+  type: 'loop',
+  label: 'loop'
+};
 
 @Component({
   selector: 'app-home',
@@ -58,7 +64,10 @@ export class HomeComponent implements OnInit {
     this.sheetServe.playSheet(id).subscribe(list => {
       this.store$.dispatch(SetSongList({ songList: list }));
       this.store$.dispatch(SetPlayList({ playList: list }));
-      this.store$.dispatch(SetCurrentIndex({ currentIndex: 0 })) // default to play the first song
+      this.store$.dispatch(SetCurrentIndex({ currentIndex: 0 })); // default to play the first song
+
+      // reset the play mode to loop when playing an ablum
+      this.store$.dispatch(SetPlayMode({ playMode: initPlayMode }))
     })
   }
 }
