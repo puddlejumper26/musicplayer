@@ -29,6 +29,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['songList']) {
       // console.log('ngOnChanges - songList', this.songList);
+      // default to play the first song
+      this.currentIndex = 0;
     };
     if(changes['currentSong']) {
       // console.log('ngOnChanges - currentSong', this.currentSong);
@@ -47,7 +49,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
         this.wyScroll.first.refreshScroll();
         setTimeout(() => {
           if(this.currentSong) {
-            this.scrollToCurrent();
+            this.scrollToCurrent(0);
           }
         }, 80);
       }
@@ -56,7 +58,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
   ngOnInit() {}
 
-  private scrollToCurrent() {
+  private scrollToCurrent(speed = 300) {
     const songListRefs = this.wyScroll.first.el.nativeElement.querySelectorAll('ul li');
     // console.log('scrollToCurrent - songListRefs - ', songListRefs);
     if(songListRefs.length) {
@@ -69,11 +71,11 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       console.log('scrollToCurrent - offsetTop - ', offsetTop);
       //downwards play songs, to keep the song in the view
       if((offsetTop - Math.abs(this.scrollY)) > offsetHeight * 5) {
-        this.wyScroll.first.scrollToElement(currentLi, 300, false, true);
+        this.wyScroll.first.scrollToElement(currentLi, speed, false, true);
       }
       //upwards play songs, to keep the song in the view
       if(offsetTop < Math.abs(this.scrollY)) {
-        this.wyScroll.first.scrollToElement(currentLi, 300, false, true);
+        this.wyScroll.first.scrollToElement(currentLi, speed, false, true);
       }
     }
   }
