@@ -57,8 +57,17 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       const currentLi = <HTMLElement>songListRefs[this.currentIndex || 0];
       //offsetTop of current playing song
       const offsetTop = currentLi.offsetTop;
+      const offsetHeight = currentLi.offsetHeight;
       console.log('scrollToCurrent - this.scrollY - ', this.scrollY);
       console.log('scrollToCurrent - offsetTop - ', offsetTop);
+      //downwards play songs, to keep the song in the view
+      if((offsetTop - Math.abs(this.scrollY)) > 215) {
+        this.wyScroll.first.scrollToElement(currentLi, 300, false, true);
+      }
+      //upwards play songs, to keep the song in the view
+      if(offsetTop < Math.abs(this.scrollY)) {
+        this.wyScroll.first.scrollToElement(currentLi, 300, false, true);
+      }
     }
   }
 }
