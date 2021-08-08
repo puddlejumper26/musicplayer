@@ -25,10 +25,17 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['songList']) {
-      console.log('ngOnChanges - songList', this.songList);
+      // console.log('ngOnChanges - songList', this.songList);
     };
     if(changes['currentSong']) {
-      console.log('ngOnChanges - currentSong', this.currentSong);
+      // console.log('ngOnChanges - currentSong', this.currentSong);
+      if(this.currentSong) {
+        if(this.show){
+          this.scrollToCurrent();
+        }
+      }else {
+
+      }
     }
     if(changes['show']) {
       if(!changes['show'].firstChange && this.show) {
@@ -38,7 +45,15 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  private scrollToCurrent() {
+    const songListRefs = this.wyScroll.first.el.nativeElement.querySelectorAll('ul li');
+    // console.log('scrollToCurrent - songListRefs - ', songListRefs);
+    if(songListRefs.length) {
+      // current play li
+      const currentLi = songListRefs[this.currentIndex] || 0;
+    }
+
+  }
 }

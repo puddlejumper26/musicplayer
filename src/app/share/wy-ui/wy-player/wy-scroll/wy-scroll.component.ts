@@ -25,7 +25,7 @@ export class WyScrollComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild('wrap', { static: true}) private wrapRef: ElementRef;
 
-  constructor() { }
+  constructor(readonly el: ElementRef) { }
 
   ngOnInit() {
   }
