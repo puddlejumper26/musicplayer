@@ -1,15 +1,18 @@
-import { SetSongList, SetPlayList, SetCurrentIndex, SetPlayMode } from './../../store/actions/player.actions';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/internal/operators';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
+import { findIndex, shuffle } from 'src/app/utils/array';
 import { HotTag, Singer, SongSheet } from './../../services/data-types/common.types';
 import { Banner } from 'src/app/services/data-types/common.types';
 import { SheetService } from 'src/app/services/sheet.service';
 import { AppStoreModule } from 'src/app/store';
 import { PlayMode } from 'src/app/share/wy-ui/wy-player/player-types';
+import { PlayState } from 'src/app/store/reducers/player.reducer';
+import { getPlayer } from 'src/app/store/selectors/player.selector';
+import { SetSongList, SetPlayList, SetCurrentIndex, SetPlayMode } from './../../store/actions/player.actions';
 
 const initPlayMode: PlayMode = {
   type: 'loop',
@@ -30,6 +33,8 @@ export class HomeComponent implements OnInit {
 
   carouselActiveIndex = 0;
 
+  private playerState: PlayState;
+
   @ViewChild(NzCarouselComponent, { static: true }) private nzCarousel: NzCarouselComponent;
 
   constructor(
@@ -43,6 +48,7 @@ export class HomeComponent implements OnInit {
       this.songSheetList = songSheetList;
       this.singers = singers;
     })
+    this.store$.pipe(select(getPlayer)).subscribe( res => this.playerState = res);
   }
 
   ngOnInit() {
@@ -63,11 +69,22 @@ export class HomeComponent implements OnInit {
   onPlaySheet(id: number) {
     this.sheetServe.playSheet(id).subscribe(list => {
       this.store$.dispatch(SetSongList({ songList: list }));
-      this.store$.dispatch(SetPlayList({ playList: list }));
-      this.store$.dispatch(SetCurrentIndex({ currentIndex: 0 })); // default to play the first song
+      /**
+       *  @method1
+       */
+      let trueIndex = 0;
+      let trueList = list.slice();
+      if(this.playerState.playMode.type === 'random') {
+        trueList = shuffle(list || []);
+        trueIndex = findIndex(trueList, list[trueIndex]);
+      }
+      this.store$.dispatch(SetPlayList({ playList: trueList }));
+      this.store$.dispatch(SetCurrentIndex({ currentIndex: trueIndex })); // default to play the first song
 
-      // reset the play mode to loop when playing an ablum
-      this.store$.dispatch(SetPlayMode({ playMode: initPlayMode }))
+      /**
+       * @method2        reset the play mode to loop when playing an ablum
+       */
+      // this.store$.dispatch(SetPlayMode({ playMode: initPlayMode }))
     })
   }
 }
