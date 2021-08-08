@@ -18,6 +18,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   @Output() onClose = new EventEmitter<void>();
   @Output() onChangeSong = new EventEmitter<Song>();
 
+  scrollY = 0;
+
   // we need to use this compnent both for player list and also for lyrics, so @Children
   @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
 
@@ -52,8 +54,11 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
     // console.log('scrollToCurrent - songListRefs - ', songListRefs);
     if(songListRefs.length) {
       // current play li
-      const currentLi = songListRefs[this.currentIndex] || 0;
+      const currentLi = <HTMLElement>songListRefs[this.currentIndex || 0];
+      //offsetTop of current playing song
+      const offsetTop = currentLi.offsetTop;
+      console.log('scrollToCurrent - this.scrollY - ', this.scrollY);
+      console.log('scrollToCurrent - offsetTop - ', offsetTop);
     }
-
   }
 }
