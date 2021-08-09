@@ -63,6 +63,7 @@ Better Angular Study
 - `pluck` | `switchMap` | `mergeMap` | `concatMap` - sheet.service.ts
 - `fromEvent` | `filter` | `tap` | `distinctUntilChanged` | `takeUntil` | `mgerge` replaced with `concat`- wy-slider.component.ts
 - `Subscription` | `fromEvent` - wy-player.component.ts
+- `timer()` - wy-scroll.component.ts | wy-player-panel.component.ts
 
 ## 3.4 dom && JS
 - `slice()`| shallow copy - song.service.ts 

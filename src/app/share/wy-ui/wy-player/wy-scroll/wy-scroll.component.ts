@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { timer } from 'rxjs';
 import BScroll from '@better-scroll/core';
 import ScrollBar from '@better-scroll/scroll-bar';
 BScroll.use(ScrollBar);
@@ -64,8 +65,13 @@ export class WyScrollComponent implements OnInit, AfterViewInit, OnChanges {
   *  public refresh method, and refresh has to be after init, so need @setTimeout
   */
   refreshScroll() {
-    setTimeout(() => {
+
+    timer(this.refreshDelay).subscribe(() => {
       this.refresh();
-    }, this.refreshDelay);
+    })
+
+    // setTimeout(() => {
+    //   this.refresh();
+    // }, this.refreshDelay);
   }
 }
