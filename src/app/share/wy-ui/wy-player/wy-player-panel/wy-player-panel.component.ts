@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, ViewChildren, QueryList } from '@angular/core';
+import { timer } from 'rxjs';
 
 import { Song } from 'src/app/services/data-types/common.types';
 import { findIndex } from 'src/app/utils/array';
@@ -47,11 +48,19 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       if(!changes['show'].firstChange && this.show) {
         // first means the first component
         this.wyScroll.first.refreshScroll();
-        setTimeout(() => {
+
+        // timer to replace the setTimeout(), after 80 secs to send a flow
+        timer(80).subscribe(() => {
           if(this.currentSong) {
             this.scrollToCurrent(0);
           }
-        }, 80);
+        })
+
+        // setTimeout(() => {
+        //   if(this.currentSong) {
+        //     this.scrollToCurrent(0);
+        //   }
+        // }, 80);
       }
     }
   }
