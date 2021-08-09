@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, ViewChildren, QueryList, Inject } from '@angular/core';
 import { timer } from 'rxjs';
 
 import { Song } from 'src/app/services/data-types/common.types';
+import { WINDOW } from 'src/app/services/services.module';
 import { findIndex } from 'src/app/utils/array';
 import { WyScrollComponent } from './../wy-scroll/wy-scroll.component';
 
@@ -25,7 +26,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   // we need to use this compnent both for player list and also for lyrics, so @Children
   @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
 
-  constructor() { }
+  constructor(@Inject(WINDOW) private win: Window) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['songList']) {
@@ -49,12 +50,18 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
         // first means the first component
         this.wyScroll.first.refreshScroll();
 
-        // timer to replace the setTimeout(), after 80 secs to send a flow
-        timer(80).subscribe(() => {
+        this.win.setTimeout(() => {
           if(this.currentSong) {
             this.scrollToCurrent(0);
           }
-        })
+        }, 80);
+
+        // timer to replace the setTimeout(), after 80 secs to send a flow
+        // timer(80).subscribe(() => {
+        //   if(this.currentSong) {
+        //     this.scrollToCurrent(0);
+        //   }
+        // })
 
         // setTimeout(() => {
         //   if(this.currentSong) {

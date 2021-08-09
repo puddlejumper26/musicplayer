@@ -32,7 +32,7 @@ Better Angular Study
 - `@SkipSelf()` - core.module.ts
 - `@Optional()` - core.module.ts
 - `Tree Shaking` - home.service.ts
-- `InjectionToken` - services.module.ts
+- `InjectionToken` | `isPlatformBrowser()` - services.module.ts
 - `@Inject()` - services.module.ts
 - `ng-content` - wy-carousel.component.html
 - `ng-template` - wy-carousel.component.html
