@@ -4,7 +4,7 @@ import { Observable } from "rxjs/internal/Observable";
 import { map } from "rxjs/internal/operators";
 
 import { API_CONFIG, ServicesModule } from "./services.module";
-import { Song, SongSheet, SongUrl } from 'src/app/services/data-types/common.types';
+import { Lyric, Song, SongSheet, SongUrl } from 'src/app/services/data-types/common.types';
 import { Url } from "url";
 
 @Injectable({
@@ -69,5 +69,10 @@ export class SongService {
       }
     });
     return result;
+  }
+
+  getLyric(id: number): Observable<Lyric> {
+      const params = new HttpParams().set('id', id.toString());
+      return this.http.get(this.uri + 'lyric', { params }).pipe(map(res => res as Lyric));
   }
 }

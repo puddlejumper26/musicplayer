@@ -3,6 +3,7 @@ import { timer } from 'rxjs';
 
 import { Song } from 'src/app/services/data-types/common.types';
 import { WINDOW } from 'src/app/services/services.module';
+import { SongService } from 'src/app/services/song.service';
 import { findIndex } from 'src/app/utils/array';
 import { WyScrollComponent } from './../wy-scroll/wy-scroll.component';
 
@@ -26,7 +27,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   // we need to use this compnent both for player list and also for lyrics, so @Children
   @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
 
-  constructor(@Inject(WINDOW) private win: Window) { }
+  constructor(@Inject(WINDOW) private win: Window, private songServe: SongService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['songList']) {
@@ -38,6 +39,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       // console.log('ngOnChanges - currentSong', this.currentSong);
       if(this.currentSong) {
         this.currentIndex = findIndex(this.songList, this.currentSong);
+        this.updateLyric();
         if(this.show){
           this.scrollToCurrent();
         }
@@ -73,6 +75,10 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {}
+
+  private updateLyric() {
+    this.songServe.getLyric(this.currentSong.id).subscribe( res => console.log( res.lrc ) );
+  }
 
   private scrollToCurrent(speed = 300) {
     const songListRefs = this.wyScroll.first.el.nativeElement.querySelectorAll('ul li');
