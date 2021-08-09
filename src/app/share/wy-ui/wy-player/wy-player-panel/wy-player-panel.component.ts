@@ -6,6 +6,7 @@ import { WINDOW } from 'src/app/services/services.module';
 import { SongService } from 'src/app/services/song.service';
 import { findIndex } from 'src/app/utils/array';
 import { WyScrollComponent } from './../wy-scroll/wy-scroll.component';
+import { WyLyric } from './wy-lyric';
 
 @Component({
   selector: 'app-wy-player-panel',
@@ -77,7 +78,10 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   private updateLyric() {
-    this.songServe.getLyric(this.currentSong.id).subscribe( res => console.log( res.lrc ) );
+    this.songServe.getLyric(this.currentSong.id).subscribe( res => {
+      // console.log( res.lrc )
+      const lyric = new WyLyric(res);
+    });
   }
 
   private scrollToCurrent(speed = 300) {
