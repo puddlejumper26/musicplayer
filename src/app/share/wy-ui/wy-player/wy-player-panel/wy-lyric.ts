@@ -1,8 +1,18 @@
 import { Lyric } from "src/app/services/data-types/common.types";
 
-type LyricLine = { txt: string; txtCn: string; time: number};
+// type LyricLine = { txt: string; txtCn: string; time: number};
 //[00:34:332]
 const timeExp = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
+
+export interface BaseLyricLine {
+  txt: string;
+  txtCn: string;
+}
+
+interface LyricLine extends BaseLyricLine {
+  time: number;
+}
+
 export class WyLyric {
 
   lines: LyricLine[] = [];
@@ -28,7 +38,7 @@ export class WyLyric {
     const lines = this.lrc.lyric.split('\n');
     // console.log('generLyric - lines --', lines);
     lines.forEach(line => this.makeLine(line));
-    console.log('generLyric - lines -- ', this.lines);
+    // console.log('generLyric - lines -- ', this.lines);
 
   }
 

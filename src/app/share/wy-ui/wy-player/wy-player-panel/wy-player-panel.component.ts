@@ -6,7 +6,7 @@ import { WINDOW } from 'src/app/services/services.module';
 import { SongService } from 'src/app/services/song.service';
 import { findIndex } from 'src/app/utils/array';
 import { WyScrollComponent } from './../wy-scroll/wy-scroll.component';
-import { WyLyric } from './wy-lyric';
+import { BaseLyricLine, WyLyric } from './wy-lyric';
 
 @Component({
   selector: 'app-wy-player-panel',
@@ -17,13 +17,14 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
   @Input() songList: Song[];
   @Input() currentSong: Song;
-  currentIndex: number;
   @Input() show: boolean;
 
   @Output() onClose = new EventEmitter<void>();
   @Output() onChangeSong = new EventEmitter<Song>();
 
   scrollY = 0;
+  currentLyric: BaseLyricLine[]
+  currentIndex: number;
 
   // we need to use this compnent both for player list and also for lyrics, so @Children
   @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
@@ -81,6 +82,9 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
     this.songServe.getLyric(this.currentSong.id).subscribe( res => {
       // console.log( res.lrc )
       const lyric = new WyLyric(res);
+      this.currentLyric = lyric.lines;
+      console.log('updateLyric -- this.currentLyric - ', this.currentLyric);
+
     });
   }
 
