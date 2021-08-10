@@ -41,17 +41,8 @@
 
     <app-wy-scroll class="list-lyric">
       <ul>
-        <li>
-          chinese <br> english
-        </li>
-        <li>
-          chinese <br> english
-        </li>
-        <li>
-          chinese <br> english
-        </li>
-        <li>
-          chinese <br> english
+        <li *ngFor="let item of currentLyric">
+          {{item.txt}} <br> {{item.txtCn}}
         </li>
       </ul>
     </app-wy-scroll>

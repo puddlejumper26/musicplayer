@@ -53,6 +53,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       if(!changes['show'].firstChange && this.show) {
         // first means the first component
         this.wyScroll.first.refreshScroll();
+        // otherwise the lyric panel wouldn't scroll
+        this.wyScroll.last.refreshScroll();
 
         this.win.setTimeout(() => {
           if(this.currentSong) {
