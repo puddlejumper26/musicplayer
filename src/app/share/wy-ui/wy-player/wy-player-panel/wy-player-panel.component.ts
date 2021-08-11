@@ -15,6 +15,7 @@ import { BaseLyricLine, WyLyric } from './wy-lyric';
 })
 export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
+  @Input() playing: boolean;
   @Input() songList: Song[];
   @Input() currentSong: Song;
   @Input() show: boolean;
@@ -86,7 +87,11 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       const lyric = new WyLyric(res);
       this.currentLyric = lyric.lines;
       console.log('updateLyric -- this.currentLyric - ', this.currentLyric);
-
+      // at the beginning, the lyric always from the top
+      this.wyScroll.last.scrollTo(0, 0);
+      if(this.playing) {
+        lyric.play();
+      }
     });
   }
 

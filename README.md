@@ -84,7 +84,7 @@ Better Angular Study
 - `[nzSuffix]` - app.component.html
 - `[nzDotRender]` - home.component.html
   - `nzBeforeChange` - home.component.html 
-- `ScrollBar` | `BScroll.use(ScrollBar)` | `MouseWheel` | `BScroll.use(MouseWheel)` | `bs.refresh()` | `bs.on('scrollEnd, ({y})'` | `bs.scrollToElement.apply()` | - wy-scroll.component.ts
+- `ScrollBar` | `BScroll.use(ScrollBar)` | `MouseWheel` | `BScroll.use(MouseWheel)` | `bs.refresh()` | `bs.on('scrollEnd, ({y})'` | `bs.scrollToElement.apply()` | `bs.scrollTo.apply()` | - wy-scroll.component.ts
 
 # 4.0 Commands
 - `ng g c *** -s -t -c=OnPush -v=None` // -s -t -> inline the css and html

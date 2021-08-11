@@ -18,6 +18,10 @@ export class WyLyric {
   lines: LyricLine[] = [];
 
   private lrc: Lyric;
+  private curNum: number;
+
+  // playing status
+  private playing = false;
 
   constructor(lrc: Lyric) {
     this.lrc = lrc;
@@ -62,5 +66,22 @@ export class WyLyric {
       }
     }
 
+  }
+
+  play(startTime = 0) {
+    if(!this.lines.length) return;
+    if(!this.playing) {
+      this.playing = true;
+    }
+
+    // find which line should for current time
+    this.curNum = this.findCurNum(startTime);
+    console.log('play - this.curNum - ', this.curNum);
+
+  }
+
+  private findCurNum(time: number): number{
+    const index = this.lines.findIndex(item => time <= item.time)
+    return index === -1 ? (this.lines.length - 1) : index;
   }
 }
