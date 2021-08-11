@@ -39,11 +39,13 @@ export class WyLyric {
 
   private generLyric() {
     // console.log('generLyric - this.lrc.lrc - ', this.lrc.lyric);
-    const lines = this.lrc.lyric.split('\n');
-    // console.log('generLyric - lines --', lines);
-    lines.forEach(line => this.makeLine(line));
-    // console.log('generLyric - lines -- ', this.lines);
-
+    let lines = [];
+    if(this.lrc.lyric) {
+      lines = this.lrc.lyric.split('\n');
+      // console.log('generLyric - lines --', lines);
+      lines.forEach(line => this.makeLine(line));
+      // console.log('generLyric - lines -- ', this.lines);
+    }
   }
 
   private generTLyric() {

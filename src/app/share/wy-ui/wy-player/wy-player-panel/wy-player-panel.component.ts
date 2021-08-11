@@ -27,12 +27,20 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   currentLyric: BaseLyricLine[]
   currentIndex: number;
 
+  private lyric: WyLyric;
+
   // we need to use this compnent both for player list and also for lyrics, so @Children
   @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
 
   constructor(@Inject(WINDOW) private win: Window, private songServe: SongService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if(changes['playing']) {
+      if(!changes['playing'].firstChange && this.playing) {
+        this.lyric.play();
+      }
+    }
+
     if(changes['songList']) {
       // console.log('ngOnChanges - songList', this.songList);
       // default to play the first song
@@ -84,13 +92,13 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   private updateLyric() {
     this.songServe.getLyric(this.currentSong.id).subscribe( res => {
       // console.log( res.lrc )
-      const lyric = new WyLyric(res);
-      this.currentLyric = lyric.lines;
+      this.lyric = new WyLyric(res);
+      this.currentLyric = this.lyric.lines;
       console.log('updateLyric -- this.currentLyric - ', this.currentLyric);
       // at the beginning, the lyric always from the top
       this.wyScroll.last.scrollTo(0, 0);
       if(this.playing) {
-        lyric.play();
+        this.lyric.play();
       }
     });
   }
