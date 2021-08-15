@@ -75,6 +75,8 @@ Better Angular Study
 - `HTMLAudioElement` | `HTMLAudioElement.currentTime` | ``HTMLAudioElement.volume` | `HTMLAudioElement.buffered()` | `HTMLAudioElement.buffered().end(0)` | `play()` | `pause()` - wy-player.component.ts
 - `(canplay)` | `(timeupdate)` | `(ended)` - wy-player.component.html
 - `| 0` | `padStart()` - format-time.pipe.ts
+- `Date.now()` - wy-lyric.ts
+
 ## 3.5 NgRx
 - `createAction` | `props` - player.actions.ts
 - `createReducer` | `Action` | `on`- player.reducer.ts

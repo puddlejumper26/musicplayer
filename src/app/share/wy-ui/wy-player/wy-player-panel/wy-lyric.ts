@@ -1,3 +1,4 @@
+import { Subject } from "rxjs/internal/Subject";
 import { Lyric } from "src/app/services/data-types/common.types";
 
 // type LyricLine = { txt: string; txtCn: string; time: number};
@@ -12,6 +13,9 @@ export interface BaseLyricLine {
 interface LyricLine extends BaseLyricLine {
   time: number;
 }
+interface Handler extends BaseLyricLine {
+  lineNumber: number; // current lyric line index
+}
 
 export class WyLyric {
 
@@ -19,9 +23,11 @@ export class WyLyric {
 
   private lrc: Lyric;
   private curNum: number;
-
+  private startStamp: number;
   // playing status
   private playing = false;
+
+  handler = new Subject<Handler>();
 
   constructor(lrc: Lyric) {
     this.lrc = lrc;
@@ -78,12 +84,40 @@ export class WyLyric {
 
     // find which line should for current time
     this.curNum = this.findCurNum(startTime);
-    console.log('play - this.curNum - ', this.curNum);
+    // console.log('play - this.curNum - ', this.curNum);
+    this.startStamp = Date.now() - startTime;
+    // this.callHandler()
 
+    if(this.curNum < this.lines.length) {
+      // continue to play
+      this.playReset();
+    }
   }
 
   private findCurNum(time: number): number{
     const index = this.lines.findIndex(item => time <= item.time)
     return index === -1 ? (this.lines.length - 1) : index;
+  }
+
+  private playReset() {
+    let line =this.lines[this.curNum];
+    const delay = line.time - (Date.now() - this.startStamp);
+    // for each line of lyric played, needs to be sent outside, so sent this.curNum, and then after sent, add 1 to this.curNum
+    setTimeout(()=>{
+      this.callHandler(this.curNum++);
+      // still have lyric and still playing
+      if(this.curNum < this.lines.length && this.playing) {
+        this.playReset();
+      }
+    }, delay);
+  }
+
+  // i: index
+  private callHandler(i : number) {
+    this.handler.next({
+      txt: this.lines[i].txt,
+      txtCn: this.lines[i].txtCn,
+      lineNumber: i,
+    });
   }
 }
