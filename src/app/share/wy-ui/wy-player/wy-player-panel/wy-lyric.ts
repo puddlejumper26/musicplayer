@@ -14,7 +14,7 @@ interface LyricLine extends BaseLyricLine {
   time: number;
 }
 interface Handler extends BaseLyricLine {
-  lineNumber: number; // current lyric line index
+  lineNum: number; // current lyric line index
 }
 
 export class WyLyric {
@@ -117,7 +117,7 @@ export class WyLyric {
     this.handler.next({
       txt: this.lines[i].txt,
       txtCn: this.lines[i].txtCn,
-      lineNumber: i,
+      lineNum: i,
     });
   }
 }

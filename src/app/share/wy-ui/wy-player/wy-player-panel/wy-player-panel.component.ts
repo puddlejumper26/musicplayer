@@ -95,12 +95,19 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       this.lyric = new WyLyric(res);
       this.currentLyric = this.lyric.lines;
       console.log('updateLyric -- this.currentLyric - ', this.currentLyric);
+      this.handleLyric();
       // at the beginning, the lyric always from the top
       this.wyScroll.last.scrollTo(0, 0);
       if(this.playing) {
         this.lyric.play();
       }
     });
+  }
+
+  private handleLyric() {
+    this.lyric.handler.subscribe(({lineNum}) => {
+      console.log('handleLyric - lineNum ---', lineNum);
+    })
   }
 
   private scrollToCurrent(speed = 300) {
