@@ -26,6 +26,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   scrollY = 0;
   currentLyric: BaseLyricLine[]
   currentIndex: number;
+  currentLineNum: number;
 
   private lyric: WyLyric;
 
@@ -107,6 +108,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   private handleLyric() {
     this.lyric.handler.subscribe(({lineNum}) => {
       console.log('handleLyric - lineNum ---', lineNum);
+      this.currentLineNum = lineNum;
     })
   }
 
