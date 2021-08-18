@@ -37,8 +37,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['playing']) {
-      if(!changes['playing'].firstChange && this.playing) {
-        this.lyric.play();
+      if(!changes['playing'].firstChange) {
+        this.lyric && this.lyric.togglePlay(this.playing);
       }
     }
 

@@ -26,6 +26,8 @@ export class WyLyric {
   private startStamp: number;
   // playing status
   private playing = false;
+  private timer: any;
+  private pauseStamp: number;
 
   handler = new Subject<Handler>();
 
@@ -89,6 +91,7 @@ export class WyLyric {
     // this.callHandler()
 
     if(this.curNum < this.lines.length) {
+      clearTimeout(this.timer);
       // continue to play
       this.playReset();
     }
@@ -103,7 +106,7 @@ export class WyLyric {
     let line =this.lines[this.curNum];
     const delay = line.time - (Date.now() - this.startStamp);
     // for each line of lyric played, needs to be sent outside, so sent this.curNum, and then after sent, add 1 to this.curNum
-    setTimeout(()=>{
+    this.timer = setTimeout(()=>{
       this.callHandler(this.curNum++);
       // still have lyric and still playing
       if(this.curNum < this.lines.length && this.playing) {
@@ -119,5 +122,24 @@ export class WyLyric {
       txtCn: this.lines[i].txtCn,
       lineNum: i,
     });
+  }
+
+  togglePlay(playing: boolean) {
+    const now = Date.now();
+    this.playing = playing;
+    if(playing) {
+      const startTime = (this.pauseStamp || now) - (this.startStamp || now)
+      this.play(startTime);
+    }else {
+      this.stop();
+      this.pauseStamp = now;
+    }
+  }
+
+  private stop() {
+    if(this.playing) {
+      this.playing = false;
+    }
+    clearTimeout(this.timer);
   }
 }
