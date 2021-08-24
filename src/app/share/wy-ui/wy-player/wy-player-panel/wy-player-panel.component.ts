@@ -29,6 +29,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   currentLineNum: number;
 
   private lyric: WyLyric;
+  private lyricRefs: NodeList;
 
   // we need to use this compnent both for player list and also for lyrics, so @Children
   @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
@@ -107,7 +108,12 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
   private handleLyric() {
     this.lyric.handler.subscribe(({lineNum}) => {
-      console.log('handleLyric - lineNum ---', lineNum);
+      // console.log('handleLyric - lineNum ---', lineNum);
+
+      if(!this.lyricRefs) {
+        this.lyricRefs = this.wyScroll.last.el.nativeElement.querySelectorAll('ul, li');
+        console.log('handleLyric - this.lyricRefs - ', this.lyricRefs);
+      }
       this.currentLineNum = lineNum;
     })
   }

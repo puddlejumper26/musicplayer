@@ -116,6 +116,8 @@ export class WyLyric {
   }
 
   // i: index
+  // here using Subject to send the data, then inside of other component to subscribe this method, to obtain the data.
+  // e.g. handleLyric of WyPlayerPanel
   private callHandler(i : number) {
     this.handler.next({
       txt: this.lines[i].txt,

@@ -74,6 +74,7 @@ Better Angular Study
 - `bind` - wy-slider.component.ts
 - `HTMLAudioElement` | `HTMLAudioElement.currentTime` | ``HTMLAudioElement.volume` | `HTMLAudioElement.buffered()` | `HTMLAudioElement.buffered().end(0)` | `play()` | `pause()` - wy-player.component.ts
 - `(canplay)` | `(timeupdate)` | `(ended)` - wy-player.component.html
+- `NodeList` - wy-player-panel.component.ts
 - `| 0` | `padStart()` - format-time.pipe.ts
 - `Date.now()` | `clearTimeout` - wy-lyric.ts
 
