@@ -114,7 +114,14 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
         this.lyricRefs = this.wyScroll.last.el.nativeElement.querySelectorAll('ul, li');
         console.log('handleLyric - this.lyricRefs - ', this.lyricRefs);
       }
-      this.currentLineNum = lineNum;
+
+      if(this.lyricRefs.length) {
+        this.currentLineNum = lineNum;
+        const targetLine = this.lyricRefs[lineNum];
+        if(targetLine) {
+          this.wyScroll.last.scrollToElement(targetLine, 300, false, false);
+        }
+      }
     })
   }
 
