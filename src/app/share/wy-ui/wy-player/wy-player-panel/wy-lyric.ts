@@ -78,7 +78,7 @@ export class WyLyric {
 
   }
 
-  play(startTime = 0) {
+  play(startTime = 0, skip = false) {
     if(!this.lines.length) return;
     if(!this.playing) {
       this.playing = true;
@@ -89,6 +89,10 @@ export class WyLyric {
     // console.log('play - this.curNum - ', this.curNum);
     this.startStamp = Date.now() - startTime;
     // this.callHandler()
+
+    if(!skip) {
+      this.callHandler(this.curNum);
+    }
 
     if(this.curNum < this.lines.length) {
       clearTimeout(this.timer);
@@ -131,7 +135,7 @@ export class WyLyric {
     this.playing = playing;
     if(playing) {
       const startTime = (this.pauseStamp || now) - (this.startStamp || now)
-      this.play(startTime);
+      this.play(startTime, true);
     }else {
       this.stop();
       this.pauseStamp = now;
@@ -143,5 +147,10 @@ export class WyLyric {
       this.playing = false;
     }
     clearTimeout(this.timer);
+  }
+
+  //
+  seek(time: number) {
+    this.play(time);
   }
 }
