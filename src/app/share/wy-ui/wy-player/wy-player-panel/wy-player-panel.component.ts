@@ -57,7 +57,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
           this.scrollToCurrent();
         }
       }else {
-
+        this.resetLyric();
       }
     }
     if(changes['show']) {
@@ -92,6 +92,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   private updateLyric() {
+    this.resetLyric();
     this.songServe.getLyric(this.currentSong.id).subscribe( res => {
       // console.log( res.lrc )
       this.lyric = new WyLyric(res);
@@ -123,6 +124,18 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
         }
       }
     })
+  }
+
+  // reset lyric instance to empty
+  // without this, when playing one song, and click another song, the lyric num would continue from previous one
+  private resetLyric() {
+    if(this.lyric) {
+      this.lyric.stop();
+      this.lyric = null;
+      this.currentLyric = [];
+      this.currentLineNum = 0;
+      this.lyricRefs = null; //wihtout this then new song lyric would not scroll
+    }
   }
 
   private scrollToCurrent(speed = 300) {
