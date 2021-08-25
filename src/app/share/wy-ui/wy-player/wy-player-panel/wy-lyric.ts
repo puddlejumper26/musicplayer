@@ -123,11 +123,14 @@ export class WyLyric {
   // here using Subject to send the data, then inside of other component to subscribe this method, to obtain the data.
   // e.g. handleLyric of WyPlayerPanel
   private callHandler(i : number) {
-    this.handler.next({
-      txt: this.lines[i].txt,
-      txtCn: this.lines[i].txtCn,
-      lineNum: i,
-    });
+    // to avoid here sends too fast, and dom (handleLyric in PlayerPanel) could not receive data, results in lyrics wouldn't scroll
+    if(i > 0) {
+      this.handler.next({
+        txt: this.lines[i].txt,
+        txtCn: this.lines[i].txtCn,
+        lineNum: i,
+      });
+    }
   }
 
   togglePlay(playing: boolean) {
