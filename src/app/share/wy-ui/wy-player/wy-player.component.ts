@@ -305,6 +305,10 @@ export class WyPlayerComponent implements OnInit {
   private loop() {
     this.audioEl.currentTime = 0;
     this.play();
+    // lyrics also need to be played from start
+    if(this.playerPanel) {
+      this.playerPanel.seekLyric(0)
+    }
   }
 
   get picUrl(): string {
