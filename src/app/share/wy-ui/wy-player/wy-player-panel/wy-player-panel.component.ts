@@ -117,7 +117,9 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       // console.log('handleLyric - lineNum ---', lineNum);
 
       if(!this.lyricRefs) {
-        this.lyricRefs = this.wyScroll.last.el.nativeElement.querySelectorAll('ul, li');
+        // (ul, li) is different from (ul li), log out could see (ul, li) has extra ul
+        // which makes the number always 1 bigger than planned
+        this.lyricRefs = this.wyScroll.last.el.nativeElement.querySelectorAll('ul li');
         console.log('handleLyric - this.lyricRefs - ', this.lyricRefs);
       }
 
