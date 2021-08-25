@@ -149,6 +149,12 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
     }
   }
 
+  seekLyric(time: number) {
+    if(this.lyric) {
+      this.lyric.seek(time);
+    }
+  }
+
   private scrollToCurrent(speed = 300) {
     const songListRefs = this.wyScroll.first.el.nativeElement.querySelectorAll('ul li');
     // console.log('scrollToCurrent - songListRefs - ', songListRefs);
