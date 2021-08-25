@@ -98,7 +98,12 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       this.lyric = new WyLyric(res);
       this.currentLyric = this.lyric.lines;
       console.log('updateLyric -- this.currentLyric - ', this.currentLyric);
-      this.handleLyric();
+
+      // if EN/CN lyrics then startign from 1, only CN lyric then from line 2 to scroll
+      // this logic is to keep the highlight lyric in the middle
+      const startLine = res.tlyric ? 1 : 2;
+      this.handleLyric(startLine);
+
       // at the beginning, the lyric always from the top
       this.wyScroll.last.scrollTo(0, 0);
       if(this.playing) {
@@ -107,7 +112,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
     });
   }
 
-  private handleLyric() {
+  private handleLyric(startLine = 2) {
     this.lyric.handler.subscribe(({lineNum}) => {
       // console.log('handleLyric - lineNum ---', lineNum);
 
@@ -118,9 +123,13 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
       if(this.lyricRefs.length) {
         this.currentLineNum = lineNum;
-        const targetLine = this.lyricRefs[lineNum];
-        if(targetLine) {
-          this.wyScroll.last.scrollToElement(targetLine, 300, false, false);
+        if(lineNum > startLine) {
+          const targetLine = this.lyricRefs[lineNum - startLine];
+          if(targetLine) {
+            this.wyScroll.last.scrollToElement(targetLine, 300, false, false);
+          }
+        }else {
+          this.wyScroll.last.scrollTo(0, 0);
         }
       }
     })
