@@ -1,4 +1,7 @@
+import { timer } from "rxjs";
 import { Subject } from "rxjs/internal/Subject";
+import { Subscription } from "rxjs/internal/Subscription";
+
 import { Lyric } from "src/app/services/data-types/common.types";
 
 // type LyricLine = { txt: string; txtCn: string; time: number};
@@ -26,9 +29,9 @@ export class WyLyric {
   private startStamp: number;
   // playing status
   private playing = false;
-  private timer: any;
   private pauseStamp: number;
 
+  private timer$: Subscription;
   handler = new Subject<Handler>();
 
   constructor(lrc: Lyric) {
@@ -95,7 +98,9 @@ export class WyLyric {
     }
 
     if(this.curNum < this.lines.length) {
-      clearTimeout(this.timer);
+      this.clearTimer();
+      // clearTimeout(this.timer);
+
       // continue to play
       this.playReset();
     }
@@ -109,14 +114,28 @@ export class WyLyric {
   private playReset() {
     let line =this.lines[this.curNum];
     const delay = line.time - (Date.now() - this.startStamp);
-    // for each line of lyric played, needs to be sent outside, so sent this.curNum, and then after sent, add 1 to this.curNum
-    this.timer = setTimeout(()=>{
+
+    // replace the following setTimeout
+    this.timer$ = timer(delay).subscribe(() => {
       this.callHandler(this.curNum++);
       // still have lyric and still playing
       if(this.curNum < this.lines.length && this.playing) {
         this.playReset();
       }
-    }, delay);
+    })
+
+    // for each line of lyric played, needs to be sent outside, so sent this.curNum, and then after sent, add 1 to this.curNum
+    // this.timer = setTimeout(()=>{
+    //   this.callHandler(this.curNum++);
+    //   // still have lyric and still playing
+    //   if(this.curNum < this.lines.length && this.playing) {
+    //     this.playReset();
+    //   }
+    // }, delay);
+  }
+
+  private clearTimer() {
+    this.timer$ && this.timer$.unsubscribe;
   }
 
   // i: index
@@ -149,7 +168,9 @@ export class WyLyric {
     if(this.playing) {
       this.playing = false;
     }
-    clearTimeout(this.timer);
+
+    this.clearTimer()
+    // clearTimeout(this.timer);
   }
 
   //
