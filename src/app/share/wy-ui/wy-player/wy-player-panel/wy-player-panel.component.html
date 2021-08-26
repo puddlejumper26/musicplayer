@@ -6,7 +6,7 @@
         <i class="icon" title="Like all"></i> Save all
       </div>
       <span class="line"></span>
-      <div class="clear-all">
+      <div class="clear-all" (click)="onClearSong.emit()">
         <i class="icon trush" title="Clear"></i> Clear
       </div>
       <p class="playing-name">{{currentSong?.name}}</p>
@@ -25,7 +25,7 @@
           <div class="col icons">
             <i class="ico like" title="Like"></i>
             <i class="ico share" title="Share"></i>
-            <i class="ico trush" title="Delete"></i>
+            <i class="ico trush" title="Delete" (click)="onDeleteSong.emit(item)"></i>
           </div>
           <div class="singers clearfix ellipsis">
             <div class="singer-item" *ngFor="let singer of item.ar; last as isLast">

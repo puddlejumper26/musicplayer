@@ -5,7 +5,7 @@ import { fromEvent, Subscription } from 'rxjs';
 
 import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList } from 'src/app/store/selectors/player.selector';
-import { SetCurrentIndex, SetPlayMode, SetPlayList } from './../../../store/actions/player.actions';
+import { SetCurrentIndex, SetPlayMode, SetPlayList, SetSongList } from './../../../store/actions/player.actions';
 import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
 import { findIndex, shuffle } from 'src/app/utils/array';
@@ -316,7 +316,35 @@ export class WyPlayerComponent implements OnInit {
   }
 
   onChangeSong(song: Song) {
-    console.log('onChangeSong is called');
+    // console.log('onChangeSong is called');
     this.updateCurrentIndex(this.playList, song);
+  }
+
+  onDeleteSong(song: Song) {
+    // console.log('onDeleteSong is called');
+    const songList = this.songList.slice();
+    const playList = this.playList.slice();
+    let currentIndex = this.currentIndex;
+
+    const sIndex = findIndex(songList, song);
+    songList.splice(sIndex, 1);
+
+    const pIndex = findIndex(playList, song);
+    playList.splice(pIndex, 1);
+
+    if(currentIndex > pIndex || currentIndex === playList.length) {
+      currentIndex--;
+    }
+
+    this.store$.dispatch(SetSongList({ songList }));
+    this.store$.dispatch(SetPlayList({ playList }));
+    this.store$.dispatch(SetCurrentIndex({ currentIndex }));
+  }
+
+  onClearSong() {
+    console.log('onClearSong is called');
+    this.store$.dispatch(SetSongList({  }));
+    this.store$.dispatch(SetPlayList({ playList }));
+    this.store$.dispatch(SetCurrentIndex({ currentIndex }));
   }
 }
