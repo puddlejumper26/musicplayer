@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { fromEvent, Subscription } from 'rxjs';
+import { NzModalService } from 'ng-zorro-antd';
 
 import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList } from 'src/app/store/selectors/player.selector';
@@ -65,6 +66,7 @@ export class WyPlayerComponent implements OnInit {
   constructor(
     private store$: Store<AppStoreModule>,
     @Inject(DOCUMENT) private doc: Document,
+    private nzModalServe: NzModalService
   ) {
 
     /**
@@ -332,6 +334,7 @@ export class WyPlayerComponent implements OnInit {
     const pIndex = findIndex(playList, song);
     playList.splice(pIndex, 1);
 
+    // this means the deleted song is ahead of current playing song, so currentIndex should be minus one
     if(currentIndex > pIndex || currentIndex === playList.length) {
       currentIndex--;
     }
@@ -342,9 +345,15 @@ export class WyPlayerComponent implements OnInit {
   }
 
   onClearSong() {
-    console.log('onClearSong is called');
-    this.store$.dispatch(SetSongList({  }));
-    this.store$.dispatch(SetPlayList({ playList }));
-    this.store$.dispatch(SetCurrentIndex({ currentIndex }));
+    // console.log('onClearSong is called');
+
+    this.nzModalServe.confirm({
+      nzTitle: 'Confirm to empty Song List',
+      nzOnOk: () => {
+        this.store$.dispatch(SetSongList({ songList: [] }));
+        this.store$.dispatch(SetPlayList({ playList: [] }));
+        this.store$.dispatch(SetCurrentIndex({ currentIndex: -1 }));
+      }
+    })
   }
 }
