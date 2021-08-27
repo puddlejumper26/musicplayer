@@ -1,3 +1,4 @@
+import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -66,7 +67,8 @@ export class WyPlayerComponent implements OnInit {
   constructor(
     private store$: Store<AppStoreModule>,
     @Inject(DOCUMENT) private doc: Document,
-    private nzModalServe: NzModalService
+    private nzModalServe: NzModalService,
+    private batchActionsServe: BatchActionsService
   ) {
 
     /**
@@ -324,24 +326,26 @@ export class WyPlayerComponent implements OnInit {
 
   onDeleteSong(song: Song) {
     // console.log('onDeleteSong is called');
-    const songList = this.songList.slice();
-    const playList = this.playList.slice();
-    let currentIndex = this.currentIndex;
+    this.batchActionsServe.deleteSong(song);
 
-    const sIndex = findIndex(songList, song);
-    songList.splice(sIndex, 1);
+    // const songList = this.songList.slice();
+    // const playList = this.playList.slice();
+    // let currentIndex = this.currentIndex;
 
-    const pIndex = findIndex(playList, song);
-    playList.splice(pIndex, 1);
+    // const sIndex = findIndex(songList, song);
+    // songList.splice(sIndex, 1);
 
-    // this means the deleted song is ahead of current playing song, so currentIndex should be minus one
-    if(currentIndex > pIndex || currentIndex === playList.length) {
-      currentIndex--;
-    }
+    // const pIndex = findIndex(playList, song);
+    // playList.splice(pIndex, 1);
 
-    this.store$.dispatch(SetSongList({ songList }));
-    this.store$.dispatch(SetPlayList({ playList }));
-    this.store$.dispatch(SetCurrentIndex({ currentIndex }));
+    // // this means the deleted song is ahead of current playing song, so currentIndex should be minus one
+    // if(currentIndex > pIndex || currentIndex === playList.length) {
+    //   currentIndex--;
+    // }
+
+    // this.store$.dispatch(SetSongList({ songList }));
+    // this.store$.dispatch(SetPlayList({ playList }));
+    // this.store$.dispatch(SetCurrentIndex({ currentIndex }));
   }
 
   onClearSong() {
@@ -350,9 +354,10 @@ export class WyPlayerComponent implements OnInit {
     this.nzModalServe.confirm({
       nzTitle: 'Confirm to empty Song List',
       nzOnOk: () => {
-        this.store$.dispatch(SetSongList({ songList: [] }));
-        this.store$.dispatch(SetPlayList({ playList: [] }));
-        this.store$.dispatch(SetCurrentIndex({ currentIndex: -1 }));
+        this.batchActionsServe.clearSong();
+        // this.store$.dispatch(SetSongList({ songList: [] }));
+        // this.store$.dispatch(SetPlayList({ playList: [] }));
+        // this.store$.dispatch(SetCurrentIndex({ currentIndex: -1 }));
       }
     })
   }
