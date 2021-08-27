@@ -13,6 +13,7 @@ import { PlayMode } from 'src/app/share/wy-ui/wy-player/player-types';
 import { PlayState } from 'src/app/store/reducers/player.reducer';
 import { getPlayer } from 'src/app/store/selectors/player.selector';
 import { SetSongList, SetPlayList, SetCurrentIndex, SetPlayMode } from './../../store/actions/player.actions';
+import { BatchActionsService } from 'src/app/store/batch-actions.service';
 
 const initPlayMode: PlayMode = {
   type: 'loop',
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
     private sheetServe: SheetService,
     private route: ActivatedRoute,
     private store$: Store<AppStoreModule>,
+    private batchActionsServe: BatchActionsService
   ) {
     this.route.data.pipe(map( res => res.homeDatas )).subscribe( ([banners, hotTags, songSheetList, singers]) => {
       this.banners = banners;
@@ -48,7 +50,7 @@ export class HomeComponent implements OnInit {
       this.songSheetList = songSheetList;
       this.singers = singers;
     })
-    this.store$.pipe(select(getPlayer)).subscribe( res => this.playerState = res);
+    // this.store$.pipe(select(getPlayer)).subscribe( res => this.q = res);
   }
 
   ngOnInit() {
@@ -68,18 +70,21 @@ export class HomeComponent implements OnInit {
   // this will call the reducer(playerReducer) for upddating the state of following parameters such as songList, playList...
   onPlaySheet(id: number) {
     this.sheetServe.playSheet(id).subscribe(list => {
-      this.store$.dispatch(SetSongList({ songList: list }));
+
+      this.batchActionsServe.selectPlayList({list, index:0});
+
+      // this.store$.dispatch(SetSongList({ songList: list }));
       /**
        *  @method1
        */
-      let trueIndex = 0;
-      let trueList = list.slice();
-      if(this.playerState.playMode.type === 'random') {
-        trueList = shuffle(list || []);
-        trueIndex = findIndex(trueList, list[trueIndex]);
-      }
-      this.store$.dispatch(SetPlayList({ playList: trueList }));
-      this.store$.dispatch(SetCurrentIndex({ currentIndex: trueIndex })); // default to play the first song
+      // let trueIndex = 0;
+      // let trueList = list.slice();
+      // if(this.playerState.playMode.type === 'random') {
+      //   trueList = shuffle(list || []);
+      //   trueIndex = findIndex(trueList, list[trueIndex]);
+      // }
+      // this.store$.dispatch(SetPlayList({ playList: trueList }));
+      // this.store$.dispatch(SetCurrentIndex({ currentIndex: trueIndex })); // default to play the first song
 
       /**
        * @method2        reset the play mode to loop when playing an ablum
