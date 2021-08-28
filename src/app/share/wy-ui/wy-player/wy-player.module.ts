@@ -2,6 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ClickoutsideDirective } from './../../directives/clickoutside.directive';
 import { WyPlayerComponent } from './wy-player.component';
 import { WySliderModule } from '../wy-slider/wy-slider.module';
 import { FormatTimePipe } from '../../pipes/format-time.pipe';
@@ -9,7 +10,7 @@ import { WyPlayerPanelComponent } from './wy-player-panel/wy-player-panel.compon
 import { WyScrollComponent } from './wy-scroll/wy-scroll.component';
 
 @NgModule({
-  declarations: [WyPlayerComponent, FormatTimePipe, WyPlayerPanelComponent, WyScrollComponent],
+  declarations: [WyPlayerComponent, FormatTimePipe, WyPlayerPanelComponent, WyScrollComponent, ClickoutsideDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -17,7 +18,9 @@ import { WyScrollComponent } from './wy-scroll/wy-scroll.component';
   ],
   exports: [
     WyPlayerComponent,
-    FormatTimePipe
-  ]
+    FormatTimePipe,
+    ClickoutsideDirective
+  ],
+
 })
 export class WyPlayerModule { }

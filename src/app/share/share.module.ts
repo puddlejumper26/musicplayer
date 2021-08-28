@@ -20,6 +20,6 @@ import { FormsModule } from '@angular/forms';
     NgZorroAntdModule,
     FormsModule,
     WyUiModule,
-  ]
+  ],
 })
 export class ShareModule { }
