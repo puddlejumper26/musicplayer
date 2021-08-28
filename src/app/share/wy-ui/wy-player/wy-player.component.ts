@@ -53,7 +53,9 @@ export class WyPlayerComponent implements OnInit {
   modeCount = 0; // record how many time clicked
 
   showVolumnPanel = false;
-  selfClick = false; // whether click the player panel itself
+
+  // selfClick = false; // whether click the player panel itself
+  bindFlag = false; // whether bind document.click event
 
   //show play list panel
   showPanel = false;
@@ -230,11 +232,11 @@ export class WyPlayerComponent implements OnInit {
 
   private togglePanel(type: string) {
     this[type] = !this[type];
-    // if(this.showVolumnPanel || this.showPanel) {
-    //   this.bindDocumentClickListener();
-    // }else {
-    //   this.unbindDocumentClickListener();
-    // }
+    if(this.showVolumnPanel || this.showPanel) {
+      this.bindFlag = true;
+    }else {
+      this.bindFlag = false;
+    }
   }
 
   // private bindDocumentClickListener() {
@@ -366,5 +368,6 @@ export class WyPlayerComponent implements OnInit {
     console.log('WyPlayerComponent - onClickOutSide is called');
     this.showVolumnPanel = false;
     this.showPanel = false;
+    this.bindFlag = false;
   }
 }
