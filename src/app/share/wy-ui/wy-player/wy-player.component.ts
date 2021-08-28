@@ -230,26 +230,26 @@ export class WyPlayerComponent implements OnInit {
 
   private togglePanel(type: string) {
     this[type] = !this[type];
-    if(this.showVolumnPanel || this.showPanel) {
-      this.bindDocumentClickListener();
-    }else {
-      this.unbindDocumentClickListener();
-    }
+    // if(this.showVolumnPanel || this.showPanel) {
+    //   this.bindDocumentClickListener();
+    // }else {
+    //   this.unbindDocumentClickListener();
+    // }
   }
 
-  private bindDocumentClickListener() {
-    if(!this.winClick) {
-      this.winClick = fromEvent(this.doc, 'click').subscribe(() => {
-        // click other parts, not the player part
-        if(!this.selfClick) {
-          this.showVolumnPanel = false;
-          this.showPanel = false;
-          this.unbindDocumentClickListener();
-        }
-        this.selfClick = false;
-      })
-    }
-  }
+  // private bindDocumentClickListener() {
+  //   if(!this.winClick) {
+  //     this.winClick = fromEvent(this.doc, 'click').subscribe(() => {
+  //       // click other parts, not the player part
+  //       if(!this.selfClick) {
+  //         this.showVolumnPanel = false;
+  //         this.showPanel = false;
+  //         this.unbindDocumentClickListener();
+  //       }
+  //       this.selfClick = false;
+  //     })
+  //   }
+  // }
 
   private unbindDocumentClickListener() {
     if(this.winClick) {
@@ -364,5 +364,7 @@ export class WyPlayerComponent implements OnInit {
 
   onClickOutSide() {
     console.log('WyPlayerComponent - onClickOutSide is called');
+    this.showVolumnPanel = false;
+    this.showPanel = false;
   }
 }
