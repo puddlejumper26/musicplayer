@@ -53,6 +53,7 @@ Better Angular Study
 - `(ngModelChange)` | `DOCUMENT` | `Inject` - wy-player.component.html
 - `AfterViewInit` | `ngAfterViewInit` - wy-scroll.component.ts
 - `firstChange` | `QueryList` | `first` | `last` - wy-player-panel.component.ts
+- `Renderer2` | `Renderer2.listen()` - clickoutside.directive.ts
 
 
 ## 3.2 Angular Material CDK
