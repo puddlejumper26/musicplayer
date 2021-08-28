@@ -361,4 +361,8 @@ export class WyPlayerComponent implements OnInit {
       }
     })
   }
+
+  onClickOutSide() {
+    console.log('WyPlayerComponent - onClickOutSide is called');
+  }
 }
