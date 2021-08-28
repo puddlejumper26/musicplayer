@@ -32,6 +32,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
   private lyric: WyLyric;
   private lyricRefs: NodeList;
+  private startLine: number = 2;
 
   // we need to use this compnent both for player list and also for lyrics, so @Children
   @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
@@ -73,6 +74,13 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
           if(this.currentSong) {
             this.scrollToCurrent(0);
           }
+          if (this.lyricRefs) {
+            const targetLine = this.lyricRefs[this.currentLineNum - this.startLine];
+            if(targetLine) {
+              // 0 cause we don't need animations here
+              this.wyScroll.last.scrollToElement(targetLine, 0, false, false);
+            }
+          }
         }, 80);
 
         // timer to replace the setTimeout(), after 80 secs to send a flow
@@ -107,8 +115,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
 
       // if EN/CN lyrics then startign from 1, only CN lyric then from line 2 to scroll
       // this logic is to keep the highlight lyric in the middle
-      const startLine = res.tlyric ? 1 : 2;
-      this.handleLyric(startLine);
+      this.startLine = res.tlyric ? 1 : 2;
+      this.handleLyric(this.startLine);
 
       // at the beginning, the lyric always from the top
       this.wyScroll.last.scrollTo(0, 0);
