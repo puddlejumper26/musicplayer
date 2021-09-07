@@ -54,7 +54,7 @@ Better Angular Study
 - `AfterViewInit` | `ngAfterViewInit` - wy-scroll.component.ts
 - `firstChange` | `QueryList` | `first` | `last` - wy-player-panel.component.ts
 - `Renderer2` | `Renderer2.listen()` - clickoutside.directive.ts
-
+- `ActivatedRoute.snapshot.queryParamMap` - sheet-list.component.ts
 
 ## 3.2 Angular Material CDK
 

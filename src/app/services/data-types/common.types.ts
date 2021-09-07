@@ -44,3 +44,8 @@ export type Lyric = {
     lyric: string;
     tlyric: string;
 }
+
+export type SheetList = {
+    playList: SongSheet[];
+    total: number;
+}
