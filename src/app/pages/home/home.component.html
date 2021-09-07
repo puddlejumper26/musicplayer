@@ -1,8 +1,8 @@
 <div class="class">
     <app-wy-carousel #wyCarousel [activeIndex]="carouselActiveIndex" (changeSlide)="onChangeSlide($event)">
-        <nz-carousel 
-            nzAutoPlay 
-            nzEffect="fade" 
+        <nz-carousel
+            nzAutoPlay
+            nzEffect="fade"
             [nzDotRender]="wyCarousel.dotRef"
             (nzBeforeChange)="onBeforeChange($event)">
             <div class="carousel-item" nz-carousel-content *ngFor="let item of banners">
@@ -24,7 +24,9 @@
                                 <a>Recommandations</a>
                             </h2>
                             <nav>
-                                <a *ngFor="let item of hotTags">{{ item.name }}</a>
+                                <a *ngFor="let item of hotTags"
+                                    routerLink="/sheet"
+                                    [queryParams]="{cat: item.name}">{{ item.name }}</a>
                             </nav>
                         </div>
                         <a>
@@ -35,7 +37,7 @@
 
                     <div class="down">
                         <div class="down-wrap">
-                            <app-single-sheet 
+                            <app-single-sheet
                                 class="sheet-item"
                                 *ngFor="let item of songSheetList"
                                 [sheet]="item"
