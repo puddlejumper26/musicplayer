@@ -19,5 +19,13 @@
       >
       </app-single-sheet>
     </div>
+
+    <nz-pagination
+      class="pagination"
+      [nzPageSize]="listParams.limit"
+      [nzPageIndex]="listParams.offset"
+      [nzTotal]="sheets?.total"
+    >
+    </nz-pagination>
   </div>
 </div>
