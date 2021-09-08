@@ -40,6 +40,14 @@ export class SheetListComponent implements OnInit {
   ngOnInit() {
   }
 
+  onOrderChange(order: 'new' | 'hot') {
+    console.log('SheetListComponent - onOrderChange - order - ', order);
+    this.listParams.order = order;
+    this.listParams.offset = 1;
+    console.log('SheetListComponent - onOrderChange - this.listParams - ', this.listParams);
+    this.getList();
+  }
+
   private getList() {
     this.sheetServe.getSheets(this.listParams).subscribe(sheets => {
       // console.log('SheetListComponent - getList - sheets -', sheets);
