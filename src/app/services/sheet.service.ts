@@ -2,8 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
 import { map, pluck, switchMap } from "rxjs/internal/operators";
-
-import { queryString } from 'query-string';
+import queryString from 'query-string';
 
 import { API_CONFIG, ServicesModule } from "./services.module";
 import { SheetList, Song, SongSheet } from 'src/app/services/data-types/common.types';
@@ -38,7 +37,7 @@ export class SheetService {
    * Obtain sheets
    */
   getSheets(args: SheetParams): Observable<SheetList> {
-    const params = new HttpParams({ fromString: queryString.stringify(args)})
+    const params = new HttpParams({ fromString: queryString.stringify(args)});
     return this.http.get(this.uri + 'top/playlist', {params}).pipe(map(res => res as SheetList));
   }
 
