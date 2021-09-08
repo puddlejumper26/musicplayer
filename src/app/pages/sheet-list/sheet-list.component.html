@@ -16,15 +16,16 @@
         *ngFor="let item of sheets?.playlists"
         [sheet]="item"
         (onPlay)="onPlaySheet($event)"
-      >
+        >
       </app-single-sheet>
     </div>
 
     <nz-pagination
-      class="pagination"
+    class="pagination"
       [nzPageSize]="listParams.limit"
       [nzPageIndex]="listParams.offset"
       [nzTotal]="sheets?.total"
+      (nzPageIndexChange)="onPageChange($event)"
     >
     </nz-pagination>
   </div>

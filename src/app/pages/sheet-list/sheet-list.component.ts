@@ -33,7 +33,7 @@ export class SheetListComponent implements OnInit {
     private sheetServe: SheetService
   ) {
     this.listParams.cat = this.route.snapshot.queryParamMap.get('cat') || 'All';
-    console.log('SheetListComponent - this.listParams - ', this.listParams);
+    // console.log('SheetListComponent - this.listParams - ', this.listParams);
     this.getList();
   }
 
@@ -41,10 +41,16 @@ export class SheetListComponent implements OnInit {
   }
 
   onOrderChange(order: 'new' | 'hot') {
-    console.log('SheetListComponent - onOrderChange - order - ', order);
+    // console.log('SheetListComponent - onOrderChange - order - ', order);
     this.listParams.order = order;
     this.listParams.offset = 1;
-    console.log('SheetListComponent - onOrderChange - this.listParams - ', this.listParams);
+    // console.log('SheetListComponent - onOrderChange - this.listParams - ', this.listParams);
+    this.getList();
+  }
+
+  onPageChange(offset: number) {
+    // console.log('SheetListComponent - onPageChange - offset - ', offset);
+    this.listParams.offset = offset;
     this.getList();
   }
 
