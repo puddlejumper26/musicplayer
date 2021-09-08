@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SheetList } from 'src/app/services/data-types/common.types';
 import { SheetParams, SheetService } from 'src/app/services/sheet.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class SheetListComponent implements OnInit {
     offset: 1,
     limit: 35
   }
+  sheets: SheetList;
+  orderValue = 'hot';
 
   /**
    * @param snapshot
@@ -38,8 +41,9 @@ export class SheetListComponent implements OnInit {
   }
 
   private getList() {
-    this.sheetServe.getSheets(this.listParams).subscribe(res => {
-      console.log('SheetListComponent - getList - res -', res)
+    this.sheetServe.getSheets(this.listParams).subscribe(sheets => {
+      // console.log('SheetListComponent - getList - sheets -', sheets);
+      this.sheets = sheets;
     })
   }
 

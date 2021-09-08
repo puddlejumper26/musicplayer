@@ -1,1 +1,13 @@
-<p>sheet-list works!</p>
+<div class="sheet wrap feature-wrap">
+  <div class="list-r">
+    <div class="top">
+      <div class="cat">
+        <span>{{listParams.cat}}</span>
+      </div>
+      <nz-radio-group nzButtonStyle="solid" [(ngModel)]="orderValue">
+        <label nz-radio-button nzValue="hot">Hot</label>
+        <label nz-radio-button nzValue="new">New</label>
+      </nz-radio-group>
+    </div>
+  </div>
+</div>
