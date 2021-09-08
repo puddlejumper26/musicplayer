@@ -19,4 +19,8 @@ export class SingleSheetComponent implements OnInit {
   playSheet(id: number) {
     this.onPlay.emit(id);
   }
+
+  get coverImg(): string{
+    return this.sheet.picUrl || this.sheet.coverImgUrl;
+  }
 }
