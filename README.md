@@ -55,6 +55,7 @@ Better Angular Study
 - `firstChange` | `QueryList` | `first` | `last` - wy-player-panel.component.ts
 - `Renderer2` | `Renderer2.listen()` - clickoutside.directive.ts
 - `ActivatedRoute.snapshot.queryParamMap` - sheet-list.component.ts
+- `ActivatedRouteSnapshot` | `ActivatedRouteSnapshot.paramMap` | `ActivatedRouteSnapshot.paramMap.get()` - sheet-info-resolver.service.ts
 
 ## 3.2 Angular Material CDK
 
