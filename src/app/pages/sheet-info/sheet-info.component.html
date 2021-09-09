@@ -45,6 +45,19 @@
             </div>
           </div>
 
+          <div class="intr f-brk" [class.f-hide]="controlDesc.isExpand">
+            <p [innerHTML]="description.short"></p>
+          </div>
+
+          <div class="intr f-brk" [class.f-hide]="!controlDesc.isExpand">
+            <p [innerHTML]="description.long"></p>
+          </div>
+
+          <div class="expand" (click)="toggleDesc()" *ngIf="description.long">
+            <span>{{controlDesc.label}}</span>
+            <i nz-icon [nzType]="controlDesc.iconCls" nzTheme="outline"></i>
+          </div>
+
         </div>
       </div>
     </div>
