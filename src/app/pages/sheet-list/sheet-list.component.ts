@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SheetList } from 'src/app/services/data-types/common.types';
 import { SheetParams, SheetService } from 'src/app/services/sheet.service';
+import { BatchActionsService } from 'src/app/store/batch-actions.service';
 
 @Component({
   selector: 'app-sheet-list',
@@ -30,7 +31,8 @@ export class SheetListComponent implements OnInit {
    */
   constructor(
     private route: ActivatedRoute,
-    private sheetServe: SheetService
+    private sheetServe: SheetService,
+    private batchActionsServe: BatchActionsService
   ) {
     this.listParams.cat = this.route.snapshot.queryParamMap.get('cat') || 'All';
     // console.log('SheetListComponent - this.listParams - ', this.listParams);
@@ -61,6 +63,11 @@ export class SheetListComponent implements OnInit {
     })
   }
 
-  onPlaySheet() {}
+  // Same as in home.component.ts
+  onPlaySheet(id: number) {
+    this.sheetServe.playSheet(id).subscribe(list => {
+      this.batchActionsServe.selectPlayList({ list, index: 0});
+    })
+  }
 
 }
