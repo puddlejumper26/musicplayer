@@ -28,6 +28,7 @@ export type SongSheet = {
     shareCount: number;
     commentCount: number;
     subscribed: boolean;
+    userId: number;
 }
 
 export type Singer = {

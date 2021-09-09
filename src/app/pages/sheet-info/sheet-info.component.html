@@ -1,1 +1,52 @@
-<p>sheet-info works!</p>
+<div class="sheet-info wrap feature-wrap">
+  <div class="g-wrap6">
+    <div class="m-info clearfix">
+      <div class="cover">
+        <img [src]="sheetInfo.coverImgUrl" [alt]="sheetInfo.name">
+        <div class="mask"></div>
+      </div>
+      <div class="cnt">
+        <div class="cntc">
+          <div class="hd clearfix">
+            <i class="f-pr"></i>
+            <div class="tit">
+              <h2 class="f-ff2 f-brk">{{sheetInfo.name}}</h2>
+            </div>
+          </div>
+          <div class="user f-cb">
+            <a [href]="'//music.163.com/artist?id=' + sheetInfo.userId" class="face" [hidden]="!sheetInfo.creator">
+              <img [src]="sheetInfo.creator?.avatarUrl" [alt]="sheetInfo.creator?.nickname">
+            </a>
+            <span class="name">
+              <a [href]="'//music.163.com/artist?id=' + sheetInfo.userId" class="s-fc7">{{sheetInfo.creator?.nickname}}</a>
+            </span>
+            <span class="time s-fc4">{{sheetInfo.createTime | date}}</span>
+          </div>
+
+          <div class="btns">
+            <nz-button-group class="btn">
+              <button class="play" nz-button nzType="primary">
+                <i nz-icon nzType="play-circle" nzTheme="outline"></i>Play
+              </button>
+              <button class="add" nz-button nzType="primary">+</button>
+            </nz-button-group>
+            <button class="btn like" nz-button>
+              <span>Save</span>({{sheetInfo.subscribedCount}})
+            </button>
+            <button class="btn share" nz-button>
+              <span>Share</span>({{sheetInfo.shareCount}})
+            </button>
+          </div>
+
+          <div class="tags clearfix">
+            <span>Tag</span>
+            <div class="tag-wrap">
+              <nz-tag *ngFor="let item of sheetInfo.tags">{{item}}</nz-tag>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
