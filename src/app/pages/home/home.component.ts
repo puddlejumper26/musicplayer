@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzCarouselComponent } from 'ng-zorro-antd';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators';
 import { Store, select } from '@ngrx/store';
 
@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private sheetServe: SheetService,
     private route: ActivatedRoute,
+    private router: Router,
     private store$: Store<AppStoreModule>,
     private batchActionsServe: BatchActionsService
   ) {
@@ -91,5 +92,9 @@ export class HomeComponent implements OnInit {
        */
       // this.store$.dispatch(SetPlayMode({ playMode: initPlayMode }))
     })
+  }
+
+  toInfo(id: number) {
+    this.router.navigate(['/sheetInfo', id]);
   }
 }

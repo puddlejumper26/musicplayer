@@ -1,5 +1,7 @@
-import { HomeModule } from './home/home.module';
 import { NgModule } from '@angular/core';
+
+import { SheetInfoModule } from './sheet-info/sheet-info.module';
+import { HomeModule } from './home/home.module';
 import { ShareModule } from '../share/share.module';
 import { SheetListModule } from './sheet-list/sheet-list.module';
 
@@ -11,11 +13,13 @@ import { SheetListModule } from './sheet-list/sheet-list.module';
   imports: [
     ShareModule,
     SheetListModule,
+    SheetInfoModule,
     HomeModule
   ],
   exports: [
     HomeModule,
-    SheetListModule
+    SheetListModule,
+    SheetInfoModule
   ]
 })
 export class PagesModule { }
