@@ -12,7 +12,7 @@ import { BatchActionsService } from 'src/app/store/batch-actions.service';
 export class SheetListComponent implements OnInit {
 
   listParams: SheetParams = {
-    cat: 'All',
+    cat: '全部',
     order: 'hot',
     offset: 1,
     limit: 35
@@ -34,7 +34,7 @@ export class SheetListComponent implements OnInit {
     private sheetServe: SheetService,
     private batchActionsServe: BatchActionsService
   ) {
-    this.listParams.cat = this.route.snapshot.queryParamMap.get('cat') || 'All';
+    this.listParams.cat = this.route.snapshot.queryParamMap.get('cat') || '全部';
     // console.log('SheetListComponent - this.listParams - ', this.listParams);
     this.getList();
   }

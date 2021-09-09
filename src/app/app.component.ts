@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'musicplayer';
+
+  menu=[{
+    label: 'Find',
+    path: '/home'
+  }, {
+    label: 'List',
+    path: '/sheet'
+  }]
 }
