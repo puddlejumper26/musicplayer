@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/internal/operators/map';
 
-import { SongSheet } from 'src/app/services/data-types/common.types';
+import { AppStoreModule } from 'src/app/store';
+import { Song, SongSheet } from 'src/app/services/data-types/common.types';
+import { Observable } from 'rxjs/internal/Observable';
+import { Subject } from 'rxjs/internal/Subject';
+import { takeUntil } from 'rxjs/internal/operators';
+import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.selector';
 
 @Component({
   selector: 'app-sheet-info',
   templateUrl: './sheet-info.component.html',
   styleUrls: ['./sheet-info.component.less']
 })
-export class SheetInfoComponent implements OnInit {
+export class SheetInfoComponent implements OnInit, OnDestroy {
 
   sheetInfo: SongSheet;
   description = {
@@ -22,7 +28,14 @@ export class SheetInfoComponent implements OnInit {
     iconCls: 'down'
   }
 
-  constructor(private route: ActivatedRoute) {
+  private appStore$: Observable<AppStoreModule>;
+  private destroy$ = new Subject<void>();
+
+  currentSong: Song;
+
+  constructor(
+    private route: ActivatedRoute,
+    private store$: Store<AppStoreModule>) {
     this.route.data.pipe(map(res => res.sheetInfo)).subscribe(res => {
       // console.log('SheetInfoComponent - constructor - route - res -', res);
       this.sheetInfo = res;
@@ -30,10 +43,19 @@ export class SheetInfoComponent implements OnInit {
       if(res.description) {
         this.changeDesc(res.description);
       }
+      this.listenCurrent();
     })
   }
 
   ngOnInit() {
+  }
+
+  private listenCurrent() {
+    this.store$.pipe(select(getPlayer), select(getCurrentSong), takeUntil(this.destroy$))
+      .subscribe(song => {
+        console.log('SheetInfoComponent - listenCurrent - song - ', song);
+        this.currentSong = song;
+      })
   }
 
   private changeDesc(desc: string) {
@@ -64,4 +86,17 @@ export class SheetInfoComponent implements OnInit {
       this.controlDesc.iconCls = 'down'
     }
   }
+
+  onAddSong(song: Song, isPlay = false) {
+    // whether added song is current playing song
+    if(!this.currentSong || this.currentSong.id !== song.id) {
+
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(); // after this, the flow would be invalid
+    this.destroy$.complete(); // also need to be completed
+  }
+
 }

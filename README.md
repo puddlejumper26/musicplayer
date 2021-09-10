@@ -56,6 +56,7 @@ Better Angular Study
 - `Renderer2` | `Renderer2.listen()` - clickoutside.directive.ts
 - `ActivatedRoute.snapshot.queryParamMap` - sheet-list.component.ts
 - `ActivatedRouteSnapshot` | `ActivatedRouteSnapshot.paramMap` | `ActivatedRouteSnapshot.paramMap.get()` - sheet-info-resolver.service.ts
+- `this.destroy$.next() | this.destroy$.complete()` - sheet-info.component.ts
 
 ## 3.2 Angular Material CDK
 
