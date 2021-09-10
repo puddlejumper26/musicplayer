@@ -57,9 +57,67 @@
             <span>{{controlDesc.label}}</span>
             <i nz-icon [nzType]="controlDesc.iconCls" nzTheme="outline"></i>
           </div>
-
         </div>
       </div>
+    </div>
+    <div class="wy-sec">
+      <div class="u-title wy-sec-wrap clearfix">
+        <h3 class="wy-sec-tit">
+          <span class="f-ff2">Song List</span>
+        </h3>
+        <span class="sub s-fc3">
+          {{sheetInfo.tracks.length}} Song(s)
+        </span>
+        <div class="more s-fc3">
+          Played:
+          <strong class="s-fc6">{{sheetInfo.playCount}}</strong>
+        </div>
+      </div>
+
+      <nz-table
+        class="wy-table"
+        #basicTable
+        [nzData]="sheetInfo.tracks"
+        [nzFrontPagination]="false"
+        nzBordered
+        nzNoResult="Empty Box!">
+          <thead>
+            <tr>
+              <th nzWidth="80px"></th>
+              <th>Title</th>
+              <th nzWidth="120px">Duration</th>
+              <th nzWidth="80px">Singer</th>
+              <th>Album</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of basicTable.data; index as i">
+              <td class="first-col">
+                <span>{{i+1}}</span>
+                <i class="ico play-song" title="play"></i>
+              </td>
+              <td class="song-name">
+                <a>{{item.name}}</a>
+              </td>
+              <td class="time-col">
+                <span>{{item.dt/1000 | formatTime}}</span>
+                <p class="icons">
+                  <i class="ico add" title="Add"></i>
+                  <i class="ico like" title="Save"></i>
+                  <i class="ico share" title="Share"></i>
+                </p>
+              </td>
+              <td>
+                <ng-container *ngFor="let singer of item.ar; last as isLast">
+                  <a>{{singer.name}}</a>
+                  <em [hidden]="isLast">/</em>
+                </ng-container>
+              </td>
+              <td>{{item.al.name}}</td>
+            </tr>
+          </tbody>
+      </nz-table>
+
     </div>
   </div>
 </div>

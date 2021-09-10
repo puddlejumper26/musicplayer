@@ -92,7 +92,7 @@ Better Angular Study
 - `ScrollBar` | `BScroll.use(ScrollBar)` | `MouseWheel` | `BScroll.use(MouseWheel)` | `bs.refresh()` | `bs.on('scrollEnd, ({y})'` | `bs.scrollToElement.apply()` | `bs.scrollTo.apply()` | - wy-scroll.component.ts
 - `nzModalservice.confirm` - wy-player.component.ts
 - `nzButtonStyle` | `<nz-radio-group>` | `nz-radio-button` | `<nz-pagination>` | `[nzPageSize]` | `[nzPageIndex]` | `[nzTotal]` | `(nzPageIndexChange)` - sheet-list.component.html
-- `<nz-button-group>` | `nz-button` | `nzTheme` | `<nz-tag>` | 
+- `<nz-button-group>` | `nz-button` | `nzTheme` | `<nz-tag>` | `[nzData]` | `[nzFrontPagination]` | `nzBordered` | `nzNoResult` | `nzWidth` - sheet-info.component.html 
 
 # 4.0 Commands
 - `ng g c *** -s -t -c=OnPush -v=None` // -s -t -> inline the css and html
