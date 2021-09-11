@@ -12,6 +12,7 @@ import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators';
 import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.selector';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
+import { findIndex } from 'src/app/utils/array';
 
 @Component({
   selector: 'app-sheet-info',
@@ -34,6 +35,7 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
   private appStore$: Observable<AppStoreModule>;
   private destroy$ = new Subject<void>();
 
+  currentIndex = -1;
   currentSong: Song;
 
   constructor(
@@ -61,6 +63,11 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
       .subscribe(song => {
         console.log('SheetInfoComponent - listenCurrent - song - ', song);
         this.currentSong = song;
+        if(this.currentSong) {
+          this.currentIndex = findIndex(this.sheetInfo.tracks, song);
+        }else {
+          this.currentIndex = -1;
+        }
       })
   }
 
