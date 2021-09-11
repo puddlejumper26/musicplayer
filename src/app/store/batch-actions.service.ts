@@ -35,6 +35,31 @@ export class BatchActionsService {
       this.store$.dispatch(SetCurrentIndex({ currentIndex: trueIndex })); // default to play the first song
   }
 
+  //add song
+  insertSong(song: Song, isPlay: boolean) {
+    const songList = this.playerState.songList.slice();
+    const playList = this.playerState.playList.slice();
+    let insertIndex = this.playerState.currentIndex;
+    const pIndex = findIndex(playList, song);
+    if(pIndex > -1) {
+      if(isPlay){
+        insertIndex = pIndex;
+      }
+    }else {
+      songList.push(song);
+      playList.push(song);
+      if(isPlay) {
+        insertIndex = songList.length - 1;
+      }
+      this.store$.dispatch(SetSongList({ songList }));
+      this.store$.dispatch(SetPlayList({ playList }));
+    }
+
+    if(insertIndex !== this.playerState.currentIndex) {
+      this.store$.dispatch(SetCurrentIndex({ currentIndex: insertIndex }));
+    }
+  }
+
   deleteSong(song: Song) {
     // console.log('onDeleteSong is called');
     const songList = this.playerState.songList.slice();

@@ -3,12 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/internal/operators/map';
 
+import { SongService } from 'src/app/services/song.service';
 import { AppStoreModule } from 'src/app/store';
 import { Song, SongSheet } from 'src/app/services/data-types/common.types';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators';
 import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.selector';
+import { BatchActionsService } from 'src/app/store/batch-actions.service';
 
 @Component({
   selector: 'app-sheet-info',
@@ -35,7 +37,9 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private store$: Store<AppStoreModule>) {
+    private store$: Store<AppStoreModule>,
+    private songServe: SongService,
+    private batchActionsServe: BatchActionsService) {
     this.route.data.pipe(map(res => res.sheetInfo)).subscribe(res => {
       // console.log('SheetInfoComponent - constructor - route - res -', res);
       this.sheetInfo = res;
@@ -90,7 +94,8 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
   onAddSong(song: Song, isPlay = false) {
     // whether added song is current playing song
     if(!this.currentSong || this.currentSong.id !== song.id) {
-
+      this.songServe.getSongList(song)
+        .subscribe(list => this.batchActionsServe.insertSong(list[0], isPlay))
     }
   }
 
