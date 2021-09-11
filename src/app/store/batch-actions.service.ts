@@ -60,6 +60,21 @@ export class BatchActionsService {
     }
   }
 
+   //add song
+   insertSongs(songs: Song[]) {
+    const songList = this.playerState.songList.slice();
+    const playList = this.playerState.playList.slice();
+    songs.forEach(item => {
+      const pIndex = findIndex(playList, item);
+      if(pIndex === -1) {
+        songList.push(item);
+        playList.push(item);
+      }
+    });
+    this.store$.dispatch(SetSongList({ songList }));
+    this.store$.dispatch(SetPlayList({ playList }));
+   }
+
   deleteSong(song: Song) {
     // console.log('onDeleteSong is called');
     const songList = this.playerState.songList.slice();

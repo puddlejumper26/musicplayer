@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/internal/operators/map';
+import { NzMessageService } from 'ng-zorro-antd';
 
 import { SongService } from 'src/app/services/song.service';
 import { AppStoreModule } from 'src/app/store';
@@ -39,7 +40,8 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private store$: Store<AppStoreModule>,
     private songServe: SongService,
-    private batchActionsServe: BatchActionsService) {
+    private batchActionsServe: BatchActionsService,
+    private nzMessageServe: NzMessageService) {
     this.route.data.pipe(map(res => res.sheetInfo)).subscribe(res => {
       // console.log('SheetInfoComponent - constructor - route - res -', res);
       this.sheetInfo = res;
@@ -99,10 +101,22 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
           if(list.length){
             this.batchActionsServe.insertSong(list[0], isPlay);
           }else {
-            alert('Source is empty, please try another one!');
+            this.nzMessageServe.create('warning', 'Source is empty, please try another one!');
           }
         })
     }
+  }
+
+  onAddSongs(songs: Song[], isPlay = false) {
+    this.songServe.getSongList(songs).subscribe(list => {
+      if(list.length) {
+        if(isPlay){
+          this.batchActionsServe.selectPlayList({list, index: 0})
+        }else {
+          this.batchActionsServe.insertSongs(list);
+        }
+      }
+    })
   }
 
   ngOnDestroy(): void {
