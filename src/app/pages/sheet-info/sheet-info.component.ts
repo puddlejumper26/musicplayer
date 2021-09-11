@@ -95,7 +95,13 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
     // whether added song is current playing song
     if(!this.currentSong || this.currentSong.id !== song.id) {
       this.songServe.getSongList(song)
-        .subscribe(list => this.batchActionsServe.insertSong(list[0], isPlay))
+        .subscribe(list => {
+          if(list.length){
+            this.batchActionsServe.insertSong(list[0], isPlay);
+          }else {
+            alert('Source is empty, please try another one!');
+          }
+        })
     }
   }
 
