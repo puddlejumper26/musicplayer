@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 
 import { Song } from 'src/app/services/data-types/common.types';
-import { BaseLyricLine } from './../../share/wy-ui/wy-player/wy-player-panel/wy-lyric';
+import { BaseLyricLine, WyLyric } from './../../share/wy-ui/wy-player/wy-player-panel/wy-lyric';
 
 @Component({
   selector: 'app-song-info',
@@ -16,8 +16,11 @@ export class SongInfoComponent implements OnInit {
   lyric: BaseLyricLine[];
 
   constructor(private route: ActivatedRoute) {
-    this.route.data.pipe(map(res => res.songInfo)).subscribe( res => {
-      console.log('SongInfoComponent - constructor - res -', res);
+    this.route.data.pipe(map(res => res.songInfo)).subscribe(([song, lyric]) => {
+      // console.log('SongInfoComponent - constructor - res -', res);
+      this.song = song;
+      this.lyric = new WyLyric(lyric).lines;
+      console.log('SongInfoComponent - constructor - lyric -', this.lyric);
     })
   }
 
