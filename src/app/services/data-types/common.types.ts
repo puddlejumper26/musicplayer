@@ -38,6 +38,11 @@ export type Singer = {
     albumSize: number;
 }
 
+export type SingerDetail = {
+    artist: Singer;
+    hotSongs: Song[];
+}
+
 export type Song = {
     id: number;
     name: string;

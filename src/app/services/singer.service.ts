@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators'
-import { Singer } from './data-types/common.types';
+import { Singer, SingerDetail } from './data-types/common.types';
 import { ServicesModule, API_CONFIG } from './services.module';
 import queryString from 'query-string';
 
@@ -25,7 +25,7 @@ const defaultParams: SingerParams = {
    *  ServiceModule will provide with HomeService
    *   same as put HomeService into the provicers inside ServiceModule
    *   cause the second method could be delete when it is not used when Tree shaking
-   * 
+   *
    *   @TreeShaking is to auto delete the module or package in the APP which is imported but not used when generating pacakge
    */
   providedIn: ServicesModule,
@@ -34,12 +34,24 @@ export class SingerService {
 
   constructor(
     private http: HttpClient,
-    @Inject(API_CONFIG) private uri: string 
+    @Inject(API_CONFIG) private uri: string
   ) { }
 
   getEnterSinger(args: SingerParams = defaultParams): Observable<Singer[]> {
     const params = new HttpParams({ fromString: queryString.stringify(args) });
     return this.http.get(this.uri + 'artist/list', { params })
       .pipe(map((res: { artists: Singer[]}) => res.artists))
+  }
+
+  getSingerDetail(id: string): Observable<SingerDetail> {
+    const params = new HttpParams().set('id', id);
+    return this.http.get(this.uri + 'artists', { params })
+      .pipe(map(res => res as SingerDetail))
+  }
+
+  getSimiSinger(id: string): Observable<Singer[]> {
+    const params = new HttpParams().set('id', id);
+    return this.http.get(this.uri + 'simi/artist', { params })
+      .pipe(map(( res : { artists: Singer[] }) => res.artists))
   }
 }
