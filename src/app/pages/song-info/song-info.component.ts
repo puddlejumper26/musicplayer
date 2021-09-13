@@ -15,6 +15,12 @@ export class SongInfoComponent implements OnInit {
   song: Song;
   lyric: BaseLyricLine[];
 
+  controlLyric = {
+    isExpand: false,
+    label: 'More',
+    iconFls: 'down'
+  }
+
   constructor(private route: ActivatedRoute) {
     this.route.data.pipe(map(res => res.songInfo)).subscribe(([song, lyric]) => {
       // console.log('SongInfoComponent - constructor - res -', res);
@@ -27,4 +33,14 @@ export class SongInfoComponent implements OnInit {
   ngOnInit() {
   }
 
+  toggleLyric(){
+    this.controlLyric.isExpand = !this.controlLyric.isExpand;
+    if(this.controlLyric.isExpand) {
+      this.controlLyric.label = "Less";
+      this.controlLyric.iconFls = "up";
+    }else {
+      this.controlLyric.label = "More";
+      this.controlLyric.iconFls = "down";
+    }
+  }
 }

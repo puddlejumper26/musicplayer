@@ -43,16 +43,16 @@
           </div>
 
           <div class="lyric-info f-brk">
-            <div class="lyric-content">
-              <div class="lyric-line">
-                <p>lyric</p>
-                <p>tlytic</p>
+            <div class="lyric-content" [class.expand]="controlLyric.isExpand">
+              <div class="lyric-line" *ngFor="let item of lyric">
+                <p>{{item.txt}}</p>
+                <p>{{item.txtCn}}</p>
               </div>
             </div>
 
-            <div class="toggle-expand">
-              <span>Expand</span>
-              <i nz-icon nzType="down" nzTheme="outline"></i>
+            <div class="toggle-expand" (click)="toggleLyric()">
+              <span>{{controlLyric.label}}</span>
+              <i nz-icon [nzType]="controlLyric.iconFls" nzTheme="outline"></i>
             </div>
           </div>
         </div>
