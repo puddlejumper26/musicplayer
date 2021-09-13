@@ -56,7 +56,7 @@
                 <div class="settled-singer">
                     <div class="tit"><b>Singers</b></div>
                     <div class="list">
-                        <div class="card" *ngFor="let singer of singers">
+                        <div class="card" *ngFor="let singer of singers" [routerLink]="['/singer', singer.id]">
                             <div class="pic">
                                 <img [src]='singer.picUrl'>
                             </div>

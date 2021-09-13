@@ -5,6 +5,7 @@ import { SheetInfoModule } from './sheet-info/sheet-info.module';
 import { HomeModule } from './home/home.module';
 import { ShareModule } from '../share/share.module';
 import { SheetListModule } from './sheet-list/sheet-list.module';
+import { SingerModule } from './singer/singer.module';
 
 /**
  *  manage all the pages
@@ -16,13 +17,15 @@ import { SheetListModule } from './sheet-list/sheet-list.module';
     SheetListModule,
     SheetInfoModule,
     HomeModule,
-    SongInfoModule
+    SongInfoModule,
+    SingerModule
   ],
   exports: [
     HomeModule,
     SheetListModule,
     SheetInfoModule,
-    SongInfoModule
+    SongInfoModule,
+    SingerModule
   ]
 })
 export class PagesModule { }
