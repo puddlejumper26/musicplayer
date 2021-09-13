@@ -1,1 +1,62 @@
-<p>song-info works!</p>
+<div class="song-info wrap feature-wrap">
+  <div class="g-wrap6">
+    <div class="m-info clearfix">
+      <div class="cover">
+        <img [src]="song.al.picUrl" [alt]="song.name">
+        <div class="mask"></div>
+      </div>
+      <div class="cnt">
+        <div class="cntc">
+          <div class="hd clearfix">
+            <i class="f-pr"></i>
+            <div class="tit">
+              <h2 class="f-ff2 f-brak">{{song.name}}</h2>
+            </div>
+          </div>
+
+          <div class="user f-cb">
+            <div class="singers clearfix">
+              <span>Singer:</span>
+              <ul class="clearfix">
+                <li *ngFor="let singer of song.ar; last as isLast">
+                  <a [href]="'//music.163.com/rtist?id=' + singer.id">{{singer.name}}</a>
+                  <i [hidden]="isLast">/</i>
+                </li>
+              </ul>
+            </div>
+
+            <div class="al">
+              <span>Album: </span>
+              <span class="al-name">{{song.al.name}}</span>
+            </div>
+          </div>
+
+          <div class="btns">
+            <nz-button-group class="btn">
+              <button class="play" nz-button nzType="primary">
+                <i nz-icon nzType="play-circle" nzTheme="outline"></i>Play
+              </button>
+              <button class="add" nz-button nzType="primary">+</button>
+            </nz-button-group>
+            <button class="btn like" nz-button><span>Like</span></button>
+            <button class="btn share" nz-button><span>Share</span></button>
+          </div>
+
+          <div class="lyric-info f-brk">
+            <div class="lyric-content">
+              <div class="lyric-line">
+                <p>lyric</p>
+                <p>tlytic</p>
+              </div>
+            </div>
+
+            <div class="toggle-expand">
+              <span>Expand</span>
+              <i nz-icon nzType="down" nzTheme="outline"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
