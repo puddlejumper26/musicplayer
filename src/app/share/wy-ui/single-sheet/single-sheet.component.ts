@@ -16,7 +16,8 @@ export class SingleSheetComponent implements OnInit {
   ngOnInit() {
   }
 
-  playSheet(id: number) {
+  playSheet(evt: MouseEvent, id: number) {
+    evt.stopPropagation(); // avoid clicking this icon, then entering the album. we just need this album to be played, stayed in the same page
     this.onPlay.emit(id);
   }
 
