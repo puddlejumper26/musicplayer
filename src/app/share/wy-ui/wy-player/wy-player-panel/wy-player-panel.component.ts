@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges, ViewChildren, QueryList, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 
 import { Song } from 'src/app/services/data-types/common.types';
@@ -24,6 +25,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   @Output() onChangeSong = new EventEmitter<Song>();
   @Output() onDeleteSong = new EventEmitter<Song>();
   @Output() onClearSong = new EventEmitter<void>();
+  @Output() onToInfo = new EventEmitter<[string, number]>();
 
   scrollY = 0;
   currentLyric: BaseLyricLine[]
@@ -37,7 +39,11 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   // we need to use this compnent both for player list and also for lyrics, so @Children
   @ViewChildren(WyScrollComponent) private wyScroll: QueryList<WyScrollComponent>;
 
-  constructor(@Inject(WINDOW) private win: Window, private songServe: SongService) { }
+  constructor(
+    @Inject(WINDOW) private win: Window,
+    private songServe: SongService,
+    private router: Router
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['playing']) {
@@ -191,5 +197,10 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
     if(targetLine) {
       this.wyScroll.last.scrollToElement(targetLine, speed, false, false);
     }
+  }
+
+  toInfo(evt: MouseEvent, path:[string, number]) {
+    evt.stopPropagation();
+    this.onToInfo.emit(path);
   }
 }

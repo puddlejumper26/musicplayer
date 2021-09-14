@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core'
 import { select, Store } from '@ngrx/store';
 import { fromEvent, Subscription } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 
 import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList } from 'src/app/store/selectors/player.selector';
@@ -70,7 +71,8 @@ export class WyPlayerComponent implements OnInit {
     private store$: Store<AppStoreModule>,
     @Inject(DOCUMENT) private doc: Document,
     private nzModalServe: NzModalService,
-    private batchActionsServe: BatchActionsService
+    private batchActionsServe: BatchActionsService,
+    private router: Router
   ) {
 
     /**
@@ -369,5 +371,13 @@ export class WyPlayerComponent implements OnInit {
     this.showVolumnPanel = false;
     this.showPanel = false;
     this.bindFlag = false;
+  }
+
+  toInfo(path: [string, number]) {
+    if(path[1]){
+      this.showPanel = false;
+      this.showVolumnPanel = false;
+      this.router.navigate(path);
+    }
   }
 }
