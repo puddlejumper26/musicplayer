@@ -36,6 +36,7 @@ export type Singer = {
     id: number;
     name: string;
     albumSize: number;
+    alias: string[];
 }
 
 export type SingerDetail = {
