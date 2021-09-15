@@ -15,4 +15,8 @@ export class AppComponent {
     label: 'List',
     path: '/sheet'
   }]
+
+  onSearch(keyword: string) {
+    console.log('AppComponent - onSearch - keyword -', keyword)
+  }
 }
