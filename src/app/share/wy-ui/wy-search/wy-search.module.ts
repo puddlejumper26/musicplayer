@@ -1,6 +1,7 @@
 import { WySearchComponent } from './wy-search.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NzIconModule, NzInputModule } from 'ng-zorro-antd';
 
 
 @NgModule({
@@ -8,7 +9,9 @@ import { CommonModule } from '@angular/common';
     WySearchComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NzInputModule,
+    NzIconModule
   ],
   exports: [
     WySearchComponent
