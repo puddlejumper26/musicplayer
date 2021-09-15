@@ -10,12 +10,15 @@
                 </div>
                 <div class="right">
                     <div class="search">
-                        <nz-input-group [nzSuffix]="suffixIconSearch">
+                        <nz-input-group nzSuffixIcon="search">
+                          <input type="text" nz-input placeholder="List/Singer/Song">
+                        </nz-input-group>
+                        <!-- <nz-input-group [nzSuffix]="suffixIconSearch">
                             <input type="text" nz-input placeholder="List/Singer/Song">
                         </nz-input-group>
                         <ng-template #suffixIconSearch>
                             <i nz-icon nzType="search"></i>
-                        </ng-template>
+                        </ng-template> -->
                     </div>
                     <div class="member">
                         <div class="no-login">

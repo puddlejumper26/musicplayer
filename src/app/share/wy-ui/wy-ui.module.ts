@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { PlayCountPipe } from '../pipes/play-count.pipe';
 import { SingleSheetComponent } from './single-sheet/single-sheet.component';
 import { WyPlayerModule } from './wy-player/wy-player.module';
+import { WySearchModule } from './wy-search/wy-search.module';
 
 @NgModule({
   declarations: [
@@ -10,12 +11,14 @@ import { WyPlayerModule } from './wy-player/wy-player.module';
     PlayCountPipe
   ],
   imports: [
-    WyPlayerModule
+    WyPlayerModule,
+    WySearchModule
   ],
   exports: [
     SingleSheetComponent,
     PlayCountPipe,
-    WyPlayerModule
+    WyPlayerModule,
+    WySearchModule
   ]
 })
 export class WyUiModule { }

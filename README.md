@@ -87,7 +87,7 @@ Better Angular Study
 - `createSelector` | `createFeatureSelector`- player.selector.ts
 
 ## 3.6 Ant Design Angular | BetterScroll
-- `[nzSuffix]` - app.component.html
+- `[nzSuffix]`| `nz-input-group` | `nz-layout` | `nz-header` | `nz-menu` | `nzTheme` | `nz-menu-item` | `nz-submenu` | `nz-icon` | `nz-footer` | `nzMode` | `nzSuffixIcon` | `nz-Input` - app.component.html
 - `[nzDotRender]` - home.component.html
   - `nzBeforeChange` - home.component.html 
 - `ScrollBar` | `BScroll.use(ScrollBar)` | `MouseWheel` | `BScroll.use(MouseWheel)` | `bs.refresh()` | `bs.on('scrollEnd, ({y})'` | `bs.scrollToElement.apply()` | `bs.scrollTo.apply()` | - wy-scroll.component.ts
