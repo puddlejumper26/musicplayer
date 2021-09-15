@@ -4,8 +4,7 @@ import { Observable } from "rxjs/internal/Observable";
 import { map } from "rxjs/internal/operators";
 
 import { API_CONFIG, ServicesModule } from "./services.module";
-import { Lyric, Song, SongSheet, SongUrl } from 'src/app/services/data-types/common.types';
-import { Url } from "url";
+import { Lyric, Song, SongUrl } from 'src/app/services/data-types/common.types';
 
 @Injectable({
   /**
