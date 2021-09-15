@@ -57,6 +57,7 @@ Better Angular Study
 - `ActivatedRoute.snapshot.queryParamMap` - sheet-list.component.ts
 - `ActivatedRouteSnapshot` | `ActivatedRouteSnapshot.paramMap` | `ActivatedRouteSnapshot.paramMap.get()` - sheet-info-resolver.service.ts
 - `this.destroy$.next() | this.destroy$.complete()` - sheet-info.component.ts
+- `TemplateRef` - wy-search.component.ts
 
 ## 3.2 Angular Material CDK
 

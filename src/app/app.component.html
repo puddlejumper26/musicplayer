@@ -10,8 +10,14 @@
                 </div>
                 <div class="right">
 
-                    <app-wy-search></app-wy-search>
+                  <app-wy-search></app-wy-search>
+                    <!-- To Use ng-template and ng-container -->
+                    <!-- <app-wy-search [customView]="customView"></app-wy-search> -->
+                      <!-- <ng-template #customView>
+                        <button>Search</button>
+                      </ng-template> -->
 
+                      <!-- Moved into WySearch component -->
                     <!-- <div class="search">
                         <nz-input-group nzSuffixIcon="search">
                           <input type="text" nz-input placeholder="List/Singer/Song">
