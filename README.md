@@ -68,6 +68,7 @@ Better Angular Study
 - `fromEvent` | `filter` | `tap` | `distinctUntilChanged` | `takeUntil` | `mgerge` replaced with `concat`- wy-slider.component.ts
 - `Subscription` | `fromEvent` - wy-player.component.ts
 - `timer()` - wy-scroll.component.ts | wy-player-panel.component.ts | wy-lyric.ts
+- `fromEvent()` | `pluck()` | `debounceTime()` | `distinctUntilChanged()` - wy-search.component.ts 
 
 ## 3.4 dom && JS
 - `slice()`| shallow copy - song.service.ts 
