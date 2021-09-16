@@ -19,7 +19,9 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() customView: TemplateRef<any>;
   @Input() searchResult: SearchResult;
   @Output() onSearch = new EventEmitter<string>();
+
   @ViewChild('nzInput', {static: false}) private nzInput: ElementRef;
+  @ViewChild('search', {static: false}) private defaultRef: ElementRef;
 
   private overlayRef: OverlayRef;
 
@@ -60,9 +62,23 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private showOverlayPanel() {
-    this.overlayRef = this.overlay.create();
+    const positionStrategy = this.overlay
+                              .position()
+                              .flexibleConnectedTo(this.defaultRef)
+                              .withPositions([{
+                                originX: 'start', // attach host bottom left
+                                originY: 'bottom', // attach host bottom left
+                                overlayX: 'start', // attach ele top left
+                                overlayY: 'top' // attach ele top left
+                              }])
+                              .withLockedPosition(true);
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(), //needs to use with withLockedPosition()
+    });
+
     const panelProtal = new ComponentPortal(WySearchPanelComponent, this.viewContainerRef);
     const panelRef = this.overlayRef.attach(panelProtal);
   }
-
 }

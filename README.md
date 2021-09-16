@@ -60,7 +60,7 @@ Better Angular Study
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
 
 ## 3.2 Angular Material CDK
-- `Overlay` | `this.overlay.create()` | `this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
+- `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`positionStrategy, scrollStrategy` | `this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
 - `entryComponents` - wy-search.module.ts
 
 ## 3.3 rxjs
