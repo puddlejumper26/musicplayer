@@ -60,6 +60,8 @@ Better Angular Study
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
 
 ## 3.2 Angular Material CDK
+- `Overlay` | `this.overlay.create()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
+- `entryComponents` - wy-search.module.ts
 
 ## 3.3 rxjs
 - `forkJoin` | `combineLatest` - home-resolve.service.ts

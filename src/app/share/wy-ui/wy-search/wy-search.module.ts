@@ -2,6 +2,8 @@ import { WySearchComponent } from './wy-search.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzIconModule, NzInputModule } from 'ng-zorro-antd';
+import { OverlayModule } from '@angular/cdk/overlay';
+
 import { WySearchPanelComponent } from './wy-search-panel/wy-search-panel.component';
 
 
@@ -10,10 +12,12 @@ import { WySearchPanelComponent } from './wy-search-panel/wy-search-panel.compon
     WySearchComponent,
     WySearchPanelComponent
   ],
+  entryComponents: [WySearchPanelComponent], //https://material.angular.io/cdk/portal/overview#componentportal
   imports: [
     CommonModule,
     NzInputModule,
-    NzIconModule
+    NzIconModule,
+    OverlayModule,
   ],
   exports: [
     WySearchComponent

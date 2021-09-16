@@ -1,10 +1,13 @@
-import { Component, ElementRef, Input, OnInit, TemplateRef, AfterViewInit, ViewChild, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, TemplateRef, AfterViewInit, ViewChild, Output, EventEmitter, OnChanges, SimpleChanges, ViewContainerRef } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
 import { pluck } from 'rxjs/internal/operators/pluck';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 import { SearchResult } from 'src/app/services/data-types/common.types';
 import { isEmptyObject } from 'src/app/utils/tool';
+import { WySearchPanelComponent } from './wy-search-panel/wy-search-panel.component';
 
 @Component({
   selector: 'app-wy-search',
@@ -18,7 +21,10 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() onSearch = new EventEmitter<string>();
   @ViewChild('nzInput', {static: false}) private nzInput: ElementRef;
 
-  constructor() { }
+  constructor(
+    private overlay: Overlay,
+    private viewContainerRef: ViewContainerRef
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['searchResult'] && !changes['searchResult'].firstChange){
@@ -51,7 +57,8 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private showOverlayPanel() {
-
+    const overlayRef = this.overlay.create();
+    const panelProtal = new ComponentPortal(WySearchPanelComponent, this.viewContainerRef)
   }
 
 }
