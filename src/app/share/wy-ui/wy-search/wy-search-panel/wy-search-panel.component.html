@@ -7,7 +7,7 @@
         <span>Song</span>
       </div>
       <ul>
-        <li class="ellipsis" *ngFor="let item of searchResult?.songs">{{item.name}}</li>
+        <li class="ellipsis" *ngFor="let item of searchResult?.songs" (click)="toInfo(['/songInfo', item.id])">{{item.name}}</li>
       </ul>
     </div>
 
@@ -17,7 +17,7 @@
         <span>Singer</span>
       </div>
       <ul>
-        <li class="ellipsis" *ngFor="let item of searchResult?.artists">{{item.name}}</li>
+        <li class="ellipsis" *ngFor="let item of searchResult?.artists" (click)="toInfo(['/singer', item.id])">{{item.name}}</li>
       </ul>
     </div>
 
@@ -27,7 +27,7 @@
         <span>Sheet</span>
       </div>
       <ul>
-        <li class="ellipsis" *ngFor="let item of searchResult?.playlists">{{item.name}}</li>
+        <li class="ellipsis" *ngFor="let item of searchResult?.playlists" (click)="toInfo(['/sheetInfo', item.id])">{{item.name}}</li>
       </ul>
     </div>
 

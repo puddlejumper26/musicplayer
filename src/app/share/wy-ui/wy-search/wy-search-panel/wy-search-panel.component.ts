@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SearchResult } from 'src/app/services/data-types/common.types';
 
@@ -11,11 +12,19 @@ export class WySearchPanelComponent implements OnInit {
 
   searchResult: SearchResult
 
-  constructor() {
-    console.log('WySearchPanelComponent - constructor - searchResult -', this.searchResult)
+  constructor(
+    private router: Router,
+  ) {
+    // console.log('WySearchPanelComponent - constructor - searchResult -', this.searchResult)
   }
 
   ngOnInit() {
   }
 
+  toInfo(path: [string, number]) {
+    // console.log('WySearchPanelComponent - toInfo - path -', path);
+    if(path[1]) {
+      this.router.navigate(path);
+    }
+  }
 }
