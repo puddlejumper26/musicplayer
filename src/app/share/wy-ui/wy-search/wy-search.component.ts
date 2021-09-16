@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, TemplateRef, AfterViewInit, ViewC
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/internal/operators';
 import { pluck } from 'rxjs/internal/operators/pluck';
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
 import { SearchResult } from 'src/app/services/data-types/common.types';
@@ -20,6 +20,8 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() searchResult: SearchResult;
   @Output() onSearch = new EventEmitter<string>();
   @ViewChild('nzInput', {static: false}) private nzInput: ElementRef;
+
+  private overlayRef: OverlayRef;
 
   constructor(
     private overlay: Overlay,
@@ -53,13 +55,15 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private hideOverlayPanel() {
-
+    if(this.overlayRef && this.overlayRef.hasAttached){
+      this.overlayRef.dispose();
+    }
   }
 
   private showOverlayPanel() {
-    const overlayRef = this.overlay.create();
+    this.overlayRef = this.overlay.create();
     const panelProtal = new ComponentPortal(WySearchPanelComponent, this.viewContainerRef);
-    const panelRef = overlayRef.attach(panelProtal);
+    const panelRef = this.overlayRef.attach(panelProtal);
   }
 
 }
