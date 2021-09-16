@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SearchResult } from 'src/app/services/data-types/common.types';
+
 @Component({
   selector: 'app-wy-search-panel',
   templateUrl: './wy-search-panel.component.html',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WySearchPanelComponent implements OnInit {
 
-  constructor() { }
+  searchResult: SearchResult
+
+  constructor() {
+    console.log('WySearchPanelComponent - constructor - searchResult -', this.searchResult)
+  }
 
   ngOnInit() {
   }

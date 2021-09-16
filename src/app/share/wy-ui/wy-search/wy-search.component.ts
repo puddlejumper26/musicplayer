@@ -82,6 +82,9 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
 
     const panelProtal = new ComponentPortal(WySearchPanelComponent, this.viewContainerRef);
     const panelRef = this.overlayRef.attach(panelProtal);
+    console.log('WySearchComponent - showOverlayPanel - panelRef - ', panelRef);
+    panelRef.instance.searchResult = this.searchResult;
+
     // check whether the extra layer is clicked
     this.overlayRef.backdropClick().subscribe(() => {
       // console.log('Overlay outside clicked');
