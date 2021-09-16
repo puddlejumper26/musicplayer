@@ -32,7 +32,6 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['searchResult'] && !changes['searchResult'].firstChange){
-      this.hideOverlayPanel();
       if(!isEmptyObject(this.searchResult)){
         this.showOverlayPanel();
       }
@@ -62,6 +61,8 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private showOverlayPanel() {
+    this.hideOverlayPanel();
+
     const positionStrategy = this.overlay
                               .position()
                               .flexibleConnectedTo(this.defaultRef)
@@ -74,11 +75,24 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
                               .withLockedPosition(true);
 
     this.overlayRef = this.overlay.create({
+      hasBackdrop: true, // create a layer when overlay exists, for control click then hide
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(), //needs to use with withLockedPosition()
     });
 
     const panelProtal = new ComponentPortal(WySearchPanelComponent, this.viewContainerRef);
     const panelRef = this.overlayRef.attach(panelProtal);
+    // check whether the extra layer is clicked
+    this.overlayRef.backdropClick().subscribe(() => {
+      // console.log('Overlay outside clicked');
+      this.hideOverlayPanel()
+    })
+  }
+
+  // after clicked outside layer, overlay closed, re-focus the input, should show overlay again
+  onFocus() {
+    if(this.searchResult && !isEmptyObject(this.searchResult)) {
+      this.showOverlayPanel();
+    }
   }
 }
