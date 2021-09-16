@@ -30,9 +30,8 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['searchResult'] && !changes['searchResult'].firstChange){
-      if(isEmptyObject(this.searchResult)){
-        this.hideOverlayPanel();
-      }else {
+      this.hideOverlayPanel();
+      if(!isEmptyObject(this.searchResult)){
         this.showOverlayPanel();
       }
     };
