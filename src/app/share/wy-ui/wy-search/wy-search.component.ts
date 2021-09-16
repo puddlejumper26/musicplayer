@@ -58,7 +58,8 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
 
   private showOverlayPanel() {
     const overlayRef = this.overlay.create();
-    const panelProtal = new ComponentPortal(WySearchPanelComponent, this.viewContainerRef)
+    const panelProtal = new ComponentPortal(WySearchPanelComponent, this.viewContainerRef);
+    const panelRef = overlayRef.attach(panelProtal);
   }
 
 }
