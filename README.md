@@ -165,3 +165,9 @@ Better Angular Study
 # 5.0 Demo
 Homepage
 ![](https://user-images.githubusercontent.com/80747582/133734382-698c7f59-7565-4c51-8f8d-964b32488b9d.png)
+Player Panel
+Sheet List(Album Sheet)
+Singer List
+Singer Detail
+Song Detail
+Login
