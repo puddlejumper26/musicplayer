@@ -13,6 +13,7 @@ import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
 import { findIndex, shuffle } from 'src/app/utils/array';
 import { WyPlayerPanelComponent } from './wy-player-panel/wy-player-panel.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 const modeTypes: PlayMode[] = [{
@@ -29,7 +30,13 @@ const modeTypes: PlayMode[] = [{
 @Component({
   selector: 'app-wy-player',
   templateUrl: './wy-player.component.html',
-  styleUrls: ['./wy-player.component.less']
+  styleUrls: ['./wy-player.component.less'],
+  animations: [trigger('showHide', [
+    state('show', style({bottom: 0})),
+    state('hide', style({bottom: -71})),
+    transition('show=>hide', [animate('0.5s')]),
+    transition('hide=>show', [animate('0.1s')])
+  ])]
 })
 export class WyPlayerComponent implements OnInit {
 
@@ -45,6 +52,7 @@ export class WyPlayerComponent implements OnInit {
   duration: number;
   currentTime: number;
 
+  showPlayer = 'hide';
   //play status
   playing = false;
   // whether ready to play
@@ -239,6 +247,10 @@ export class WyPlayerComponent implements OnInit {
     }else {
       this.bindFlag = false;
     }
+  }
+
+  togglePlayer(type: string) {
+    this.showPlayer = type;
   }
 
   // private bindDocumentClickListener() {

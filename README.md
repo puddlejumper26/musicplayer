@@ -58,6 +58,17 @@ Better Angular Study
 - `ActivatedRouteSnapshot` | `ActivatedRouteSnapshot.paramMap` | `ActivatedRouteSnapshot.paramMap.get()` - sheet-info-resolver.service.ts
 - `this.destroy$.next() | this.destroy$.complete()` - sheet-info.component.ts
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
+- wy-player.component.ts
+```ts
+    animations: [trigger('showHide', [
+    state('show', style({bottom: 0})),
+    state('hide', style({bottom: -71})),
+    transition('show=>hide', [animate('0.3s')]),
+    transition('hide=>show', [animate('0.1s')])
+  ])]
+``` 
+- 
+-  
 
 ## 3.2 Angular Material CDK
 - `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`hasBackdrop, positionStrategy, scrollStrategy`| `this.overlay.create().backdropClick()` |`this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
@@ -86,6 +97,12 @@ Better Angular Study
 - `Date.now()` | `clearTimeout` - wy-lyric.ts
 - `(focus)` | `(blur)` - wy-search.component.html
 - `(click)` | `(mousedown)` - wy-search-panel.component.html
+- wy-player.component.html
+```html
+(mouseenter)="function()"
+(mouseleave)="function()"
+```
+- 
 
 ## 3.5 NgRx
 - `createAction` | `props` - player.actions.ts
