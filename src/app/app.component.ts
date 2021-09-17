@@ -1,3 +1,4 @@
+import { isEmptyObject } from 'src/app/utils/tool';
 import { Component } from '@angular/core';
 
 import { SearchResult } from './services/data-types/common.types';
@@ -28,10 +29,25 @@ export class AppComponent {
     if(keywords) {
       this.searchServe.search(keywords).subscribe(res=>{
         // console.log('AppComponent - onSearch - res -', res)
-        this.searchResult = res;
+        this.searchResult = this.hightlightKeyword(keywords, res);
+        // console.log('AppComponent - onSearch - searchResult -', this.searchResult)
       })
     }else {
       this.searchResult = {};
     }
+  }
+
+  private hightlightKeyword(keywords: string, result: SearchResult): SearchResult {
+    if(!isEmptyObject(result)){
+      const reg = new RegExp(keywords, 'ig');
+      ['artists', 'playlists', 'songs'].forEach(type => {
+        if(result[type]) {
+          result[type].forEach(item => {
+            item.name = item.name.replace(reg, '<span class="highlight">$&</span>')
+          });
+        }
+      })
+    }
+    return result;
   }
 }
