@@ -5,8 +5,8 @@
   [@showHide]="showPlayer"
   (mouseenter)="togglePlayer('show')"
   (mouseleave)="togglePlayer('hide')">
-    <div class="lock">
-        <div class="left"><i></i></div>
+    <div class="lock" (click)="isLocked = !isLocked">
+        <div class="left"><i [class.locked] = "isLocked"></i></div>
     </div>
     <div class="hand"></div>
     <div class="container">

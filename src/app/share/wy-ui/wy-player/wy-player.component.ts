@@ -53,6 +53,8 @@ export class WyPlayerComponent implements OnInit {
   currentTime: number;
 
   showPlayer = 'hide';
+  isLocked = false;
+
   //play status
   playing = false;
   // whether ready to play
@@ -250,7 +252,9 @@ export class WyPlayerComponent implements OnInit {
   }
 
   togglePlayer(type: string) {
-    this.showPlayer = type;
+    if(!this.isLocked) {
+      this.showPlayer = type;
+    }
   }
 
   // private bindDocumentClickListener() {
