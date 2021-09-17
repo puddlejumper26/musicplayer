@@ -28,7 +28,7 @@ Better Angular Study
   - open `localhost:4200` to see the app
 
 # 3.0 API && Note
-## 3.1 Angular
+## 3.1.1 Angular [API]
 - `@SkipSelf()` - core.module.ts
 - `@Optional()` - core.module.ts
 - `Tree Shaking` - home.service.ts
@@ -58,7 +58,14 @@ Better Angular Study
 - `ActivatedRouteSnapshot` | `ActivatedRouteSnapshot.paramMap` | `ActivatedRouteSnapshot.paramMap.get()` - sheet-info-resolver.service.ts
 - `this.destroy$.next() | this.destroy$.complete()` - sheet-info.component.ts
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
-- wy-player.component.ts - [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d)
+- `[@showHide]` | `(@showHide.start)` | `(@showHide.done)` | `animations` | `trigger` | `state` | `style` | `transition` | `animate` - wy-player.component.ts
+
+
+## 3.1.2 Angular [Note]
+#### wy-player.component.ts
+- animation
+- [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d) | [【Player-ShowHide】isLocked logics for lock](https://github.com/puddlejumper26/musicplayer/commit/ddccd0d57874393f90f47039e027567e166a2073) | [【Player-ShowHide】avoiding shaking when mouseenter | mouseleave](https://github.com/puddlejumper26/musicplayer/commit/13c36248f85ef6dcefa2dcf746770f5b22caae3e)
+
 ```ts
 -----html
   [@showHide]="showPlayer"
@@ -77,10 +84,11 @@ Better Angular Study
 - 
 -  
 
-## 3.2 Angular Material CDK
+## 3.2.1 Angular Material CDK [API]
 - `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`hasBackdrop, positionStrategy, scrollStrategy`| `this.overlay.create().backdropClick()` |`this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
 - `entryComponents` - wy-search.module.ts
 
+## 3.2.1 Angular Material CDK [Note]
 ## 3.3 rxjs
 - `forkJoin` | `combineLatest` - home-resolve.service.ts
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
@@ -90,7 +98,7 @@ Better Angular Study
 - `timer()` - wy-scroll.component.ts | wy-player-panel.component.ts | wy-lyric.ts
 - `fromEvent()` | `pluck()` | `debounceTime()` | `distinctUntilChanged()` - wy-search.component.ts 
 
-## 3.4 dom && JS
+## 3.4 dom && JS [API]
 - `slice()`| shallow copy - song.service.ts 
 - `HTMLDivElement` - wy-slider.component.ts
 - `MouseEvent` | `TouchEvent` | `instanceof` | `stopPropagation` | `preventDefault` - wy-slider.component.ts
@@ -105,11 +113,37 @@ Better Angular Study
 - `(focus)` | `(blur)` - wy-search.component.html
 - `(click)` | `(mousedown)` - wy-search-panel.component.html
 - wy-player.component.html
-```html
-(mouseenter)="function()"
-(mouseleave)="function()"
-```
+
 - 
+
+## 3.4 dom && JS [Note]
+#### wy-player.component
+- Angular animation
+- ```html
+  <div
+    (mouseenter)="function()"
+    (mouseleave)="function()"
+  >
+  </div>
+  ```
+
+- HTMLAudioElement
+- 
+- ```ts
+  @ViewChild('audio', { static: true }) private audio: ElementRef;
+  private audioEl: HTMLAudioElement;
+  this.audioEl = this.audio.nativeElement;
+  const currentTime = this.duration * (per / 100);
+    this.audioEl.currentTime = currentTime;
+  onVolumnChange(per: number) {
+    this.audioEl.volume = per / 100;
+  }
+  this.currentTime = (<HTMLAudioElement>e.target).currentTime;
+    this.percent = (this.currentTime / this.duration) * 100;
+  const buffered = this.audioEl.buffered;
+  this.audioEl.play();
+  this.audioEl.pause();
+  ```
 
 ## 3.5 NgRx
 - `createAction` | `props` - player.actions.ts
@@ -129,4 +163,5 @@ Better Angular Study
 - `ng g c *** -s -t -c=OnPush -v=None` // -s -t -> inline the css and html
 
 # 5.0 Demo
-![](https://user-images.githubusercontent.com/80747582/124521982-cbbdc300-ddf1-11eb-94ce-2053cd32376a.png)
+Homepage
+![](https://user-images.githubusercontent.com/80747582/133734382-698c7f59-7565-4c51-8f8d-964b32488b9d.png)
