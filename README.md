@@ -84,7 +84,8 @@ Better Angular Study
 - `NodeList` - wy-player-panel.component.ts
 - `| 0` | `padStart()` - format-time.pipe.ts
 - `Date.now()` | `clearTimeout` - wy-lyric.ts
-- `(focus)` - wy-search.component.html
+- `(focus)` | `(blur)` - wy-search.component.html
+- `(click)` | `(mousedown)` - wy-search-panel.component.html
 
 ## 3.5 NgRx
 - `createAction` | `props` - player.actions.ts

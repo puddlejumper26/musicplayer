@@ -75,7 +75,7 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
                               .withLockedPosition(true);
 
     this.overlayRef = this.overlay.create({
-      hasBackdrop: true, // create a layer when overlay exists, for control click then hide
+      // hasBackdrop: true, // create a layer when overlay exists, for control click then hide
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(), //needs to use with withLockedPosition()
     });
@@ -90,6 +90,10 @@ export class WySearchComponent implements OnInit, AfterViewInit, OnChanges {
       // console.log('Overlay outside clicked');
       this.hideOverlayPanel()
     })
+  }
+
+  onBlur() {
+    this.hideOverlayPanel();
   }
 
   // after clicked outside layer, overlay closed, re-focus the input, should show overlay again
