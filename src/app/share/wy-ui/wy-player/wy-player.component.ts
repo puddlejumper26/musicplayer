@@ -54,6 +54,7 @@ export class WyPlayerComponent implements OnInit {
 
   showPlayer = 'hide';
   isLocked = false;
+  animating = false; //whether now is animation
 
   //play status
   playing = false;
@@ -252,7 +253,7 @@ export class WyPlayerComponent implements OnInit {
   }
 
   togglePlayer(type: string) {
-    if(!this.isLocked) {
+    if(!this.isLocked && !this.animating) {
       this.showPlayer = type;
     }
   }

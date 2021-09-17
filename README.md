@@ -58,8 +58,15 @@ Better Angular Study
 - `ActivatedRouteSnapshot` | `ActivatedRouteSnapshot.paramMap` | `ActivatedRouteSnapshot.paramMap.get()` - sheet-info-resolver.service.ts
 - `this.destroy$.next() | this.destroy$.complete()` - sheet-info.component.ts
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
-- wy-player.component.ts
+- wy-player.component.ts - [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d)
 ```ts
+-----html
+  [@showHide]="showPlayer"
+  (@showHide.start)="animating = true"
+  (@showHide.done)="animating = false"
+  (mouseenter)="togglePlayer('show')"
+  (mouseleave)="togglePlayer('hide')"
+-----ts
     animations: [trigger('showHide', [
     state('show', style({bottom: 0})),
     state('hide', style({bottom: -71})),

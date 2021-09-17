@@ -3,6 +3,8 @@
   [bindFlag]="bindFlag"
   (onClickOutSide) = "onClickOutSide()"
   [@showHide]="showPlayer"
+  (@showHide.start)="animating = true"
+  (@showHide.done)="animating = false"
   (mouseenter)="togglePlayer('show')"
   (mouseleave)="togglePlayer('hide')">
     <div class="lock" (click)="isLocked = !isLocked">
