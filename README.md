@@ -62,6 +62,28 @@ Better Angular Study
 
 
 ## 3.1.2 Angular [Note]
+
+#### `HTMLElement` & `nativeElement`
+- `nativeElement` - single Property of ElementRef
+- `HTMLElement`
+- - Interface 
+- - represents any HTML element
+- - ```ts 
+    export function getElementOffset(el: HTMLElement): {top: number, left: number} {}
+    ```
+
+  
+
+#### Difference between `TemplateRef` & `ElementRef`
+- `ElementRef` is simply like document.getElementById('myId') - only able to do some decorations - access basic native element present in DOM.
+- ```ts
+  class ElementRef<T = any> {
+    constructor(nativeElement: T)
+    nativeElement: T
+  }
+  ```
+ 
+- `TemplateRef` is an embedded template which you can use in ViewContainerRef.createEmbeddedView to create Embedded View - access DOM element within `<ng-template>`. - Structural directive uses this TemplateRef
 #### wy-player.component.ts
 - animation
 - [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d) | [【Player-ShowHide】isLocked logics for lock](https://github.com/puddlejumper26/musicplayer/commit/ddccd0d57874393f90f47039e027567e166a2073) | [【Player-ShowHide】avoiding shaking when mouseenter | mouseleave](https://github.com/puddlejumper26/musicplayer/commit/13c36248f85ef6dcefa2dcf746770f5b22caae3e)
@@ -89,7 +111,7 @@ Better Angular Study
 - `entryComponents` - wy-search.module.ts
 
 ## 3.2.1 Angular Material CDK [Note]
-## 3.3 rxjs
+## 3.3.1 rxjs [API]
 - `forkJoin` | `combineLatest` - home-resolve.service.ts
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
 - `pluck` | `switchMap` | `mergeMap` | `concatMap` - sheet.service.ts
@@ -97,6 +119,8 @@ Better Angular Study
 - `Subscription` | `fromEvent` - wy-player.component.ts
 - `timer()` - wy-scroll.component.ts | wy-player-panel.component.ts | wy-lyric.ts
 - `fromEvent()` | `pluck()` | `debounceTime()` | `distinctUntilChanged()` - wy-search.component.ts 
+
+## 3.3.1 rxjs [Note]
 
 ## 3.4 dom && JS [API]
 - `slice()`| shallow copy - song.service.ts 
