@@ -433,11 +433,16 @@ export class WyPlayerComponent implements OnInit {
     })
   }
 
-  onClickOutSide() {
+  onClickOutSide(target: HTMLElement) {
     // console.log('WyPlayerComponent - onClickOutSide is called');
-    this.showVolumnPanel = false;
-    this.showPanel = false;
-    this.bindFlag = false;
+    console.log('WyPlayerComponent - onClickOutSide - target.dataset', target.dataset)
+    // here dataset.act - act is defined in WyPlayerPanel template data-act="delete", so any string would work
+    // e.g. data-haha='eeee'  => if(target.dataset.haha) {...}
+    if(target.dataset.act!=="delete") {
+      this.showVolumnPanel = false;
+      this.showPanel = false;
+      this.bindFlag = false;
+    }
   }
 
   toInfo(path: [string, number]) {

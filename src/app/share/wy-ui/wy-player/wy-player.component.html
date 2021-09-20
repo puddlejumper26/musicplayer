@@ -1,7 +1,7 @@
 <div class="m-player"
   appClickoutside
   [bindFlag]="bindFlag"
-  (onClickOutSide) = "onClickOutSide()"
+  (onClickOutSide) = "onClickOutSide($event)"
   [@showHide]="showPlayer"
   (@showHide.start)="animating = true"
   (@showHide.done)="onAnimateDone($event)"
