@@ -7,13 +7,14 @@ import { NzModalService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 
 import { AppStoreModule } from 'src/app/store';
-import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList } from 'src/app/store/selectors/player.selector';
-import { SetCurrentIndex, SetPlayMode, SetPlayList, SetSongList } from './../../../store/actions/player.actions';
+import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList, getCurrentAction } from 'src/app/store/selectors/player.selector';
+import { SetCurrentIndex, SetPlayMode, SetPlayList, SetSongList, SetCurrentAction } from './../../../store/actions/player.actions';
 import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
 import { findIndex, shuffle } from 'src/app/utils/array';
 import { WyPlayerPanelComponent } from './wy-player-panel/wy-player-panel.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CurrentActions } from 'src/app/store/reducers/player.reducer';
 
 
 const modeTypes: PlayMode[] = [{
@@ -105,6 +106,9 @@ export class WyPlayerComponent implements OnInit {
     appStore$.pipe(select(getCurrentSong)).subscribe(song => {
       this.watchCurrentSong(song)
     });
+    appStore$.pipe(select(getCurrentAction)).subscribe(action => {
+      this.watchCurrentAction(action)
+    });
 
     // following is only working under @ngrx/store-devtool@8.3.0
     // const stateArr = [{
@@ -173,6 +177,11 @@ export class WyPlayerComponent implements OnInit {
       this.duration = song.dt / 1000; // to change from minisec -> sec
       // console.log('watchCurrentSong - currentSong -', song);
     }
+  }
+
+  private watchCurrentAction(action: CurrentActions) {
+    console.log('WyPlayerComponent - watchCurrentAction - CurrentActions[action] -', CurrentActions[action]);
+    this.store$.dispatch(SetCurrentAction({ currentAction: CurrentActions.Other })); // restore the status
   }
 
   changeMode() {

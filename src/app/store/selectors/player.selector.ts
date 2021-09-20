@@ -6,7 +6,7 @@ const selectPlayerStates = (state: PlayState) => state;
 
 // to obtain the player
 /**
- * @player has to be identical with the index.ts ->     StoreModule.forRoot({player: playerReducer}, 
+ * @player has to be identical with the index.ts ->     StoreModule.forRoot({player: playerReducer},
  */
 export const getPlayer = createFeatureSelector<PlayState>('player');
 
@@ -15,5 +15,6 @@ export const getPlayList = createSelector(selectPlayerStates, (state: PlayState)
 export const getSongList = createSelector(selectPlayerStates, (state: PlayState) => state.songList);
 export const getPlayMode = createSelector(selectPlayerStates, (state: PlayState) => state.playMode);
 export const getCurrentIndex = createSelector(selectPlayerStates, (state: PlayState) => state.currentIndex);
+export const getCurrentAction = createSelector(selectPlayerStates, (state: PlayState) => state.currentAction);
 
 export const getCurrentSong = createSelector(selectPlayerStates, ({ playList, currentIndex }: PlayState) => playList[currentIndex]);
