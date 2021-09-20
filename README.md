@@ -138,7 +138,7 @@ Better Angular Study
 - `HTMLElement.getBoundingClientRect()` | `HTMLElement.getClientRects()` | `HTMLElement.ownerDocument.defaultView` | `window.pageYOffset` | `window.pageXOffset` - wy-slider-helper.ts
 - `bind` - wy-slider.component.ts
 - `HTMLAudioElement` | `HTMLAudioElement.currentTime` | ``HTMLAudioElement.volume` | `HTMLAudioElement.buffered()` | `HTMLAudioElement.buffered().end(0)` | `play()` | `pause()` - wy-player.component.ts
-- `(canplay)` | `(timeupdate)` | `(ended)` - wy-player.component.html
+- `(canplay)` | `(timeupdate)` | `(ended)` | `(error)`- wy-player.component.html
 - `NodeList` - wy-player-panel.component.ts
 - `| 0` | `padStart()` - format-time.pipe.ts
 - `Date.now()` | `clearTimeout` - wy-lyric.ts
@@ -180,10 +180,14 @@ Better Angular Study
     (mouseleave)="function()"
   >
   </div>
+- <audio>
+  <audio
+    (error)="function"
+  >
+  </audio>
   ```
 
 - HTMLAudioElement
-- 
 - ```ts
   @ViewChild('audio', { static: true }) private audio: ElementRef;
   private audioEl: HTMLAudioElement;

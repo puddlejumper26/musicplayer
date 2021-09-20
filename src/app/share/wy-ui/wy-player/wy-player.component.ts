@@ -152,7 +152,7 @@ export class WyPlayerComponent implements OnInit {
   }
 
   private watchPlayMode(mode: PlayMode) {
-    console.log('watchPlayMode - mode -', mode);
+    // console.log('watchPlayMode - mode -', mode);
     this.currentMode = mode;
 
     if(this.songList) {
@@ -171,18 +171,18 @@ export class WyPlayerComponent implements OnInit {
 
   // to find the current playing song's index in the new songList after shuffled
   private updateCurrentIndex(list: Song[], song: Song) {
-    console.log('updateCurrentIndex - Song - ', song);
+    // console.log('updateCurrentIndex - Song - ', song);
 
     if(song) {
-      console.log('updateCurrentindex - song.id - ', song.id);
+      // console.log('updateCurrentindex - song.id - ', song.id);
       const newIndex = findIndex(list, song);
       this.store$.dispatch(SetCurrentIndex({ currentIndex: newIndex }));
     }
   }
 
   private watchCurrentSong(song: Song) {
+    this.currentSong = song;
     if(song) {
-      this.currentSong = song;
       this.duration = song.dt / 1000; // to change from minisec -> sec
       // console.log('watchCurrentSong - currentSong -', song);
     }
@@ -434,7 +434,7 @@ export class WyPlayerComponent implements OnInit {
   }
 
   onClickOutSide() {
-    console.log('WyPlayerComponent - onClickOutSide is called');
+    // console.log('WyPlayerComponent - onClickOutSide is called');
     this.showVolumnPanel = false;
     this.showPanel = false;
     this.bindFlag = false;
@@ -446,5 +446,12 @@ export class WyPlayerComponent implements OnInit {
       this.showVolumnPanel = false;
       this.router.navigate(path);
     }
+  }
+
+  // Error when playing
+  onError() {
+    console.log('WyPlayerComponent - onError - this.currentSong - ', this.currentSong);
+    this.playing = false;
+    this.bufferOffset = 0;
   }
 }
