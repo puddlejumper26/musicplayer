@@ -66,7 +66,7 @@ Better Angular Study
 #### `HTMLElement` & `nativeElement`
 - `nativeElement` - single Property of ElementRef
 - `HTMLElement`
-- - Interface 
+- - Interface of Web API(not angular)
 - - represents any HTML element
 - - ```ts 
     export function getElementOffset(el: HTMLElement): {top: number, left: number} {}
@@ -82,8 +82,16 @@ Better Angular Study
     nativeElement: T
   }
   ```
- 
+ ~   ~
 - `TemplateRef` is an embedded template which you can use in ViewContainerRef.createEmbeddedView to create Embedded View - access DOM element within `<ng-template>`. - Structural directive uses this TemplateRef
+- ```html
+  <ng-template #dot let-number>
+    <i class="dot" [class.active]="activeIndex === number"></i>
+  </ng-template>
+  ```
+- ```ts
+  @ViewChild('dot', {static: true}) dotRef: TemplateRef<any>;
+  ```
 #### wy-player.component.ts
 - animation
 - [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d) | [【Player-ShowHide】isLocked logics for lock](https://github.com/puddlejumper26/musicplayer/commit/ddccd0d57874393f90f47039e027567e166a2073) | [【Player-ShowHide】avoiding shaking when mouseenter | mouseleave](https://github.com/puddlejumper26/musicplayer/commit/13c36248f85ef6dcefa2dcf746770f5b22caae3e)
@@ -120,9 +128,9 @@ Better Angular Study
 - `timer()` - wy-scroll.component.ts | wy-player-panel.component.ts | wy-lyric.ts
 - `fromEvent()` | `pluck()` | `debounceTime()` | `distinctUntilChanged()` - wy-search.component.ts 
 
-## 3.3.1 rxjs [Note]
+## 3.3.2 rxjs [Note]
 
-## 3.4 dom && JS [API]
+## 3.4.1 Web && JS [API]
 - `slice()`| shallow copy - song.service.ts 
 - `HTMLDivElement` - wy-slider.component.ts
 - `MouseEvent` | `TouchEvent` | `instanceof` | `stopPropagation` | `preventDefault` - wy-slider.component.ts
@@ -140,7 +148,30 @@ Better Angular Study
 
 - 
 
-## 3.4 dom && JS [Note]
+## 3.4.2 Web && JS [Note]
+
+#### `Element`
+- Base class for all element objects in a `Document`
+- e.g. `HTMLElement`, `HTMLDivElement`, `HTMLAudioELement`, `SVGElement` etc
+
+#### `HTMLElement` & `HTMLDivElement`
+- `HTMLDivElement` interface extends from `HTMLElement`
+
+#### `Document` & `DOCUMENT (Angular)` & `document`
+- `Document` 
+- - Interface
+- - any web page loaded in the browser
+- - serves as an entry point into the web page's content - dom tree
+- `DOCUMENT` angular
+- - ```ts 
+    @Inject(DOCUMENT) private doc: Document,
+    ```
+- `document`
+- - ```ts 
+    declare var document: Document;
+    ```
+
+
 #### wy-player.component
 - Angular animation
 - ```html
