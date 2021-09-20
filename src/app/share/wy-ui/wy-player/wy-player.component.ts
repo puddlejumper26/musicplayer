@@ -2,7 +2,7 @@ import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { fromEvent, Subscription } from 'rxjs';
+import { fromEvent, Subscription, timer } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
@@ -193,25 +193,37 @@ export class WyPlayerComponent implements OnInit {
     // console.log('WyPlayerComponent - watchCurrentAction - CurrentActions[action] -', CurrentActions[action]);
     if(title) {
       this.controlTooltip.title = title;
-      // if(this.showPlayer === 'hide') {
-      //   this.togglePlayer('show')
-      // }else {
+      if(this.showPlayer === 'hide') {
+        this.togglePlayer('show')
+      }else {
         this.showTooltip();
-      // }
+      }
     }
     this.store$.dispatch(SetCurrentAction({ currentAction: CurrentActions.Other })); // restore the status
   }
 
-  private showTooltip() {
-    this.controlTooltip.show = true;
+
+  onAnimateDone(event: AnimationEvent) {
+    this.animating = false;
+    /*
+    * @toState === show => animation is from `hide` to `show`
+    * @toState === hide => animation is from `show` to `hide`
+    */
+  //  console.log('WyPlayerComponent - onAnimation - event.toState - ', event.toState);
+   if(event.toState === 'show' && this.controlTooltip.title) {
+     this.showTooltip();
+    }
   }
 
-  // onAnimateDone(event: AnimationEvent) {
-  //   this.animating = false;
-  //   if(event.toState === 'show' && this.controlTooltip.show) {
-  //     this.showTooltip();
-  //   }
-  // }
+  private showTooltip() {
+    this.controlTooltip.show = true;
+    timer(1500).subscribe(()=> {
+      this.controlTooltip = {
+        title: '',
+        show: false
+      }
+    })
+  }
 
   changeMode() {
     // console.log('changeMode - this.modeCount - ', this.modeCount);

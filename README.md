@@ -58,7 +58,7 @@ Better Angular Study
 - `ActivatedRouteSnapshot` | `ActivatedRouteSnapshot.paramMap` | `ActivatedRouteSnapshot.paramMap.get()` - sheet-info-resolver.service.ts
 - `this.destroy$.next() | this.destroy$.complete()` - sheet-info.component.ts
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
-- `[@showHide]` | `(@showHide.start)` | `(@showHide.done)` | `animations` | `trigger` | `state` | `style` | `transition` | `animate` - wy-player.component.ts
+- `[@showHide]` | `(@showHide.start)` | `(@showHide.done)` | `animations` | `trigger` | `state` | `style` | `transition` | `animate` | `AnimationEvent` | `AnimationEvent.toState`- wy-player.component.ts
 
 
 ## 3.1.2 Angular [Note]

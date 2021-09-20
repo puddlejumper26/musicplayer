@@ -4,7 +4,7 @@
   (onClickOutSide) = "onClickOutSide()"
   [@showHide]="showPlayer"
   (@showHide.start)="animating = true"
-  (@showHide.done)="animating = false"
+  (@showHide.done)="onAnimateDone($event)"
   (mouseenter)="togglePlayer('show')"
   (mouseleave)="togglePlayer('hide')">
     <div class="lock" (click)="isLocked = !isLocked">
