@@ -5,6 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { fromEvent, Subscription } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
+import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
 
 import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList, getCurrentAction } from 'src/app/store/selectors/player.selector';
@@ -13,7 +14,6 @@ import { PlayMode } from './player-types';
 import { Song } from 'src/app/services/data-types/common.types';
 import { findIndex, shuffle } from 'src/app/utils/array';
 import { WyPlayerPanelComponent } from './wy-player-panel/wy-player-panel.component';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CurrentActions } from 'src/app/store/reducers/player.reducer';
 
 
@@ -28,6 +28,10 @@ const modeTypes: PlayMode[] = [{
   label:'single loop'
 }];
 
+enum TipTitles {
+  Add = 'Added to the list',
+  Play = 'Start to play'
+}
 @Component({
   selector: 'app-wy-player',
   templateUrl: './wy-player.component.html',
@@ -52,6 +56,11 @@ export class WyPlayerComponent implements OnInit {
   currentSong: Song;
   duration: number;
   currentTime: number;
+
+  controlTooltip = {
+    title: '',
+    show: false
+  }
 
   showPlayer = 'hide';
   isLocked = false;
@@ -180,9 +189,29 @@ export class WyPlayerComponent implements OnInit {
   }
 
   private watchCurrentAction(action: CurrentActions) {
-    console.log('WyPlayerComponent - watchCurrentAction - CurrentActions[action] -', CurrentActions[action]);
+    const title = TipTitles[CurrentActions[action]];
+    // console.log('WyPlayerComponent - watchCurrentAction - CurrentActions[action] -', CurrentActions[action]);
+    if(title) {
+      this.controlTooltip.title = title;
+      // if(this.showPlayer === 'hide') {
+      //   this.togglePlayer('show')
+      // }else {
+        this.showTooltip();
+      // }
+    }
     this.store$.dispatch(SetCurrentAction({ currentAction: CurrentActions.Other })); // restore the status
   }
+
+  private showTooltip() {
+    this.controlTooltip.show = true;
+  }
+
+  // onAnimateDone(event: AnimationEvent) {
+  //   this.animating = false;
+  //   if(event.toState === 'show' && this.controlTooltip.show) {
+  //     this.showTooltip();
+  //   }
+  // }
 
   changeMode() {
     // console.log('changeMode - this.modeCount - ', this.modeCount);

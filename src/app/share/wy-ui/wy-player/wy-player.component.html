@@ -50,7 +50,7 @@
             <div class="ctrl">
                 <i class="volume" title="volume" (click)="toggleVolPanel($event)"></i>
                 <i [ngClass]="currentMode.type" [title]="currentMode.label" (click)="changeMode()"></i>
-                <p class="open" (click)="toggleListPanel()">
+                <p nz-tooltip [nzTooltipTitle]="controlTooltip.title" [nzVisible]="controlTooltip.show" nzOverlayClassName="tip-bg" class="open" (click)="toggleListPanel()">
                     <span></span>
                 </p>
 

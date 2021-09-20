@@ -200,10 +200,14 @@ Better Angular Study
   this.audioEl.pause();
   ```
 
-## 3.5 NgRx
+## 3.5.1 NgRx [API]
 - `createAction` | `props` - player.actions.ts
 - `createReducer` | `Action` | `on`- player.reducer.ts
 - `createSelector` | `createFeatureSelector`- player.selector.ts
+
+## 3.5.2 NgRx [Note]
+#### Example
+- [Add currentAction](https://github.com/puddlejumper26/musicplayer/commit/5ebdf2487a7d90201b40a28e8fa6bdb377f35db8)
 
 ## 3.6 Ant Design Angular | BetterScroll
 - `[nzSuffix]`| `nz-input-group` | `nz-layout` | `nz-header` | `nz-menu` | `nzTheme` | `nz-menu-item` | `nz-submenu` | `nz-icon` | `nz-footer` | `nzMode` | `nzSuffixIcon` | `nz-Input` - app.component.html
@@ -213,6 +217,7 @@ Better Angular Study
 - `nzModalservice.confirm` - wy-player.component.ts
 - `nzButtonStyle` | `<nz-radio-group>` | `nz-radio-button` | `<nz-pagination>` | `[nzPageSize]` | `[nzPageIndex]` | `[nzTotal]` | `(nzPageIndexChange)` - sheet-list.component.html
 - `<nz-button-group>` | `nz-button` | `nzTheme` | `<nz-tag>` | `[nzData]` | `[nzFrontPagination]` | `nzBordered` | `nzNoResult` | `nzWidth` - sheet-info.component.html 
+- `nz-tooltip` | `[nzTooltipTitle]` | `[nzVisible]` | `nzOverlayClassName` - wy-player.component.html
 
 # 4.0 Commands
 - `ng g c *** -s -t -c=OnPush -v=None` // -s -t -> inline the css and html
