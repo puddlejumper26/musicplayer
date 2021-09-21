@@ -1,5 +1,26 @@
 <h1 align="center">Music Player</h1>
 
+# Category
+[1.0 Purpose](https://github.com/puddlejumper26/musicplayer#10-purpose)
+[2.0 Environment & Installation](https://github.com/puddlejumper26/musicplayer#20-enviroment--installation)
+    - [2.1 Environment](https://github.com/puddlejumper26/musicplayer#21-environment)
+    - [2.2 Installation](https://github.com/puddlejumper26/musicplayer#22-installation)
+[3.0 API & Note](https://github.com/puddlejumper26/musicplayer#30-api--note)
+    - [3.1.1 Angular [API]](https://github.com/puddlejumper26/musicplayer#311-angular-api)
+    - [3.1.2 Angular [Note]](https://github.com/puddlejumper26/musicplayer#312-angular-note)
+    - [3.2.1 Angular Material CDK [API]](https://github.com/puddlejumper26/musicplayer#321-angular-material-cdk-api)
+    - [3.2.1 Angular Material CDK [Note]](https://github.com/puddlejumper26/musicplayer#321-angular-material-cdk-note)
+    - [3.3.1 rxjs [API]](https://github.com/puddlejumper26/musicplayer#331-rxjs-api)
+    - [3.3.2 rxjs [Note]](https://github.com/puddlejumper26/musicplayer#332-rxjs-note)
+    - [3.4.1 Web && JS [API]](https://github.com/puddlejumper26/musicplayer#341-web--js-api)
+    - [3.4.2 Web && JS [Note]](https://github.com/puddlejumper26/musicplayer#342-web--js-note)
+    - [3.5.1 NgRx [API]](https://github.com/puddlejumper26/musicplayer#351-ngrx-api)
+    - [3.5.2 NgRx [Note]](https://github.com/puddlejumper26/musicplayer#352-ngrx-note)
+    - [3.6 Ant Design Angular | BetterScroll](https://github.com/puddlejumper26/musicplayer#36-ant-design-angular--betterscroll)
+[4.0 Commands](https://github.com/puddlejumper26/musicplayer#40-commands)
+[5.0 Demo](https://github.com/puddlejumper26/musicplayer#50-demo)
+
+
 # 1.0 Purpose 
 Better Angular Study
 
@@ -212,7 +233,7 @@ Better Angular Study
 ## 3.5.2 NgRx [Note]
 #### Example
 - [Add currentAction](https://github.com/puddlejumper26/musicplayer/commit/5ebdf2487a7d90201b40a28e8fa6bdb377f35db8)
-- [Add member]()
+- [Add member](https://github.com/puddlejumper26/musicplayer/commit/57002e31bd210fec9a0caab6e4c6c6171acf07a2)
   - **member.actions.ts**
   - ```ts
     import { createAction, props } from "@ngrx/store";
