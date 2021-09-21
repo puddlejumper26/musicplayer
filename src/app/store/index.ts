@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { playerReducer } from './reducers/player.reducer';
 import { environment } from 'src/environments/environment';
+import { memberReducer } from './reducers/member.reducer';
 
 /**
  *  This module could be deleted, just import all these dependencies into AppModule.,
@@ -13,7 +15,7 @@ import { environment } from 'src/environments/environment';
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({player: playerReducer}, {
+    StoreModule.forRoot({player: playerReducer, member: memberReducer}, {
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true

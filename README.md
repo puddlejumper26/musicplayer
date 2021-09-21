@@ -212,6 +212,102 @@ Better Angular Study
 ## 3.5.2 NgRx [Note]
 #### Example
 - [Add currentAction](https://github.com/puddlejumper26/musicplayer/commit/5ebdf2487a7d90201b40a28e8fa6bdb377f35db8)
+- [Add member]()
+  - **member.actions.ts**
+  - ```ts
+    import { createAction, props } from "@ngrx/store";
+    import { ModalTypes } from "../reducers/member.reducer";
+
+    export const SetModalVisible = createAction('[member] Set modal visible', props<{ modalVisible: boolean }>());
+    export const SetModalType = createAction('[member] Set modal type', props<{ modalType: ModalTypes }>());
+    ```
+  - **member.reducer.ts**
+  - ```ts
+    import { SetModalVisible, SetModalType } from './../actions/member.actions';
+    import { Action, createReducer, on } from "@ngrx/store";
+
+    // pop up window types
+    export enum ModalTypes {
+      Register = 'register',
+      LoginByPhone = 'loginbyphone',
+      Share = 'share',
+      Like = 'like',
+      Default = 'default',
+    }
+
+    export type MemberState = {
+        modalVisible: boolean;
+        modalType: ModalTypes
+    }
+
+    export const initialState: MemberState = {
+      modalVisible: false,
+      modalType: ModalTypes.Default
+    }
+
+    // register 6 actions
+    const reducer = createReducer(
+        initialState,
+        on(SetModalVisible, (state, {modalVisible}) => ({...state, modalVisible})),
+        on(SetModalType, (state, {modalType}) => ({...state, modalType}))
+    )
+
+    export function memberReducer(state: MemberState, action: Action) {
+        return reducer(state, action);
+    }
+    ```
+  - **member.selector.ts**
+  - ```ts
+    import { createFeatureSelector, createSelector } from '@ngrx/store';
+
+    import { MemberState } from '../reducers/member.reducer';
+
+    const selectMemberStates = (state: MemberState) => state;
+
+    // to obtain the member
+    /**
+    * @member has to be identical with the index.ts ->     StoreModule.forRoot({member: memberReducer},
+    */
+    export const getMember = createFeatureSelector<MemberState>('member');
+
+    export const getModalVisible = createSelector(selectMemberStates, (state: MemberState) => state.modalVisible);
+    export const getModalType = createSelector(selectMemberStates, (state: MemberState) => state.modalType);
+    ```
+  - **index.ts (AppStoreModule)**
+  - ```ts
+    @NgModule({
+      declarations: [],
+      imports: [
+        CommonModule,
+        StoreModule.forRoot({member: memberReducer}, {
+          runtimeChecks: {
+            strictStateImmutability: true,
+            strictActionImmutability: true
+          }
+        }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+      ]
+    })
+    
+    export class AppStoreModule {}
+    ```
+  - **Application in the component**
+  - ```ts
+    import { AppStoreModule } from 'src/app/store';
+    import { getMember, getModalVisible, getModalType } from './../../../../store/selectors/member.selector';
+
+    constructor(
+      private store$: Store<AppStoreModule>
+    ) {
+      const appStore$ = this.store$.pipe(select(getMember));
+      appStore$.pipe(select(getModalVisible)).subscribe(visib => {
+        console.log('WyLayerModalComponent - constructore - visib - ', visib);
+      });
+      appStore$.pipe(select(getModalType)).subscribe(type => {
+        console.log('WyLayerModalComponent - constructore - type - ', type);
+      })
+    }
+    ```
 
 ## 3.6 Ant Design Angular | BetterScroll
 - `[nzSuffix]`| `nz-input-group` | `nz-layout` | `nz-header` | `nz-menu` | `nzTheme` | `nz-menu-item` | `nz-submenu` | `nz-icon` | `nz-footer` | `nzMode` | `nzSuffixIcon` | `nz-Input` - app.component.html
