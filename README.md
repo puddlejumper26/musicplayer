@@ -165,7 +165,7 @@ Better Angular Study
 - `Date.now()` | `clearTimeout` - wy-lyric.ts
 - `(focus)` | `(blur)` - wy-search.component.html
 - `(click)` | `(mousedown)` - wy-search-panel.component.html
-- wy-player.component.html
+- `KeyboardEvent` - wy-layer-panel.component.ts
 
 - 
 
