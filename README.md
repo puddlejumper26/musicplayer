@@ -132,8 +132,28 @@ Better Angular Study
     transition('hide=>show', [animate('0.1s')])
   ])]
 ``` 
-- 
--  
+
+#### Renderer2
+-  ```ts
+   constructor(private rd: Renderer2){}
+   ngAfterViewInit(): void {
+    this.rd.listen('window','resize', () => {
+      this.keepCenter(modal, modalSize)
+    })
+   }
+   ngOnChanges(changes: SimpleChanges): void {
+    if(changes['bindFlag'] && !changes['bindFlag'].firstChange) {
+      if(this.bindFlag) {
+        this.handleClick = this.rd.listen(this.doc, 'click', evt => {
+          const target = evt.target;
+          const isContain = this.el.nativeElement.contains(evt.target);
+          if(!isContain) {
+            this.onClickOutSide.emit(target);
+          }
+        });
+      }
+    }
+  }
 
 ## 3.2.1 Angular Material CDK [API]
 - `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`hasBackdrop, positionStrategy, scrollStrategy`| `this.overlay.create().backdropClick()` |`this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts

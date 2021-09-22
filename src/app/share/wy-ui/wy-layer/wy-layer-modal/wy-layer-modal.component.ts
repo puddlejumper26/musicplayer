@@ -1,5 +1,5 @@
 import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher } from '@angular/cdk/overlay';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { AppStoreModule } from 'src/app/store';
@@ -30,7 +30,8 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
     private elementRef: ElementRef,
     private overlayKeyboardDispatcher: OverlayKeyboardDispatcher,
     private cdr: ChangeDetectorRef,
-    private batchActionsServe: BatchActionsService
+    private batchActionsServe: BatchActionsService,
+    private rd: Renderer2
   ) {
     const appStore$ = this.store$.pipe(select(getMember));
     appStore$.pipe(select(getModalVisible)).subscribe(visib => {
@@ -48,7 +49,10 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
     const modal = this.modalRef.nativeElement;
     const modalSize = this.getHideDomSize(modal);
     // console.log('WyLayerModalComponent - modalSize -', modalSize);
-    this.keepCenter(modal, modalSize);
+    this.keepCenter(modal, modalSize)
+    this.rd.listen('window','resize', () => {
+      this.keepCenter(modal, modalSize)
+    })
   }
 
   private getHideDomSize(dom: HTMLElement) {
