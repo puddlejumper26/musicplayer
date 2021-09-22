@@ -1,12 +1,15 @@
+import { SetModalType, SetModalVisible } from './actions/member.actions';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import { CurrentActions, PlayState } from 'src/app/store/reducers/player.reducer';
 import { AppStoreModule } from 'src/app/store';
 import { Song } from '../services/data-types/common.types';
+import { getMember } from './selectors/member.selector';
 import { getPlayer } from './selectors/player.selector';
 import { SetCurrentIndex, SetPlayList, SetSongList, SetCurrentAction } from './actions/player.actions';
 import { findIndex, shuffle } from '../utils/array';
+import { MemberState, ModalTypes } from './reducers/member.reducer';
 
 @Injectable({
   providedIn: AppStoreModule
@@ -14,11 +17,13 @@ import { findIndex, shuffle } from '../utils/array';
 export class BatchActionsService {
 
   private playerState: PlayState;
+  private memberState: MemberState
 
   constructor(
     private store$: Store<AppStoreModule>,
     ) {
     this.store$.pipe(select(getPlayer)).subscribe( res => this.playerState = res);
+    this.store$.pipe(select(getMember)).subscribe( res => this.memberState = res);
   }
 
   //playList
@@ -109,5 +114,12 @@ export class BatchActionsService {
     this.store$.dispatch(SetPlayList({ playList: [] }));
     this.store$.dispatch(SetCurrentIndex({ currentIndex: -1 }));
     this.store$.dispatch(SetCurrentAction({ currentAction: CurrentActions.Clear }));
+  }
+
+  // membership login tab show | hide
+  // default is to show
+  controlModal(visible = true, modalType = ModalTypes.Default) {
+    this.store$.dispatch(SetModalType({ modalType }));
+    this.store$.dispatch(SetModalVisible({ modalVisible: visible }));
   }
 }

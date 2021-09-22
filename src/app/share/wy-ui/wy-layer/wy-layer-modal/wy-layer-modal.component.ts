@@ -1,5 +1,5 @@
 import { Overlay, OverlayRef, OverlayKeyboardDispatcher } from '@angular/cdk/overlay';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { AppStoreModule } from 'src/app/store';
@@ -16,7 +16,7 @@ export class WyLayerModalComponent implements OnInit {
 
   showModal = false;
 
-  private visible: boolean;
+  private visible = false;
   private currentModalType = ModalTypes.Default;
   private overlayRef: OverlayRef;
 
@@ -25,6 +25,7 @@ export class WyLayerModalComponent implements OnInit {
     private overlay: Overlay,
     private elementRef: ElementRef,
     private overlayKeyboardDispatcher: OverlayKeyboardDispatcher,
+    private cdr: ChangeDetectorRef
   ) {
     const appStore$ = this.store$.pipe(select(getMember));
     appStore$.pipe(select(getModalVisible)).subscribe(visib => {
@@ -65,6 +66,7 @@ export class WyLayerModalComponent implements OnInit {
   }
 
   private handleVisibleChange(visib: boolean) {
+    // console.log('WyLayerModalComponent - handleVisibleChange - visib -', visib)
     if(visib){
       this.showModal = true;
       this.overlayKeyboardDispatcher.add(this.overlayRef);
@@ -72,5 +74,6 @@ export class WyLayerModalComponent implements OnInit {
       this.showModal = false;
       this.overlayKeyboardDispatcher.remove(this.overlayRef);
     }
+    this.cdr.markForCheck();
   }
 }
