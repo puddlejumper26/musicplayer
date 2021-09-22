@@ -3,6 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorR
 import { Store, select } from '@ngrx/store';
 
 import { AppStoreModule } from 'src/app/store';
+import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { ModalTypes } from 'src/app/store/reducers/member.reducer';
 import { getMember, getModalVisible, getModalType } from './../../../../store/selectors/member.selector';
 
@@ -25,7 +26,8 @@ export class WyLayerModalComponent implements OnInit {
     private overlay: Overlay,
     private elementRef: ElementRef,
     private overlayKeyboardDispatcher: OverlayKeyboardDispatcher,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private batchActionsServe: BatchActionsService
   ) {
     const appStore$ = this.store$.pipe(select(getMember));
     appStore$.pipe(select(getModalVisible)).subscribe(visib => {
@@ -49,7 +51,10 @@ export class WyLayerModalComponent implements OnInit {
   }
 
   private keydownListener(evt: KeyboardEvent){
-
+    console.log('WyLayerModalComponent - keydownListener - evt -', evt);
+    if(evt.key === 'Escape'){
+      this.hide();
+    }
   }
 
   private watchModalVisible(visib: boolean) {
@@ -75,5 +80,9 @@ export class WyLayerModalComponent implements OnInit {
       this.overlayKeyboardDispatcher.remove(this.overlayRef);
     }
     this.cdr.markForCheck();
+  }
+
+  hide() {
+    this.batchActionsServe.controlModal(false);
   }
 }

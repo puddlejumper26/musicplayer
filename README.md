@@ -171,6 +171,13 @@ Better Angular Study
 
 ## 3.4.2 Web && JS [Note]
 
+#### `KeyboardEvent` 
+- ```ts
+  private keydownListener(evt: KeyboardEvent){
+    if(evt.key === 'Escape'){
+      this.hide();
+    }
+  }
 #### `Element`
 - Base class for all element objects in a `Document`
 - e.g. `HTMLElement`, `HTMLDivElement`, `HTMLAudioELement`, `SVGElement` etc
