@@ -183,6 +183,7 @@ Better Angular Study
   }
   ```
 #### BlockScrollStrategy
+- [【WyLayerModal】block scroll of homepage when modal is open](https://github.com/puddlejumper26/musicplayer/commit/138faa357fd29902b2cce7cfc45ad82e553745f1)
 - ```ts
   private overlayRef: OverlayRef;
   private scrollStrategy: BlockScrollStrategy;
@@ -261,6 +262,7 @@ Better Angular Study
 - `document`
 - - ```ts 
     declare var document: Document;
+    window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth;
     ```
 
 

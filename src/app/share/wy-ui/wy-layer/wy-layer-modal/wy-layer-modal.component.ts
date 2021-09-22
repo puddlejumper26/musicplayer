@@ -1,5 +1,5 @@
 import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher } from '@angular/cdk/overlay';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { AppStoreModule } from 'src/app/store';
@@ -13,7 +13,7 @@ import { getMember, getModalVisible, getModalType } from './../../../../store/se
   styleUrls: ['./wy-layer-modal.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WyLayerModalComponent implements OnInit {
+export class WyLayerModalComponent implements OnInit, AfterViewInit {
 
   showModal = false;
 
@@ -21,6 +21,8 @@ export class WyLayerModalComponent implements OnInit {
   private currentModalType = ModalTypes.Default;
   private overlayRef: OverlayRef;
   private scrollStrategy: BlockScrollStrategy;
+
+  @ViewChild('modalContainer', { static: false }) private modalRef: ElementRef;
 
   constructor(
     private store$: Store<AppStoreModule>,
@@ -40,6 +42,35 @@ export class WyLayerModalComponent implements OnInit {
       this.watchModalType(type);
     });
     this.scrollStrategy = this.overlay.scrollStrategies.block();
+  }
+
+  ngAfterViewInit(): void {
+    const modal = this.modalRef.nativeElement;
+    const modalSize = this.getHideDomSize(modal);
+    // console.log('WyLayerModalComponent - modalSize -', modalSize);
+    this.keepCenter(modal, modalSize);
+  }
+
+  private getHideDomSize(dom: HTMLElement) {
+    // console.log('WyLayerModalComponent - getHideDomSize - dom -', dom);
+    return {
+      w: dom.offsetWidth,
+      h: dom.offsetHeight
+    }
+  }
+
+  private keepCenter(modal: HTMLElement, size: {w: number, h: number}) {
+    const left = (this.getWindowSize().w - size.w) / 2;
+    const top = (this.getWindowSize().h - size.h) / 2;
+    modal.style.left = left + 'px';
+    modal.style.top = top + 'px';
+  }
+
+  private getWindowSize() {
+    return {
+      w: window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth,
+      h: window.innerHeight || document.documentElement.clientHeight || document.body.offsetHeight
+    }
   }
 
   ngOnInit() {
