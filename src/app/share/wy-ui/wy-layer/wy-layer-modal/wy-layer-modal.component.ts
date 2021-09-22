@@ -1,4 +1,4 @@
-import { Overlay, OverlayRef, OverlayKeyboardDispatcher } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher } from '@angular/cdk/overlay';
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
@@ -20,6 +20,7 @@ export class WyLayerModalComponent implements OnInit {
   private visible = false;
   private currentModalType = ModalTypes.Default;
   private overlayRef: OverlayRef;
+  private scrollStrategy: BlockScrollStrategy;
 
   constructor(
     private store$: Store<AppStoreModule>,
@@ -37,7 +38,8 @@ export class WyLayerModalComponent implements OnInit {
     appStore$.pipe(select(getModalType)).subscribe(type => {
       // console.log('WyLayerModalComponent - constructore - type - ', type);
       this.watchModalType(type);
-    })
+    });
+    this.scrollStrategy = this.overlay.scrollStrategies.block();
   }
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class WyLayerModalComponent implements OnInit {
   }
 
   private keydownListener(evt: KeyboardEvent){
-    console.log('WyLayerModalComponent - keydownListener - evt -', evt);
+    // console.log('WyLayerModalComponent - keydownListener - evt -', evt);
     if(evt.key === 'Escape'){
       this.hide();
     }
@@ -74,9 +76,11 @@ export class WyLayerModalComponent implements OnInit {
     // console.log('WyLayerModalComponent - handleVisibleChange - visib -', visib)
     if(visib){
       this.showModal = true;
+      this.scrollStrategy.enable();
       this.overlayKeyboardDispatcher.add(this.overlayRef);
     }else {
       this.showModal = false;
+      this.scrollStrategy.disable();
       this.overlayKeyboardDispatcher.remove(this.overlayRef);
     }
     this.cdr.markForCheck();

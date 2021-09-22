@@ -138,8 +138,71 @@ Better Angular Study
 ## 3.2.1 Angular Material CDK [API]
 - `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`hasBackdrop, positionStrategy, scrollStrategy`| `this.overlay.create().backdropClick()` |`this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
 - `entryComponents` - wy-search.module.ts
+- `private scrollStrategy: BlockScrollStrategy` | `this.scrollStrategy = overlay.scrollStrategies.block()` | `this.scrollStrategy.enable()` | `this.scrollStrategy.disable()` - wy-layer-modal.component.ts
 
 ## 3.2.1 Angular Material CDK [Note]
+
+#### `Overlay`
+- ```ts
+  private overlayRef: OverlayRef;
+  constructor(private overlay: Overlay, private viewContainerRef: ViewContainerRef) {}
+  private showOverlayPanel() {
+    this.hideOverlayPanel();
+
+    const positionStrategy = this.overlay
+                              .position()
+                              .flexibleConnectedTo(this.defaultRef)
+                              .withPositions([{
+                                originX: 'start', // attach host bottom left
+                                originY: 'bottom', // attach host bottom left
+                                overlayX: 'start', // attach ele top left
+                                overlayY: 'top' // attach ele top left
+                              }])
+                              .withLockedPosition(true);
+
+    this.overlayRef = this.overlay.create({
+      // hasBackdrop: true, // create a layer when overlay exists, for control click then hide
+      positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(), //needs to use with withLockedPosition()
+    });
+
+    const panelProtal = new ComponentPortal(WySearchPanelComponent, this.viewContainerRef);
+    const panelRef = this.overlayRef.attach(panelProtal);
+    panelRef.instance.searchResult = this.searchResult;
+
+    // check whether the extra layer is clicked
+    this.overlayRef.backdropClick().subscribe(() => {
+      this.hideOverlayPanel()
+    })
+  }
+
+  private hideOverlayPanel() {
+    if(this.overlayRef && this.overlayRef.hasAttached){
+      this.overlayRef.dispose();
+    }
+  }
+  ```
+#### BlockScrollStrategy
+- ```ts
+  private overlayRef: OverlayRef;
+  private scrollStrategy: BlockScrollStrategy;
+
+  constructor(private overlay: Overlay) {
+    this.scrollStrategy = this.overlay.scrollStrategies.block();
+  }
+  ngOnInit() {
+    this.createOverlay();
+  }
+
+  private createOverlay() {
+    this.overlayRef = this.overlay.create();
+    this.overlayRef.overlayElement.appendChild(this.elementRef.nativeElement);
+    this.overlayRef.keydownEvents().subscribe(e => this.keydownListener(e));
+  }
+  this.scrollStrategy.enable();      
+  this.scrollStrategy.disable();
+  ```
+
 ## 3.3.1 rxjs [API]
 - `forkJoin` | `combineLatest` - home-resolve.service.ts
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
@@ -172,6 +235,7 @@ Better Angular Study
 ## 3.4.2 Web && JS [Note]
 
 #### `KeyboardEvent` 
+- [【WyLayerModal】hide modal when cross or ESCAPE](https://github.com/puddlejumper26/musicplayer/commit/e1c2d72d6f71c133ed8315e44821ba86f5607b6a)
 - ```ts
   private keydownListener(evt: KeyboardEvent){
     if(evt.key === 'Escape'){
