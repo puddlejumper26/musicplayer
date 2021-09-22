@@ -134,7 +134,7 @@ Better Angular Study
 ``` 
 
 #### Renderer2
-- [【WyLayerModal】responsive modal position when center](https://github.com/puddlejumper26/musicplayer/commit/81aa3fa525be1ba3ab68cb67e7179d8d2dc56749)
+- [【WyLayerModal】responsive modal position when center](https://github.com/puddlejumper26/musicplayer/commit/81aa3fa525be1ba3ab68cb67e7179d8d2dc56749) | [【WyLayerModal】remove listener of resize](https://github.com/puddlejumper26/musicplayer/commit/3e656d59135f88db896a00a3b1fe506c72184a4a)
 -  ```ts
   private resizeHandler: () => void; // check the listen method its return to define the type here
 
@@ -279,14 +279,35 @@ Better Angular Study
 #### `HTMLElement` & `HTMLDivElement`
 - `HTMLDivElement` interface extends from `HTMLElement`
 
-#### `Document` & `DOCUMENT (Angular)` & `document`
+#### `Document` & `DOCUMENT (Angular)` & `window` & `Window & `document`
 - `Document` 
 - - Interface
 - - any web page loaded in the browser
 - - serves as an entry point into the web page's content - dom tree
-- `DOCUMENT` angular
+- `DOCUMENT` (angular) | `window` | `Window`
+- []
 - - ```ts 
-    @Inject(DOCUMENT) private doc: Document,
+    import { WINDOW } from 'src/app/services/services.module';
+    constrcutor(@Inject(DOCUMENT) private doc: Document, @Inject(WINDOW) private win: Window,){}
+    w: this.win.innerWidth || this.doc.documentElement.clientWidth || this.doc.body.offsetWidth;
+    ```
+    ```ts
+    export const WINDOW = new InjectionToken('WindowToken');
+    @NgModule({
+      providers: [
+        { provide: API_CONFIG, useValue:'http://localhost:3000/'},
+        {
+          provide: WINDOW,
+          useFactory(platformId: Object): Window | Object {
+            // whether it is a browser environment
+            return isPlatformBrowser(platformId) ? window : {};
+          },
+          //dependency , PLATFORM_ID is constant, whether the platform is server end or user end
+          deps: [PLATFORM_ID]
+        }
+      ]
+    })
+    export class ServicesModule { }
     ```
 - `document`
 - [【WyLayerModal】center modal](https://github.com/puddlejumper26/musicplayer/commit/0d9c0f60b6ec5b80c8210acb4ad4edab308a3a88)

@@ -1,7 +1,9 @@
 import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher } from '@angular/cdk/overlay';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2, Inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
+import { WINDOW } from 'src/app/services/services.module';
 import { AppStoreModule } from 'src/app/store';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { ModalTypes } from 'src/app/store/reducers/member.reducer';
@@ -26,6 +28,8 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   @ViewChild('modalContainer', { static: false }) private modalRef: ElementRef;
 
   constructor(
+    @Inject(DOCUMENT) private doc: Document,
+    @Inject(WINDOW) private win: Window,
     private store$: Store<AppStoreModule>,
     private overlay: Overlay,
     private elementRef: ElementRef,
@@ -77,8 +81,10 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
 
   private getWindowSize() {
     return {
-      w: window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth,
-      h: window.innerHeight || document.documentElement.clientHeight || document.body.offsetHeight
+      // w: window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth,
+      // h: window.innerHeight || document.documentElement.clientHeight || document.body.offsetHeight
+      w: this.win.innerWidth || this.doc.documentElement.clientWidth || this.doc.body.offsetWidth,
+      h: this.win.innerHeight || this.doc.documentElement.clientHeight || this.doc.body.offsetHeight
     }
   }
 
