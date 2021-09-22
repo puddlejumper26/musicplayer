@@ -134,14 +134,20 @@ Better Angular Study
 ``` 
 
 #### Renderer2
+- [【WyLayerModal】responsive modal position when center](https://github.com/puddlejumper26/musicplayer/commit/81aa3fa525be1ba3ab68cb67e7179d8d2dc56749)
 -  ```ts
-   constructor(private rd: Renderer2){}
-   ngAfterViewInit(): void {
-    this.rd.listen('window','resize', () => {
+  private resizeHandler: () => void; // check the listen method its return to define the type here
+
+  constructor(private rd: Renderer2){}
+  ngAfterViewInit(): void {
+    this.listenResizeToCenter();
+  }
+  private listenResizeToCenter() {
+    this.resizeHandler = this.rd.listen('window','resize', () => {
       this.keepCenter(modal, modalSize)
     })
-   }
-   ngOnChanges(changes: SimpleChanges): void {
+  }
+  ngOnChanges(changes: SimpleChanges): void {
     if(changes['bindFlag'] && !changes['bindFlag'].firstChange) {
       if(this.bindFlag) {
         this.handleClick = this.rd.listen(this.doc, 'click', evt => {
@@ -153,6 +159,9 @@ Better Angular Study
         });
       }
     }
+  }
+  ngOnDestroy() {
+    this.resizeHandler(); // way to remove the listener
   }
 
 ## 3.2.1 Angular Material CDK [API]
@@ -280,6 +289,7 @@ Better Angular Study
     @Inject(DOCUMENT) private doc: Document,
     ```
 - `document`
+- [【WyLayerModal】center modal](https://github.com/puddlejumper26/musicplayer/commit/0d9c0f60b6ec5b80c8210acb4ad4edab308a3a88)
 - - ```ts 
     declare var document: Document;
     window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth;

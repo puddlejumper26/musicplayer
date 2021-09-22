@@ -21,6 +21,7 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   private currentModalType = ModalTypes.Default;
   private overlayRef: OverlayRef;
   private scrollStrategy: BlockScrollStrategy;
+  private resizeHandler: () => void; // check the listen method its return to define the type here
 
   @ViewChild('modalContainer', { static: false }) private modalRef: ElementRef;
 
@@ -46,11 +47,15 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.listenResizeToCenter();
+  }
+
+  private listenResizeToCenter() {
     const modal = this.modalRef.nativeElement;
     const modalSize = this.getHideDomSize(modal);
     // console.log('WyLayerModalComponent - modalSize -', modalSize);
     this.keepCenter(modal, modalSize)
-    this.rd.listen('window','resize', () => {
+    this.resizeHandler = this.rd.listen('window','resize', () => {
       this.keepCenter(modal, modalSize)
     })
   }
@@ -113,10 +118,12 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
       this.showModal = true;
       this.scrollStrategy.enable();
       this.overlayKeyboardDispatcher.add(this.overlayRef);
+      this.listenResizeToCenter();
     }else {
       this.showModal = false;
       this.scrollStrategy.disable();
       this.overlayKeyboardDispatcher.remove(this.overlayRef);
+      this.resizeHandler(); // to remove the listener
     }
     this.cdr.markForCheck();
   }
