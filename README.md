@@ -80,9 +80,23 @@ Better Angular Study
 - `this.destroy$.next() | this.destroy$.complete()` - sheet-info.component.ts
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
 - `[@showHide]` | `(@showHide.start)` | `(@showHide.done)` | `animations` | `trigger` | `state` | `style` | `transition` | `animate` | `AnimationEvent` | `AnimationEvent.toState`- wy-player.component.ts
+- `[ngSwitch]` | `*ngSwitchCase` | `select` | `*ngSwitchDefault` - wy-layer-modal.component.html
 
 
 ## 3.1.2 Angular [Note]
+
+#### `ngSwitch`
+- []()
+- ```html
+  <ng-container [ngSwitch]="currentModalType">
+    <ng-container *ngSwitchCase="'loginByPhone'">
+      <ng-content select="[name=login]"></ng-content>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <ng-content></ng-content>
+    </ng-container>
+  </ng-container>
+  ```
 
 #### `HTMLElement` & `nativeElement`
 - `nativeElement` - single Property of ElementRef
@@ -172,7 +186,7 @@ Better Angular Study
 ## 3.2.1 Angular Material CDK [Note]
 
 #### `DragDropModule`
-- []()
+- [【WyLayerModal】drag and drop function to modal Angular CDK](https://github.com/puddlejumper26/musicplayer/commit/7c3a5f94e24e0be0b6c3e3899b8571dcdd6b780f)
 - ```html
   <div class="m-layer" [@showHide]="showModal" #modalContainer cdkDrag cdkDragBoundary=".cdk-overlay-container">
     <div class="zbar" cdkDragHandle>

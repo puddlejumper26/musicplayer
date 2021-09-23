@@ -3,6 +3,16 @@
   <div class="zbar" cdkDragHandle>
     <div class="zttl f-thide">Title</div>
   </div>
+
+  <ng-container [ngSwitch]="currentModalType">
+    <ng-container *ngSwitchCase="'loginByPhone'">
+      <ng-content select="[name=login]"></ng-content>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <ng-content></ng-content>
+    </ng-container>
+  </ng-container>
+
   <ng-content></ng-content>
   <div class="zcls" title="Close" (click)="hide()"></div>
 </div>
