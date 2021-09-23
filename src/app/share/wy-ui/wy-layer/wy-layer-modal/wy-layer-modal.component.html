@@ -1,5 +1,6 @@
-<div class="m-layer" [style.visibility]="showModal ? 'visible' : 'hidden'" #modalContainer>
-  <div class="zbar">
+<!-- <div class="m-layer" [style.visibility]="showModal ? 'visible' : 'hidden'" #modalContainer> -->
+<div class="m-layer" [@showHide]="showModal" #modalContainer>
+    <div class="zbar">
     <div class="zttl f-thide">Title</div>
   </div>
   <ng-content></ng-content>

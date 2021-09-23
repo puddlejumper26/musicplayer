@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher, OverlayContainer } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2, Inject } from '@angular/core';
@@ -13,11 +14,16 @@ import { getMember, getModalVisible, getModalType } from './../../../../store/se
   selector: 'app-wy-layer-modal',
   templateUrl: './wy-layer-modal.component.html',
   styleUrls: ['./wy-layer-modal.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [trigger('showHide', [
+    state('show', style({ transform: 'scale(1)', opacity: 1})),
+    state('hide', style({ transform: 'scale(0)', opacity: 0})),
+    transition('show <=> hide', animate('0.1s')),
+  ])],
 })
 export class WyLayerModalComponent implements OnInit, AfterViewInit {
 
-  showModal = false;
+  showModal = 'hide';
 
   private visible = false;
   private currentModalType = ModalTypes.Default;
@@ -126,13 +132,13 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   private handleVisibleChange(visib: boolean) {
     // console.log('WyLayerModalComponent - handleVisibleChange - visib -', visib)
     if(visib){
-      this.showModal = true;
+      this.showModal = 'show';
       this.scrollStrategy.enable();
       this.overlayKeyboardDispatcher.add(this.overlayRef);
       this.listenResizeToCenter();
       this.changePointerEvents('auto');
     }else {
-      this.showModal = false;
+      this.showModal = 'hide';
       this.scrollStrategy.disable();
       this.overlayKeyboardDispatcher.remove(this.overlayRef);
       this.resizeHandler(); // to remove the listener

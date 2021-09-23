@@ -172,7 +172,7 @@ Better Angular Study
 ## 3.2.1 Angular Material CDK [Note]
 
 #### `Overlay`
-- []
+- [【WyLayerModal】close click event on background when modal is open](https://github.com/puddlejumper26/musicplayer/commit/00f3f0cfb1c328a9ad50bc9345e6214e9529ab97) | [【WyLayerModal-NGRX】panel show|hide logics through NGRX](https://github.com/puddlejumper26/musicplayer/commit/892020cefe6d4a14300309d976a33b8bbe98f0b9)
 - ```ts
   private overlayRef: OverlayRef;
   private overlayContainerEl: HTMLElement;
