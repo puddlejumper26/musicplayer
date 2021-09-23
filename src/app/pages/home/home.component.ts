@@ -14,6 +14,7 @@ import { PlayState } from 'src/app/store/reducers/player.reducer';
 import { getPlayer } from 'src/app/store/selectors/player.selector';
 import { SetSongList, SetPlayList, SetCurrentIndex, SetPlayMode } from './../../store/actions/player.actions';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
+import { ModalTypes } from 'src/app/store/reducers/member.reducer';
 
 const initPlayMode: PlayMode = {
   type: 'loop',
@@ -99,6 +100,6 @@ export class HomeComponent implements OnInit {
   }
 
   openModal() {
-    this.batchActionsServe.controlModal()
+    this.batchActionsServe.controlModal(true, ModalTypes.Default)
   }
 }
