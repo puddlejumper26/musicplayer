@@ -1,3 +1,4 @@
+import { ModalTypes } from './store/reducers/member.reducer';
 import { isEmptyObject } from 'src/app/utils/tool';
 import { Component } from '@angular/core';
 
@@ -49,5 +50,9 @@ export class AppComponent {
       })
     }
     return result;
+  }
+
+  onChangeModalType(type = ModalTypes.Default) {
+    console.log('AppComponent - onChangeModalType - type -', type);
   }
 }
