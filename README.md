@@ -115,8 +115,7 @@ Better Angular Study
   ```
 #### wy-player.component.ts
 - animation
-- [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d) | [【Player-ShowHide】isLocked logics for lock](https://github.com/puddlejumper26/musicplayer/commit/ddccd0d57874393f90f47039e027567e166a2073) | [【Player-ShowHide】avoiding shaking when mouseenter | mouseleave](https://github.com/puddlejumper26/musicplayer/commit/13c36248f85ef6dcefa2dcf746770f5b22caae3e)
-
+- [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d) | [【Player-ShowHide】isLocked logics for lock](https://github.com/puddlejumper26/musicplayer/commit/ddccd0d57874393f90f47039e027567e166a2073) | [【Player-ShowHide】avoiding shaking when mouseenter | mouseleave](https://github.com/puddlejumper26/musicplayer/commit/13c36248f85ef6dcefa2dcf746770f5b22caae3e) | [【WyLayerModal】animation show | hide modal](https://github.com/puddlejumper26/musicplayer/commit/32f40b34e1ec770aefb63b8ca832dd69f31e5881)
 ```ts
 -----html
   [@showHide]="showPlayer"
@@ -168,8 +167,26 @@ Better Angular Study
 - `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`hasBackdrop, positionStrategy, scrollStrategy`| `this.overlay.create().backdropClick()` |`this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
 - `entryComponents` - wy-search.module.ts
 - `private scrollStrategy: BlockScrollStrategy` | `this.scrollStrategy = overlay.scrollStrategies.block()` | `this.scrollStrategy.enable()` | `this.scrollStrategy.disable()` | `OverlayContainer` - wy-layer-modal.component.ts
+- `cdkDrag` | `cdkDrapHandle` | `cdkDragBoundary`- wy-layer-modal.component.html
 
 ## 3.2.1 Angular Material CDK [Note]
+
+#### `DragDropModule`
+- []()
+- ```html
+  <div class="m-layer" [@showHide]="showModal" #modalContainer cdkDrag cdkDragBoundary=".cdk-overlay-container">
+    <div class="zbar" cdkDragHandle>
+      <div class="zttl f-thide">Title</div>
+    </div>
+    <div class="zcls" title="Close" (click)="hide()"></div>
+  </div>
+  ```
+  ```ts
+  imports: [
+    DragDropModule,
+  ],
+  export class WyLayerModule { }
+  ``` 
 
 #### `Overlay`
 - [【WyLayerModal】close click event on background when modal is open](https://github.com/puddlejumper26/musicplayer/commit/00f3f0cfb1c328a9ad50bc9345e6214e9529ab97) | [【WyLayerModal-NGRX】panel show|hide logics through NGRX](https://github.com/puddlejumper26/musicplayer/commit/892020cefe6d4a14300309d976a33b8bbe98f0b9)
