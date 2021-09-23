@@ -1,1 +1,38 @@
-<p>wy-layer-login works!</p>
+<div class="login-phone modal-content">
+  <div class="modal-wrap">
+    <form nz-form class="login-form">
+      <nz-form-item>
+        <nz-form-control nzHasFeedback nzErrorTip="Correct Phone Number Required">
+          <nz-input-group nzPrefixIcon="mobile">
+            <input type="tel" nz-input placeholder="Please input Phone Number">
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzHasFeedback nzErrorTip="Correct Password Required">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input placeholder="Please input Password">
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzHasFeedback nzErrorTip="Correct Password Required">
+          <div class="tools">
+            <label nz-checkbox class="remember">
+              <span>Remember Password</span>
+            </label>
+          </div>
+
+          <button class="login-form-button" nz-button nzType="primary" nzBlock>Login</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>
+
+<div class="m-footer clearfix">
+  <a (click)="onChangeModalType.emit('default')"><  Switch Logins</a>
+  <a (click)="onChangeModalType.emit('register')">No Account? Register Free</a>
+</div>
