@@ -86,7 +86,7 @@ Better Angular Study
 ## 3.1.2 Angular [Note]
 
 #### `ngSwitch`
-- []()
+- [【WyLayerLogin】ngSwitch 'loginByPhone' | Default](https://github.com/puddlejumper26/musicplayer/commit/5e8ffadbc19f0df6bdd86a503ad722394bae7595)
 - ```html
   <ng-container [ngSwitch]="currentModalType">
     <ng-container *ngSwitchCase="'loginByPhone'">

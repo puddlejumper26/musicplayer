@@ -24,9 +24,9 @@ import { getMember, getModalVisible, getModalType } from './../../../../store/se
 export class WyLayerModalComponent implements OnInit, AfterViewInit {
 
   showModal = 'hide';
+  currentModalType = ModalTypes.Default;
 
   private visible = false;
-  private currentModalType = ModalTypes.Default;
   private overlayRef: OverlayRef;
   private scrollStrategy: BlockScrollStrategy;
   private resizeHandler: () => void; // check the listen method its return to define the type here
@@ -126,6 +126,7 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   private watchModalType(type: ModalTypes) {
     if(this.currentModalType !== type){
       this.currentModalType = type;
+      this.cdr.markForCheck();
     }
   }
 

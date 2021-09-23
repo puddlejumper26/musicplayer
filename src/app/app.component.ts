@@ -1,7 +1,10 @@
-import { ModalTypes } from './store/reducers/member.reducer';
+import { SetModalType } from './store/actions/member.actions';
 import { isEmptyObject } from 'src/app/utils/tool';
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
+import { ModalTypes } from './store/reducers/member.reducer';
+import { AppStoreModule } from './store/index';
 import { SearchResult } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
 
@@ -23,7 +26,10 @@ export class AppComponent {
 
   searchResult: SearchResult;
 
-  constructor(private searchServe: SearchService) {}
+  constructor(
+    private searchServe: SearchService,
+    private store$: Store<AppStoreModule>,
+  ) {}
 
   onSearch(keywords: string) {
     // console.log('AppComponent - onSearch - keywords -', keywords)
@@ -52,7 +58,8 @@ export class AppComponent {
     return result;
   }
 
-  onChangeModalType(type = ModalTypes.Default) {
-    console.log('AppComponent - onChangeModalType - type -', type);
+  onChangeModalType(modalType = ModalTypes.Default) {
+    // console.log('AppComponent - onChangeModalType - type -', type);
+    this.store$.dispatch(SetModalType({ modalType }));
   }
 }
