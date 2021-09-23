@@ -4,7 +4,7 @@ import { Action, createReducer, on } from "@ngrx/store";
 // pop up window types
 export enum ModalTypes {
   Register = 'register',
-  LoginByPhone = 'loginbyphone',
+  LoginByPhone = 'loginByPhone',
   Share = 'share',
   Like = 'like',
   Default = 'default',
