@@ -1,4 +1,4 @@
-import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher, OverlayContainer } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2, Inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
@@ -24,6 +24,7 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   private overlayRef: OverlayRef;
   private scrollStrategy: BlockScrollStrategy;
   private resizeHandler: () => void; // check the listen method its return to define the type here
+  private overlayContainerEl: HTMLElement;
 
   @ViewChild('modalContainer', { static: false }) private modalRef: ElementRef;
 
@@ -36,7 +37,8 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
     private overlayKeyboardDispatcher: OverlayKeyboardDispatcher,
     private cdr: ChangeDetectorRef,
     private batchActionsServe: BatchActionsService,
-    private rd: Renderer2
+    private rd: Renderer2,
+    private overlayContainerServe: OverlayContainer,
   ) {
     const appStore$ = this.store$.pipe(select(getMember));
     appStore$.pipe(select(getModalVisible)).subscribe(visib => {
@@ -51,6 +53,9 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // to obtain the overlay dom
+    this.overlayContainerEl = this.overlayContainerServe.getContainerElement();
+    // console.log('WyLayerModalComponent - ngAfterViewInit - this.overlayContainerEl - ', this.overlayContainerEl);
     this.listenResizeToCenter();
   }
 
@@ -125,13 +130,21 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
       this.scrollStrategy.enable();
       this.overlayKeyboardDispatcher.add(this.overlayRef);
       this.listenResizeToCenter();
+      this.changePointerEvents('auto');
     }else {
       this.showModal = false;
       this.scrollStrategy.disable();
       this.overlayKeyboardDispatcher.remove(this.overlayRef);
       this.resizeHandler(); // to remove the listener
+      this.changePointerEvents('none');
     }
     this.cdr.markForCheck();
+  }
+
+  private changePointerEvents(type: 'none' | 'auto') {
+    if(this.overlayContainerEl) {
+      this.overlayContainerEl.style.pointerEvents = type;
+    }
   }
 
   hide() {

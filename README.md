@@ -167,14 +167,26 @@ Better Angular Study
 ## 3.2.1 Angular Material CDK [API]
 - `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`hasBackdrop, positionStrategy, scrollStrategy`| `this.overlay.create().backdropClick()` |`this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
 - `entryComponents` - wy-search.module.ts
-- `private scrollStrategy: BlockScrollStrategy` | `this.scrollStrategy = overlay.scrollStrategies.block()` | `this.scrollStrategy.enable()` | `this.scrollStrategy.disable()` - wy-layer-modal.component.ts
+- `private scrollStrategy: BlockScrollStrategy` | `this.scrollStrategy = overlay.scrollStrategies.block()` | `this.scrollStrategy.enable()` | `this.scrollStrategy.disable()` | `OverlayContainer` - wy-layer-modal.component.ts
 
 ## 3.2.1 Angular Material CDK [Note]
 
 #### `Overlay`
+- []
 - ```ts
   private overlayRef: OverlayRef;
-  constructor(private overlay: Overlay, private viewContainerRef: ViewContainerRef) {}
+  private overlayContainerEl: HTMLElement;
+  constructor(
+    private overlay: Overlay, 
+    private viewContainerRef: ViewContainerRef
+    private overlayContainerServe: OverlayContainer,
+  ) {}
+
+  ngAfterViewInit(){
+    this.overlayContainerEl = this.overlayContainerServe.getContainerElement();
+  }
+  this.overlayContainerEl.style.pointerEvents = 'auto'; // close the click event on background when modal is open
+  this.overlayContainerEl.style.pointerEvents = 'none'
   private showOverlayPanel() {
     this.hideOverlayPanel();
 
@@ -285,7 +297,7 @@ Better Angular Study
 - - any web page loaded in the browser
 - - serves as an entry point into the web page's content - dom tree
 - `DOCUMENT` (angular) | `window` | `Window`
-- []
+- [【WyLayerModal】Document & Window to replace](https://github.com/puddlejumper26/musicplayer/commit/7db2cb359d53fe7626f8f044874a1649b71e899b)
 - - ```ts 
     import { WINDOW } from 'src/app/services/services.module';
     constrcutor(@Inject(DOCUMENT) private doc: Document, @Inject(WINDOW) private win: Window,){}
