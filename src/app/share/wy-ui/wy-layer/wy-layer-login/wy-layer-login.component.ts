@@ -1,6 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+export type LoginParams = {
+  phone: string;
+  password: string;
+  remember: boolean;
+}
+
 @Component({
   selector: 'app-wy-layer-login',
   templateUrl: './wy-layer-login.component.html',
@@ -10,6 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class WyLayerLoginComponent implements OnInit {
 
   @Output() onChangeModalType = new EventEmitter<string | void>();
+  @Output() onLogin = new EventEmitter<LoginParams>();
 
   formModel: FormGroup;
 
@@ -28,6 +35,7 @@ export class WyLayerLoginComponent implements OnInit {
 
   onSubmit() {
     // console.log('WyLayerLoginComponent - onSubmit - this.formModel.value -', this.formModel.value);
+    this.onLogin.emit(this.formModel.value)
   }
 
 }

@@ -87,7 +87,7 @@ Better Angular Study
 ## 3.1.2 Angular [Note]
 
 #### `Form` responsive
-- [【WyLayerLogin-Form】add responsive form](https://github.com/puddlejumper26/musicplayer/commit/2d1688d6e4c875b08337e1e0c85f880e6ceeee90)
+- [【WyLayerLogin-Form】add responsive form](https://github.com/puddlejumper26/musicplayer/commit/2d1688d6e4c875b08337e1e0c85f880e6ceeee90) | [【WyLayerLogin-Form】add form validation](https://github.com/puddlejumper26/musicplayer/commit/608ea578ba7c30bd20b36f3895071f25d4cb390a)
 - ```html
   <form nz-form class="login-form" [formGroup]="formModel" (ngSubmit)="onSubmit()">
     <nz-form-item>

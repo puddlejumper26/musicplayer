@@ -8,6 +8,7 @@ import { ModalTypes } from './store/reducers/member.reducer';
 import { AppStoreModule } from './store/index';
 import { SearchResult } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
+import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 
 @Component({
   selector: 'app-root',
@@ -67,5 +68,9 @@ export class AppComponent {
 
   openModal(type: ModalTypes) {
     this.batchActionsServe.controlModal(true, type);
+  }
+
+  onLogin(params: LoginParams) {
+    console.log('AppComponent - onLogin - params -', params);
   }
 }
