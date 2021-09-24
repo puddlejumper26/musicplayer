@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-wy-layer-login',
@@ -17,8 +17,8 @@ export class WyLayerLoginComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.formModel = this.fb.group({
-      phone: ['aaaaa'],
-      password: ['bbbbbbb'],
+      phone: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       remember: [false],
     })
   }
@@ -27,7 +27,7 @@ export class WyLayerLoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('WyLayerLoginComponent - onSubmit - this.formModel.value -', this.formModel.value);
+    // console.log('WyLayerLoginComponent - onSubmit - this.formModel.value -', this.formModel.value);
   }
 
 }

@@ -18,14 +18,14 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-control nzHasFeedback nzErrorTip="Correct Password Required">
+        <nz-form-control>
           <div class="tools">
             <label nz-checkbox class="remember" formControlName="remember">
               <span>Remember Password</span>
             </label>
           </div>
 
-          <button class="login-form-button" nz-button nzType="primary" nzBlock>Login</button>
+          <button class="login-form-button" [disabled]="!formModel.valid" nz-button nzType="primary" nzBlock>Login</button>
         </nz-form-control>
       </nz-form-item>
     </form>

@@ -87,7 +87,7 @@ Better Angular Study
 ## 3.1.2 Angular [Note]
 
 #### `Form` responsive
-- []()
+- [【WyLayerLogin-Form】add responsive form](https://github.com/puddlejumper26/musicplayer/commit/2d1688d6e4c875b08337e1e0c85f880e6ceeee90)
 - ```html
   <form nz-form class="login-form" [formGroup]="formModel" (ngSubmit)="onSubmit()">
     <nz-form-item>
@@ -107,14 +107,14 @@ Better Angular Study
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-control nzHasFeedback nzErrorTip="Correct Password Required">
+        <nz-form-control>
           <div class="tools">
             <label nz-checkbox class="remember" formControlName="remember">
               <span>Remember Password</span>
             </label>
           </div>
 
-          <button class="login-form-button" nz-button nzType="primary" nzBlock>Login</button>
+          <button class="login-form-button" [disabled]="!formModel.valid" nz-button nzType="primary" nzBlock>Login</button>
         </nz-form-control>
       </nz-form-item>
   </form>
@@ -125,8 +125,8 @@ Better Angular Study
     private fb: FormBuilder
   ) {
     this.formModel = this.fb.group({
-      phone: ['aaaaa'],
-      password: ['bbbbbbb'],
+      phone: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       remember: [false],
     })
   }
