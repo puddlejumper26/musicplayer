@@ -24,8 +24,8 @@ export class WyLayerLoginComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.formModel = this.fb.group({
-      phone: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      phone: ['15079010174', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+      password: ['LYC6809915TC', [Validators.required, Validators.minLength(6)]],
       remember: [false],
     })
   }

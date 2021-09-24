@@ -9,6 +9,7 @@ import { AppStoreModule } from './store/index';
 import { SearchResult } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
+import { MemberService } from './services/member.service';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,7 @@ export class AppComponent {
     private searchServe: SearchService,
     private store$: Store<AppStoreModule>,
     private batchActionsServe: BatchActionsService,
+    private memberServe: MemberService,
   ) {}
 
   onSearch(keywords: string) {
@@ -71,6 +73,9 @@ export class AppComponent {
   }
 
   onLogin(params: LoginParams) {
-    console.log('AppComponent - onLogin - params -', params);
+    // console.log('AppComponent - onLogin - params -', params);
+    this.memberServe.login(params).subscribe(user => {
+      console.log('AppComponent - onLogin - user -', user);
+    })
   }
 }
