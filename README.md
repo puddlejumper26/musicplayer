@@ -81,9 +81,59 @@ Better Angular Study
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
 - `[@showHide]` | `(@showHide.start)` | `(@showHide.done)` | `animations` | `trigger` | `state` | `style` | `transition` | `animate` | `AnimationEvent` | `AnimationEvent.toState`- wy-player.component.ts
 - `[ngSwitch]` | `*ngSwitchCase` | `select` | `*ngSwitchDefault` - wy-layer-modal.component.html
+- `FormBuilder` | `FormGroup` | `[formGroup]` | `(ngSubmit)` | `formControlName` - wy-layer-login.component.ts
 
 
 ## 3.1.2 Angular [Note]
+
+#### `Form` responsive
+- []()
+- ```html
+  <form nz-form class="login-form" [formGroup]="formModel" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+        <nz-form-control nzHasFeedback nzErrorTip="Correct Phone Number Required">
+          <nz-input-group nzPrefixIcon="mobile">
+            <input type="tel" nz-input placeholder="Please input Phone Number" formControlName="phone">
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzHasFeedback nzErrorTip="Correct Password Required">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input placeholder="Please input Password" formControlName="password">
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzHasFeedback nzErrorTip="Correct Password Required">
+          <div class="tools">
+            <label nz-checkbox class="remember" formControlName="remember">
+              <span>Remember Password</span>
+            </label>
+          </div>
+
+          <button class="login-form-button" nz-button nzType="primary" nzBlock>Login</button>
+        </nz-form-control>
+      </nz-form-item>
+  </form>
+  ```
+  ```ts
+  formModel: FormGroup;
+  constructor(
+    private fb: FormBuilder
+  ) {
+    this.formModel = this.fb.group({
+      phone: ['aaaaa'],
+      password: ['bbbbbbb'],
+      remember: [false],
+    })
+  }
+  onSubmit() {
+    console.log('WyLayerLoginComponent - onSubmit - this.formModel.value -', this.formModel.value);
+  }
+  ```
 
 #### `ngSwitch`
 - [【WyLayerLogin】ngSwitch 'loginByPhone' | Default](https://github.com/puddlejumper26/musicplayer/commit/5e8ffadbc19f0df6bdd86a503ad722394bae7595) | [【WyLayerLogin】register to NgSwitch, switch when click 'loginByPhone' ](https://github.com/puddlejumper26/musicplayer/commit/7ae8436f5a5adf297711c7f500cb284cc824b656)

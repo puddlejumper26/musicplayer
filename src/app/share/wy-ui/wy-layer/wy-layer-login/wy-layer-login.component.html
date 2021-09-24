@@ -1,10 +1,10 @@
 <div class="login-phone modal-content">
   <div class="modal-wrap">
-    <form nz-form class="login-form">
+    <form nz-form class="login-form" [formGroup]="formModel" (ngSubmit)="onSubmit()">
       <nz-form-item>
         <nz-form-control nzHasFeedback nzErrorTip="Correct Phone Number Required">
           <nz-input-group nzPrefixIcon="mobile">
-            <input type="tel" nz-input placeholder="Please input Phone Number">
+            <input type="tel" nz-input placeholder="Please input Phone Number" formControlName="phone">
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
@@ -12,7 +12,7 @@
       <nz-form-item>
         <nz-form-control nzHasFeedback nzErrorTip="Correct Password Required">
           <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input placeholder="Please input Password">
+            <input type="password" nz-input placeholder="Please input Password" formControlName="password">
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
@@ -20,7 +20,7 @@
       <nz-form-item>
         <nz-form-control nzHasFeedback nzErrorTip="Correct Password Required">
           <div class="tools">
-            <label nz-checkbox class="remember">
+            <label nz-checkbox class="remember" formControlName="remember">
               <span>Remember Password</span>
             </label>
           </div>
