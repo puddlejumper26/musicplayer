@@ -84,7 +84,7 @@ export class AppComponent {
   }
 
   onLogin(params: LoginParams) {
-    // console.log('AppComponent - onLogin - localstorage - ', localStorage.getItem('WyRememberLogin'))
+    // console.log('AppComponent - onLogin - localstorage - ', localStorage.getItem('wyRememberLogin'))
     // console.log('AppComponent - onLogin - params -', params);
     this.memberServe.login(params).subscribe(user => {
       // console.log('AppComponent - onLogin - user -', user);
@@ -97,9 +97,9 @@ export class AppComponent {
       localStorage.setItem('wyUserId', user.profile.userId.toString());
 
       if(params.remember) {
-        localStorage.setItem('WyRememberLogin', JSON.stringify(params));
+        localStorage.setItem('wyRememberLogin', JSON.stringify(params));
       }else {
-        localStorage.removeItem('WyRememberLogin');
+        localStorage.removeItem('wyRememberLogin');
       }
     }, error => {
       this.alertMessage('error', ('Error code: ' + error.error.code) || 'Login Failed!');
@@ -108,5 +108,16 @@ export class AppComponent {
 
   private alertMessage(type: string, msg: string) {
     this.messageServe.create(type, msg);
+  }
+
+  onLogout() {
+    this.memberServe.logout().subscribe(res => {
+      localStorage.removeItem('wyRememberLogin');
+      localStorage.removeItem('wyUserId');
+      this.alertMessage('success', 'Already Logged Out')
+      // this.user= null; //only this will still logged in after refresh
+    }, error => {
+      this.alertMessage('error', ('Error code: ' + error.error.code) || 'Log Out Failed!');
+    });
   }
 }

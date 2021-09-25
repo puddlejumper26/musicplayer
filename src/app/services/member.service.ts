@@ -4,6 +4,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators'
 
+import { sampleBack } from './data-types/common.types';
 import { LoginParams } from '../share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { User } from './data-types/member.type';
 import { ServicesModule, API_CONFIG } from './services.module';
@@ -35,5 +36,10 @@ export class MemberService {
     const params = new HttpParams({ fromString: queryString.stringify(uid)});
     return this.http.get(this.uri + 'user/detail', {params})
       .pipe(map(res => res as User))
+  }
+
+  logout(): Observable<sampleBack> {
+    return this.http.get(this.uri + 'logout')
+      .pipe(map(res => res as sampleBack))
   }
 }

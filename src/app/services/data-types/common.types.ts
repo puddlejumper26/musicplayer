@@ -74,3 +74,8 @@ export type SearchResult = {
     songs?: Song[];
     // songs: {artist: Singer[]}
 }
+
+export type sampleBack = {
+  code: number;
+  [key: string]: any;
+}
