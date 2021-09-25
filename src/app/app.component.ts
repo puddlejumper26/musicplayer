@@ -38,7 +38,14 @@ export class AppComponent {
     private batchActionsServe: BatchActionsService,
     private memberServe: MemberService,
     private messageServe: NzMessageService,
-  ) {}
+  ) {
+    const userId = localStorage.getItem('wyUserId');
+    if(userId) {
+      this.memberServe.getUserDetail(userId).subscribe(user => {
+        this.user = user;
+      })
+    }
+  }
 
   onSearch(keywords: string) {
     // console.log('AppComponent - onSearch - keywords -', keywords)
