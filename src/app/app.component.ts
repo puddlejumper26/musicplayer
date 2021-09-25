@@ -3,6 +3,7 @@ import { isEmptyObject } from 'src/app/utils/tool';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { User } from './services/data-types/member.type';
 import { BatchActionsService } from './store/batch-actions.service';
 import { ModalTypes } from './store/reducers/member.reducer';
 import { AppStoreModule } from './store/index';
@@ -10,6 +11,7 @@ import { SearchResult } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { MemberService } from './services/member.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,7 @@ import { MemberService } from './services/member.service';
 })
 export class AppComponent {
   title = 'musicplayer';
+  user: User;
 
   menu=[{
     label: 'Find',
@@ -34,6 +37,7 @@ export class AppComponent {
     private store$: Store<AppStoreModule>,
     private batchActionsServe: BatchActionsService,
     private memberServe: MemberService,
+    private messageServe: NzMessageService,
   ) {}
 
   onSearch(keywords: string) {
@@ -75,7 +79,26 @@ export class AppComponent {
   onLogin(params: LoginParams) {
     // console.log('AppComponent - onLogin - params -', params);
     this.memberServe.login(params).subscribe(user => {
-      console.log('AppComponent - onLogin - user -', user);
+      // console.log('AppComponent - onLogin - user -', user);
+      this.user = user;
+      //close login modal
+      this.batchActionsServe.controlModal(false);
+      //pop login success
+      this.alertMessage('success', 'Login Successfully!');
+      // store user info into browser cache
+      localStorage.setItem('wyUserId', user.profile.userId.toString());
+
+      if(params.remember) {
+        localStorage.setItem('WyRememberLogin', JSON.stringify(params));
+      }else {
+        localStorage.removeItem('WyRememberLogin');
+      }
+    }, error => {
+      this.alertMessage('error', error.message || 'Login Failed!');
     })
+  }
+
+  private alertMessage(type: string, msg: string) {
+    this.messageServe.create(type, msg);
   }
 }

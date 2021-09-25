@@ -28,6 +28,6 @@ export class MemberService {
   login(formValue: LoginParams): Observable<User> {
     const params = new HttpParams({ fromString: queryString.stringify(formValue)});
     return this.http.get(this.uri + 'login/cellphone', {params})
-      .pipe(map((res: { profile: User}) => res.profile))
+      .pipe(map((res) => res as User))
   }
 }
