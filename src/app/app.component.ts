@@ -77,6 +77,7 @@ export class AppComponent {
   }
 
   onLogin(params: LoginParams) {
+    // console.log('AppComponent - onLogin - localstorage - ', localStorage.getItem('WyRememberLogin'))
     // console.log('AppComponent - onLogin - params -', params);
     this.memberServe.login(params).subscribe(user => {
       // console.log('AppComponent - onLogin - user -', user);
@@ -94,7 +95,7 @@ export class AppComponent {
         localStorage.removeItem('WyRememberLogin');
       }
     }, error => {
-      this.alertMessage('error', error.message || 'Login Failed!');
+      this.alertMessage('error', ('Error code: ' + error.error.code) || 'Login Failed!');
     })
   }
 
