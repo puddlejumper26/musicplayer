@@ -112,10 +112,10 @@ export class AppComponent {
 
   onLogout() {
     this.memberServe.logout().subscribe(res => {
-      localStorage.removeItem('wyRememberLogin');
+      // localStorage.removeItem('wyRememberLogin');
       localStorage.removeItem('wyUserId');
+      this.user= null; //only this will still logged in after refresh
       this.alertMessage('success', 'Already Logged Out')
-      // this.user= null; //only this will still logged in after refresh
     }, error => {
       this.alertMessage('error', ('Error code: ' + error.error.code) || 'Log Out Failed!');
     });
