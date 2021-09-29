@@ -394,6 +394,9 @@ Better Angular Study
     return result;
   }
   ```
+  ```ts
+  const value = codeJson(userLoginParams.currentValue, 'decode');
+  ```
 
 #### `KeyboardEvent` 
 - [【WyLayerModal】hide modal when cross or ESCAPE](https://github.com/puddlejumper26/musicplayer/commit/e1c2d72d6f71c133ed8315e44821ba86f5607b6a)
