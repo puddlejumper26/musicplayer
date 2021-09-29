@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators'
 
-import { sampleBack } from './data-types/common.types';
+import { SampleBack } from './data-types/common.types';
 import { LoginParams } from '../share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { User } from './data-types/member.type';
 import { ServicesModule, API_CONFIG } from './services.module';
@@ -38,8 +38,8 @@ export class MemberService {
       .pipe(map(res => res as User))
   }
 
-  logout(): Observable<sampleBack> {
+  logout(): Observable<SampleBack> {
     return this.http.get(this.uri + 'logout')
-      .pipe(map(res => res as sampleBack))
+      .pipe(map(res => res as SampleBack))
   }
 }

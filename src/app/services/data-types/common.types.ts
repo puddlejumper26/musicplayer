@@ -75,7 +75,10 @@ export type SearchResult = {
     // songs: {artist: Singer[]}
 }
 
-export type sampleBack = {
-  code: number;
-  [key: string]: any;
+export interface AnyJson {
+  [key: string]: any
 }
+export interface SampleBack extends AnyJson {
+  code: number;
+}
+

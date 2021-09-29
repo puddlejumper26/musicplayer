@@ -12,6 +12,7 @@ import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { MemberService } from './services/member.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { codeJson } from './utils/base64';
 
 @Component({
   selector: 'app-root',
@@ -102,10 +103,8 @@ export class AppComponent {
       // store user info into browser cache
       localStorage.setItem('wyUserId', user.profile.userId.toString());
 
-      console.log(11111, params.remember)
       if(params.remember === true) {
-        console.log(22222);
-        localStorage.setItem('wyRememberLogin', JSON.stringify(params));
+        localStorage.setItem('wyRememberLogin', JSON.stringify(codeJson(params)));
       }else {
         localStorage.removeItem('wyRememberLogin');
       }

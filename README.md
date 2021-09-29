@@ -373,10 +373,27 @@ Better Angular Study
 - `(focus)` | `(blur)` - wy-search.component.html
 - `(click)` | `(mousedown)` - wy-search-panel.component.html
 - `KeyboardEvent` - wy-layer-panel.component.ts
-
-- 
+- `Base64` - base64.ts
 
 ## 3.4.2 Web && JS [Note]
+
+#### `Base64` 
+- []()
+- `npm i js-base64`
+- ```ts
+  import { Base64 } from 'js-base64';
+  import { AnyJson } from "../services/data-types/common.types";
+
+  export function codeJson (source: Object, type='encode'): AnyJson {
+    const result = {};
+    for(const attr in source) {
+      if(source.hasOwnProperty(attr)){
+        result[Base64[type](attr)] = Base64[type](source[attr])
+      }
+    }
+    return result;
+  }
+  ```
 
 #### `KeyboardEvent` 
 - [【WyLayerModal】hide modal when cross or ESCAPE](https://github.com/puddlejumper26/musicplayer/commit/e1c2d72d6f71c133ed8315e44821ba86f5607b6a)
