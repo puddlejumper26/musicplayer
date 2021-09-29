@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export type LoginParams = {
@@ -7,14 +7,20 @@ export type LoginParams = {
   remember: boolean;
 }
 
+const defaultLoginParams: LoginParams = {
+  phone: '',
+  password: '',
+  remember: false,
+}
+
 @Component({
   selector: 'app-wy-layer-login',
   templateUrl: './wy-layer-login.component.html',
   styleUrls: ['./wy-layer-login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WyLayerLoginComponent implements OnInit {
-
+export class WyLayerLoginComponent implements OnInit, OnChanges {
+  @Input() wyRememberLogin: LoginParams;
   @Output() onChangeModalType = new EventEmitter<string | void>();
   @Output() onLogin = new EventEmitter<LoginParams>();
 
@@ -23,10 +29,31 @@ export class WyLayerLoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder
   ) {
+    this.setModel(defaultLoginParams);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const userLoginParams = changes['wyRememberLogin'];
+    if(userLoginParams) {
+      let phone = '';
+      let password = '';
+      let remember = false;
+
+      const value = userLoginParams.currentValue;
+      if(value) {
+        phone = value.phone;
+        password = value.password;
+        remember = value.remember;
+      }
+      this.setModel({phone, password, remember});
+    }
+  }
+
+  private setModel({phone, password, remember}) {
     this.formModel = this.fb.group({
-      phone: ['15079010174', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
-      password: ['LYC6809915TC', [Validators.required, Validators.minLength(6)]],
-      remember: [false],
+      phone: [phone, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+      password: [password, [Validators.required, Validators.minLength(6)]],
+      remember: [remember],
     })
   }
 

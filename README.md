@@ -81,11 +81,32 @@ Better Angular Study
 - `TemplateRef` | `ngTemplateOutlet` - wy-search.component.ts
 - `[@showHide]` | `(@showHide.start)` | `(@showHide.done)` | `animations` | `trigger` | `state` | `style` | `transition` | `animate` | `AnimationEvent` | `AnimationEvent.toState`- wy-player.component.ts
 - `[ngSwitch]` | `*ngSwitchCase` | `select` | `*ngSwitchDefault` - wy-layer-modal.component.html
-- `FormBuilder` | `FormGroup` | `[formGroup]` | `(ngSubmit)` | `formControlName` - wy-layer-login.component.ts
+- `FormBuilder` | `FormGroup` | `[formGroup]` | `(ngSubmit)` | `formControlName` | `SimpleChanges.currentValue`- wy-layer-login.component.ts
 
 
 ## 3.1.2 Angular [Note]
 
+#### `SimpleChanges` 
+- []()
+- ```ts
+  ngOnChanges(changes: SimpleChanges) {
+    const userLoginParams = changes['wyRememberLogin'];
+    if(userLoginParams) {
+      let phone = '';
+      let password = '';
+      let remember = false;
+
+      const value = userLoginParams.currentValue;
+      if(value) {
+        phone = value.phone;
+        password = value.password;
+        remember = value.remember;
+      }
+      this.setModel({phone, password, remember});
+    }
+  }
+  ```
+  
 #### `Form` responsive
 - [【WyLayerLogin-Form】add responsive form](https://github.com/puddlejumper26/musicplayer/commit/2d1688d6e4c875b08337e1e0c85f880e6ceeee90) | [【WyLayerLogin-Form】add form validation](https://github.com/puddlejumper26/musicplayer/commit/608ea578ba7c30bd20b36f3895071f25d4cb390a)
 - ```html

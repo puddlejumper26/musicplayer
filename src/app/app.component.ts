@@ -21,6 +21,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 export class AppComponent {
   title = 'musicplayer';
   user: User;
+  wyRememberLogin: LoginParams;
 
   menu=[{
     label: 'Find',
@@ -44,6 +45,11 @@ export class AppComponent {
       this.memberServe.getUserDetail(userId).subscribe(user => {
         this.user = user;
       })
+    }
+
+    const wyRememberLogin = localStorage.getItem('wyRememberLogin');
+    if(wyRememberLogin) {
+      this.wyRememberLogin = JSON.parse(wyRememberLogin);
     }
   }
 
@@ -96,7 +102,9 @@ export class AppComponent {
       // store user info into browser cache
       localStorage.setItem('wyUserId', user.profile.userId.toString());
 
-      if(params.remember) {
+      console.log(11111, params.remember)
+      if(params.remember === true) {
+        console.log(22222);
         localStorage.setItem('wyRememberLogin', JSON.stringify(params));
       }else {
         localStorage.removeItem('wyRememberLogin');
