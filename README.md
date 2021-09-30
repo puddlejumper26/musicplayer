@@ -378,7 +378,8 @@ Better Angular Study
 ## 3.4.2 Web && JS [Note]
 
 #### `Base64` 
-- []()
+- [【WyLayerLogin-encode】encode through js-base64](https://github.com/puddlejumper26/musicplayer/commit/482723d6bbaad049c0eca92549b56617f142ab73)
+- [【WyLayerLogin-decode】decode through js-base64](https://github.com/puddlejumper26/musicplayer/commit/17a36f80078d76d119976963b3072cafa4edc73f)
 - `npm i js-base64`
 - ```ts
   import { Base64 } from 'js-base64';

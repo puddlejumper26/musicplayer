@@ -1,8 +1,10 @@
-import { SetModalType } from './store/actions/member.actions';
-import { isEmptyObject } from 'src/app/utils/tool';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { NzMessageService } from 'ng-zorro-antd';
 
+import { SetModalType } from './store/actions/member.actions';
+import { isEmptyObject } from 'src/app/utils/tool';
+import { StorageService } from './services/storage.service';
 import { User } from './services/data-types/member.type';
 import { BatchActionsService } from './store/batch-actions.service';
 import { ModalTypes } from './store/reducers/member.reducer';
@@ -11,7 +13,6 @@ import { SearchResult } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { MemberService } from './services/member.service';
-import { NzMessageService } from 'ng-zorro-antd';
 import { codeJson } from './utils/base64';
 
 @Component({
@@ -40,17 +41,26 @@ export class AppComponent {
     private batchActionsServe: BatchActionsService,
     private memberServe: MemberService,
     private messageServe: NzMessageService,
+    private storageServe: StorageService
   ) {
-    const userId = localStorage.getItem('wyUserId');
+    const userId = this.storageServe.getStorage('wyUserId');
     if(userId) {
       this.memberServe.getUserDetail(userId).subscribe(user => {
         this.user = user;
       })
     }
 
-    const wyRememberLogin = localStorage.getItem('wyRememberLogin');
+    const wyRememberLogin = this.storageServe.getStorage('wyRememberLogin');
+    console.log(111111, wyRememberLogin)
+    console.log(22222, typeof(wyRememberLogin))
     if(wyRememberLogin) {
-      this.wyRememberLogin = JSON.parse(wyRememberLogin);
+      try{
+        this.wyRememberLogin = JSON.parse(wyRememberLogin);
+      }
+      catch(error){
+        this.alertMessage('warn', error);
+        console.log(error)
+      }
     }
   }
 
@@ -101,12 +111,22 @@ export class AppComponent {
       //pop login success
       this.alertMessage('success', 'Login Successfully!');
       // store user info into browser cache
-      localStorage.setItem('wyUserId', user.profile.userId.toString());
+      // localStorage.setItem('wyUserId', user.profile.userId.toString());
+      this.storageServe.setStorage({
+        key: 'wyUserId',
+        value: user.profile.userId.toString()
+      })
 
       if(params.remember === true) {
-        localStorage.setItem('wyRememberLogin', JSON.stringify(codeJson(params)));
+        // localStorage.setItem('wyRememberLogin', JSON.stringify(codeJson(params)));
+        console.log(333333)
+        this.storageServe.setStorage({
+          key: 'wyRememberLogin',
+          value: JSON.stringify(codeJson(params))
+        })
       }else {
-        localStorage.removeItem('wyRememberLogin');
+        // localStorage.removeItem('wyRememberLogin');
+        this.storageServe.removeStorage('wyRememberLogin');
       }
     }, error => {
       this.alertMessage('error', ('Error code: ' + error.error.code) || 'Login Failed!');
@@ -120,7 +140,8 @@ export class AppComponent {
   onLogout() {
     this.memberServe.logout().subscribe(res => {
       // localStorage.removeItem('wyRememberLogin');
-      localStorage.removeItem('wyUserId');
+      // localStorage.removeItem('wyUserId');
+      this.storageServe.removeStorage('wyUserId')
       this.user= null; //only this will still logged in after refresh
       this.alertMessage('success', 'Already Logged Out')
     }, error => {
