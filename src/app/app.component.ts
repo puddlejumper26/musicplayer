@@ -51,8 +51,6 @@ export class AppComponent {
     }
 
     const wyRememberLogin = this.storageServe.getStorage('wyRememberLogin');
-    console.log(111111, wyRememberLogin)
-    console.log(22222, typeof(wyRememberLogin))
     if(wyRememberLogin) {
       try{
         this.wyRememberLogin = JSON.parse(wyRememberLogin);
@@ -119,7 +117,6 @@ export class AppComponent {
 
       if(params.remember === true) {
         // localStorage.setItem('wyRememberLogin', JSON.stringify(codeJson(params)));
-        console.log(333333)
         this.storageServe.setStorage({
           key: 'wyRememberLogin',
           value: JSON.stringify(codeJson(params))

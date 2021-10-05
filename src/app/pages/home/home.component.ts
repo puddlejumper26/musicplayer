@@ -15,6 +15,10 @@ import { getPlayer } from 'src/app/store/selectors/player.selector';
 import { SetSongList, SetPlayList, SetCurrentIndex, SetPlayMode } from './../../store/actions/player.actions';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { ModalTypes } from 'src/app/store/reducers/member.reducer';
+import { User } from 'src/app/services/data-types/member.type';
+import { MemberService } from 'src/app/services/member.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { of } from 'rxjs/internal/observable/of';
 
 const initPlayMode: PlayMode = {
   type: 'loop',
@@ -32,6 +36,7 @@ export class HomeComponent implements OnInit {
   hotTags: HotTag[];
   songSheetList: SongSheet[];
   singers: Singer[];
+  user: User;
 
   carouselActiveIndex = 0;
 
@@ -44,13 +49,17 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private store$: Store<AppStoreModule>,
-    private batchActionsServe: BatchActionsService
+    private batchActionsServe: BatchActionsService,
+    private memberServe: MemberService,
+    private storageServe: StorageService
   ) {
-    this.route.data.pipe(map( res => res.homeDatas )).subscribe( ([banners, hotTags, songSheetList, singers]) => {
+    this.route.data.pipe(map( res => res.homeDatas )).subscribe( ([banners, hotTags, songSheetList, singers, user]) => {
       this.banners = banners;
       this.hotTags = hotTags;
       this.songSheetList = songSheetList;
       this.singers = singers;
+      console.log('HomeComponent - constructor - user - ', user)
+      this.user = user;
     })
     // this.store$.pipe(select(getPlayer)).subscribe( res => this.q = res);
   }

@@ -33,7 +33,8 @@ export class MemberService {
   }
 
   getUserDetail(uid: string): Observable<User>{
-    const params = new HttpParams({ fromString: queryString.stringify(uid)});
+    // const params = new HttpParams({ fromString: queryString.stringify({uid})});
+    const params = new HttpParams().set('uid', uid);
     return this.http.get(this.uri + 'user/detail', {params})
       .pipe(map(res => res as User))
   }
