@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { User } from 'src/app/services/data-types/member.type';
 
 @Component({
   selector: 'app-member-card',
@@ -6,6 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./member-card.component.less']
 })
 export class MemberCardComponent implements OnInit {
+  @Input() user: User;
 
   @Output() openModal = new EventEmitter<void>();
 

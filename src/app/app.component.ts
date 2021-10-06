@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd';
 
-import { SetModalType } from './store/actions/member.actions';
+import { SetModalType, SetUserId } from './store/actions/member.actions';
 import { isEmptyObject } from 'src/app/utils/tool';
 import { StorageService } from './services/storage.service';
 import { User } from './services/data-types/member.type';
@@ -45,6 +45,7 @@ export class AppComponent {
   ) {
     const userId = this.storageServe.getStorage('wyUserId');
     if(userId) {
+      this.store$.dispatch(SetUserId({ userId: userId }));
       this.memberServe.getUserDetail(userId).subscribe(user => {
         this.user = user;
       })
@@ -115,6 +116,8 @@ export class AppComponent {
         value: user.profile.userId.toString()
       })
 
+      this.store$.dispatch(SetUserId({ userId: user.profile.userId.toString() }));
+
       if(params.remember === true) {
         // localStorage.setItem('wyRememberLogin', JSON.stringify(codeJson(params)));
         this.storageServe.setStorage({
@@ -139,6 +142,7 @@ export class AppComponent {
       // localStorage.removeItem('wyRememberLogin');
       // localStorage.removeItem('wyUserId');
       this.storageServe.removeStorage('wyUserId')
+      this.store$.dispatch(SetUserId({ userId: '' }));
       this.user= null; //only this will still logged in after refresh
       this.alertMessage('success', 'Already Logged Out')
     }, error => {

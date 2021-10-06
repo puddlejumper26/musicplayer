@@ -1,6 +1,10 @@
 <div class="member">
-    <div class="login">
+    <div class="login" *ngIf="!user else logined">
         <p>Login NetEase Music, Enjoy Unlimited Resources, Sync to Handy</p>
         <button nz-button class="btn" (click)="openModal.emit()">Login</button>
     </div>
 </div>
+
+<ng-template #logined>
+  <h1>Logined</h1>
+</ng-template>

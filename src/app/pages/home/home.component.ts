@@ -1,3 +1,4 @@
+import { getMember, getUserId } from './../../store/selectors/member.selector';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -51,20 +52,32 @@ export class HomeComponent implements OnInit {
     private store$: Store<AppStoreModule>,
     private batchActionsServe: BatchActionsService,
     private memberServe: MemberService,
-    private storageServe: StorageService
+    private storageServe: StorageService,
   ) {
-    this.route.data.pipe(map( res => res.homeDatas )).subscribe( ([banners, hotTags, songSheetList, singers, user]) => {
+    this.route.data.pipe(map( res => res.homeDatas )).subscribe( ([banners, hotTags, songSheetList, singers]) => {
       this.banners = banners;
       this.hotTags = hotTags;
       this.songSheetList = songSheetList;
       this.singers = singers;
-      console.log('HomeComponent - constructor - user - ', user)
-      this.user = user;
     })
     // this.store$.pipe(select(getPlayer)).subscribe( res => this.q = res);
+    this.store$.pipe(select(getMember)).subscribe(member => {
+      console.log('HomeComponent - Constructor - member - ', member);
+      if(member.userId) {
+        this.getUserDetail(member.userId);
+      }else {
+        this.user = null;
+      }
+    })
   }
 
   ngOnInit() {
+  }
+
+  private getUserDetail(id: string) {
+    this.memberServe.getUserDetail(id).subscribe(user => {
+      this.user = user;
+    })
   }
 
   onBeforeChange({ to }){

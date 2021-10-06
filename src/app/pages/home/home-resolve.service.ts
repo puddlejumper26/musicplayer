@@ -10,7 +10,7 @@ import { MemberService } from "src/app/services/member.service";
 import { SingerService } from "src/app/services/singer.service";
 import { User } from 'src/app/services/data-types/member.type';
 
-type HomeDataType = [Banner[], HotTag[], SongSheet[], Singer[], User];
+type HomeDataType = [Banner[], HotTag[], SongSheet[], Singer[]];
 
 /**
  *  @resover is to render the page before the page is loaded, to make user experience better
@@ -27,11 +27,11 @@ export class HomeResolverService implements Resolve<HomeDataType> {
 
     resolve(): Observable<HomeDataType> {
 
-        const userId = this.storageServe.getStorage('wyUserId');
-        let detail$ = of(null);
-        if(userId) {
-          detail$ = this.memberServe.getUserDetail(userId);
-        }
+        // const userId = this.storageServe.getStorage('wyUserId');
+        // let detail$ = of(null);
+        // if(userId) {
+        //   detail$ = this.memberServe.getUserDetail(userId);
+        // }
 
         /**
          * @forJoin  send an array composed by the lastest observable datas when all flows finish
@@ -42,7 +42,6 @@ export class HomeResolverService implements Resolve<HomeDataType> {
             this.homeServe.getHotTags(),
             this.homeServe.getPersonalSheetList(),
             this.singerServe.getEnterSinger(),
-            detail$,
         ]).pipe(take(1));
     }
 }
