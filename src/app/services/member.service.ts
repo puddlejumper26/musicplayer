@@ -6,7 +6,7 @@ import { map } from 'rxjs/internal/operators'
 
 import { SampleBack } from './data-types/common.types';
 import { LoginParams } from '../share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
-import { User } from './data-types/member.type';
+import { Signin, User } from './data-types/member.type';
 import { ServicesModule, API_CONFIG } from './services.module';
 
 @Injectable({
@@ -42,5 +42,12 @@ export class MemberService {
   logout(): Observable<SampleBack> {
     return this.http.get(this.uri + 'logout')
       .pipe(map(res => res as SampleBack))
+  }
+
+  // daily sign in
+  signin(): Observable<Signin> {
+    const params = new HttpParams({ fromString: queryString.stringify({ type: 1})});
+    return this.http.get(this.uri + 'daily_signin', { params })
+      .pipe(map(res => res as Signin));
   }
 }

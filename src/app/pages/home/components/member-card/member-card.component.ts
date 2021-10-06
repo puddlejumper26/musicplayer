@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { User } from 'src/app/services/data-types/member.type';
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-member-card',
@@ -12,9 +13,19 @@ export class MemberCardComponent implements OnInit {
 
   @Output() openModal = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(
+    private memberServe: MemberService,
+  ) { }
 
   ngOnInit() {
   }
 
+  onSignin() {
+    this.memberServe.signin()
+      .subscribe(res => {
+        console.log('MemberCardComponent - onSignin - res -', res);
+      }, error => {
+        console.log('MemberCardComponent - onSignin - error -', error);
+      })
+  }
 }

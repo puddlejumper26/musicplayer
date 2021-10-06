@@ -14,3 +14,9 @@ export type User = {
     eventCount: number;
   }
 }
+
+export type Signin = {
+  code: number;
+  point?: number;
+  msg?: number;
+}
