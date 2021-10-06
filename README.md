@@ -84,12 +84,14 @@ Better Angular Study
 - `FormBuilder` | `FormGroup` | `[formGroup]` | `(ngSubmit)` | `formControlName` | `SimpleChanges.currentValue`- wy-layer-login.component.ts
 
 
+
+
 ## 3.1.2 Angular [Note]
 
 #### `Interceptor`
 - main functions: Cross-domain requests
 - [【Interceptor】Init and apply](https://github.com/puddlejumper26/musicplayer/commit/2e174f2b617e5dfe8c6b8f111a4a60384bcbab8c)
-- []()
+- [【Interceptor】complete error display through interceptor](https://github.com/puddlejumper26/musicplayer/commit/a304716e0ee6705093b7d98362c9be0fd0b8fe0a)
 - ```ts
   @Injectable()
   export class CommonInterceptor implements HttpInterceptor {
