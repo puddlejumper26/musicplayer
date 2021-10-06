@@ -86,6 +86,31 @@ Better Angular Study
 
 ## 3.1.2 Angular [Note]
 
+#### `Interceptor`
+- []()
+- ```ts
+  @Injectable()
+  export class CommonInterceptor implements HttpInterceptor {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      return next.handle(req.clone({
+        withCredentials: true,
+      }))
+    }
+  }
+  ```
+  ```ts
+  export const httpInterceptorProvides = [
+    { provide: HTTP_INTERCEPTORS, useClass: CommonInterceptor, multi: true }
+  ]
+  ```
+  ```ts
+  @NgModule({
+  declarations: [],
+  imports: [],
+  providers: [httpInterceptorProvides]})
+  export class ServicesModule { }
+  ```
+
 #### `SimpleChanges` 
 - []()
 - ```ts
