@@ -87,14 +87,20 @@ Better Angular Study
 ## 3.1.2 Angular [Note]
 
 #### `Interceptor`
+- main functions: Cross-domain requests
+- [【Interceptor】Init and apply](https://github.com/puddlejumper26/musicplayer/commit/2e174f2b617e5dfe8c6b8f111a4a60384bcbab8c)
 - []()
 - ```ts
   @Injectable()
   export class CommonInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       return next.handle(req.clone({
-        withCredentials: true,
-      }))
+        withCredentials: true,// Cross-domain requests
+      })).pipe(catchError(this.handleError))
+    }
+
+    private handleError(error: HttpErrorResponse): never {
+      throw error.error;
     }
   }
   ```
@@ -623,6 +629,7 @@ Better Angular Study
 - `nzButtonStyle` | `<nz-radio-group>` | `nz-radio-button` | `<nz-pagination>` | `[nzPageSize]` | `[nzPageIndex]` | `[nzTotal]` | `(nzPageIndexChange)` - sheet-list.component.html
 - `<nz-button-group>` | `nz-button` | `nzTheme` | `<nz-tag>` | `[nzData]` | `[nzFrontPagination]` | `nzBordered` | `nzNoResult` | `nzWidth` - sheet-info.component.html 
 - `nz-tooltip` | `[nzTooltipTitle]` | `[nzVisible]` | `nzOverlayClassName` - wy-player.component.html
+- `nz-tooltip` | `nzTitle` | `nzPlacement="bottom"` - member-card.component.html
 
 # 4.0 Commands
 - `ng g c *** -s -t -c=OnPush -v=None` // -s -t -> inline the css and html
