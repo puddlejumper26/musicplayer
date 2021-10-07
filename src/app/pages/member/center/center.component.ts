@@ -5,6 +5,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { BatchActionsService } from './../../../store/batch-actions.service';
 import { User, UserRecord, recordVal, UserSheet } from 'src/app/services/data-types/member.type';
 import { SheetService } from 'src/app/services/sheet.service';
+import { RecordType } from 'src/app/services/member.service';
 
 
 @Component({
@@ -15,8 +16,9 @@ import { SheetService } from 'src/app/services/sheet.service';
 export class CenterComponent implements OnInit {
 
   user: User;
-  userRecord: recordVal[];
-  userSheet: UserSheet
+  records: recordVal[];
+  userSheet: UserSheet;
+  recordType = RecordType.weekData;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +27,7 @@ export class CenterComponent implements OnInit {
   ) {
     this.route.data.pipe(map(res => res.user )).subscribe(([user, userRecord, userSheet]) => {
       this.user = user;
-      this.userRecord = userRecord;
+      this.records = userRecord;
       this.userSheet = userSheet;
     });
   }

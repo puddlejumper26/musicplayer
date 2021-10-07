@@ -1,0 +1,57 @@
+<div class="wy-sec">
+  <div class="u-title wy-sec-wrap clearfix">
+    <h3 class="wy-sec-tit"><span class="f-ff2">Ranks</span></h3>
+    <span class="sub s-fc3">
+      All {{listenSongs}} songs listened!
+    </span>
+    <div class="more tab-type">
+      <span [class.active]="recordType === 1" (click)="onChangeType.emit(1)">Last Week</span>
+      <nz-divider nzType="vertical"></nz-divider>
+      <span [class.active]="recordType === 0" (click)="onChangeType.emit(0)">All Time</span>
+    </div>
+  </div>
+
+  <nz-table
+    class="wy-table"
+    #basicTable
+    [nzData]="records"
+    [nzFrontPagination]="false"
+    nzBordered
+    nzNoResult="No Music!">
+    <thead>
+      <tr>
+        <th nzWidth="80px"></th>
+        <th>Title</th>
+        <th nzWidth="120px">Duration</th>
+        <th nzWidth="80px">Singer</th>
+        <th>Played Times</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of basicTable.data; index as i">
+        <td class="first-col">
+          <span>{{i + 1}}</span>
+          <i class="ico play-song" title="Play" [class.current]="currentIndex === i" (click)="onAddSong.emit([item.song, true])"></i>
+        </td>
+        <td class="song-name">
+          <a [routerLink]="['/songInfo', item.id]">{{item.song.name}}</a>
+        </td>
+        <td class="time-col">
+          <span>{{item.song.dt / 1000 | formatTime}}</span>
+          <p class="icons">
+            <i class="ico add" title="Add" (click)="onAddSong.emit([item.song, false])"></i>
+            <i class="ico like" title="Like" (click)="onLikeSong.emit(item.song.id)"></i>
+            <i class="ico share" title="Share" (click)="onShareSong.emit(item.song)"></i>
+          </p>
+        </td>
+        <td>
+          <ng-container *ngFor="let singer of item.song.ar; last as isLast">
+            <a [routerLink]="['/singer', singer.id]">{{singer.name}}</a>
+            <em [hidden]="isLast">/</em>
+          </ng-container>
+        </td>
+        <td>{{item.playCount}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
