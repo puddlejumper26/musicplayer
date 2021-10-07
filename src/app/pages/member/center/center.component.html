@@ -1,1 +1,77 @@
-<p>center works!</p>
+<div class="user-center wrap feature-wrap">
+  <div class="page-wrap">
+    <div class="m-proifo clearfix">
+      <div class="f-pr">
+        <img [src]="user.profile.avatarUrl" [alt]="user.profile.nickname" />
+      </div>
+      <div class="f-r">
+        <div class="name">
+          <h2 class="clearfix">
+            <span class="tit ellipsis">{{user.profile.nickname}}</span>
+            <p class="lv">
+              <span class="u-lv u-icn2">
+                {{user.level}}<i class="lvright u-icn2"></i>
+              </span>
+            </p>
+            <div class="icn-gender"></div>
+          </h2>
+        </div>
+
+        <ul class="dny clearfix">
+          <li class="fst">
+            <strong class="ellipsis">{{user.profile.eventCount}}</strong>
+            <span>Count</span>
+          </li>
+          <li>
+            <strong class="ellipsis">{{user.profile.follows}}</strong>
+            <span>Follow</span>
+          </li>
+          <li class="lst">
+            <strong class="ellipsis">{{user.profile.followeds}}</strong>
+            <span>Fans</span>
+          </li>
+        </ul>
+        <div class="inf f-brk">{{user.profile.signature}}</div>
+      </div>
+    </div>
+
+    <div class="wy-sec sheets">
+      <div class="u-title wy-sec-wrap clearfix">
+        <h3 class="wy-sec-tit">
+          <span class="f-ff2">Created Sheet - </span>
+          <span class="sub s-fc3">{{userSheet.self.length}}</span>
+        </h3>
+      </div>
+
+      <div class="sheet-list clearfix">
+        <app-single-sheet
+          class="sheet-item"
+          *ngFor="let item of userSheet.self"
+          [sheet]="item"
+          [routerLink]="['/sheetInfo', item.id]"
+          (onPlay)="onPlaySheet($event)">
+        </app-single-sheet>
+      </div>
+    </div>
+
+    <div class="wy-sec sheets">
+      <div class="u-title wy-sec-wrap clearfix">
+        <h3 class="wy-sec-tit">
+          <span class="f-ff2">Subscribed Sheet - </span>
+          <span class="sub s-fc3">{{userSheet.subscribed.length}}</span>
+        </h3>
+      </div>
+
+      <div class="sheet-list clearfix">
+        <app-single-sheet
+        class="sheet-item"
+        *ngFor="let item of userSheet.subscribed"
+        [sheet]="item"
+        [routerLink]="['/sheetInfo', item.id]"
+        (onPlay)="onPlaySheet($event)">
+        </app-single-sheet>
+      </div>
+    </div>
+
+  </div>
+</div>
