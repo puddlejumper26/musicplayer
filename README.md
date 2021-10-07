@@ -90,6 +90,7 @@ Better Angular Study
 
 #### `Interceptor`
 - main functions: Cross-domain requests
+- [Video](https://www.bilibili.com/video/BV1iJ411F7Bf?p=85)
 - [【Interceptor】Init and apply](https://github.com/puddlejumper26/musicplayer/commit/2e174f2b617e5dfe8c6b8f111a4a60384bcbab8c)
 - [【Interceptor】complete error display through interceptor](https://github.com/puddlejumper26/musicplayer/commit/a304716e0ee6705093b7d98362c9be0fd0b8fe0a)
 - ```ts

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { MemberModule } from './member/member.module';
 import { SongInfoModule } from './song-info/song-info.module';
 import { SheetInfoModule } from './sheet-info/sheet-info.module';
 import { HomeModule } from './home/home.module';
@@ -18,14 +19,16 @@ import { SingerModule } from './singer/singer.module';
     SheetInfoModule,
     HomeModule,
     SongInfoModule,
-    SingerModule
+    SingerModule,
+    MemberModule
   ],
   exports: [
     HomeModule,
     SheetListModule,
     SheetInfoModule,
     SongInfoModule,
-    SingerModule
+    SingerModule,
+    MemberModule
   ]
 })
 export class PagesModule { }
