@@ -1,9 +1,11 @@
 import { getPlayer, getCurrentSong } from 'src/app/store/selectors/player.selector';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { select, Store } from '@ngrx/store';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
+import { Subject } from 'rxjs/internal/Subject';
 
 import { findIndex } from 'src/app/utils/array';
 import { AppStoreModule } from 'src/app/store';
@@ -20,7 +22,7 @@ import { Song } from 'src/app/services/data-types/common.types';
   templateUrl: './center.component.html',
   styleUrls: ['./center.component.less']
 })
-export class CenterComponent implements OnInit {
+export class CenterComponent implements OnInit, OnDestroy {
 
   user: User;
   records: recordVal[];
@@ -29,6 +31,7 @@ export class CenterComponent implements OnInit {
   currentSong: Song;
   currentIndex = -1;
 
+  private destroy$ = new Subject();
 
   constructor(
     private route: ActivatedRoute,
@@ -51,7 +54,7 @@ export class CenterComponent implements OnInit {
   }
 
   private listenCurrentSong() {
-    this.store$.pipe(select(getPlayer), select(getCurrentSong)).subscribe( song => {
+    this.store$.pipe(select(getPlayer), select(getCurrentSong), takeUntil(this.destroy$)).subscribe( song => {
       this.currentSong = song;
       if(song) {
         const songs = this.records.map(item => item.song);
@@ -89,4 +92,8 @@ export class CenterComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next(); // after this, the flow would be invalid
+    this.destroy$.complete(); // also need to be completed
+  }
 }

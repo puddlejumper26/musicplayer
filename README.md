@@ -190,6 +190,22 @@ Better Angular Study
   }
   ```
 
+#### `ngDestroy`
+- []()
+- ```ts
+  export class CenterComponent implements OnInit, OnDestroy {
+  
+    private destroy$ = new Subject();
+    
+    this.store$.pipe(select(******), takeUntil(this.destroy$)).subscribe(****);
+    
+    ngOnDestroy(): void {
+      this.destroy$.next(); // after this, the flow would be invalid
+      this.destroy$.complete(); // also need to be completed
+    }
+  }
+  ```
+
 #### `ngSwitch`
 - [【WyLayerLogin】ngSwitch 'loginByPhone' | Default](https://github.com/puddlejumper26/musicplayer/commit/5e8ffadbc19f0df6bdd86a503ad722394bae7595) | [【WyLayerLogin】register to NgSwitch, switch when click 'loginByPhone' ](https://github.com/puddlejumper26/musicplayer/commit/7ae8436f5a5adf297711c7f500cb284cc824b656)
 - ```html
@@ -212,8 +228,6 @@ Better Angular Study
     export function getElementOffset(el: HTMLElement): {top: number, left: number} {}
     ```
 
-  
-
 #### Difference between `TemplateRef` & `ElementRef`
 - `ElementRef` is simply like document.getElementById('myId') - only able to do some decorations - access basic native element present in DOM.
 - ```ts
@@ -232,8 +246,7 @@ Better Angular Study
 - ```ts
   @ViewChild('dot', {static: true}) dotRef: TemplateRef<any>;
   ```
-#### wy-player.component.ts
-- animation
+#### `animation`
 - [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d) | [【Player-ShowHide】isLocked logics for lock](https://github.com/puddlejumper26/musicplayer/commit/ddccd0d57874393f90f47039e027567e166a2073) | [【Player-ShowHide】avoiding shaking when mouseenter | mouseleave](https://github.com/puddlejumper26/musicplayer/commit/13c36248f85ef6dcefa2dcf746770f5b22caae3e) | [【WyLayerModal】animation show | hide modal](https://github.com/puddlejumper26/musicplayer/commit/32f40b34e1ec770aefb63b8ca832dd69f31e5881)
 ```ts
 -----html
@@ -253,7 +266,7 @@ Better Angular Study
 
 #### Renderer2
 - [【WyLayerModal】responsive modal position when center](https://github.com/puddlejumper26/musicplayer/commit/81aa3fa525be1ba3ab68cb67e7179d8d2dc56749) | [【WyLayerModal】remove listener of resize](https://github.com/puddlejumper26/musicplayer/commit/3e656d59135f88db896a00a3b1fe506c72184a4a)
--  ```ts
+- ```ts
   private resizeHandler: () => void; // check the listen method its return to define the type here
 
   constructor(private rd: Renderer2){}
@@ -281,6 +294,7 @@ Better Angular Study
   ngOnDestroy() {
     this.resizeHandler(); // way to remove the listener
   }
+  ```
 
 ## 3.2.1 Angular Material CDK [API]
 - `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`hasBackdrop, positionStrategy, scrollStrategy`| `this.overlay.create().backdropClick()` |`this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
