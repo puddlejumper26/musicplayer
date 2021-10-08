@@ -58,7 +58,7 @@ export class MemberService {
       .pipe(map(res => res as Signin));
   }
 
-  getUserRecord(uid: string, type = RecordType.weekData): Observable<recordVal[]> {
+  getUserRecord(uid: string, type = RecordType.allData): Observable<recordVal[]> {
     const params = new HttpParams({ fromString: queryString.stringify({ uid, type}) });
     return this.http.get(this.uri + 'user/record', { params })
       .pipe(map((res: UserRecord) => res[records[type]]))

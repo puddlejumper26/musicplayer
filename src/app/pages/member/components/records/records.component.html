@@ -5,9 +5,9 @@
       All {{listenSongs}} songs listened!
     </span>
     <div class="more tab-type">
-      <span [class.active]="recordType === 1" (click)="onChangeType.emit(1)">Last Week</span>
-      <nz-divider nzType="vertical"></nz-divider>
       <span [class.active]="recordType === 0" (click)="onChangeType.emit(0)">All Time</span>
+      <nz-divider nzType="vertical"></nz-divider>
+      <span [class.active]="recordType === 1" (click)="onChangeType.emit(1)">Last Week</span>
     </div>
   </div>
 

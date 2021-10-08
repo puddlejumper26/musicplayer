@@ -39,6 +39,7 @@
       [records]="records"
       [recordType]="recordType"
       [listenSongs]="user.listenSongs"
+      (onChangeType)="onChangeType($event)"
       ></app-records>
 
     <a class="look-more" [routerLink]="['records', user.profile.userId]">More >>></a>
