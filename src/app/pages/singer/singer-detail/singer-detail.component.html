@@ -67,7 +67,15 @@
 
   <div class="dt-right">
     <div class="right-wrap">
-      <h3>Similar Songs</h3>
+      <h3>Similar Singers</h3>
+      <ul class="clearfix" >
+        <li *ngFor="let singer of simiSingers" [routerLink]="['/singer', singer.id]">
+          <div class="pic">
+            <img [src]="singer.picUrl" [alt]="singer.name">
+          </div>
+          <p class="ellipsis">{{singer.name}}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/internal/operators';
 import { Subject } from 'rxjs/internal/Subject';
 
 import { AppStoreModule } from './../../../store/index';
-import { SingerDetail, Song } from 'src/app/services/data-types/common.types';
+import { Singer, SingerDetail, Song } from 'src/app/services/data-types/common.types';
 import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.selector';
 import { SongService } from 'src/app/services/song.service';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
@@ -21,6 +21,7 @@ import { findIndex } from 'src/app/utils/array';
 export class SingerDetailComponent implements OnInit, OnDestroy {
 
   singerDetail: SingerDetail;
+  simiSingers: Singer[];
   currentSong: Song;
   currentIndex = -1;
 
@@ -33,9 +34,11 @@ export class SingerDetailComponent implements OnInit, OnDestroy {
     private batchActionsServe: BatchActionsService,
     private nzMessageServe: NzMessageService
     ) {
-    this.route.data.pipe(map(res => res.singerDetail)).subscribe(res => {
-      // console.log('SingerDetailComponent - constructor - res - ', res)
-      this.singerDetail = res;
+    this.route.data.pipe(map(res => res.singerDetail)).subscribe(([singerDetail, simiSingers]) => {
+      // console.log('SingerDetailComponent - constructor - singerDetail - ', singerDetail)
+      // console.log('SingerDetailComponent - constructor - simiSingers - ', simiSingers)
+      this.singerDetail = singerDetail;
+      this.simiSingers = simiSingers;
     });
     this.listenCurrent();
   }
