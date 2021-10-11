@@ -7,9 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WyLayerDefaultComponent } from './wy-layer-default/wy-layer-default.component';
 import { WyLayerModalComponent } from './wy-layer-modal/wy-layer-modal.component';
 import { WyLayerLoginComponent } from './wy-layer-login/wy-layer-login.component';
+import { WyLayerLikeComponent } from './wy-layer-like/wy-layer-like.component';
 
 @NgModule({
-  declarations: [WyLayerModalComponent, WyLayerDefaultComponent, WyLayerLoginComponent],
+  declarations: [WyLayerModalComponent, WyLayerDefaultComponent, WyLayerLoginComponent, WyLayerLikeComponent],
   imports: [
     CommonModule,
     NzButtonModule,
@@ -24,6 +25,6 @@ import { WyLayerLoginComponent } from './wy-layer-login/wy-layer-login.component
     NzFormModule,
     FormsModule
   ],
-  exports: [WyLayerModalComponent, WyLayerDefaultComponent, WyLayerLoginComponent]
+  exports: [WyLayerModalComponent, WyLayerDefaultComponent, WyLayerLoginComponent, WyLayerLikeComponent]
 })
 export class WyLayerModule { }

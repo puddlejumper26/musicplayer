@@ -31,7 +31,7 @@
               <button class="add" nz-button nzType="primary" (click)="onAddSongs(sheetInfo.tracks)">+</button>
             </nz-button-group>
             <button class="btn like" nz-button>
-              <span>Save</span>({{sheetInfo.subscribedCount}})
+              <span>Like</span>({{sheetInfo.subscribedCount}})
             </button>
             <button class="btn share" nz-button>
               <span>Share</span>({{sheetInfo.shareCount}})
@@ -103,7 +103,7 @@
                 <span>{{item.dt/1000 | formatTime}}</span>
                 <p class="icons">
                   <i class="ico add" title="Add" (click)="onAddSong(item)"></i>
-                  <i class="ico like" title="Save"></i>
+                  <i class="ico like" title="Like" (click)="onLikeSong(item.id.toString())"></i>
                   <i class="ico share" title="Share"></i>
                 </p>
               </td>

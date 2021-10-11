@@ -13,6 +13,7 @@ import { takeUntil } from 'rxjs/internal/operators';
 import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.selector';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { findIndex } from 'src/app/utils/array';
+import { ModalTypes } from 'src/app/store/reducers/member.reducer';
 
 @Component({
   selector: 'app-sheet-info',
@@ -124,6 +125,10 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
         }
       }
     })
+  }
+
+  onLikeSong(id: string) {
+    this.batchActionsServe.controlModal(true, ModalTypes.Like)
   }
 
   ngOnDestroy(): void {
