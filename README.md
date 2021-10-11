@@ -1,6 +1,6 @@
 <h1 align="center">Music Player</h1>
 
-# Category
+<h1 id="category">Category</h1>
 [1.0 Purpose](https://github.com/puddlejumper26/musicplayer#10-purpose)
 [2.0 Environment & Installation](https://github.com/puddlejumper26/musicplayer#20-enviroment--installation)
     - [2.1 Environment](https://github.com/puddlejumper26/musicplayer#21-environment)
@@ -84,6 +84,7 @@ Better Angular Study
 - `FormBuilder` | `FormGroup` | `[formGroup]` | `(ngSubmit)` | `formControlName` | `SimpleChanges.currentValue`- wy-layer-login.component.ts
 
 
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 
 ## 3.1.2 Angular [Note]
@@ -119,6 +120,7 @@ Better Angular Study
   providers: [httpInterceptorProvides]})
   export class ServicesModule { }
   ```
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 #### `SimpleChanges` 
 - []()
@@ -140,6 +142,8 @@ Better Angular Study
     }
   }
   ```
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
   
 #### `Form` responsive
 - [【WyLayerLogin-Form】add responsive form](https://github.com/puddlejumper26/musicplayer/commit/2d1688d6e4c875b08337e1e0c85f880e6ceeee90) | [【WyLayerLogin-Form】add form validation](https://github.com/puddlejumper26/musicplayer/commit/608ea578ba7c30bd20b36f3895071f25d4cb390a)
@@ -190,6 +194,8 @@ Better Angular Study
   }
   ```
 
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 #### `ngDestroy`
 - []()
 - ```ts
@@ -205,6 +211,8 @@ Better Angular Study
     }
   }
   ```
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 #### `ngSwitch`
 - [【WyLayerLogin】ngSwitch 'loginByPhone' | Default](https://github.com/puddlejumper26/musicplayer/commit/5e8ffadbc19f0df6bdd86a503ad722394bae7595) | [【WyLayerLogin】register to NgSwitch, switch when click 'loginByPhone' ](https://github.com/puddlejumper26/musicplayer/commit/7ae8436f5a5adf297711c7f500cb284cc824b656)
@@ -246,6 +254,8 @@ Better Angular Study
 - ```ts
   @ViewChild('dot', {static: true}) dotRef: TemplateRef<any>;
   ```
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>  
 #### `animation`
 - [【Player-ShowHide】ng-animation show-hide](https://github.com/puddlejumper26/musicplayer/commit/696b9af9c5241302bf6825b94f6469446088de3d) | [【Player-ShowHide】isLocked logics for lock](https://github.com/puddlejumper26/musicplayer/commit/ddccd0d57874393f90f47039e027567e166a2073) | [【Player-ShowHide】avoiding shaking when mouseenter | mouseleave](https://github.com/puddlejumper26/musicplayer/commit/13c36248f85ef6dcefa2dcf746770f5b22caae3e) | [【WyLayerModal】animation show | hide modal](https://github.com/puddlejumper26/musicplayer/commit/32f40b34e1ec770aefb63b8ca832dd69f31e5881)
 ```ts
@@ -263,6 +273,8 @@ Better Angular Study
     transition('hide=>show', [animate('0.1s')])
   ])]
 ``` 
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 #### Renderer2
 - [【WyLayerModal】responsive modal position when center](https://github.com/puddlejumper26/musicplayer/commit/81aa3fa525be1ba3ab68cb67e7179d8d2dc56749) | [【WyLayerModal】remove listener of resize](https://github.com/puddlejumper26/musicplayer/commit/3e656d59135f88db896a00a3b1fe506c72184a4a)
@@ -296,11 +308,15 @@ Better Angular Study
   }
   ```
 
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 ## 3.2.1 Angular Material CDK [API]
 - `Overlay` | `this.overlay.create()` | `this.overlay.position().flexibleConnectedTo().withPositions().withLockedPosition()` | `scrollStrategy.reposition()` |`hasBackdrop, positionStrategy, scrollStrategy`| `this.overlay.create().backdropClick()` |`this.overlay.create().attach()` | `this.overlay.create().hasAttached` | `this.overlay.create().dispose()` | `new ComponentPortal()` | - `ViewContainerRef` | wy-search.component.ts
 - `entryComponents` - wy-search.module.ts
 - `private scrollStrategy: BlockScrollStrategy` | `this.scrollStrategy = overlay.scrollStrategies.block()` | `this.scrollStrategy.enable()` | `this.scrollStrategy.disable()` | `OverlayContainer` - wy-layer-modal.component.ts
 - `cdkDrag` | `cdkDrapHandle` | `cdkDragBoundary`- wy-layer-modal.component.html
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 ## 3.2.1 Angular Material CDK [Note]
 
@@ -320,6 +336,8 @@ Better Angular Study
   ],
   export class WyLayerModule { }
   ``` 
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 #### `Overlay`
 - [【WyLayerModal】close click event on background when modal is open](https://github.com/puddlejumper26/musicplayer/commit/00f3f0cfb1c328a9ad50bc9345e6214e9529ab97) | [【WyLayerModal-NGRX】panel show|hide logics through NGRX](https://github.com/puddlejumper26/musicplayer/commit/892020cefe6d4a14300309d976a33b8bbe98f0b9)
@@ -373,6 +391,9 @@ Better Angular Study
     }
   }
   ```
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 #### BlockScrollStrategy
 - [【WyLayerModal】block scroll of homepage when modal is open](https://github.com/puddlejumper26/musicplayer/commit/138faa357fd29902b2cce7cfc45ad82e553745f1)
 - ```ts
@@ -395,6 +416,8 @@ Better Angular Study
   this.scrollStrategy.disable();
   ```
 
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 ## 3.3.1 rxjs [API]
 - `forkJoin` | `combineLatest` - home-resolve.service.ts
 - `new Observale(obsever => obsever.next())` | `Observale.create(obsever => obsever.next())` - song.service.ts
@@ -403,6 +426,8 @@ Better Angular Study
 - `Subscription` | `fromEvent` - wy-player.component.ts
 - `timer()` - wy-scroll.component.ts | wy-player-panel.component.ts | wy-lyric.ts
 - `fromEvent()` | `pluck()` | `debounceTime()` | `distinctUntilChanged()` - wy-search.component.ts 
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 ## 3.3.2 rxjs [Note]
 
@@ -422,6 +447,8 @@ Better Angular Study
 - `(click)` | `(mousedown)` - wy-search-panel.component.html
 - `KeyboardEvent` - wy-layer-panel.component.ts
 - `Base64` - base64.ts
+
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 ## 3.4.2 Web && JS [Note]
 
@@ -462,6 +489,8 @@ Better Angular Study
 #### `HTMLElement` & `HTMLDivElement`
 - `HTMLDivElement` interface extends from `HTMLElement`
 
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 #### `Document` & `DOCUMENT (Angular)` & `window` & `Window & `document`
 - `Document` 
 - - Interface
@@ -499,6 +528,7 @@ Better Angular Study
     window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth;
     ```
 
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 
 #### wy-player.component
 - Angular animation
@@ -637,6 +667,8 @@ Better Angular Study
     }
     ```
 
+<h4 align="right"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 ## 3.6 Ant Design Angular | BetterScroll
 - `[nzSuffix]`| `nz-input-group` | `nz-layout` | `nz-header` | `nz-menu` | `nzTheme` | `nz-menu-item` | `nz-submenu` | `nz-icon` | `nz-footer` | `nzMode` | `nzSuffixIcon` | `nz-Input` - app.component.html
 - `[nzDotRender]` - home.component.html
@@ -654,9 +686,16 @@ Better Angular Study
 # 5.0 Demo
 Homepage
 ![](https://user-images.githubusercontent.com/80747582/133734382-698c7f59-7565-4c51-8f8d-964b32488b9d.png)
+<h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 Player Panel
+<h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 Sheet List(Album Sheet)
+<h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 Singer List
+<h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 Singer Detail
+<h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 Song Detail
+<h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
 Login
+<h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
