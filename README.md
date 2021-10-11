@@ -1,6 +1,7 @@
 <h1 align="center">Music Player</h1>
 
 <h1 id="category">Category</h1>
+
 [1.0 Purpose](https://github.com/puddlejumper26/musicplayer#10-purpose)
 [2.0 Environment & Installation](https://github.com/puddlejumper26/musicplayer#20-enviroment--installation)
     - [2.1 Environment](https://github.com/puddlejumper26/musicplayer#21-environment)
