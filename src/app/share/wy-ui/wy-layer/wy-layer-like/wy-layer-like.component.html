@@ -6,7 +6,7 @@
     </div>
     <nz-list [nzDataSource]="mySheets" nzItemLayout="horizontal" [nzRenderItem]="itemTpl">
       <ng-template #itemTpl let-item>
-        <nz-list-item class="list-item">
+        <nz-list-item class="list-item" (click)="onLike(item.id.toString())">
           <nz-list-item-meta
             [nzTitle]="nzTitle"
             [nzDescription]="item.trackCount"

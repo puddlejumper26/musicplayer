@@ -35,4 +35,7 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
     }
   }
 
+  onLike(id: string) {
+  }
+
 }
