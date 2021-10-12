@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher, OverlayContainer } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2, Inject, Output, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { WINDOW } from 'src/app/services/services.module';
@@ -33,6 +33,8 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   private overlayContainerEl: HTMLElement;
 
   @ViewChild('modalContainer', { static: false }) private modalRef: ElementRef;
+
+  @Output() onLoadMySheets = new EventEmitter<void>();
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -125,6 +127,9 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
 
   private watchModalType(type: ModalTypes) {
     if(this.currentModalType !== type){
+      if(type === ModalTypes.Like) {
+        this.onLoadMySheets.emit();
+      }
       this.currentModalType = type;
       this.cdr.markForCheck();
     }

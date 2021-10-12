@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd';
 
-import { SetModalType, SetUserId } from './store/actions/member.actions';
+import { SetModalType, SetModalVisible, SetUserId } from './store/actions/member.actions';
 import { isEmptyObject } from 'src/app/utils/tool';
 import { StorageService } from './services/storage.service';
 import { User } from './services/data-types/member.type';
 import { BatchActionsService } from './store/batch-actions.service';
 import { ModalTypes } from './store/reducers/member.reducer';
 import { AppStoreModule } from './store/index';
-import { SearchResult } from './services/data-types/common.types';
+import { SearchResult, SongSheet } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { MemberService } from './services/member.service';
@@ -24,6 +24,7 @@ export class AppComponent {
   title = 'musicplayer';
   user: User;
   wyRememberLogin: LoginParams;
+  mySheets: SongSheet[];
 
   menu=[{
     label: 'Find',
@@ -88,6 +89,18 @@ export class AppComponent {
       })
     }
     return result;
+  }
+
+  //obtain current user songsheet
+  onLoadMySheets() {
+    if(this.user){
+      this.memberServe.getUserSheets(this.user.profile.userId.toString()).subscribe(userSheet => {
+        this.mySheets = userSheet.self;
+        this.store$.dispatch(SetModalVisible({ modalVisible: true }))
+      })
+    } else {
+      this.openModal(ModalTypes.Default)
+    }
   }
 
   onChangeModalType(modalType = ModalTypes.Default) {

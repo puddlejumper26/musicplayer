@@ -124,4 +124,8 @@ export class BatchActionsService {
     }
     this.store$.dispatch(SetModalVisible({ modalVisible: visible }));
   }
+
+  likeSong(id: string) {
+    this.store$.dispatch(SetModalType({ modalType: ModalTypes.Like }))
+  }
 }
