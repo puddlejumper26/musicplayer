@@ -128,7 +128,7 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
   }
 
   onLikeSong(id: string) {
-    this.batchActionsServe.controlModal(true, ModalTypes.Like)
+    this.batchActionsServe.likeSong(id);
   }
 
   ngOnDestroy(): void {

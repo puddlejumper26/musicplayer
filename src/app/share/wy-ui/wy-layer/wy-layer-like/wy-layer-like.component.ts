@@ -1,6 +1,9 @@
+import { getMember, getLikeId } from './../../../../store/selectors/member.selector';
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 
 import { SongSheet } from 'src/app/services/data-types/common.types';
+import { AppStoreModule } from 'src/app/store';
 
 @Component({
   selector: 'app-wy-layer-like',
@@ -12,7 +15,16 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
 
   @Input() mySheets: SongSheet[];
 
-  constructor() { }
+  private likeId: string;
+
+  constructor(private store$: Store<AppStoreModule>) {
+    this.store$.pipe(select(getMember), select(getLikeId)).subscribe(id => {
+      console.log('WyLayerLikeComponent - constructore - id - ', id);
+      if(id) {
+        this.likeId = id;
+      }
+    })
+  }
 
   ngOnInit() {
   }

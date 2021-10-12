@@ -91,7 +91,7 @@ Better Angular Study
 ## 3.1.2 Angular [Note]
 
 #### `<ng-template>`
-- []()
+- [【WyLayerLike-WyLayerModal】add content into template <ng-template>](https://github.com/puddlejumper26/musicplayer/commit/cef912545738f479017e7f196260186d02ee33d3)
 - ```html
   <nz-list [nzDataSource]="mySheets" nzItemLayout="horizontal" [nzRenderItem]="itemTpl">
     <ng-template #itemTpl let-item>  (item is the every single value from my sheet)

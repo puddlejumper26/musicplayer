@@ -1,4 +1,4 @@
-import { SetModalType, SetModalVisible } from './actions/member.actions';
+import { SetModalType, SetModalVisible, SetLikeId } from './actions/member.actions';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
@@ -126,6 +126,7 @@ export class BatchActionsService {
   }
 
   likeSong(id: string) {
-    this.store$.dispatch(SetModalType({ modalType: ModalTypes.Like }))
+    this.store$.dispatch(SetModalType({ modalType: ModalTypes.Like }));
+    this.store$.dispatch(SetLikeId({ likeId: id }));
   }
 }
