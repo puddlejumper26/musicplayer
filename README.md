@@ -90,6 +90,23 @@ Better Angular Study
 
 ## 3.1.2 Angular [Note]
 
+#### `<ng-template>`
+- []()
+- ```html
+  <nz-list [nzDataSource]="mySheets" nzItemLayout="horizontal" [nzRenderItem]="itemTpl">
+    <ng-template #itemTpl let-item>  (item is the every single value from my sheet)
+      <nz-list-item class="list-item">
+        <nz-list-item-meta
+          [nzTitle]="nzTitle">
+          <ng-template #nzTitle>
+            <span>{{item.name}}</span>
+          </ng-template>
+        </nz-list-item-meta>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+  ```
+
 #### `Interceptor`
 - main functions: Cross-domain requests
 - [Video](https://www.bilibili.com/video/BV1iJ411F7Bf?p=85)
@@ -680,6 +697,7 @@ Better Angular Study
 - `<nz-button-group>` | `nz-button` | `nzTheme` | `<nz-tag>` | `[nzData]` | `[nzFrontPagination]` | `nzBordered` | `nzNoResult` | `nzWidth` - sheet-info.component.html 
 - `nz-tooltip` | `[nzTooltipTitle]` | `[nzVisible]` | `nzOverlayClassName` - wy-player.component.html
 - `nz-tooltip` | `nzTitle` | `nzPlacement="bottom"` - member-card.component.html
+- `[nzDataSource]` | `nzItemLayout` | `[nzRenderItem]` | `[nzTitle]` | `[nzDescription]` | `[nzAvatar]` - wy-layer-like.component.html
 
 # 4.0 Commands
 - `ng g c *** -s -t -c=OnPush -v=None` // -s -t -> inline the css and html

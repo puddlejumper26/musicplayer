@@ -1,1 +1,22 @@
-<p>wy-layer-like works!</p>
+<div class="like">
+  <div class="sheet-list">
+    <div class="header">
+      <i nz-icon nzType="folder-add" nzTheme="outline"></i>
+      <span>New Song Sheet</span>
+    </div>
+    <nz-list [nzDataSource]="mySheets" nzItemLayout="horizontal" [nzRenderItem]="itemTpl">
+      <ng-template #itemTpl let-item>
+        <nz-list-item class="list-item">
+          <nz-list-item-meta
+            [nzTitle]="nzTitle"
+            [nzDescription]="item.trackCount"
+            [nzAvatar]="item.coverImgUrl">
+            <ng-template #nzTitle>
+              <span>{{item.name}}</span>
+            </ng-template>
+          </nz-list-item-meta>
+        </nz-list-item>
+      </ng-template>
+    </nz-list>
+  </div>
+</div>
