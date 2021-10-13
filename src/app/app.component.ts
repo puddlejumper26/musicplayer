@@ -12,7 +12,7 @@ import { AppStoreModule } from './store/index';
 import { SearchResult, SongSheet } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
-import { MemberService } from './services/member.service';
+import { LikeSongParams, MemberService } from './services/member.service';
 import { codeJson } from './utils/base64';
 import { getLikeId, getMember, getModalType, getModalVisible } from './store/selectors/member.selector';
 
@@ -196,5 +196,9 @@ export class AppComponent {
     }, error => {
       this.alertMessage('error', ('Error code: ' + error.error.code) || 'Log Out Failed!');
     });
+  }
+
+  onLikeSong(args: LikeSongParams) {
+    console.log('AppComponent - onLikeSong - args -', args);
   }
 }

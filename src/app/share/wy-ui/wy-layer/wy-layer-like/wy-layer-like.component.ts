@@ -1,9 +1,7 @@
-import { getMember, getLikeId } from './../../../../store/selectors/member.selector';
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 import { SongSheet } from 'src/app/services/data-types/common.types';
-import { AppStoreModule } from 'src/app/store';
+import { LikeSongParams } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-wy-layer-like',
@@ -15,6 +13,8 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
 
   @Input() mySheets: SongSheet[];
   @Input() likeId: string;
+
+  @Output() onLikeSong = new EventEmitter<LikeSongParams>();
 
   constructor() {}
 
@@ -30,7 +30,8 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
     }
   }
 
-  onLike(id: string) {
+  onLike(pid: string) {
+    this.onLikeSong.emit({ pid, tracks: this.likeId });
   }
 
 }
