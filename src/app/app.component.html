@@ -97,7 +97,7 @@
 <!-- Music Player Component -->
 <app-wy-player></app-wy-player>
 
-<app-wy-layer-modal (onLoadMySheets)="onLoadMySheets()">
+<app-wy-layer-modal [visible]="visible" [currentModalType]="currentModalType" (onLoadMySheets)="onLoadMySheets()">
   <app-wy-layer-login name="login" [wyRememberLogin]="wyRememberLogin" (onLogin)="onLogin($event)" (onChangeModalType)="onChangeModalType($event)"></app-wy-layer-login>
   <app-wy-layer-like [likeId]="likeId" name="like" [mySheets]="mySheets"></app-wy-layer-like>
   <app-wy-layer-default (onChangeModalType)="onChangeModalType($event)"></app-wy-layer-default>

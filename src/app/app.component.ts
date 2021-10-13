@@ -14,7 +14,7 @@ import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { MemberService } from './services/member.service';
 import { codeJson } from './utils/base64';
-import { getLikeId, getMember } from './store/selectors/member.selector';
+import { getLikeId, getMember, getModalType, getModalVisible } from './store/selectors/member.selector';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +28,8 @@ export class AppComponent {
   mySheets: SongSheet[];
 
   likeId: string;
+  visible = false;
+  currentModalType = ModalTypes.Default;
 
   menu=[{
     label: 'Find',
@@ -71,14 +73,29 @@ export class AppComponent {
 
   private listenStates() {
     const appStore$ = this.store$.pipe(select(getMember));
-    appStore$.pipe(select(getLikeId)).subscribe(id => {
-      this.watchLikeId(id)
-    });
+    appStore$.pipe(select(getLikeId)).subscribe(id => this.watchLikeId(id));
+    appStore$.pipe(select(getModalVisible)).subscribe(visib => this.watchModalVisible(visib));
+    appStore$.pipe(select(getModalType)).subscribe(type => this.watchModalType(type));
   }
 
   private watchLikeId(id: string) {
     if(id) {
       this.likeId = id;
+    }
+  }
+
+  private watchModalVisible(visib: boolean) {
+    if(this.visible !== visib){
+      this.visible = visib;
+    }
+  }
+
+  private watchModalType(type: ModalTypes) {
+    if(this.currentModalType !== type){
+      if(type === ModalTypes.Like) {
+        this.onLoadMySheets();
+      }
+      this.currentModalType = type;
     }
   }
 

@@ -1,14 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Overlay, OverlayRef, BlockScrollStrategy, OverlayKeyboardDispatcher, OverlayContainer } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2, Inject, Output, EventEmitter } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild, AfterViewInit, Renderer2, Inject, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { WINDOW } from 'src/app/services/services.module';
-import { AppStoreModule } from 'src/app/store';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { ModalTypes } from 'src/app/store/reducers/member.reducer';
-import { getMember, getModalVisible, getModalType } from './../../../../store/selectors/member.selector';
 
 @Component({
   selector: 'app-wy-layer-modal',
@@ -21,12 +18,13 @@ import { getMember, getModalVisible, getModalType } from './../../../../store/se
     transition('show <=> hide', animate('0.1s')),
   ])],
 })
-export class WyLayerModalComponent implements OnInit, AfterViewInit {
+export class WyLayerModalComponent implements OnInit, AfterViewInit, OnChanges {
 
   showModal = 'hide';
-  currentModalType = ModalTypes.Default;
 
-  private visible = false;
+  @Input() currentModalType = ModalTypes.Default;
+  @Input() visible = false;
+
   private overlayRef: OverlayRef;
   private scrollStrategy: BlockScrollStrategy;
   private resizeHandler: () => void; // check the listen method its return to define the type here
@@ -39,7 +37,6 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     @Inject(WINDOW) private win: Window,
-    private store$: Store<AppStoreModule>,
     private overlay: Overlay,
     private elementRef: ElementRef,
     private overlayKeyboardDispatcher: OverlayKeyboardDispatcher,
@@ -48,15 +45,6 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
     private rd: Renderer2,
     private overlayContainerServe: OverlayContainer,
   ) {
-    const appStore$ = this.store$.pipe(select(getMember));
-    appStore$.pipe(select(getModalVisible)).subscribe(visib => {
-      console.log('WyLayerModalComponent - constructore - visib - ', visib);
-      this.watchModalVisible(visib);
-    });
-    appStore$.pipe(select(getModalType)).subscribe(type => {
-      // console.log('WyLayerModalComponent - constructore - type - ', type);
-      this.watchModalType(type);
-    });
     this.scrollStrategy = this.overlay.scrollStrategies.block();
   }
 
@@ -65,6 +53,13 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
     this.overlayContainerEl = this.overlayContainerServe.getContainerElement();
     // console.log('WyLayerModalComponent - ngAfterViewInit - this.overlayContainerEl - ', this.overlayContainerEl);
     this.listenResizeToCenter();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['visible'] && !changes['visible'].firstChange) {
+      console.log('WyLayerComponent - ngOnChanges - visible -', this.visible)
+      this.handleVisibleChange(this.visible)
+    }
   }
 
   private listenResizeToCenter() {
@@ -115,23 +110,6 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit {
     // console.log('WyLayerModalComponent - keydownListener - evt -', evt);
     if(evt.key === 'Escape'){
       this.hide();
-    }
-  }
-
-  private watchModalVisible(visib: boolean) {
-    if(this.visible !== visib){
-      this.visible = visib;
-      this.handleVisibleChange(visib);
-    }
-  }
-
-  private watchModalType(type: ModalTypes) {
-    if(this.currentModalType !== type){
-      if(type === ModalTypes.Like) {
-        this.onLoadMySheets.emit();
-      }
-      this.currentModalType = type;
-      this.cdr.markForCheck();
     }
   }
 
