@@ -14,17 +14,9 @@ import { AppStoreModule } from 'src/app/store';
 export class WyLayerLikeComponent implements OnInit, OnChanges {
 
   @Input() mySheets: SongSheet[];
+  @Input() likeId: string;
 
-  private likeId: string;
-
-  constructor(private store$: Store<AppStoreModule>) {
-    this.store$.pipe(select(getMember), select(getLikeId)).subscribe(id => {
-      console.log('WyLayerLikeComponent - constructore - id - ', id);
-      if(id) {
-        this.likeId = id;
-      }
-    })
-  }
+  constructor() {}
 
   ngOnInit() {
   }
@@ -32,6 +24,9 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['mySheets']) {
       console.log('WyLayerLikeComponent - ngOnChanges - changes["mySheets"] - ', changes['mySheets'].currentValue);
+    }
+    if(changes['likeId']) {
+      console.log('WyLayerLikeComponent - ngOnChanges - changes["likeId"] - ', changes['likeId'].currentValue);
     }
   }
 

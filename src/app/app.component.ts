@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { SetModalType, SetModalVisible, SetUserId } from './store/actions/member.actions';
@@ -14,6 +14,7 @@ import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { MemberService } from './services/member.service';
 import { codeJson } from './utils/base64';
+import { getLikeId, getMember } from './store/selectors/member.selector';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,8 @@ export class AppComponent {
   user: User;
   wyRememberLogin: LoginParams;
   mySheets: SongSheet[];
+
+  likeId: string;
 
   menu=[{
     label: 'Find',
@@ -61,6 +64,21 @@ export class AppComponent {
         this.alertMessage('warn', error);
         console.log(error)
       }
+    }
+
+    this.listenStates();
+  }
+
+  private listenStates() {
+    const appStore$ = this.store$.pipe(select(getMember));
+    appStore$.pipe(select(getLikeId)).subscribe(id => {
+      this.watchLikeId(id)
+    });
+  }
+
+  private watchLikeId(id: string) {
+    if(id) {
+      this.likeId = id;
     }
   }
 
