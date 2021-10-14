@@ -118,7 +118,7 @@ export class BatchActionsService {
 
   // membership login tab show | hide
   // default is to show
-  controlModal(visible = true, modalType?: ModalTypes) {
+  controlModal(visible = true, modalType = ModalTypes.Default) {
     if(modalType) {
       this.store$.dispatch(SetModalType({ modalType }));
     }
