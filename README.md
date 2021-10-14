@@ -91,7 +91,7 @@ Better Angular Study
 ## 3.1.2 Angular [Note]
 
 #### `Use same template for two displays`
-- []()
+- [【WyLayerLike】switch add new sheet name template and obtain](https://github.com/puddlejumper26/musicplayer/commit/1ff9f434f695dd174b2837ad96fd5fd7295a5075)
 - ```html
   <div class="sheet-list" *ngIf="!creating else createSheet">
     <button (click)="creating = true"> New Song Sheet </button>

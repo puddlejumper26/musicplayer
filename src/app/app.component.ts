@@ -207,4 +207,8 @@ export class AppComponent {
       this.alertMessage('error', error.msg || 'Save Failed!');
     })
   }
+
+  onCreateSheet(sheetName: string) {
+    console.log('AppComponent - onCreateSheet - sheetName - ', sheetName);
+  }
 }

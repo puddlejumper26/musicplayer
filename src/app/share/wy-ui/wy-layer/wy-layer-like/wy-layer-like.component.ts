@@ -16,6 +16,7 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
   @Input() likeId: string;
 
   @Output() onLikeSong = new EventEmitter<LikeSongParams>();
+  @Output() onCreateSheet = new EventEmitter<string>();
 
   creating = false;
   formModel: FormGroup;
@@ -43,7 +44,8 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    console.log('WyLayerLikeComponent - onSubmit - this.formModel.value - ', this.formModel.value);
+    // console.log('WyLayerLikeComponent - onSubmit - this.formModel.value - ', this.formModel.value);
+    this.onCreateSheet.emit(this.formModel.get('sheetName').value)
   }
 
 }
