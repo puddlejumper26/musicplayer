@@ -90,6 +90,28 @@ Better Angular Study
 
 ## 3.1.2 Angular [Note]
 
+#### `Use same template for two displays`
+- []()
+- ```html
+  <div class="sheet-list" *ngIf="!creating else createSheet">
+    <button (click)="creating = true"> New Song Sheet </button>
+    <div>Existing Song Sheets
+      <li>.....</li>
+    </div>
+  </div>
+
+  <ng-template #createSheet>
+    <div class="create-sheet">
+      <input>Input new Sheet Name
+      <button class="btn-back" (click)="creating = false">Return</button>
+    </div>
+  </ng-template>
+  ```
+  ```ts
+  creating = false;
+  ```
+
+
 #### `<ng-template>`
 - [【WyLayerLike-WyLayerModal】add content into template <ng-template>](https://github.com/puddlejumper26/musicplayer/commit/cef912545738f479017e7f196260186d02ee33d3)
 - ```html

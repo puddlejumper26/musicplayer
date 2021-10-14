@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SongSheet } from 'src/app/services/data-types/common.types';
 import { LikeSongParams } from 'src/app/services/member.service';
@@ -16,7 +17,14 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
 
   @Output() onLikeSong = new EventEmitter<LikeSongParams>();
 
-  constructor() {}
+  creating = false;
+  formModel: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.formModel = this.fb.group({
+      sheetName: ['', [Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }
@@ -32,6 +40,10 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
 
   onLike(pid: string) {
     this.onLikeSong.emit({ pid, tracks: this.likeId });
+  }
+
+  onSubmit() {
+    console.log('WyLayerLikeComponent - onSubmit - this.formModel.value - ', this.formModel.value);
   }
 
 }
