@@ -1,6 +1,7 @@
 import { SetModalType, SetModalVisible, SetLikeId } from './actions/member.actions';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { timer } from 'rxjs/internal/observable/timer';
 
 import { CurrentActions, PlayState } from 'src/app/store/reducers/player.reducer';
 import { AppStoreModule } from 'src/app/store';
@@ -118,11 +119,14 @@ export class BatchActionsService {
 
   // membership login tab show | hide
   // default is to show
-  controlModal(visible = true, modalType = ModalTypes.Default) {
+  controlModal(visible = true, modalType?: ModalTypes) {
     if(modalType) {
       this.store$.dispatch(SetModalType({ modalType }));
     }
     this.store$.dispatch(SetModalVisible({ modalVisible: visible }));
+    if(!visible) {
+      timer(500).subscribe(() => this.store$.dispatch(SetModalType({ modalType: ModalTypes.Default})));
+    }
   }
 
   likeSong(id: string) {
