@@ -200,5 +200,11 @@ export class AppComponent {
 
   onLikeSong(args: LikeSongParams) {
     console.log('AppComponent - onLikeSong - args -', args);
+    this.memberServe.likeSong(args).subscribe(() => {
+      this.batchActionsServe.controlModal(false);
+      this.alertMessage('success', 'Successfully saved!')
+    }, error => {
+      this.alertMessage('error', error.msg || 'Save Failed!');
+    })
   }
 }
