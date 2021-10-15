@@ -14,6 +14,7 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
 
   @Input() mySheets: SongSheet[];
   @Input() likeId: string;
+  @Input() visible: boolean;
 
   @Output() onLikeSong = new EventEmitter<LikeSongParams>();
   @Output() onCreateSheet = new EventEmitter<string>();
@@ -36,6 +37,12 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
     }
     if(changes['likeId']) {
       // console.log('WyLayerLikeComponent - ngOnChanges - changes["likeId"] - ', changes['likeId'].currentValue);
+    }
+    if(changes['visible']) {
+      console.log('WyLayerLikeComponent - ngOnChanges - changes["visible"] - ', changes['visible'].currentValue);
+      if(!changes['visible']) {
+        this.creating = false;
+      }
     }
   }
 

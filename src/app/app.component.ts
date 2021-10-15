@@ -209,6 +209,12 @@ export class AppComponent {
   }
 
   onCreateSheet(sheetName: string) {
-    console.log('AppComponent - onCreateSheet - sheetName - ', sheetName);
+    // console.log('AppComponent - onCreateSheet - sheetName - ', sheetName);
+    this.memberServe.createSheet(sheetName).subscribe(sheetId => {
+      console.log('AppComponent - onCreateSheet - sheetId - ', sheetId);
+      this.onLikeSong({ pid: sheetId, tracks: this.likeId });
+    }, error => {
+      this.alertMessage('error', error.msg || 'Creation Failed!');
+    })
   }
 }

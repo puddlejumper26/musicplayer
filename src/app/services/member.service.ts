@@ -86,4 +86,9 @@ export class MemberService {
     const params = new HttpParams({ fromString: queryString.stringify({ pid, tracks, op: 'add' })});
     return this.http.get(this.uri + 'playlist/tracks', {params}).pipe(map((res: SampleBack) => res.code))
   }
+
+  createSheet(name: string): Observable<string> {
+    const params = new HttpParams({ fromString: queryString.stringify({ name })});
+    return this.http.get(this.uri + 'playlist/create', { params }).pipe(map((res: SampleBack) => res.id.toString() ))
+  }
 }
