@@ -14,6 +14,7 @@ import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.select
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { findIndex } from 'src/app/utils/array';
 import { ModalTypes } from 'src/app/store/reducers/member.reducer';
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-sheet-info',
@@ -44,7 +45,8 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
     private store$: Store<AppStoreModule>,
     private songServe: SongService,
     private batchActionsServe: BatchActionsService,
-    private nzMessageServe: NzMessageService) {
+    private memberServe: MemberService,
+    private messageServe: NzMessageService) {
     this.route.data.pipe(map(res => res.sheetInfo)).subscribe(res => {
       // console.log('SheetInfoComponent - constructor - route - res -', res);
       this.sheetInfo = res;
@@ -109,7 +111,7 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
           if(list.length){
             this.batchActionsServe.insertSong(list[0], isPlay);
           }else {
-            this.nzMessageServe.create('warning', 'Source is empty, please try another one!');
+            this.alertMessage('warning', 'Source is empty, please try another one!');
           }
         })
     }
@@ -129,6 +131,19 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
 
   onLikeSong(id: string) {
     this.batchActionsServe.likeSong(id);
+  }
+
+  onLikeSheet(id: string) {
+    this.memberServe.likeSheet(id).subscribe(() => {
+      this.batchActionsServe.controlModal(false);
+      this.alertMessage('success', 'Successfully saved!')
+      }, error => {
+        this.alertMessage('error', error.msg || 'Save Failed!');
+      })
+  }
+
+  private alertMessage(type: string, msg: string) {
+    this.messageServe.create(type, msg);
   }
 
   ngOnDestroy(): void {
