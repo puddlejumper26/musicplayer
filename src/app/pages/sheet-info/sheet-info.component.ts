@@ -1,3 +1,4 @@
+import { SetShareInfo } from './../../store/actions/member.actions';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -136,7 +137,8 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
     } else {
       txt = this.makeTxt('Song', resource.name, (resource as Song).ar)
     }
-    console.log('SheetInfoComponent - shareResource - txt -', txt);
+    // console.log('SheetInfoComponent - shareResource - txt -', txt);
+    this.store$.dispatch(SetShareInfo({ shareInfo: { id: resource.id.toString(), type, txt } }))
   }
 
   private makeTxt(type: string, name: string, makeBy: string | Singer[]): string {

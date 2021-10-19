@@ -7,14 +7,14 @@ import { isEmptyObject } from 'src/app/utils/tool';
 import { StorageService } from './services/storage.service';
 import { User } from './services/data-types/member.type';
 import { BatchActionsService } from './store/batch-actions.service';
-import { ModalTypes } from './store/reducers/member.reducer';
+import { ModalTypes, ShareInfo } from './store/reducers/member.reducer';
 import { AppStoreModule } from './store/index';
 import { SearchResult, SongSheet } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
 import { LikeSongParams, MemberService } from './services/member.service';
 import { codeJson } from './utils/base64';
-import { getLikeId, getMember, getModalType, getModalVisible } from './store/selectors/member.selector';
+import { getLikeId, getMember, getModalType, getModalVisible, getShareInfo } from './store/selectors/member.selector';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +30,7 @@ export class AppComponent {
   likeId: string;
   visible = false;
   currentModalType = ModalTypes.Default;
+  shareInfo: ShareInfo;
 
   menu=[{
     label: 'Find',
@@ -76,6 +77,14 @@ export class AppComponent {
     appStore$.pipe(select(getLikeId)).subscribe(id => this.watchLikeId(id));
     appStore$.pipe(select(getModalVisible)).subscribe(visib => this.watchModalVisible(visib));
     appStore$.pipe(select(getModalType)).subscribe(type => this.watchModalType(type));
+    appStore$.pipe(select(getShareInfo)).subscribe(shareInfo => this.watchShareInfo(shareInfo));
+  }
+
+  private watchShareInfo(shareInfo: ShareInfo) {
+    console.log('AppComponent - watchShareInfo - shareInfo -', shareInfo);
+    if(shareInfo) {
+      this.shareInfo = shareInfo;
+    }
   }
 
   private watchLikeId(id: string) {
