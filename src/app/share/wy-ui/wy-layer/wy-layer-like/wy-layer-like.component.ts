@@ -39,8 +39,9 @@ export class WyLayerLikeComponent implements OnInit, OnChanges {
       // console.log('WyLayerLikeComponent - ngOnChanges - changes["likeId"] - ', changes['likeId'].currentValue);
     }
     if(changes['visible']) {
-      console.log('WyLayerLikeComponent - ngOnChanges - changes["visible"] - ', changes['visible'].currentValue);
+      // console.log('WyLayerLikeComponent - ngOnChanges - changes["visible"] - ', changes['visible'].currentValue);
       if(!changes['visible']) {
+        this.formModel.get('sheetName').reset();
         this.creating = false;
       }
     }

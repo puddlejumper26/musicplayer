@@ -720,6 +720,7 @@ Better Angular Study
 - `nz-tooltip` | `[nzTooltipTitle]` | `[nzVisible]` | `nzOverlayClassName` - wy-player.component.html
 - `nz-tooltip` | `nzTitle` | `nzPlacement="bottom"` - member-card.component.html
 - `[nzDataSource]` | `nzItemLayout` | `[nzRenderItem]` | `[nzTitle]` | `[nzDescription]` | `[nzAvatar]` - wy-layer-like.component.html
+- `this.formModel.get('sheetName').reset()` - wy-layer-like.component.ts
 
 # 4.0 Commands
 - `ng g c *** -s -t -c=OnPush -v=None` // -s -t -> inline the css and html
