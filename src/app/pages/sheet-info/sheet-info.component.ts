@@ -6,7 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 
 import { SongService } from 'src/app/services/song.service';
 import { AppStoreModule } from 'src/app/store';
-import { Song, SongSheet } from 'src/app/services/data-types/common.types';
+import { Singer, Song, SongSheet } from 'src/app/services/data-types/common.types';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators';
@@ -127,6 +127,26 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
         }
       }
     })
+  }
+
+  shareResource(resource: Song | SongSheet, type = 'song') {
+    let txt = '';
+    if(type === 'playlist') {
+      txt = this.makeTxt('Sheet', resource.name, (resource as SongSheet).creator.nickname);
+    } else {
+      txt = this.makeTxt('Song', resource.name, (resource as Song).ar)
+    }
+    console.log('SheetInfoComponent - shareResource - txt -', txt);
+  }
+
+  private makeTxt(type: string, name: string, makeBy: string | Singer[]): string {
+    let makeByStr = '';
+    if(Array.isArray(makeBy)) {
+      makeByStr = makeBy.map(item => item.name).join('/');
+    } else {
+      makeByStr = makeBy;
+    }
+    return `${type}: ${name} -- ${makeByStr}`;
   }
 
   onLikeSong(id: string) {
