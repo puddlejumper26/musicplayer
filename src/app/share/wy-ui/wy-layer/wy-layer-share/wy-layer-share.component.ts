@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ShareInfo } from 'src/app/store/reducers/member.reducer';
@@ -11,6 +11,8 @@ import { ShareInfo } from 'src/app/store/reducers/member.reducer';
 })
 export class WyLayerShareComponent implements OnInit {
   @Input() shareInfo: ShareInfo;
+
+  @Output() onCancel = new EventEmitter<void>();
 
   formModel: FormGroup
 

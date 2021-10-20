@@ -227,4 +227,8 @@ export class AppComponent {
       this.alertMessage('error', error.msg || 'Creation Failed!');
     })
   }
+
+  onCancel() {
+    this.batchActionsServe.controlModal(false);
+  }
 }
