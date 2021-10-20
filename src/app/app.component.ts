@@ -12,7 +12,7 @@ import { AppStoreModule } from './store/index';
 import { SearchResult, SongSheet } from './services/data-types/common.types';
 import { SearchService } from './services/search.service';
 import { LoginParams } from './share/wy-ui/wy-layer/wy-layer-login/wy-layer-login.component';
-import { LikeSongParams, MemberService } from './services/member.service';
+import { LikeSongParams, MemberService, ShareParams } from './services/member.service';
 import { codeJson } from './utils/base64';
 import { getLikeId, getMember, getModalType, getModalVisible, getShareInfo } from './store/selectors/member.selector';
 
@@ -164,7 +164,7 @@ export class AppComponent {
       // console.log('AppComponent - onLogin - user -', user);
       this.user = user;
       //close login modal
-      this.batchActionsServe.controlModal(false);
+      this.closeModal();
       //pop login success
       this.alertMessage('success', 'Login Successfully!');
       // store user info into browser cache
@@ -211,7 +211,7 @@ export class AppComponent {
   onLikeSong(args: LikeSongParams) {
     console.log('AppComponent - onLikeSong - args -', args);
     this.memberServe.likeSong(args).subscribe(() => {
-      this.batchActionsServe.controlModal(false);
+      this.closeModal();
       this.alertMessage('success', 'Successfully saved!')
     }, error => {
       this.alertMessage('error', error.msg || 'Save Failed!');
@@ -228,7 +228,17 @@ export class AppComponent {
     })
   }
 
-  onCancel() {
+  closeModal() {
     this.batchActionsServe.controlModal(false);
+  }
+
+  onShare(args: ShareParams) {
+    // console.log('AppComponent - onShare - args -', args)
+    this.memberServe.shareResource(args).subscribe(() => {
+      this.closeModal();
+      this.alertMessage('success', 'Successfully shared!');
+    }, error => {
+      this.alertMessage('error', error.msg || 'Share Failed!');
+    })
   }
 }

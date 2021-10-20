@@ -19,6 +19,12 @@ export type LikeSongParams = {
   tracks: string;
 }
 
+export type ShareParams = {
+  id: string;
+  msg: string;
+  type: string;
+}
+
 const records = ['allData', 'weekData'];
 
 @Injectable({
@@ -97,7 +103,7 @@ export class MemberService {
     return this.http.get(this.uri + 'playlist/create', { params }).pipe(map((res: SampleBack) => res.id.toString() ))
   }
 
-  shareResource(id: string, msg: string, type= 'song'): Observable<number> {
+  shareResource({ id, msg, type= 'song' }: ShareParams): Observable<number> {
     const params = new HttpParams({ fromString: queryString.stringify({ id, msg, type })});
     return this.http.get(this.uri + 'share/resource', { params }).pipe(map((res: SampleBack) => res.code))
   }
