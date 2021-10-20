@@ -26,6 +26,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
   @Output() onDeleteSong = new EventEmitter<Song>();
   @Output() onClearSong = new EventEmitter<void>();
   @Output() onToInfo = new EventEmitter<[string, number]>();
+  @Output() onLikeSong = new EventEmitter<string>();
+  @Output() onShareSong = new EventEmitter<Song>();
 
   scrollY = 0;
   currentLyric: BaseLyricLine[]

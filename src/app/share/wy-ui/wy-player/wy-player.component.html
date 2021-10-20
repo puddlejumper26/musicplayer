@@ -44,8 +44,8 @@
             </div>
 
             <div class="oper">
-                <i class="like" title="Like"></i>
-                <i class="share" title="Share"></i>
+                <i class="like" title="Like" (click)="onLikeSong(currentSong.id.toString())"></i>
+                <i class="share" title="Share" (click)="onShareSong(currentSong)"></i>
             </div>
             <div class="ctrl">
                 <i class="volume" title="volume" (click)="toggleVolPanel($event)"></i>
@@ -68,6 +68,8 @@
               (onClearSong)="onClearSong()"
               (onDeleteSong)="onDeleteSong($event)"
               (onToInfo)="toInfo($event)"
+              (onLikeSong)="onLikeSong($event)"
+              (onShareSong)="onShareSong($event)"
               ></app-wy-player-panel>
         </div>
     </div>

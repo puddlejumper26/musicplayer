@@ -11,10 +11,11 @@ import { AppStoreModule } from 'src/app/store';
 import { getCurrentIndex, getPlayer, getPlayMode, getCurrentSong, getPlayList, getSongList, getCurrentAction } from 'src/app/store/selectors/player.selector';
 import { SetCurrentIndex, SetPlayMode, SetPlayList, SetSongList, SetCurrentAction } from './../../../store/actions/player.actions';
 import { PlayMode } from './player-types';
-import { Song } from 'src/app/services/data-types/common.types';
+import { Singer, Song } from 'src/app/services/data-types/common.types';
 import { findIndex, shuffle } from 'src/app/utils/array';
 import { WyPlayerPanelComponent } from './wy-player-panel/wy-player-panel.component';
 import { CurrentActions } from 'src/app/store/reducers/player.reducer';
+import { SetShareInfo } from 'src/app/store/actions/member.actions';
 
 
 const modeTypes: PlayMode[] = [{
@@ -458,5 +459,20 @@ export class WyPlayerComponent implements OnInit {
     console.log('WyPlayerComponent - onError - this.currentSong - ', this.currentSong);
     this.playing = false;
     this.bufferOffset = 0;
+  }
+
+  onShareSong(resource: Song, type = 'song') {
+    let txt = this.makeTxt('Song', resource.name, resource.ar);
+    // console.log('WyPlayerComponent - onShareSong - txt -', txt);
+    this.store$.dispatch(SetShareInfo({ shareInfo: { id: resource.id.toString(), type, txt } }))
+  }
+
+  private makeTxt(type: string, name: string, makeBy: Singer[]): string {
+    let makeByStr = makeBy.map(item => item.name).join('/');
+    return `${type}: ${name} -- ${makeByStr}`;
+  }
+
+  onLikeSong(id: string) {
+    this.batchActionsServe.likeSong(id);
   }
 }
