@@ -205,4 +205,14 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
     evt.stopPropagation();
     this.onToInfo.emit(path);
   }
+
+  likeSong(evt: MouseEvent, id: string) {
+    evt.stopPropagation();
+    this.onLikeSong.emit(id);
+  }
+
+  shareSong(evt: MouseEvent, song: Song) {
+    evt.stopPropagation();
+    this.onShareSong.emit(song);
+  }
 }
