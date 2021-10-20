@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ShareInfo } from 'src/app/store/reducers/member.reducer';
 
@@ -11,9 +12,18 @@ import { ShareInfo } from 'src/app/store/reducers/member.reducer';
 export class WyLayerShareComponent implements OnInit {
   @Input() shareInfo: ShareInfo;
 
-  constructor() { }
+  formModel: FormGroup
+
+  constructor() {
+    this.formModel = new FormGroup({
+      msg: new FormControl('', Validators.maxLength(140))
+    })
+  }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    console.log('share: ', this.formModel);
+  }
 }

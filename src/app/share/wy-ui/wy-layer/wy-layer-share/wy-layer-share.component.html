@@ -1,1 +1,26 @@
-<p>wy-layer-share works!</p>
+<div class="share">
+  <div class="u-txtwrap">
+    <form nz-form [formGroup]="formModel">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="No Longer than 140 words">
+          <textarea nz-input rows="6" formControlName="msg"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <div class="info">
+      <div class="text">
+        <p class="f-thide ellipsis">{{shareInfo?.txt}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tools clearfix">
+    <span class="txt-count">140</span>
+    <div class="btns">
+      <button nz-button>Cancel</button>
+      <button nz-button nzType="primary" [disabled]="!formModel.valid" (click)="onSubmit()">Share</button>
+    </div>
+  </div>
+
+  <nz-alert nzType="error" nzMessage="NO MORE THAN 140" nzShowIcon></nz-alert>
+</div>
