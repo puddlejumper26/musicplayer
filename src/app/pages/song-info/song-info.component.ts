@@ -8,11 +8,12 @@ import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 import { SongService } from 'src/app/services/song.service';
-import { Song } from 'src/app/services/data-types/common.types';
+import { Singer, Song } from 'src/app/services/data-types/common.types';
 import { BaseLyricLine, WyLyric } from './../../share/wy-ui/wy-player/wy-player-panel/wy-lyric';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.selector';
 import { findIndex } from 'src/app/utils/array';
+import { SetShareInfo } from 'src/app/store/actions/member.actions';
 
 @Component({
   selector: 'app-song-info',
@@ -87,5 +88,20 @@ export class SongInfoComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(); // after this, the flow would be invalid
     this.destroy$.complete(); // also need to be completed
+  }
+
+  onLikeSong(id: string) {
+    this.batchActionsServe.likeSong(id);
+  }
+
+  onShareSong(resource: Song, type = 'song') {
+    let txt = this.makeTxt('Song', resource.name, resource.ar);
+    // console.log('WyPlayerComponent - onShareSong - txt -', txt);
+    this.store$.dispatch(SetShareInfo({ shareInfo: { id: resource.id.toString(), type, txt } }))
+  }
+
+  private makeTxt(type: string, name: string, makeBy: Singer[]): string {
+    let makeByStr = makeBy.map(item => item.name).join('/');
+    return `${type}: ${name} -- ${makeByStr}`;
   }
 }
