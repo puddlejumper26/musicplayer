@@ -90,6 +90,11 @@ export class SingerDetailComponent implements OnInit, OnDestroy {
     this.destroy$.complete(); // also need to be completed
   }
 
+  onLikeSongs(songs: Song[]) {
+    const ids = songs.map(item => item.id).join(',');
+    this.onLikeSong(ids);
+  }
+
   onLikeSong(id: string) {
     this.batchActionsServe.likeSong(id);
   }

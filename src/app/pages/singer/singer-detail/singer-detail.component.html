@@ -20,7 +20,7 @@
             </button>
             <button class="add" nz-button nzType="primary" (click)="onAddSongs(singerDetail.hotSongs)">+</button>
           </nz-button-group>
-          <button class="btn like" nz-button><span>Like</span>{{singerDetail.hotSongs.length}}</button>
+          <button class="btn like" nz-button (click)="onLikeSongs(singerDetail.hotSongs)"><span>Like</span>{{singerDetail.hotSongs.length}}</button>
         </div>
 
         <!-- Table -->
