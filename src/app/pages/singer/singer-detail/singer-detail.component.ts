@@ -13,6 +13,7 @@ import { SongService } from 'src/app/services/song.service';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { findIndex } from 'src/app/utils/array';
 import { SetShareInfo } from 'src/app/store/actions/member.actions';
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-singer-detail',
@@ -25,6 +26,7 @@ export class SingerDetailComponent implements OnInit, OnDestroy {
   simiSingers: Singer[];
   currentSong: Song;
   currentIndex = -1;
+  hasLiked = false;
 
   private destroy$ = new Subject<void>();
 
@@ -33,7 +35,8 @@ export class SingerDetailComponent implements OnInit, OnDestroy {
     private store$: Store<AppStoreModule>,
     private songServe: SongService,
     private batchActionsServe: BatchActionsService,
-    private nzMessageServe: NzMessageService
+    private nzMessageServe: NzMessageService,
+    private memberServe: MemberService
     ) {
     this.route.data.pipe(map(res => res.singerDetail)).subscribe(([singerDetail, simiSingers]) => {
       // console.log('SingerDetailComponent - constructor - singerDetail - ', singerDetail)
@@ -107,5 +110,26 @@ export class SingerDetailComponent implements OnInit, OnDestroy {
   private makeTxt(type: string, name: string, makeBy: Singer[]): string {
     let makeByStr = makeBy.map(item => item.name).join('/');
     return `${type}: ${name} -- ${makeByStr}`;
+  }
+
+  onLikeSinger(id: string) {
+    let typeInfo = {
+      type: 1,
+      msg: 'Like'
+    }
+
+    if(this.hasLiked) {
+      typeInfo = {
+        type: 2,
+        msg: 'Cancel Like'
+      }
+    }
+    this.memberServe.likeSinger(id, typeInfo.type).subscribe(() => {
+      this.hasLiked = !this.hasLiked;
+      this.nzMessageServe.create('success', typeInfo.msg + 'successfully!')
+    }, error => {
+      this.nzMessageServe.create('error', error.msg || typeInfo.msg + 'failed!')
+    })
+
   }
 }

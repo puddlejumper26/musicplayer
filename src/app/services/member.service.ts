@@ -93,6 +93,11 @@ export class MemberService {
     return this.http.get(this.uri + 'playlist/tracks', {params}).pipe(map((res: SampleBack) => res.code))
   }
 
+  likeSinger(id: string, t = 1): Observable<number> {
+    const params = new HttpParams({ fromString: queryString.stringify({ id, t })});
+    return this.http.get(this.uri + 'artist/sub', { params }).pipe(map((res: SampleBack) => res.code))
+  }
+
   likeSheet(id: string, t =1): Observable<number> {
     const params = new HttpParams({ fromString: queryString.stringify( {id, t} )});
     return this.http.get(this.uri + 'playlist/subscribe', {params}).pipe(map((res: SampleBack) => res.code))
