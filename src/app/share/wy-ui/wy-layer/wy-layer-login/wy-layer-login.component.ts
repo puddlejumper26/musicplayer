@@ -22,6 +22,7 @@ const defaultLoginParams: LoginParams = {
 })
 export class WyLayerLoginComponent implements OnInit, OnChanges {
   @Input() wyRememberLogin: LoginParams;
+  @Input() visible = false;
   @Output() onChangeModalType = new EventEmitter<string | void>();
   @Output() onLogin = new EventEmitter<LoginParams>();
 
@@ -35,6 +36,7 @@ export class WyLayerLoginComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     const userLoginParams = changes['wyRememberLogin'];
+    const visible = changes['visible'];
     if(userLoginParams) {
       let phone = '';
       let password = '';
@@ -47,6 +49,10 @@ export class WyLayerLoginComponent implements OnInit, OnChanges {
         remember = value.remember;
       }
       this.setModel({phone, password, remember});
+    }
+
+    if(visible && !visible.firstChange) {
+      this.formModel.markAllAsTouched();
     }
   }
 
