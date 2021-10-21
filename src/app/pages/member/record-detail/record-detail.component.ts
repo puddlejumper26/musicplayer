@@ -6,12 +6,13 @@ import { map } from 'rxjs/internal/operators/map';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Subject } from 'rxjs/internal/Subject';
 
-import { Song } from 'src/app/services/data-types/common.types';
+import { Singer, Song } from 'src/app/services/data-types/common.types';
 import { recordVal, User } from 'src/app/services/data-types/member.type';
 import { MemberService, RecordType } from 'src/app/services/member.service';
 import { SheetService } from 'src/app/services/sheet.service';
 import { SongService } from 'src/app/services/song.service';
 import { AppStoreModule } from 'src/app/store';
+import { SetShareInfo } from 'src/app/store/actions/member.actions';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.selector';
 import { findIndex } from 'src/app/utils/array';
@@ -100,6 +101,20 @@ export class RecordDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(); // after this, the flow would be invalid
     this.destroy$.complete(); // also need to be completed
+  }
+
+  onLikeSong(id: string) {
+    this.batchActionsServe.likeSong(id);
+  }
+
+  onShareSong(resource: Song, type = 'song') {
+    let txt = this.makeTxt('Song', resource.name, resource.ar);
+    this.store$.dispatch(SetShareInfo({ shareInfo: { id: resource.id.toString(), type, txt } }))
+  }
+
+  private makeTxt(type: string, name: string, makeBy: Singer[]): string {
+    let makeByStr = makeBy.map(item => item.name).join('/');
+    return `${type}: ${name} -- ${makeByStr}`;
   }
 
 }

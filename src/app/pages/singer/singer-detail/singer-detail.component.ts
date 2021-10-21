@@ -12,6 +12,7 @@ import { getCurrentSong, getPlayer } from 'src/app/store/selectors/player.select
 import { SongService } from 'src/app/services/song.service';
 import { BatchActionsService } from 'src/app/store/batch-actions.service';
 import { findIndex } from 'src/app/utils/array';
+import { SetShareInfo } from 'src/app/store/actions/member.actions';
 
 @Component({
   selector: 'app-singer-detail',
@@ -87,5 +88,19 @@ export class SingerDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(); // after this, the flow would be invalid
     this.destroy$.complete(); // also need to be completed
+  }
+
+  onLikeSong(id: string) {
+    this.batchActionsServe.likeSong(id);
+  }
+
+  onShareSong(resource: Song, type = 'song') {
+    let txt = this.makeTxt('Song', resource.name, resource.ar);
+    this.store$.dispatch(SetShareInfo({ shareInfo: { id: resource.id.toString(), type, txt } }))
+  }
+
+  private makeTxt(type: string, name: string, makeBy: Singer[]): string {
+    let makeByStr = makeBy.map(item => item.name).join('/');
+    return `${type}: ${name} -- ${makeByStr}`;
   }
 }

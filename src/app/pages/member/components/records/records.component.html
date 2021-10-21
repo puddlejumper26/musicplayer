@@ -40,8 +40,8 @@
           <span>{{item.song.dt / 1000 | formatTime}}</span>
           <p class="icons">
             <i class="ico add" title="Add" (click)="onAddSong.emit([item.song, false])"></i>
-            <i class="ico like" title="Like" ></i>
-            <i class="ico share" title="Share"></i>
+            <i class="ico like" title="Like" (click)="onLikeSong.emit(item.song.id)"></i>
+            <i class="ico share" title="Share" (click)="onShareSong.emit(item.song)"></i>
           </p>
         </td>
         <td>
