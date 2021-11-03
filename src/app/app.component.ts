@@ -83,8 +83,12 @@ export class AppComponent {
   private watchShareInfo(shareInfo: ShareInfo) {
     console.log('AppComponent - watchShareInfo - shareInfo -', shareInfo);
     if(shareInfo) {
-      this.shareInfo = shareInfo;
-      this.openModal(ModalTypes.Share);
+      if(this.user){
+        this.shareInfo = shareInfo;
+        this.openModal(ModalTypes.Share);
+      }else {
+        this.openModal(ModalTypes.Default)
+      }
     }
   }
 
