@@ -1,7 +1,7 @@
 <!-- <div class="m-layer" [style.visibility]="showModal ? 'visible' : 'hidden'" #modalContainer> -->
 <div class="m-layer" [@showHide]="showModal" #modalContainer cdkDrag cdkDragBoundary=".cdk-overlay-container">
   <div class="zbar" cdkDragHandle>
-    <div class="zttl f-thide">Title</div>
+    <div class="zttl f-thide">{{modalTitle[currentModalType]}}</div>
   </div>
 
   <ng-container [ngSwitch]="currentModalType">

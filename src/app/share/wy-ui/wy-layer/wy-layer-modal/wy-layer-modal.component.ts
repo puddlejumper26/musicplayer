@@ -20,6 +20,14 @@ import { ModalTypes } from 'src/app/store/reducers/member.reducer';
 })
 export class WyLayerModalComponent implements OnInit, AfterViewInit, OnChanges {
 
+  modalTitle = {
+    register: 'Register',
+    loginByPhone: 'Mobile Login',
+    share: 'Share',
+    like: 'Like',
+    default: ''
+  }
+
   showModal = 'hide';
 
   @Input() currentModalType = ModalTypes.Default;
