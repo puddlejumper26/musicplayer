@@ -153,7 +153,7 @@ export class AppComponent {
   }
 
   onChangeModalType(modalType = ModalTypes.Default) {
-    // console.log('AppComponent - onChangeModalType - type -', type);
+    console.log('AppComponent - onChangeModalType - modalType -', modalType);
     this.store$.dispatch(SetModalType({ modalType }));
   }
 
