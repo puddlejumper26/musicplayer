@@ -1,1 +1,31 @@
-<p>wy-layer-register works!</p>
+<div class="register modal-content">
+  <div class="modal-wrap">
+    <form nz-form nzLayout="vertical">
+      <nz-form-item>
+        <nz-form-label>Mobile</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input correct Mobile">
+          <nz-input-group nzPrefixIcon="mobile">
+            <input type="tel" nz-input placeholder="Please input Mobile">
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>Password</nz-form-label>
+        <nz-form-control nzHasFeedback nzErrorTip="Please input correct Password">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input placeholder="Please input Password">
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzBlock>Next step</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>
+
+<div class="m-footer clearfix">
+  <a>&lt; Other Loggins</a>
+</div>
