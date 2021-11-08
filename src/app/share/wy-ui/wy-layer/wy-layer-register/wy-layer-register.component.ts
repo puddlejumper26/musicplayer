@@ -1,5 +1,8 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd';
+
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-wy-layer-register',
@@ -14,7 +17,10 @@ export class WyLayerRegisterComponent implements OnInit {
 
   formModel: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private memberServe: MemberService,
+    private messageServe: NzMessageService) {
     this.formModel = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -25,7 +31,17 @@ export class WyLayerRegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('WyLayerRegisterComponent - onSubmit - ', this.formModel);
+    // console.log('WyLayerRegisterComponent - onSubmit - ', this.formModel);
+    if(this.formModel.valid) {
+      this.sendCode();
+    }
   }
 
+  sendCode() {
+    this.memberServe.sendCode(this.formModel.get('phone').value).subscribe(() => {
+
+    }, error => {
+      this.messageServe.error(error.message)
+    }
+  )}
 }
