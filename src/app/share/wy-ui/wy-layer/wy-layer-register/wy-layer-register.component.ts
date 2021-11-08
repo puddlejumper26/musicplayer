@@ -1,6 +1,8 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
+import { interval } from 'rxjs';
+import { take } from 'rxjs/internal/operators';
 
 import { MemberService } from 'src/app/services/member.service';
 
@@ -16,6 +18,7 @@ export class WyLayerRegisterComponent implements OnInit {
   @Output() onChangeModalType = new EventEmitter<string | void>();
 
   formModel: FormGroup;
+  timing: number;
 
   constructor(
     private fb: FormBuilder,
@@ -39,7 +42,8 @@ export class WyLayerRegisterComponent implements OnInit {
 
   sendCode() {
     this.memberServe.sendCode(this.formModel.get('phone').value).subscribe(() => {
-
+      this.timing = 60;
+      interval(1000).pipe(take(60)).subscribe(() => this.timing--);
     }, error => {
       this.messageServe.error(error.message)
     }
