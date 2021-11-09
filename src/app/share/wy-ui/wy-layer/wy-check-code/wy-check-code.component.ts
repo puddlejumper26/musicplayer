@@ -11,7 +11,15 @@ export class WyCheckCodeComponent implements OnInit {
 
   private phoneHideStr = '';
 
-  @Input() phone;
+  @Input()
+  set phone(phone: string) {
+    const arr = phone.split('');
+    arr.splice(3, 4, '****');
+    this.phoneHideStr = arr.join('');
+  }
+  get phone() {
+    return this.phoneHideStr;
+  }
 
   formModel: FormGroup;
 
