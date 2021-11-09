@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-wy-check-code',
@@ -8,9 +9,23 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class WyCheckCodeComponent implements OnInit {
 
-  constructor() { }
+  private phoneHideStr = '';
+
+  @Input() phone;
+
+  formModel: FormGroup;
+
+  constructor() {
+    this.formModel = new FormGroup({
+      code: new FormControl('', [Validators.required, Validators.pattern(/\d{4}/)])
+    });
+  }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+
   }
 
 }
