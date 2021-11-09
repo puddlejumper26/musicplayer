@@ -1,5 +1,5 @@
 <div class="register modal-content">
-  <div class="modal-wrap">
+  <div class="modal-wrap" *ngIf="!showCode else code">
     <form nz-form nzLayout="vertical" [formGroup]="formModel" (ngSubmit)="onSubmit()">
       <nz-form-item>
         <nz-form-label>Mobile</nz-form-label>
@@ -24,8 +24,16 @@
       </nz-form-item>
     </form>
   </div>
+
+  <ng-template #code>
+    <div class="modal-wrap">
+      Verification
+    </div>
+  </ng-template>
+
 </div>
 
+
 <div class="m-footer clearfix">
-  <a (click)="onChangeModalType.emit('default')">&lt; Other Loggins</a>
+  <a (click)="changeType()">&lt; Other Loggins</a>
 </div>
