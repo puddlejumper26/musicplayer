@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+const CODELEN = 4;
+
 @Component({
   selector: 'app-wy-code',
   templateUrl: './wy-code.component.html',
@@ -8,7 +10,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class WyCodeComponent implements OnInit {
 
-  constructor() { }
+  inputArr = [];
+
+  constructor() {
+    this.inputArr = Array(CODELEN).fill('');
+  }
 
   ngOnInit() {
   }
