@@ -90,6 +90,51 @@ Better Angular Study
 
 ## 3.1.2 Angular [Note]
 
+#### `@ControlValueAccessor and @NG_VALUE_ACCESSOR - to make component acts as form`
+- []()
+- Purpose - `to make this component to have form behavior`  
+- ```ts
+  @Component({
+    providers: [{
+      provide: NG_VALUE_ACCESSOR, // applied with ControlValueAccessor
+      useExisting: forwardRef(() => WyCodeComponent), // to allow to use an Class not defined yet, will be defined in the following
+      multi: true, // has multiple dependencies
+    }]
+  })
+  export class WyCodeComponent implements OnInit, ControlValueAccessor {
+
+    private onValueChange(value: string): void {};
+    private onTouched(): void {};
+
+    // read and set value , value here are passed from outside
+    // from outside template to obtain the value, should be like '2312' 4 digits, but string
+    // when there is a value changed inside ParentComponent, and binded through <app-wy-code> inside of ParentComponent.html, then here would receive this value
+    writeValue(code: string): void {
+      this.setValue(code);
+    }
+    // Emit change event
+    registerOnChange(fn: (value: string) => void): void {
+      this.onValueChange = fn;
+    }
+    // Emit change event
+    registerOnTouched(fn: () => void): void {
+      this.onTouched = fn;
+    }
+  }
+  ```
+  ```html
+    <!-- implemented in Parent.component.html -->
+    <form>
+      <app-wy-code></app-wy-code>
+    </form>
+  ```
+
+#### `children.component could use the styling file in parent.component.css`
+- ```ts
+  @Component({
+    encapsulation: ViewEncapsulation.None,
+  })
+  ```
 #### `Use same template for two displays`
 - [【WyLayerLike】switch add new sheet name template and obtain](https://github.com/puddlejumper26/musicplayer/commit/1ff9f434f695dd174b2837ad96fd5fd7295a5075)
 - ```html
