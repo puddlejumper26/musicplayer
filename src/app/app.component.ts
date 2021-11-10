@@ -65,7 +65,7 @@ export class AppComponent {
       }
       catch(error){
         this.alertMessage('warn', error);
-        console.log(error)
+        // console.log(error)
       }
     }
 
@@ -81,7 +81,7 @@ export class AppComponent {
   }
 
   private watchShareInfo(shareInfo: ShareInfo) {
-    console.log('AppComponent - watchShareInfo - shareInfo -', shareInfo);
+    // console.log('AppComponent - watchShareInfo - shareInfo -', shareInfo);
     if(shareInfo) {
       if(this.user){
         this.shareInfo = shareInfo;
@@ -153,7 +153,7 @@ export class AppComponent {
   }
 
   onChangeModalType(modalType = ModalTypes.Default) {
-    console.log('AppComponent - onChangeModalType - modalType -', modalType);
+    // console.log('AppComponent - onChangeModalType - modalType -', modalType);
     this.store$.dispatch(SetModalType({ modalType }));
   }
 
@@ -213,7 +213,7 @@ export class AppComponent {
   }
 
   onLikeSong(args: LikeSongParams) {
-    console.log('AppComponent - onLikeSong - args -', args);
+    // console.log('AppComponent - onLikeSong - args -', args);
     this.memberServe.likeSong(args).subscribe(() => {
       this.closeModal();
       this.alertMessage('success', 'Successfully saved!')
@@ -225,7 +225,7 @@ export class AppComponent {
   onCreateSheet(sheetName: string) {
     // console.log('AppComponent - onCreateSheet - sheetName - ', sheetName);
     this.memberServe.createSheet(sheetName).subscribe(sheetId => {
-      console.log('AppComponent - onCreateSheet - sheetId - ', sheetId);
+      // console.log('AppComponent - onCreateSheet - sheetId - ', sheetId);
       this.onLikeSong({ pid: sheetId, tracks: this.likeId });
     }, error => {
       this.alertMessage('error', error.msg || 'Creation Failed!');

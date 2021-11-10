@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     })
     // this.store$.pipe(select(getPlayer)).subscribe( res => this.q = res);
     this.store$.pipe(select(getMember)).subscribe(member => {
-      console.log('HomeComponent - Constructor - member - ', member);
+      // console.log('HomeComponent - Constructor - member - ', member);
       if(member.userId) {
         this.getUserDetail(member.userId);
       }else {

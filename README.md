@@ -91,7 +91,8 @@ Better Angular Study
 ## 3.1.2 Angular [Note]
 
 #### `@ControlValueAccessor and @NG_VALUE_ACCESSOR - to make component acts as form`
-- []()
+- [【WyCheckCode-WyCode】apply @ControlValueAccessorto WyCode](https://github.com/puddlejumper26/musicplayer/commit/92215557535c9323fa046aa42f6a0d4845b2d0ef)
+- [【Slider】relize ControlValueAccessor and adjust setValue(), assertValu](https://github.com/puddlejumper26/musicplayer/commit/3026e4a579bd8cdd64caea5e745510bed71e16ee)
 - Purpose - `to make this component to have form behavior`  
 - ```ts
   @Component({

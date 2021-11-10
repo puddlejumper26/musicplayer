@@ -65,7 +65,7 @@ export class WyLayerModalComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['visible'] && !changes['visible'].firstChange) {
-      console.log('WyLayerComponent - ngOnChanges - visible -', this.visible)
+      // console.log('WyLayerComponent - ngOnChanges - visible -', this.visible)
       this.handleVisibleChange(this.visible)
     }
   }

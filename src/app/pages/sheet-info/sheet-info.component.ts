@@ -65,7 +65,7 @@ export class SheetInfoComponent implements OnInit, OnDestroy {
   private listenCurrent() {
     this.store$.pipe(select(getPlayer), select(getCurrentSong), takeUntil(this.destroy$))
       .subscribe(song => {
-        console.log('SheetInfoComponent - listenCurrent - song - ', song);
+        // console.log('SheetInfoComponent - listenCurrent - song - ', song);
         this.currentSong = song;
         if(this.currentSong) {
           this.currentIndex = findIndex(this.sheetInfo.tracks, song);

@@ -117,7 +117,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       // console.log( res.lrc )
       this.lyric = new WyLyric(res);
       this.currentLyric = this.lyric.lines;
-      console.log('updateLyric -- this.currentLyric - ', this.currentLyric);
+      // console.log('updateLyric -- this.currentLyric - ', this.currentLyric);
 
       // if EN/CN lyrics then startign from 1, only CN lyric then from line 2 to scroll
       // this logic is to keep the highlight lyric in the middle
@@ -140,7 +140,7 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
         // (ul, li) is different from (ul li), log out could see (ul, li) has extra ul
         // which makes the number always 1 bigger than planned
         this.lyricRefs = this.wyScroll.last.el.nativeElement.querySelectorAll('ul li');
-        console.log('handleLyric - this.lyricRefs - ', this.lyricRefs);
+        // console.log('handleLyric - this.lyricRefs - ', this.lyricRefs);
       }
 
       if(this.lyricRefs.length) {
@@ -181,8 +181,8 @@ export class WyPlayerPanelComponent implements OnInit, OnChanges {
       //offsetTop of current playing song
       const offsetTop = currentLi.offsetTop;
       const offsetHeight = currentLi.offsetHeight;
-      console.log('scrollToCurrent - this.scrollY - ', this.scrollY);
-      console.log('scrollToCurrent - offsetTop - ', offsetTop);
+      // console.log('scrollToCurrent - this.scrollY - ', this.scrollY);
+      // console.log('scrollToCurrent - offsetTop - ', offsetTop);
       //downwards play songs, to keep the song in the view
       if((offsetTop - Math.abs(this.scrollY)) > offsetHeight * 5) {
         this.wyScroll.first.scrollToElement(currentLi, speed, false, true);

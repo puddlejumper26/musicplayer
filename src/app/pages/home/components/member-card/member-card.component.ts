@@ -27,7 +27,7 @@ export class MemberCardComponent implements OnInit {
   onSignin() {
     this.memberServe.signin()
       .subscribe(res => {
-        console.log('MemberCardComponent - onSignin - res -', res);
+        // console.log('MemberCardComponent - onSignin - res -', res);
         this.tipTitle = 'Point +' + res.point;
         this.showTip = true;
         timer(1500).subscribe(() => {
@@ -35,7 +35,7 @@ export class MemberCardComponent implements OnInit {
           this.tipTitle = '';
         });
       }, error => {
-        console.log('MemberCardComponent - onSignin - error -', error);
+        // console.log('MemberCardComponent - onSignin - error -', error);
       })
   }
 }

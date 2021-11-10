@@ -45,7 +45,7 @@ export class SongInfoComponent implements OnInit, OnDestroy {
       // console.log('SongInfoComponent - constructor - res -', res);
       this.song = song;
       this.lyric = new WyLyric(lyric).lines;
-      console.log('SongInfoComponent - constructor - lyric -', this.lyric);
+      // console.log('SongInfoComponent - constructor - lyric -', this.lyric);
     });
     this.listenCurrent();
   }
@@ -80,7 +80,7 @@ export class SongInfoComponent implements OnInit, OnDestroy {
   private listenCurrent() {
     this.store$.pipe(select(getPlayer), select(getCurrentSong), takeUntil(this.destroy$))
       .subscribe(song => {
-        console.log('SongInfoComponent - listenCurrent - song - ', song);
+        // console.log('SongInfoComponent - listenCurrent - song - ', song);
         this.currentSong = song;
       })
   }

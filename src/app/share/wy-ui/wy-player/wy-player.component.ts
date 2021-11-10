@@ -436,7 +436,7 @@ export class WyPlayerComponent implements OnInit {
 
   onClickOutSide(target: HTMLElement) {
     // console.log('WyPlayerComponent - onClickOutSide is called');
-    console.log('WyPlayerComponent - onClickOutSide - target.dataset', target.dataset)
+    // console.log('WyPlayerComponent - onClickOutSide - target.dataset', target.dataset)
     // here dataset.act - act is defined in WyPlayerPanel template data-act="delete", so any string would work
     // e.g. data-haha='eeee'  => if(target.dataset.haha) {...}
     if(target.dataset.act!=="delete") {
@@ -456,7 +456,7 @@ export class WyPlayerComponent implements OnInit {
 
   // Error when playing
   onError() {
-    console.log('WyPlayerComponent - onError - this.currentSong - ', this.currentSong);
+    // console.log('WyPlayerComponent - onError - this.currentSong - ', this.currentSong);
     this.playing = false;
     this.bufferOffset = 0;
   }
