@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, forwardRef, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const CODELEN = 4;
@@ -14,14 +14,24 @@ const CODELEN = 4;
     multi: true, // has multiple dependencies
   }]
 })
-export class WyCodeComponent implements OnInit, ControlValueAccessor {
+export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewInit {
+
+  @ViewChild('codeWrap', { static: true }) private codeWrap: ElementRef;
+  inputEl: HTMLElement[];
 
   inputArr = [];
-
   private code: string;
 
   constructor() {
     this.inputArr = Array(CODELEN).fill('');
+  }
+
+  ngAfterViewInit(): void {
+    this.inputEl = this.codeWrap.nativeElement.getElementsByClassName('item') as HTMLElement[];
+    // console.log('-----> WyCodeComponent - ngAfterViewInit - this.inputEl - ', this.inputEl)
+    // the first element to have focus automatically
+    this.inputEl[0].focus();
+
   }
 
   private setValue(code: string) {
