@@ -1,5 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { takeUntil } from 'rxjs/internal/operators';
+import { Component, OnInit, ChangeDetectionStrategy, forwardRef, ViewChild, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fromEvent, Subject } from 'rxjs';
 
 const CODELEN = 4;
 
@@ -14,13 +16,17 @@ const CODELEN = 4;
     multi: true, // has multiple dependencies
   }]
 })
-export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewInit {
+export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewInit, OnDestroy {
 
   @ViewChild('codeWrap', { static: true }) private codeWrap: ElementRef;
   inputEl: HTMLElement[];
 
   inputArr = [];
+  result: string[] = [];
+  currentFocusIndex = 0;
+
   private code: string;
+  private destory$ = new Subject();
 
   constructor() {
     this.inputArr = Array(CODELEN).fill('');
@@ -31,7 +37,23 @@ export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewI
     // console.log('-----> WyCodeComponent - ngAfterViewInit - this.inputEl - ', this.inputEl)
     // the first element to have focus automatically
     this.inputEl[0].focus();
+    for(let a= 0; a < this.inputEl.length; a++) {
+      const item = this.inputEl[a];
+      fromEvent(item, 'keyup').pipe(takeUntil(this.destory$)).subscribe((event: KeyboardEvent) => this.listenKeyup(event));
+      fromEvent(item, 'click').pipe(takeUntil(this.destory$)).subscribe(() => this.currentFocusIndex = a);
+    }
+  }
 
+  private listenKeyup(event: KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+    const isBackSpace = event.code === 'Backspace';
+    if(value) {
+      this.result[this.currentFocusIndex] = value; // give the input value to current input
+      this.currentFocusIndex = (this.currentFocusIndex + 1) % CODELEN; // jump to next input
+      this.inputEl[this.currentFocusIndex].focus(); // re-focus
+    }
+    // console.log('----->WyCodeComponent - listenKeyup - this.result - ', this.result);
   }
 
   private setValue(code: string) {
@@ -53,6 +75,11 @@ export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewI
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
+    this.destory$.next();
+    this.destory$.complete();
   }
 
 }

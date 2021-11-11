@@ -562,12 +562,21 @@ Better Angular Study
 
 #### `KeyboardEvent` 
 - [【WyLayerModal】hide modal when cross or ESCAPE](https://github.com/puddlejumper26/musicplayer/commit/e1c2d72d6f71c133ed8315e44821ba86f5607b6a)
+- []()
 - ```ts
   private keydownListener(evt: KeyboardEvent){
     if(evt.key === 'Escape'){
       this.hide();
     }
   }
+  ```
+  ```ts
+  private listenKeyup(event: KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+    const isBackSpace = event.code === 'Backspace';
+  }
+  ```
 #### `Element`
 - Base class for all element objects in a `Document`
 - e.g. `HTMLElement`, `HTMLDivElement`, `HTMLAudioELement`, `SVGElement` etc
