@@ -562,7 +562,7 @@ Better Angular Study
 
 #### `KeyboardEvent` 
 - [【WyLayerModal】hide modal when cross or ESCAPE](https://github.com/puddlejumper26/musicplayer/commit/e1c2d72d6f71c133ed8315e44821ba86f5607b6a)
-- []()
+- [【WyCheckCode-WyCode】input value among 4 inputs,re-focus](https://github.com/puddlejumper26/musicplayer/commit/6faeff565df2ec902bbaa802b066fd6489df7360)
 - ```ts
   private keydownListener(evt: KeyboardEvent){
     if(evt.key === 'Escape'){

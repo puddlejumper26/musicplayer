@@ -17,7 +17,7 @@ export class WyLayerRegisterComponent implements OnInit {
   @Input() visible = false;
   @Output() onChangeModalType = new EventEmitter<string | void>();
 
-  showCode = false;
+  showCode = true;
   formModel: FormGroup;
   timing: number;
 

@@ -60,11 +60,19 @@ export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewI
       this.currentFocusIndex = Math.max(this.currentFocusIndex - 1, 0);
       this.inputEl[this.currentFocusIndex].focus();
     }
+    this.checkResult(this.result);
     // console.log('----->WyCodeComponent - listenKeyup - this.result - ', this.result);
+  }
+
+  private checkResult(result: string[]) {
+    const codeStr = result.join('');
+    this.setValue(codeStr);
   }
 
   private setValue(code: string) {
     this.code = code;
+    // output the code
+    this.onValueChange(code);
   }
 
   private onValueChange(value: string): void {};
