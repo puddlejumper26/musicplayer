@@ -1,5 +1,5 @@
 import { takeUntil } from 'rxjs/internal/operators';
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef, ViewChild, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, forwardRef, ViewChild, AfterViewInit, ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject } from 'rxjs';
 
@@ -28,7 +28,7 @@ export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewI
   private code: string;
   private destory$ = new Subject();
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     this.inputArr = Array(CODELEN).fill('');
   }
 
@@ -73,6 +73,7 @@ export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewI
     this.code = code;
     // output the code
     this.onValueChange(code);
+    this.cdr.markForCheck();
   }
 
   private onValueChange(value: string): void {};
