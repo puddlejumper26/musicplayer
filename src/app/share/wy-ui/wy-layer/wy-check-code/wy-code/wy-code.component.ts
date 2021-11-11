@@ -48,7 +48,10 @@ export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewI
     const target = event.target as HTMLInputElement;
     const value = target.value;
     const isBackSpace = event.code === 'Backspace';
-    if(value) {
+    if(/\D/.test(value)) {
+      target.value = '';
+      this.result[this.currentFocusIndex] = '';
+    } else if(value) {
       this.result[this.currentFocusIndex] = value; // give the input value to current input
       this.currentFocusIndex = (this.currentFocusIndex + 1) % CODELEN; // jump to next input
       this.inputEl[this.currentFocusIndex].focus(); // re-focus
