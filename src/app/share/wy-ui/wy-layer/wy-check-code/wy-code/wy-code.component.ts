@@ -52,6 +52,10 @@ export class WyCodeComponent implements OnInit, ControlValueAccessor, AfterViewI
       this.result[this.currentFocusIndex] = value; // give the input value to current input
       this.currentFocusIndex = (this.currentFocusIndex + 1) % CODELEN; // jump to next input
       this.inputEl[this.currentFocusIndex].focus(); // re-focus
+    }else if(isBackSpace) {
+      this.result[this.currentFocusIndex] = '';
+      this.currentFocusIndex = Math.max(this.currentFocusIndex - 1, 0);
+      this.inputEl[this.currentFocusIndex].focus();
     }
     // console.log('----->WyCodeComponent - listenKeyup - this.result - ', this.result);
   }
