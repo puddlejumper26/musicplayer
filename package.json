@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "startNode": "node startNode.js"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
     "minireset.css": "0.0.7",
     "ng-zorro-antd": "^8.5.2",
     "rxjs": "~6.4.0",
+    "shelljs": "^0.8.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
