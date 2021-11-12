@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,10 +7,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./wy-check-code.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WyCheckCodeComponent implements OnInit {
+export class WyCheckCodeComponent implements OnInit, OnChanges {
 
   private phoneHideStr = '';
 
+  @Input() timing : number;
   @Input() codePass = false;
   @Input()
   set phone(phone: string) {
@@ -30,6 +31,12 @@ export class WyCheckCodeComponent implements OnInit {
     this.formModel = new FormGroup({
       code: new FormControl('', [Validators.required, Validators.pattern(/\d{4}/)])
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['timing']) {
+
+    }
   }
 
   ngOnInit() {

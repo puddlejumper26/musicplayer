@@ -15,8 +15,8 @@
         <nz-form-control>
           <app-wy-code formControlName="code"></app-wy-code>
           <div class="send clearfix">
-            <span class="err" [hidden]="!codePass">Wrong Verification Code</span>
-            <span class="txt" >60s</span>
+            <span class="err" [hidden]="codePass">Wrong Verification Code</span>
+            <span class="txt" >{{ timing }}s</span>
           </div>
         </nz-form-control>
       </nz-form-item>

@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { interval } from 'rxjs';
 import { take } from 'rxjs/internal/operators';
@@ -25,6 +25,7 @@ export class WyLayerRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private memberServe: MemberService,
+    private cdr: ChangeDetectorRef,
     private messageServe: NzMessageService) {
     this.formModel = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
@@ -48,7 +49,11 @@ export class WyLayerRegisterComponent implements OnInit {
       if(!this.showCode) {
         this.showCode = true;
       }
-      interval(1000).pipe(take(60)).subscribe(() => this.timing--);
+      this.cdr.markForCheck();
+      interval(1000).pipe(take(60)).subscribe(() => {
+        this.timing--;
+        this.cdr.markForCheck();
+      });
     }, error => {
       this.messageServe.error(error.message)
     }
@@ -63,8 +68,11 @@ export class WyLayerRegisterComponent implements OnInit {
   onCheckCode(code: string) {
     this.memberServe.checkCode(this.formModel.get('phone').value, Number(code))
       .subscribe(
+        // if the code verification failed, then codepass = false
+        // no matter verification falied or not, always markForCheck()
         () => this.codePass = true,
-        () => this.codePass = false
+        () => this.codePass = false,
+        () => this.cdr.markForCheck()
       )
   }
 }
