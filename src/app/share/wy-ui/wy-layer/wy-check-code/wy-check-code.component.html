@@ -13,9 +13,9 @@
     <form nz-form nzLayout="vertical" [formGroup]="formModel" (ngSubmit)="onSubmit()">
       <nz-form-item>
         <nz-form-control>
-          <app-wy-code></app-wy-code>
+          <app-wy-code formControlName="code"></app-wy-code>
           <div class="send clearfix">
-            <span class="err" >Wrong Verification Code</span>
+            <span class="err" [hidden]="!codePass">Wrong Verification Code</span>
             <span class="txt" >60s</span>
           </div>
         </nz-form-control>

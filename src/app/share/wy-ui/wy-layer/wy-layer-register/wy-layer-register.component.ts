@@ -20,6 +20,7 @@ export class WyLayerRegisterComponent implements OnInit {
   showCode = false;
   formModel: FormGroup;
   timing: number;
+  codePass = false;
 
   constructor(
     private fb: FormBuilder,
@@ -57,5 +58,13 @@ export class WyLayerRegisterComponent implements OnInit {
     this.onChangeModalType.emit('default');
     this.showCode = false;
     this.formModel.reset();
+  }
+
+  onCheckCode(code: string) {
+    this.memberServe.checkCode(this.formModel.get('phone').value, Number(code))
+      .subscribe(
+        () => this.codePass = true,
+        () => this.codePass = false
+      )
   }
 }

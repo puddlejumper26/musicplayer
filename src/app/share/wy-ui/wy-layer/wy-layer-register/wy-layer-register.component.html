@@ -27,7 +27,10 @@
 
   <ng-template #code>
     <div class="modal-wrap">
-      <app-wy-check-code [phone]="formModel.get('phone').value"></app-wy-check-code>
+      <app-wy-check-code
+        [phone]="formModel.get('phone').value"
+        [codePass]="codePass"
+        (onCheckCode)="onCheckCode($event)"></app-wy-check-code>
     </div>
   </ng-template>
 

@@ -11,6 +11,7 @@ export class WyCheckCodeComponent implements OnInit {
 
   private phoneHideStr = '';
 
+  @Input() codePass = false;
   @Input()
   set phone(phone: string) {
     const arr = phone.split('');
@@ -20,6 +21,8 @@ export class WyCheckCodeComponent implements OnInit {
   get phone() {
     return this.phoneHideStr;
   }
+
+  @Output() onCheckCode = new EventEmitter<string>();
 
   formModel: FormGroup;
 
@@ -33,7 +36,10 @@ export class WyCheckCodeComponent implements OnInit {
   }
 
   onSubmit() {
-
+    if(this.formModel.valid) {
+      this.onCheckCode.emit(this.formModel.value.code);
+    }
   }
+
 
 }
