@@ -24,8 +24,10 @@ export class WyCheckCodeComponent implements OnInit, OnChanges {
   }
 
   @Output() onCheckCode = new EventEmitter<string>();
+  @Output() onRepeatSendCode = new EventEmitter<string>();
 
   formModel: FormGroup;
+  showRepeatBtn = false;
 
   constructor() {
     this.formModel = new FormGroup({
@@ -42,7 +44,7 @@ export class WyCheckCodeComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['timing']) {
-
+      this.showRepeatBtn = this.timing <= 0;
     }
   }
 
