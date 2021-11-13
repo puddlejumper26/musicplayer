@@ -4,7 +4,13 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { interval } from 'rxjs';
 import { take } from 'rxjs/internal/operators';
 
+import { ModalTypes } from './../../../../store/reducers/member.reducer';
 import { MemberService } from 'src/app/services/member.service';
+
+enum Exist {
+  'Exist' = 1,
+  'Non-Exist' = -1
+}
 
 @Component({
   selector: 'app-wy-layer-register',
@@ -16,6 +22,7 @@ export class WyLayerRegisterComponent implements OnInit {
 
   @Input() visible = false;
   @Output() onChangeModalType = new EventEmitter<string | void>();
+  @Output() onRegister = new EventEmitter<string>();
 
   showCode = false;
   formModel: FormGroup;
@@ -59,8 +66,8 @@ export class WyLayerRegisterComponent implements OnInit {
     }
   )}
 
-  changeType() {
-    this.onChangeModalType.emit('default');
+  changeType(type = ModalTypes.Default) {
+    this.onChangeModalType.emit(type);
     this.showCode = false;
     this.formModel.reset();
   }
@@ -74,5 +81,16 @@ export class WyLayerRegisterComponent implements OnInit {
         () => this.codePass = false,
         () => this.cdr.markForCheck()
       )
+  }
+
+  onCheckExist(phone: string) {
+    this.memberServe.checkExist(Number(phone)).subscribe(res => {
+      if(Exist[res] === 'Exist') {
+        this.messageServe.error('Account Exists, please Login directly!');
+        this.changeType(ModalTypes.LoginByPhone);
+      } else {
+        this.onRegister.emit(phone);
+      }
+    })
   }
 }

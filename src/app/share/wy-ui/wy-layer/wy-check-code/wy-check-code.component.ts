@@ -25,6 +25,7 @@ export class WyCheckCodeComponent implements OnInit, OnChanges {
 
   @Output() onCheckCode = new EventEmitter<string>();
   @Output() onRepeatSendCode = new EventEmitter<string>();
+  @Output() onCheckExist = new EventEmitter<string>();
 
   formModel: FormGroup;
   showRepeatBtn = false;
@@ -58,6 +59,7 @@ export class WyCheckCodeComponent implements OnInit, OnChanges {
   onSubmit() {
     if(this.formModel.valid && this.codePass) {
       // check whehter already register
+      this.onCheckExist.emit(this.phone);
     }
   }
 

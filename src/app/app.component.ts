@@ -245,4 +245,8 @@ export class AppComponent {
       this.alertMessage('error', error.msg || 'Share Failed!');
     })
   }
+
+  onRegister(phone: string) {
+    this.alertMessage('success', 'Registeration finished!')
+  }
 }

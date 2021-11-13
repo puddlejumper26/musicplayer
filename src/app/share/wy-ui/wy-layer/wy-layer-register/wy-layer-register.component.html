@@ -32,6 +32,7 @@
         [codePass]="codePass"
         [timing]="timing"
         (onRepeatSendCode)="sendCode()"
+        (onCheckExist)="onCheckExist($event)"
         (onCheckCode)="onCheckCode($event)"></app-wy-check-code>
     </div>
   </ng-template>
