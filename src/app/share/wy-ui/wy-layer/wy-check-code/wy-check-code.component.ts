@@ -31,6 +31,13 @@ export class WyCheckCodeComponent implements OnInit, OnChanges {
     this.formModel = new FormGroup({
       code: new FormControl('', [Validators.required, Validators.pattern(/\d{4}/)])
     });
+
+    const codeControl = this.formModel.get('code');
+    codeControl.statusChanges.subscribe( status => {
+      if(status === 'VALID') {
+        this.onCheckCode.emit(this.formModel.value.code);
+      }
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -43,8 +50,8 @@ export class WyCheckCodeComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    if(this.formModel.valid) {
-      this.onCheckCode.emit(this.formModel.value.code);
+    if(this.formModel.valid && this.codePass) {
+      // check whehter already register
     }
   }
 
