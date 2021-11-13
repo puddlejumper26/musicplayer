@@ -28,6 +28,7 @@ export class WyCheckCodeComponent implements OnInit, OnChanges {
 
   formModel: FormGroup;
   showRepeatBtn = false;
+  showErrorTip = false;
 
   constructor() {
     this.formModel = new FormGroup({
@@ -45,6 +46,9 @@ export class WyCheckCodeComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['timing']) {
       this.showRepeatBtn = this.timing <= 0;
+    }
+    if(changes['codePass'] && !changes['codePass'].firstChange) {
+      this.showErrorTip = !this.codePass;
     }
   }
 

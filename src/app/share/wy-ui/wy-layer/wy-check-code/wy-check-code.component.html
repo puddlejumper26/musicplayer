@@ -15,7 +15,7 @@
         <nz-form-control>
           <app-wy-code formControlName="code"></app-wy-code>
           <div class="send clearfix">
-            <span class="err" [hidden]="codePass">Wrong Verification Code</span>
+            <span class="err" [hidden]="!showErrorTip">Wrong Verification Code</span>
             <span class="txt" *ngIf="!showRepeatBtn else repearBtn">{{ timing }}s</span>
             <ng-template #repearBtn>
               <span class="txt repeat" (click)="onRepeatSendCode.emit()">Re-send</span>

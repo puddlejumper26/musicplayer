@@ -20,7 +20,7 @@ export class WyLayerRegisterComponent implements OnInit {
   showCode = false;
   formModel: FormGroup;
   timing: number;
-  codePass = false;
+  codePass: string | boolean = '';
 
   constructor(
     private fb: FormBuilder,
