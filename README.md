@@ -2,24 +2,24 @@
 
 <h1 id="category">Category</h1>
 
-[1.0 Purpose](https://github.com/puddlejumper26/musicplayer#10-purpose)
-[2.0 Environment & Installation](https://github.com/puddlejumper26/musicplayer#20-enviroment--installation)
-    - [2.1 Environment](https://github.com/puddlejumper26/musicplayer#21-environment)
-    - [2.2 Installation](https://github.com/puddlejumper26/musicplayer#22-installation)
-[3.0 API & Note](https://github.com/puddlejumper26/musicplayer#30-api--note)
-    - [3.1.1 Angular [API]](https://github.com/puddlejumper26/musicplayer#311-angular-api)
-    - [3.1.2 Angular [Note]](https://github.com/puddlejumper26/musicplayer#312-angular-note)
-    - [3.2.1 Angular Material CDK [API]](https://github.com/puddlejumper26/musicplayer#321-angular-material-cdk-api)
-    - [3.2.1 Angular Material CDK [Note]](https://github.com/puddlejumper26/musicplayer#321-angular-material-cdk-note)
-    - [3.3.1 rxjs [API]](https://github.com/puddlejumper26/musicplayer#331-rxjs-api)
-    - [3.3.2 rxjs [Note]](https://github.com/puddlejumper26/musicplayer#332-rxjs-note)
-    - [3.4.1 Web && JS [API]](https://github.com/puddlejumper26/musicplayer#341-web--js-api)
-    - [3.4.2 Web && JS [Note]](https://github.com/puddlejumper26/musicplayer#342-web--js-note)
-    - [3.5.1 NgRx [API]](https://github.com/puddlejumper26/musicplayer#351-ngrx-api)
-    - [3.5.2 NgRx [Note]](https://github.com/puddlejumper26/musicplayer#352-ngrx-note)
-    - [3.6 Ant Design Angular | BetterScroll](https://github.com/puddlejumper26/musicplayer#36-ant-design-angular--betterscroll)
-[4.0 Commands](https://github.com/puddlejumper26/musicplayer#40-commands)
-[5.0 Demo](https://github.com/puddlejumper26/musicplayer#50-demo)
+[1.0 Purpose](https://github.com/puddlejumper26/musicplayer#10-purpose)<br>
+[2.0 Environment & Installation](https://github.com/puddlejumper26/musicplayer#20-enviroment--installation)<br>
+    - [2.1 Environment](https://github.com/puddlejumper26/musicplayer#21-environment)<br>
+    - [2.2 Installation](https://github.com/puddlejumper26/musicplayer#22-installation)<br>
+[3.0 API & Note](https://github.com/puddlejumper26/musicplayer#30-api--note)<br>
+    - [3.1.1 Angular [API]](https://github.com/puddlejumper26/musicplayer#311-angular-api)<br>
+    - [3.1.2 Angular [Note]](https://github.com/puddlejumper26/musicplayer#312-angular-note)<br>
+    - [3.2.1 Angular Material CDK [API]](https://github.com/puddlejumper26/musicplayer#321-angular-material-cdk-api)<br>
+    - [3.2.1 Angular Material CDK [Note]](https://github.com/puddlejumper26/musicplayer#321-angular-material-cdk-note)<br>
+    - [3.3.1 rxjs [API]](https://github.com/puddlejumper26/musicplayer#331-rxjs-api)<br>
+    - [3.3.2 rxjs [Note]](https://github.com/puddlejumper26/musicplayer#332-rxjs-note)<br>
+    - [3.4.1 Web && JS [API]](https://github.com/puddlejumper26/musicplayer#341-web--js-api)<br>
+    - [3.4.2 Web && JS [Note]](https://github.com/puddlejumper26/musicplayer#342-web--js-note)<br>
+    - [3.5.1 NgRx [API]](https://github.com/puddlejumper26/musicplayer#351-ngrx-api)<br>
+    - [3.5.2 NgRx [Note]](https://github.com/puddlejumper26/musicplayer#352-ngrx-note)<br>
+    - [3.6 Ant Design Angular | BetterScroll](https://github.com/puddlejumper26/musicplayer#36-ant-design-angular--betterscroll)<br>
+[4.0 Commands](https://github.com/puddlejumper26/musicplayer#40-commands)<br>
+[5.0 Demo](https://github.com/puddlejumper26/musicplayer#50-demo)<br>
 
 
 # 1.0 Purpose 
@@ -784,15 +784,26 @@ Better Angular Study
 Homepage
 ![](https://user-images.githubusercontent.com/80747582/133734382-698c7f59-7565-4c51-8f8d-964b32488b9d.png)
 <h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 Player Panel
+![](https://user-images.githubusercontent.com/80747582/141679745-18bff6c2-6a71-49f5-bcd7-488c981b5191.gif)
 <h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 Sheet List(Album Sheet)
 <h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
-Singer List
+
+Album Details
+![](https://user-images.githubusercontent.com/80747582/141680188-75ab4c6b-5774-4462-8334-74c5635281d1.gif)
 <h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 Singer Detail
+![](https://user-images.githubusercontent.com/80747582/141680007-bfdbe855-2dab-437e-abf1-60ace6359c77.png)
 <h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
-Song Detail
+
+Searching
+![](https://user-images.githubusercontent.com/80747582/141680584-ee30687f-a6f9-4027-b25f-7c14525bd83a.gif)
 <h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
+
 Login
+![](https://user-images.githubusercontent.com/80747582/141680511-4f7cfa79-8b17-44b1-8dc9-2813ad885fd2.gif)
 <h4 align="center"><a href="#category"><g-emoji class="g-emoji" alias="arrow_up" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b06.png">⬆️</g-emoji></a></h4>
