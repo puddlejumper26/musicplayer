@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Observable } from 'rxjs';
+import { filter, map, mergeMap } from 'rxjs/internal/operators';
+import { Title } from '@angular/platform-browser';
 
 import { SetModalType, SetModalVisible, SetUserId } from './store/actions/member.actions';
 import { isEmptyObject } from 'src/app/utils/tool';
@@ -23,14 +27,15 @@ import { getLikeId, getMember, getModalType, getModalVisible, getShareInfo } fro
 })
 export class AppComponent {
   title = 'musicplayer';
+  routeTitle = '';
   user: User;
   wyRememberLogin: LoginParams;
   mySheets: SongSheet[];
-
+  searchResult: SearchResult;
+  shareInfo: ShareInfo;
   likeId: string;
   visible = false;
   currentModalType = ModalTypes.Default;
-  shareInfo: ShareInfo;
 
   menu=[{
     label: 'Find',
@@ -40,7 +45,7 @@ export class AppComponent {
     path: '/sheet'
   }]
 
-  searchResult: SearchResult;
+  private navEnd: Observable<NavigationEnd>
 
   constructor(
     private searchServe: SearchService,
@@ -48,7 +53,10 @@ export class AppComponent {
     private batchActionsServe: BatchActionsService,
     private memberServe: MemberService,
     private messageServe: NzMessageService,
-    private storageServe: StorageService
+    private storageServe: StorageService,
+    private router: Router,
+    private activateRouter: ActivatedRoute,
+    private titleServe: Title
   ) {
     const userId = this.storageServe.getStorage('wyUserId');
     if(userId) {
@@ -70,6 +78,25 @@ export class AppComponent {
     }
 
     this.listenStates();
+
+    this.navEnd = <Observable<NavigationEnd>>this.router.events.pipe(filter( evt => evt instanceof NavigationEnd))
+    this.setTitle();
+  }
+
+  private setTitle() {
+    this.navEnd.pipe(
+      map(() => this.activateRouter),
+      map((route: ActivatedRoute) => {
+        while(route.firstChild) {
+          route = route.firstChild
+        }
+        return route
+      }),
+      mergeMap(route => route.data)
+    ).subscribe(data => {
+      this.routeTitle = data['title'];
+      this.titleServe.setTitle(this.routeTitle)
+    })
   }
 
   private listenStates() {
